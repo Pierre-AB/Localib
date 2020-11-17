@@ -2,6 +2,7 @@ const express = require('express');
 const authRoutes = express.Router();
 
 const bcrypt = require('bcryptjs');
+const User = require('../models/user-model');
 
 //  ######  ####  ######   ##    ##         ##     ## ########  
 // ##    ##  ##  ##    ##  ###   ##         ##     ## ##     ## 
@@ -13,8 +14,8 @@ const bcrypt = require('bcryptjs');
 
 authRoutes.post('/signup', (req, res, next) => {
 
-  // const { email, password, type, fullName, address, zip, geoloc, phone, description, openingHours, picture, businessType } = req.body;
-  const { email, password } = req.body;
+  const { email, password, type, fullName, address, zip, geoloc, phone, description, openingHours, picture, businessType } = req.body;
+  // const { email, password } = req.body;
 
   if (!email) {
     res.status(400).json({ message: "please provide an email address" })
@@ -27,28 +28,39 @@ authRoutes.post('/signup', (req, res, next) => {
     return;
   }
 
-  res.json({ message: "link ok" })
+if (!type) {
+  res.status(400).json({message: "Please check code, type of user is MANDATORY"})
+  return;
+}
+
+if (type === 'store') {
+  // ATTENTION: PICTURE IS NOT IMPLEMENTED YET
+  if(!fullName || !address || !zip || !phone || !description || !openingHours || !siret)
 
 
-  // const salt = bcrypt.genSaltSync(10);
-  // const hashPass = bcrypt.hashSync(password, salt);
+}
+  // res.json({ message: "link ok" })
 
-  // const newUser = new User ({
-  //   email,
-  //   password: hashPass,
-  //   type,
-  //   fullName,
-  //   address,
-  //   zip,
-  //   geoloc,
-  //   phone,
-  //   description,
-  //   openingHours,
-  //   picture,
-  //   businessType
-  // });
 
-  // newUser.save().then().catch()
+  const salt = bcrypt.genSaltSync(10);
+  const hashPass = bcrypt.hashSync(password, salt);
+
+  const newUser = new User ({
+    email,
+    password: hashPass,
+    type,
+    fullName,
+    address,
+    zip,
+    geoloc,
+    phone,
+    description,
+    openingHours,
+    picture,
+    businessType
+  });
+
+  newUser.save().then().catch()
 
 })
 

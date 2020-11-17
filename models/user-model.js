@@ -16,6 +16,8 @@ const userSchema = new Schema({
   description: String,
   openingHours: Array,
   picture: String,
+  siret: String,
+  numVAT: String,
   businessType: {
     type: String,
     enum: ["fromagerie", "fleuriste", "legume"]

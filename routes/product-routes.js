@@ -1,7 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Product = require('../models/product-model');
+const User = require('../models/user-model');
+
 const router = express.Router();
+
 
 /*                                                                                                           ,,                                   
 `7MM"""Mq.                        `7MM                      mm           
@@ -45,10 +48,10 @@ router.get('/products/:id', (req, res, next) => {
  */
 
  router.post('/products', (req, res, next) => {
-  const storeId = req.session.user.id
-  const { name, description, picture, price, category,Tags } = req.body;
+//  const storeId = req.session.currentuser.id
+  const { store_id, name, description, picture, price, category,Tags } = req.body;
   Product.create({
-    store_id = storeId, // à tester
+    store_id: req.session.currentUser._id, // à tester
     name, 
     description, 
     picture, 
@@ -58,6 +61,7 @@ router.get('/products/:id', (req, res, next) => {
   })
     .then(theResponse => {
       res.json(theResponse);
+      console.log(theResponse)
     })
     .catch(err => {
       res.json(err);

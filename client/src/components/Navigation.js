@@ -63,7 +63,7 @@ const Navigation = (props) => {
                 <Link to={tab.route}>
                   <div className="nav-link">
                     <tab.icon/>
-                    <div className="nav-label">{tab.label}</div>
+                    {/* <div className="nav-label">{tab.label}</div> */}
                   </div>
                 </Link>
               </div>

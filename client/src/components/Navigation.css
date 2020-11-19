@@ -73,7 +73,7 @@
 }
 
 .navbar a:link {color: inherit;}
-.navbar a:visited {color: gray;}
+.navbar a:visited {color: var(--grey);}
 .navbar a:hover, .navbar a:focus, .navbar a:active {
   color: var(--accent-color);
   font-weight: 800;

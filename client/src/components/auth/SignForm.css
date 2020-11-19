@@ -1,0 +1,89 @@
+/***
+ *    ########    ###    ########   ######  
+ *       ##      ## ##   ##     ## ##    ## 
+ *       ##     ##   ##  ##     ## ##       
+ *       ##    ##     ## ########   ######  
+ *       ##    ######### ##     ##       ## 
+ *       ##    ##     ## ##     ## ##    ## 
+ *       ##    ##     ## ########   ######  
+ */
+
+.sign-tabs {
+  background-color: white;
+  display: flex;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.sign-tab {
+  text-decoration: none;
+  width: 100%;
+  padding: 1em;
+  border: 1px solid var(--border);
+}
+
+.sign-tabs a:link {color: inherit;}
+.sign-tabs a:visited {color: var(--grey);}
+.sign-tabs a:hover {
+  color: var(--accent-color);
+  font-weight: 800;
+}
+.sign-tabs a:focus, .sign-tabs a:active {
+  color: var(--black);
+  font-weight: 800;
+  border-bottom: 5px solid var(--accent-color);
+}
+
+
+/***
+ *     ######  ####  ######   ##    ##    ##     ## ########     ########     ###     ######   ######## 
+ *    ##    ##  ##  ##    ##  ###   ##    ##     ## ##     ##    ##     ##   ## ##   ##    ##  ##       
+ *    ##        ##  ##        ####  ##    ##     ## ##     ##    ##     ##  ##   ##  ##        ##       
+ *     ######   ##  ##   #### ## ## ##    ##     ## ########     ########  ##     ## ##   #### ######   
+ *          ##  ##  ##    ##  ##  ####    ##     ## ##           ##        ######### ##    ##  ##       
+ *    ##    ##  ##  ##    ##  ##   ###    ##     ## ##           ##        ##     ## ##    ##  ##       
+ *     ######  ####  ######   ##    ##     #######  ##           ##        ##     ##  ######   ######## 
+ */
+
+.sign-page {
+  background-color: var(--grey-bg);
+  min-height: 100vh;
+}
+
+.sign-form {
+  display: flex;
+  flex-direction: column;
+  padding: 3em 2em;
+}
+
+.sign-form input {
+  background: white;
+  color: var(--grey);
+  margin-bottom: 1.5em;
+  padding: 1em;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  
+}
+
+.sign-form .I-am-retailer {
+  text-decoration: none;
+  color: var(--grey);
+}
+
+.sign-form button {
+  color: white;
+  background-color: var(--accent-color);
+  margin: 3em 2em 2em;
+  padding: 1em;
+  border: 0;
+  border-radius: 10px;
+}
+
+.sign-form button::before {
+  content: '\2192\0000a0';
+}
+
+.sign-form button:hover {
+  cursor: pointer;
+}

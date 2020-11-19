@@ -10,6 +10,9 @@
 :root {
   --accent-color: #baceac;
   --black: #1d1d1d;
+  --grey-bg: #f7f7fa;
+  --grey: #aeb5c5;
+  --border: #eeeeee;
 }
 
 /* MEDIA QUERIES BREAKPOINT RECAP */
@@ -45,3 +48,4 @@ body {
   color: var(--black);
   font-family: 'Nunito', sans-serif;
 }
+

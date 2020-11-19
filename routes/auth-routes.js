@@ -18,7 +18,7 @@ authRoutes.post('/signup', (req, res, next) => {
   // const { email, password } = req.body;
 
 
-  // console.log(req.session.currentUser)
+  console.log(req.session.currentUser)
 
   if (!email) {
     res.status(400).json({ message: "please provide an email address" })
@@ -86,7 +86,18 @@ authRoutes.post('/signup', (req, res, next) => {
         res.status(500).json({ message: "Siret check went bad" })
       })
 
+  } else {
+    User.findOne({email})
+    .then(user => {
+      if(user){
+        res.status(400).json({message: 'Email already taken'})
+      }
+    })
+    .catch()
+
   }
+
+  
   // res.json({ message: "link ok" })
 
 

@@ -1,0 +1,51 @@
+/* IMPORT NUNITO GOOGLE FONT */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap');
+
+/* EVERYTHING BORDER BOX */
+*, ::before, ::after {
+  box-sizing: border-box;
+}
+
+/* COLORS VAR */
+:root {
+  --accent-color: #baceac;
+  --black: #1d1d1d;
+  --grey-bg: #f7f7fa;
+  --grey: #aeb5c5;
+  --border: #eeeeee;
+}
+
+/* MEDIA QUERIES BREAKPOINT RECAP */
+/* MIN */
+/* // Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) { ... }
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { ... }
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... } */
+
+/* MAX */
+/* @media (max-width: 575.98px) { ... }
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) { ... }
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) { ... }
+
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1199.98px) { ... } */
+
+
+/* MAIN & COMMON STYLE */
+body {
+  background: grey;
+  color: var(--black);
+  font-family: 'Nunito', sans-serif;
+}
+

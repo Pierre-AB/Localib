@@ -1,0 +1,91 @@
+/* RESPONSIVE */
+@media (min-width: 992px) { 
+  .navbar.desktop {
+    display: block;
+    position: fixed;
+    top: 0;
+  }
+
+  .navbar.mobile {
+    display: none;
+  }
+}
+
+@media (max-width: 991.98px) { 
+  .navbar.desktop {
+    display: none;
+  }
+
+  .navbar.mobile {
+    display: block;
+    position: fixed;
+    bottom: 0;
+  }
+ }
+
+
+/* DESKTOP NAVBAR */
+.navbar {
+  background: white;
+  width: 100vw;
+  text-transform: uppercase;
+}
+
+.nav-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.desktop .nav-container {
+  padding: 1.5em 3em;
+}
+
+.mobile .nav-container {
+  padding: 0.75em;
+}
+
+.nav-menu ul {
+  list-style: none;
+  margin: 0;
+}
+
+.nav-menu li {
+  display: inline-block;
+}
+
+.nav-link {
+  display: block;
+  padding: 0 1rem;
+}
+
+.mobile .nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navbar a {
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.navbar a:link {color: inherit;}
+.navbar a:visited {color: var(--grey);}
+.navbar a:hover, .navbar a:focus, .navbar a:active {
+  color: var(--accent-color);
+  font-weight: 800;
+}
+
+
+
+/* ONLY ON MOBILE NAVBAR */
+.mobile .nav-item {
+  width: 20%
+}
+
+.mobile .nav-label {
+  font-size: 0.6em;
+}

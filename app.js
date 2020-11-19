@@ -9,6 +9,8 @@ const mongoose = require('mongoose');
 const logger = require('morgan');
 const path = require('path');
 
+const session = require('express-session');
+
 
 mongoose
   .connect('mongodb://localhost/localib', { useNewUrlParser: true })
@@ -44,6 +46,15 @@ app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
+//SESSION
+// On aura besoin d'un "store" quand on sera en production.
+app.use(session({
+  secret: "localib's secret sentence",
+  resave: true,
+  saveUninitialized: true
+}));
+
+
 
 // default value for title local
 app.locals.title = 'Localib';
@@ -60,7 +71,7 @@ app.use(cors({
 // ROUTES MIDDLEWARE STARTS HERE:
 const index = require('./routes/index');
 app.use('/', index);
-app.use('/auth', require('./routes/auth-routes'));
+app.use('/api', require('./routes/auth-routes'));
 
 
 

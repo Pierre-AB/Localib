@@ -70,8 +70,11 @@ app.use(cors({
 
 // ROUTES MIDDLEWARE STARTS HERE:
 const index = require('./routes/index');
+
+
 app.use('/', index);
 app.use('/api', require('./routes/auth-routes'));
+app.use('/api', require('./routes/product-routes'));
 
 
 

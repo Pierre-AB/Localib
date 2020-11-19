@@ -15,10 +15,7 @@ const User = require('../models/user-model');
 authRoutes.post('/signup', (req, res, next) => {
 
   const { email, password, type, fullName, address, zip, geoloc, phone, description, openingHours, picture, siret, numVAT, businessType } = req.body;
-  // const { email, password } = req.body;
-
-
-  console.log(req.session.currentUser)
+  console.log("signup - req.session.currentUser", req.session.currentUser)
 
   if (!email) {
     res.status(400).json({ message: "please provide an email address" })
@@ -51,58 +48,123 @@ authRoutes.post('/signup', (req, res, next) => {
           res.status(400).json({ message: "This store is already existing" });
           return;
         }
-
-        const salt = bcrypt.genSaltSync(10);
-        const hashPass = bcrypt.hashSync(password, salt);
-
-        const newStore = new User({
-          email,
-          password: hashPass,
-          type,
-          fullName,
-          address,
-          zip,
-          geoloc,
-          phone,
-          description,
-          openingHours,
-          picture,
-          siret,
-          numVAT,
-          businessType
-        });
-
-        newStore.save()
-          .then(newStore => {
-            req.session.currentUser = newStore;
-            res.status(200).json(newStore);
-          })
-          .catch(err => {
-            res.status(500).json({ message: 'Saving newStore to database went wrong.' })
-          })
-
       })
       .catch(err => {
         res.status(500).json({ message: "Siret check went bad" })
       })
-
   } else {
-    User.findOne({email})
-    .then(user => {
-      if(user){
-        res.status(400).json({message: 'Email already taken'})
-      }
-    })
-    .catch()
-
+    User.findOne({ email })
+      .then(user => {
+        if (user) {
+          res.status(400).json({ message: 'Email already taken' });
+          return;
+        }
+      })
+      .catch(err => {
+        res.status(500).json({ message: 'Consumer check went wrong' })
+      })
   }
 
-  
+
+  const salt = bcrypt.genSaltSync(10);
+  const hashPass = bcrypt.hashSync(password, salt);
+
+  const newUser = new User({
+    email,
+    password: hashPass,
+    type,
+    fullName,
+    address,
+    zip,
+    geoloc,
+    phone,
+    description,
+    openingHours,
+    picture,
+    siret,
+    numVAT,
+    businessType
+  });
+
+  newUser.save()
+    .then(newUser => {
+      req.session.currentUser = newUser;
+      res.status(200).json(newUser);
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Saving newUser to database went wrong.' })
+    })
+
+
   // res.json({ message: "link ok" })
 
 
+})
+
+// ##        #######   ######   #### ##    ## 
+// ##       ##     ## ##    ##   ##  ###   ## 
+// ##       ##     ## ##         ##  ####  ## 
+// ##       ##     ## ##   ####  ##  ## ## ## 
+// ##       ##     ## ##    ##   ##  ##  #### 
+// ##       ##     ## ##    ##   ##  ##   ### 
+// ########  #######   ######   #### ##    ## 
+
+
+authRoutes.post('/login', (req, res, next) => {
+  const { email, password } = req.body
+
+  User.findOne({ email }).then(user => {
+    if (!user) {
+      res.status(500).json({ message: 'Not registered user' })
+      return;
+    }
+
+
+    if (bcrypt.compareSync(password, user.password) !== true) {
+      res.status(500).json({ message: 'wrong credentials' });
+      return;
+    } else {
+      req.session.currentUser = user;
+      res.json(user)
+    }
+  }).catch(next)
 
 
 })
+
+// ##        #######   ######    #######  ##     ## ######## 
+// ##       ##     ## ##    ##  ##     ## ##     ##    ##    
+// ##       ##     ## ##        ##     ## ##     ##    ##    
+// ##       ##     ## ##   #### ##     ## ##     ##    ##    
+// ##       ##     ## ##    ##  ##     ## ##     ##    ##    
+// ##       ##     ## ##    ##  ##     ## ##     ##    ##    
+// ########  #######   ######    #######   #######     ##    
+
+
+authRoutes.post('/logout', (req, res, next) => {
+  req.session.destroy();
+  res.json({ message: 'Logged out successfully' })
+})
+
+
+// ##        #######   ######    ######   ######## ########  #### ##    ## 
+// ##       ##     ## ##    ##  ##    ##  ##       ##     ##  ##  ###   ## 
+// ##       ##     ## ##        ##        ##       ##     ##  ##  ####  ## 
+// ##       ##     ## ##   #### ##   #### ######   ##     ##  ##  ## ## ## 
+// ##       ##     ## ##    ##  ##    ##  ##       ##     ##  ##  ##  #### 
+// ##       ##     ## ##    ##  ##    ##  ##       ##     ##  ##  ##   ### 
+// ########  #######   ######    ######   ######## ########  #### ##    ## 
+
+authRoutes.get('/loggedIn', (req, res, next) => {
+  if (req.session.currentUser) {
+    res.status(200).json(req.session.currentUser);
+    return;
+  }
+  res.status(403).json({ message: 'Please log in' });
+})
+
+
+
+
 
 module.exports = authRoutes;

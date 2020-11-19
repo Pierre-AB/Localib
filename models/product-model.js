@@ -9,11 +9,11 @@ const productSchema = new Schema({
   price: Number,
   category: {
     type: [String],
-    enum: ['fromage', 'fleur', 'legume']
+    enum: ['fromage', 'fleur', 'legume', 'fruit', 'outillage', 'luminaire']
   },
   Tags: [String]
 },
-{timestamps: true}
+  { timestamps: true }
 )
 
 const Product = mongoose.model('Product', productSchema)

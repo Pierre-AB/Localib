@@ -13,7 +13,11 @@ const session = require('express-session');
 
 
 mongoose
-  .connect('mongodb://localhost/localib', { useNewUrlParser: true })
+  .connect('mongodb://localhost/localib', { 
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -75,6 +79,7 @@ const index = require('./routes/index');
 app.use('/', index);
 app.use('/api', require('./routes/auth-routes'));
 app.use('/api', require('./routes/product-routes'));
+app.use('/api', require('./routes/orders-routes'));
 
 
 

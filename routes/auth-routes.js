@@ -52,6 +52,7 @@ authRoutes.post('/signup', (req, res, next) => {
       .catch(err => {
         res.status(500).json({ message: "Siret check went bad" })
       })
+    // Si c'est un consumer.
   } else {
     User.findOne({ email })
       .then(user => {

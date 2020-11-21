@@ -18,6 +18,9 @@ import UserSettings from './pages/UserSettings';
 // import pages for Login, Sign up & Log out
 import Signup from './components/auth/Signup'
 
+// import page for product creation
+// import AddProduct from './components/Products/addProducts'
+
 
 function App() {
   return (
@@ -36,6 +39,9 @@ function App() {
         
         {/* Login & signup */}
         <Route exact path="/signup" component={Signup} />
+
+        {/* product create form */}
+        {/* <Route exact path="/products" component={AddProduct} /> */}
       </Switch>
     </div>
   );

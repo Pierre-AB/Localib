@@ -7,9 +7,9 @@ const dotenv = require('dotenv');
 dotenv.config({ path: './config/config.env' });
 
 // Load models
-const Orders = require('./seed-data/orders.json');
-const Products = require('./seed-data/products.json');
-const User = require('./seed-data/users.json');
+const Orders = require('./models/order-model');
+const Products = require('./models/product-model');
+const User = require('./models/user-model');
 
 // Connect to DB
 mongoose

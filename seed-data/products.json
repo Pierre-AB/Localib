@@ -85,7 +85,7 @@
     "description": "croquant et frais",
     "picture": "https://cdn3.fermedesaintemarthe.com/I-Autre-23182_1200x1200-radis-de-18-jours-ab.net.jpg",
     "price": "3.65",
-    "category": "légume",
+    "category": "legume",
     "tags": [
       "frais",
       "salade",
@@ -97,7 +97,7 @@
     "description": "riche en minéraux",
     "picture": "https://www.cookforyourlife.org/wp-content/uploads/2018/08/shutterstock_294838064-min-696x520.jpg",
     "price": "2.80",
-    "category": "légume",
+    "category": "legume",
     "tags": [
       "frais",
       "vert",

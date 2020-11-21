@@ -11,7 +11,22 @@ const userSchema = new Schema({
   fullName: String,
   address: String,
   zip: String,
-  geoloc: [Number], // maybe create an object {lat: 12, long: 34}
+  location: {
+    type: {
+      type: String,
+      enum: ['Point']
+    },
+    coordinates: {
+      type: [Number],
+      index: '2dsphere'
+    },
+    formattedAddress: String,
+    street: String,
+    city: String,
+    state: String,
+    zipcode: String,
+    country: String
+  },
   phone: String,
   description: String,
   openingHours: Array,

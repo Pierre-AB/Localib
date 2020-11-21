@@ -1,0 +1,107 @@
+[
+  {
+    "name": "Camembert",
+    "description": "le classique de Normandie",
+    "picture": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Camembert_de_Normandie_%28AOP%29_11.jpg/1024px-Camembert_de_Normandie_%28AOP%29_11.jpg",
+    "price": "5",
+    "category": "fromage",
+    "tags": [
+      "vache",
+      "lait_cru"
+    ]
+  },
+  {
+    "name": "Comté",
+    "description": "le classique du Jura",
+    "picture": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Comte_AOP.jpg/1024px-Comte_AOP.jpg",
+    "price": "2.75",
+    "category": "fromage",
+    "tags": [
+      "vache",
+      "lait_cru"
+    ]
+  },
+  {
+    "name": "Poire",
+    "description": "Juteuse et subtile",
+    "picture": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Pears.jpg",
+    "price": "4.2",
+    "category": "fruit",
+    "tags": [
+      "automne",
+      "healthy"
+    ]
+  },
+  {
+    "name": "Orange",
+    "description": "riche en vitamine C",
+    "picture": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Orange-Whole-%26-Split.jpg/1280px-Orange-Whole-%26-Split.jpg",
+    "price": "2.5",
+    "category": "fruit",
+    "tags": [
+      "hiver",
+      "vitaminé",
+      "healthy"
+    ]
+  },
+  {
+    "name": "clou",
+    "description": "solide et brillant",
+    "picture": "https://quipoquiz.com/sn_uploads/quizzes/29834b89504596da1e59aa9988ac52091455203010550.jpeg?maxw=350",
+    "price": "0.12",
+    "category": "outillage",
+    "tags": [
+      "fixation",
+      "outil",
+      "truc"
+    ]
+  },
+  {
+    "name": "ampoule led",
+    "description": "800 lumen",
+    "picture": "https://media3.leds-boutique.fr/5686-large_default/ampoule-led-gu10-5w-cob-dimmable.jpg",
+    "price": "9.44",
+    "category": "luminaire",
+    "tags": [
+      "lampe",
+      "éclairage",
+      "truc"
+    ]
+  },
+  {
+    "name": "ampoule led",
+    "description": "800 lumen",
+    "picture": "https://media3.leds-boutique.fr/5686-large_default/ampoule-led-gu10-5w-cob-dimmable.jpg",
+    "price": "9.44",
+    "category": "luminaire",
+    "tags": [
+      "lampe",
+      "éclairage",
+      "truc"
+    ]
+  },
+  {
+    "name": "radis",
+    "description": "croquant et frais",
+    "picture": "https://cdn3.fermedesaintemarthe.com/I-Autre-23182_1200x1200-radis-de-18-jours-ab.net.jpg",
+    "price": "3.65",
+    "category": "légume",
+    "tags": [
+      "frais",
+      "salade",
+      "healthy"
+    ]
+  },
+  {
+    "name": "broccoli",
+    "description": "riche en minéraux",
+    "picture": "https://www.cookforyourlife.org/wp-content/uploads/2018/08/shutterstock_294838064-min-696x520.jpg",
+    "price": "2.80",
+    "category": "légume",
+    "tags": [
+      "frais",
+      "vert",
+      "healthy"
+    ]
+  }
+]

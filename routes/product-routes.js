@@ -48,12 +48,10 @@ router.get('/products/:id', (req, res, next) => {
  */
 
  router.post('/products', (req, res, next) => {
-//  const storeId = req.session.currentuser.id
   const { store_id, name, description, picture, price, category,Tags } = req.body;
   Product.create({
     store_id: req.session.currentUser._id, // à tester
     name, 
-    description, 
     picture, 
     price, 
     category,

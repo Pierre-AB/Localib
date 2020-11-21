@@ -48,9 +48,9 @@ router.get('/products/:id', (req, res, next) => {
   const storeId = req.session.user.id
   const { name, description, picture, price, category,Tags } = req.body;
   Product.create({
-    store_id = storeId, // à tester
+    // store_id = storeId, // à tester
     name, 
-    description, 
+    // description, 
     picture, 
     price, 
     category,

@@ -63,7 +63,6 @@
   padding: 1em;
   border: 1px solid var(--border);
   border-radius: 10px;
-  
 }
 
 .sign-form .I-am-retailer {
@@ -73,15 +72,18 @@
 
 .sign-form button {
   color: white;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: left;
   background-color: var(--accent-color);
-  margin: 3em 2em 2em;
+  margin: 3em -2.2em 0 40vw;
   padding: 1em;
   border: 0;
-  border-radius: 10px;
+  border-radius: 10px 0 0 10px;
 }
 
 .sign-form button::before {
-  content: '\2192\0000a0';
+  content: '\0000a0\0000a0\0000a0\2192\0000a0\0000a0';
 }
 
 .sign-form button:hover {

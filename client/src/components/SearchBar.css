@@ -1,0 +1,32 @@
+.search-container {
+  margin: 2em auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.search-container .fa-filter {
+  color: white;
+  background: var(--accent-color);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: .5em;
+  border-radius: 0 10px 10px 0;
+  flex-grow: 1;
+}
+
+.SearchBar {
+  width: 80vw;
+  background: white;
+  color: var(--grey);
+  border-radius: 10px;
+  
+}
+
+.SearchBar input {
+  border: 0;
+  margin: 0 0.5em;
+  padding: .5em;
+  flex-grow: 2;
+}

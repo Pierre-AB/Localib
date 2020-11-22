@@ -80,6 +80,9 @@ app.use('/', index);
 app.use('/api', require('./routes/auth-routes'));
 app.use('/api', require('./routes/product-routes'));
 app.use('/api', require('./routes/orders-routes'));
+app.use('/api', require('./routes/store-routes'));
+
+
 
 
 

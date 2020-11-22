@@ -67,8 +67,9 @@ const deleteData = async () => {
   }
 };
 
-if (process.argv[2] === '-i') {
+
+if (process.argv[2] === '-i') { // Node seeder -i pour importer data
   importData();
-} else if (process.argv[2] === '-d') {
+} else if (process.argv[2] === '-d') { // Node seeder -i pour supprimer data
   deleteData();
 }

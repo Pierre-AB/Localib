@@ -46,7 +46,7 @@ const userSchema = new Schema({
 
 // Geocode & create location field
 
-userSchema.pre('save', async function(next) {
+userSchema.pre('save', async function (next) {
   const loc = await geocoder.geocode(this.address);
   this.location = {
     type: 'Point',

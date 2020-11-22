@@ -15,7 +15,6 @@ const User = require('../models/user-model');
 authRoutes.post('/signup', (req, res, next) => {
 
   const { email, password, type, fullName, address, zip, geoloc, phone, description, openingHours, picture, siret, numVAT, businessType } = req.body;
-  console.log("signup - req.session.currentUser", req.session.currentUser)
 
   if (!email) {
     res.status(400).json({ message: "please provide an email address" })
@@ -70,6 +69,8 @@ authRoutes.post('/signup', (req, res, next) => {
   const salt = bcrypt.genSaltSync(10);
   const hashPass = bcrypt.hashSync(password, salt);
 
+  //LOCATION DATA IS CREATED IN USER MODEL THROUGH GEOCODER.
+
   const newUser = new User({
     email,
     password: hashPass,
@@ -77,7 +78,6 @@ authRoutes.post('/signup', (req, res, next) => {
     fullName,
     address,
     zip,
-    geoloc,
     phone,
     description,
     openingHours,

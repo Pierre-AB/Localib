@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { GeolocatedProps, geolocated } from "react-geolocated";
 import Geolocated from './geolocated';
-
+import service, {storesDistance} from './map-service'
 
 
 class storesList extends Component {
@@ -12,11 +12,13 @@ class storesList extends Component {
       this.state = { listOfStores: [] };
   }
 
-
   getAllStores = () => {
+    // const { latitude, longitude } = this.props.coords;
+    // axios.get(`http://localhost:5000/api/stores/distances/${latitude},${longitude}}`)  
+    // storesDistance()
     axios.get(`http://localhost:5000/api/stores/distances/48.794850700000005,2.4614814`)
     .then(responseFromApi => {
-      this.setState({
+    this.setState({
         listOfStores: responseFromApi.data
       })
     })

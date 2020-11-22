@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { geolocated } from "react-geolocated";
 import Geolocated from '../components/Maps/geolocated';
-import StoresList from '../components/Maps/viewMap'
+import StoresList from '../components/Maps/storesList'
 
 
 

@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+
 const service = axios.create({
   baseURL: 'http://localhost:5000/api',
   withCredentials: true
@@ -7,7 +8,7 @@ const service = axios.create({
 export default service;
 
 function storesDistance( latlng ) {
-  return service.get('/stores/distances/:latlng', { latlng }).then(response => response.data)
+  return service.get(`/stores/distances/48.794850700000005,2.4614814`, { latlng }).then(response => response.data)
 }
 export {storesDistance}
 

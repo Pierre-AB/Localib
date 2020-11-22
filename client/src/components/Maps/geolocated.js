@@ -1,0 +1,40 @@
+import React from "react";
+import { geolocated } from "react-geolocated";
+ 
+class Geolocated extends React.Component {
+    render() {
+        return !this.props.isGeolocationAvailable ? (
+          
+            <div>Your browser does not support Geolocation</div>
+        ) : !this.props.isGeolocationEnabled ? (
+            <div>Geolocation is not enabled</div>
+        ) : this.props.coords ? (
+            <table>
+                <tbody>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                    <tr>
+                        <td>latitude</td>
+                        <td>{this.props.coords.latitude}</td>
+                    </tr>
+                    <tr>
+                        <td>longitude</td>
+                        <td>{this.props.coords.longitude}</td>
+                    </tr>
+                </tbody>
+            </table>
+        ) : (
+            <div>Getting the location data</div>
+        );
+    }
+}
+ 
+export default geolocated({
+    positionOptions: {
+        enableHighAccuracy: false,
+    },
+    userDecisionTimeout: 5000,
+})(Geolocated);

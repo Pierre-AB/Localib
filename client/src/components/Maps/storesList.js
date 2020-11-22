@@ -24,6 +24,7 @@ class storesList extends Component {
     })
   }
 
+
   componentDidMount() {
     this.getAllStores();
   }

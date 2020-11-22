@@ -9,12 +9,36 @@ import service, {storesDistance} from './map-service'
 class storesList extends Component {
   constructor(props){
       super(props);
-      this.state = { listOfStores: [] };
+      this.state = { 
+        listOfStores: [],
+        latitude: "48.794850700000005",
+        longitude: "2.4614814"
+       };
+      this.getLocation = this.getLocation.bind(this);
+      this.getCoordinates = this.getCoordinates.bind(this);
+      this.getAllStores = this.getAllStores.bind(this);
+
+      
   }
 
-  getAllStores = () => {
-    // const { latitude, longitude } = this.props.coords;
-    // axios.get(`http://localhost:5000/api/stores/distances/${latitude},${longitude}}`)  
+  getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.getCoordinates())
+    } else {
+      alert("Please turn on your geolocalisation")
+    }
+  }
+
+  getCoordinates(position){
+    this.setState({
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude
+    })
+    this.getAllStores();
+  }
+
+  getAllStores() {
+    // axios.get(`http://localhost:5000/api/stores/distances/${this.state.latitude},${this.state.longitude}}`)  
     // storesDistance()
     axios.get(`http://localhost:5000/api/stores/distances/48.794850700000005,2.4614814`)
     .then(responseFromApi => {
@@ -35,16 +59,18 @@ class storesList extends Component {
 
       <div>
       <h1>Storeslist</h1>
-      <div style={{width: '60%', float:"left"}}>
+      <div className="media">
               {this.state.listOfStores.length <= 0 && "Loading stores . . . "}
               {this.state.listOfStores.map( store => {
             return (
               <div key={store._id}>
-               <img src={store.picture}></img>
-                 <h2>{store.fullName}</h2>
-                 <h3>{store.address}</h3>
-                 <h3>{store.distance} meters</h3>
-                 <h4>{store.businessType}</h4>
+               <img src={store.picture} width="64" height="64"></img>
+                <div className="media-body">
+                  <h2 className="mt-0">{store.fullName}</h2>
+                  <h3>{store.address}</h3>
+                  <h3>{store.distance} meters</h3>
+                  <h4>{store.businessType}</h4>
+                 </div>
                </div>
               )})
           }

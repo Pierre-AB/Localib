@@ -109,6 +109,7 @@ router.get('/stores/distances/:latlng', (req, res, next) => {
     }
   ])
   .then(project => {
+      console.log(project)
       res.status(200).json(project);
     })
     .catch(error => {

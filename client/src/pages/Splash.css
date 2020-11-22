@@ -1,0 +1,24 @@
+.splash-page {
+  background: 
+  /* top, transparent red */ 
+  linear-gradient(
+    rgba(29, 29, 29, 0.75), 
+    rgba(29, 29, 29, 0.75)
+  ),
+  /* bottom, image */
+  url(https://images.pexels.com/photos/1833586/pexels-photo-1833586.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260);
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+
+.splash-page h1 {
+  font-size: 3em;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin: 0.2em 0;
+}

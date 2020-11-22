@@ -49,3 +49,21 @@ body {
   font-family: 'Nunito', sans-serif;
 }
 
+.btn {
+  color: white;
+  text-transform: uppercase;
+  font-weight: 800;
+  margin: 1em 1em 0;
+  padding: 1em;
+  border: 0;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.green {
+  background-color: var(--accent-color);
+}
+
+.dark {
+  background-color: var(--black);
+}

@@ -53,4 +53,32 @@
   "numVAT": "11111111111",
   "businessType": "Supermarché"
   
+},
+{
+  "email": "boulangerie@gmail.fr",
+  "password": "azerty123",
+  "type": "store", 
+  "fullName": "Local Paris",
+  "address": "142 Rue de Rivoli, 75001 Paris, FR",
+  "phone": "0142074853",
+  "description": "Boulangerie",
+  "picture": "https://lh5.googleusercontent.com/p/AF1QipMcv0eDoU7A_OY-rPhyiuxUtm0s0zKsJ0jC90TE=w90-h90-n-k-no",
+  "siret": "11111111111",
+  "numVAT": "11111111111",
+  "businessType": "Supermarché"
+  
+},
+{
+  "email": "boulangerie@gmail.fr",
+  "password": "azerty123",
+  "type": "store", 
+  "fullName": "Boulanger Rennes",
+  "address": "18 Rue de Nemours, 35000 Rennes",
+  "phone": "0142074853",
+  "description": "Boulangerie",
+  "picture": "https://lh5.googleusercontent.com/p/AF1QipMcv0eDoU7A_OY-rPhyiuxUtm0s0zKsJ0jC90TE=w90-h90-n-k-no",
+  "siret": "11111111111",
+  "numVAT": "11111111111",
+  "businessType": "Supermarché"
+  
 }]

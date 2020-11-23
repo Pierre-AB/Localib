@@ -10,12 +10,12 @@ class Geolocated extends React.Component {
             <div>Geolocation is not enabled</div>
         ) : this.props.coords ? (
             <table>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
                 <tbody>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
                     <tr>
                         <td>latitude</td>
                         <td>{this.props.coords.latitude}</td>

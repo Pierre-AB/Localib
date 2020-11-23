@@ -82,7 +82,7 @@ const getStoreInRadius = (async (req, res, next) => {
 //Get distance à partir de la latitud et longitud 
 
 router.get('/stores/distances/:latlng', (req, res, next) => {
-  const { latlng, /*type*/ } = req.params;
+  const { latlng,  } = req.params;
   const [lat, lng] = latlng.split(',');
 
   //par défaut c'est meters
@@ -104,7 +104,8 @@ router.get('/stores/distances/:latlng', (req, res, next) => {
         fullName: 1,
         address: 1, 
         businessType: 1,
-        picture: 1
+        picture: 1,
+        location: 1,
     }
     }
   ])

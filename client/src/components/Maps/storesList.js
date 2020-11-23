@@ -11,19 +11,21 @@ class storesList extends Component {
       super(props);
       this.state = { 
         listOfStores: [],
-        latitude: "48.794850700000005",
+        latitude: "489.794850700000005",
         longitude: "2.4614814"
        };
       this.getLocation = this.getLocation.bind(this);
       this.getCoordinates = this.getCoordinates.bind(this);
       this.getAllStores = this.getAllStores.bind(this);
+  }
 
-      
+  startApp () {
+    this.getLocation();
   }
 
   getLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.getCoordinates())
+      navigator.geolocation.getCurrentPosition(this.getCoordinates)
     } else {
       alert("Please turn on your geolocalisation")
     }
@@ -37,9 +39,12 @@ class storesList extends Component {
     this.getAllStores();
   }
 
+  
   getAllStores() {
+    // const locationMaintenant = navigator.geolocation.getCurrentPosition()
+    // console.log("😀", locationMaintenant)
+    // this.getCoordinates(navigator.geolocation.getCurrentPosition(position))
     // axios.get(`http://localhost:5000/api/stores/distances/${this.state.latitude},${this.state.longitude}}`)  
-    // storesDistance()
     axios.get(`http://localhost:5000/api/stores/distances/48.794850700000005,2.4614814`)
     .then(responseFromApi => {
     this.setState({
@@ -48,9 +53,12 @@ class storesList extends Component {
     })
   }
 
-
   componentDidMount() {
-    this.getAllStores();
+    this.getAllStores()
+  }
+  componentWillMount() {
+    this.getLocation();
+    // this.getAllStores();
   }
 
 
@@ -70,6 +78,9 @@ class storesList extends Component {
                   <h3>{store.address}</h3>
                   <h3>{store.distance} meters</h3>
                   <h4>{store.businessType}</h4>
+                  <p>Latitude : {store.location.coordinates[1]}</p>
+                  <p>Longitude: {store.location.coordinates[0]}</p>
+
                  </div>
                </div>
               )})

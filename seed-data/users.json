@@ -6,7 +6,7 @@
   "address": "22 Rue du Général Leclerc, 94000 Créteil",
   "phone": "0142071837",
   "description": "Supermarché de Créteil",
-  "picture": "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.toute-la-franchise.com%2Fimages%2Fzoom%2Fsupermarche-franchise.jpg&imgrefurl=https%3A%2F%2Fwww.toute-la-franchise.com%2Fvie-de-la-franchise-A26252-franchise-supermarche.html&tbnid=ttCzWQzn3j_WUM&vet=12ahUKEwi7ofSUoZPtAhXI04UKHfpaB4YQMygBegUIARCkAQ..i&docid=PwcqV42hLAy1_M&w=1000&h=667&q=supermarche%20image&ved=2ahUKEwi7ofSUoZPtAhXI04UKHfpaB4YQMygBegUIARCkAQ",
+  "picture": "https://picsum.photos/64",
   "siret": "11111111111",
   "numVAT": "11111111111",
   "businessType": "Supermarché"
@@ -20,7 +20,7 @@
   "address": "43 Rue du Général Leclerc, 94000 Créteil",
   "phone": "0142071349",
   "description": "Fromagerie",
-  "picture": "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.fromagerie-jeannot-31.com%2Fupload-diaporamas%2Fmedium%2Fimage-banniere.jpg&imgrefurl=https%3A%2F%2Fwww.fromagerie-jeannot-31.com%2F&tbnid=oOXjBfqX2VJhJM&vet=12ahUKEwjdzpuooZPtAhVLSxoKHaSNDe0QMygAegUIARC3AQ..i&docid=J0u1trVPr1uJ6M&w=1919&h=978&q=fromagerie%20image&ved=2ahUKEwjdzpuooZPtAhVLSxoKHaSNDe0QMygAegUIARC3AQ",
+  "picture": "https://picsum.photos/64",
   "siret": "11111111111",
   "numVAT": "11111111111",
   "businessType": "fromagerie"
@@ -34,7 +34,7 @@
   "address": "27 Rue du Général Leclerc, 94000 Créteil",
   "phone": "0142071837",
   "description": "Nicolas vin",
-  "picture": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F9%2F2020%2F08%2F11%2Fbest-affordable-foreign-wines-FT-BLOG0820.jpg",
+  "picture": "https://picsum.photos/64",
   "siret": "11111111111",
   "numVAT": "11111111111",
   "businessType": "vinothèque"
@@ -48,7 +48,7 @@
   "address": "18 Rue du Dr Plichon, 94000 Créteil",
   "phone": "0142074853",
   "description": "Boulangerie",
-  "picture": "https://lh5.googleusercontent.com/p/AF1QipMcv0eDoU7A_OY-rPhyiuxUtm0s0zKsJ0jC90TE=w90-h90-n-k-no",
+  "picture": "https://picsum.photos/64",
   "siret": "11111111111",
   "numVAT": "11111111111",
   "businessType": "Supermarché"
@@ -62,7 +62,7 @@
   "address": "142 Rue de Rivoli, 75001 Paris, FR",
   "phone": "0142074853",
   "description": "Boulangerie",
-  "picture": "https://lh5.googleusercontent.com/p/AF1QipMcv0eDoU7A_OY-rPhyiuxUtm0s0zKsJ0jC90TE=w90-h90-n-k-no",
+  "picture": "https://picsum.photos/64",
   "siret": "11111111111",
   "numVAT": "11111111111",
   "businessType": "Supermarché"
@@ -76,7 +76,7 @@
   "address": "18 Rue de Nemours, 35000 Rennes",
   "phone": "0142074853",
   "description": "Boulangerie",
-  "picture": "https://lh5.googleusercontent.com/p/AF1QipMcv0eDoU7A_OY-rPhyiuxUtm0s0zKsJ0jC90TE=w90-h90-n-k-no",
+  "picture": "https://picsum.photos/64",
   "siret": "11111111111",
   "numVAT": "11111111111",
   "businessType": "Supermarché"

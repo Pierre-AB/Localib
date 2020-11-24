@@ -17,17 +17,20 @@ authRoutes.post('/signup', (req, res, next) => {
   const { email, password, type, fullName, address, zip, geoloc, phone, description, openingHours, picture, siret, numVAT, businessType } = req.body;
 
   if (!email) {
+    console.log("bloque a cause de lemail")
     res.status(400).json({ message: "please provide an email address" })
     return;
   }
 
   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
   if (!regex.test(password)) {
+    console.log("bloque a cause du password")
     res.status(400).json({ message: "Password must have at least 6 characters, one cap letter AND one digit" })
     return;
   }
 
   if (!type) {
+    console.log("bloque a cause du type")
     res.status(400).json({ message: "Please check code, type of user is MANDATORY" })
     return;
   }
@@ -89,6 +92,7 @@ authRoutes.post('/signup', (req, res, next) => {
 
   newUser.save()
     .then(newUser => {
+      console.log("signup - req.session.currentUser", req.session.currentUser)
       req.session.currentUser = newUser;
       res.status(200).json(newUser);
     })

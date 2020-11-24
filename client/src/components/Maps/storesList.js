@@ -11,7 +11,7 @@ class storesList extends Component {
       super(props);
       this.state = { 
         listOfStores: [],
-        latitude: "489.794850700000005",
+        latitude: "48.794850700000005",
         longitude: "2.4614814"
        };
       this.getLocation = this.getLocation.bind(this);

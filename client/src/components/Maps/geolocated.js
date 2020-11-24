@@ -2,6 +2,10 @@ import React from "react";
 import { geolocated } from "react-geolocated";
  
 class Geolocated extends React.Component {
+    state {
+        type: ''
+    }
+
     render() {
         return !this.props.isGeolocationAvailable ? (
           

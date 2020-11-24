@@ -110,7 +110,7 @@ router.get('/stores/distances/:latlng', (req, res, next) => {
     }
   ])
   .then(project => {
-      console.log(project)
+      console.log(colors.green.inverse(project))
       res.status(200).json(project);
     })
     .catch(error => {

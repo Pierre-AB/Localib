@@ -11,55 +11,68 @@ class storesList extends Component {
       super(props);
       this.state = { 
         listOfStores: [],
-        latitude: "489.794850700000005",
-        longitude: "2.4614814"
+        latitude: "",
+        longitude: ""
        };
-      this.getLocation = this.getLocation.bind(this);
-      this.getCoordinates = this.getCoordinates.bind(this);
-      this.getAllStores = this.getAllStores.bind(this);
+      this.askLocation = this.askLocation.bind(this);
+      // this.getCoordinates = this.getCoordinates.bind(this);
+      // this.getAllStores = this.getAllStores.bind(this);
   }
 
   startApp () {
     this.getLocation();
   }
 
-  getLocation() {
+  askLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.getCoordinates)
+      navigator.geolocation.getCurrentPosition((pos) => {
+        const lat = pos.coords.latitude
+        const lng = pos.coords.longitude
+        console.log('success geoloc 🗺', pos)
+        // success
+        this.setState({
+          latitude: lat,
+          longitude: lng
+        })
+          axios.get(`http://localhost:5000/api/stores/distances/${this.state.latitude},${this.state.longitude}`)
+        
+        .then(responseFromApi => {
+          this.setState({
+              listOfStores: responseFromApi.data
+            })
+          })
+    })
     } else {
       alert("Please turn on your geolocalisation")
     }
   }
 
-  getCoordinates(position){
-    this.setState({
-      latitude: position.coords.latitude,
-      longitude: position.coords.longitude
-    })
-    this.getAllStores();
-  }
+  // getCoordinates(position){
+  //   this.setState({
+  //     latitude: position.coords.latitude,
+  //     longitude: position.coords.longitude
+  //   })
+  //   this.getAllStores();
+  // }
 
   
-  getAllStores() {
-    // const locationMaintenant = navigator.geolocation.getCurrentPosition()
-    // console.log("😀", locationMaintenant)
-    // this.getCoordinates(navigator.geolocation.getCurrentPosition(position))
-    // axios.get(`http://localhost:5000/api/stores/distances/${this.state.latitude},${this.state.longitude}}`)  
-    axios.get(`http://localhost:5000/api/stores/distances/48.794850700000005,2.4614814`)
-    .then(responseFromApi => {
-    this.setState({
-        listOfStores: responseFromApi.data
-      })
-    })
-  }
+  // getAllStores() {
+  //   // const locationMaintenant = navigator.geolocation.getCurrentPosition()
+  //   // console.log("😀", locationMaintenant)
+  //   // this.getCoordinates(navigator.geolocation.getCurrentPosition(position))
+  //   // axios.get(`http://localhost:5000/api/stores/distances/${this.state.latitude},${this.state.longitude}}`)  
+  //   axios.get(`http://localhost:5000/api/stores/distances/48.794850700000005,2.4614814`)
+  //   .then(responseFromApi => {
+  //   this.setState({
+  //       listOfStores: responseFromApi.data
+  //     })
+  //   })
+  // }
 
   componentDidMount() {
-    this.getAllStores()
+    this.askLocation()
   }
-  componentWillMount() {
-    this.getLocation();
-    // this.getAllStores();
-  }
+
 
 
   render(){

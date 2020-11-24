@@ -6,7 +6,7 @@ import './SignForm.css';
 
 class Signup extends Component {
 
-  state = { email: '', password: '', type: '' }
+  state = { email: '', password: '', type: this.props.type }
 
   handleFormSubmit = (event) => {
     event.preventDefault();

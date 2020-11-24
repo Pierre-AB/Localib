@@ -1,84 +1,386 @@
-[{
-  "email": "auchan@gmail.Com",
-  "password": "azerty123",
-  "type": "store", 
-  "fullName": "Auchan Supermarché",
-  "address": "22 Rue du Général Leclerc, 94000 Créteil",
-  "phone": "0142071837",
-  "description": "Supermarché de Créteil",
-  "picture": "https://picsum.photos/64",
-  "siret": "11111111111",
-  "numVAT": "11111111111",
-  "businessType": "Supermarché"
-  
-},
-{
-  "email": "fromagerie@gmail.com",
-  "password": "azerty123",
-  "type": "store", 
-  "fullName": "La Fromagerie du Village - S. Baudouin",
-  "address": "43 Rue du Général Leclerc, 94000 Créteil",
-  "phone": "0142071349",
-  "description": "Fromagerie",
-  "picture": "https://picsum.photos/64",
-  "siret": "11111111111",
-  "numVAT": "11111111111",
-  "businessType": "fromagerie"
-  
-},
-{
-  "email": "NicolasWines@gmail.com",
-  "password": "azerty123",
-  "type": "store", 
-  "fullName": "Nicolas",
-  "address": "27 Rue du Général Leclerc, 94000 Créteil",
-  "phone": "0142071837",
-  "description": "Nicolas vin",
-  "picture": "https://picsum.photos/64",
-  "siret": "11111111111",
-  "numVAT": "11111111111",
-  "businessType": "vinothèque"
-  
-},
-{
-  "email": "boulangerie@gmail.fr",
-  "password": "azerty123",
-  "type": "store", 
-  "fullName": "Boulanger Eric",
-  "address": "18 Rue du Dr Plichon, 94000 Créteil",
-  "phone": "0142074853",
-  "description": "Boulangerie",
-  "picture": "https://picsum.photos/64",
-  "siret": "11111111111",
-  "numVAT": "11111111111",
-  "businessType": "Supermarché"
-  
-},
-{
-  "email": "boulangerie@gmail.fr",
-  "password": "azerty123",
-  "type": "store", 
-  "fullName": "Local Paris",
-  "address": "142 Rue de Rivoli, 75001 Paris, FR",
-  "phone": "0142074853",
-  "description": "Boulangerie",
-  "picture": "https://picsum.photos/64",
-  "siret": "11111111111",
-  "numVAT": "11111111111",
-  "businessType": "Supermarché"
-  
-},
-{
-  "email": "boulangerie@gmail.fr",
-  "password": "azerty123",
-  "type": "store", 
-  "fullName": "Boulanger Rennes",
-  "address": "18 Rue de Nemours, 35000 Rennes",
-  "phone": "0142074853",
-  "description": "Boulangerie",
-  "picture": "https://picsum.photos/64",
-  "siret": "11111111111",
-  "numVAT": "11111111111",
-  "businessType": "Supermarché"
-  
-}]
+[
+  {
+    "email": "auchan@gmail.Com",
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Auchan Supermarché",
+    "address": "22 Rue du Général Leclerc, 94000 Créteil",
+    "phone": "0142071837",
+    "description": "Supermarché de Créteil",
+    "picture": "https://picsum.photos/64",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Supermarché",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 7,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "fromagerie@gmail.com",
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "La Fromagerie du Village - S. Baudouin",
+    "address": "43 Rue du Général Leclerc, 94000 Créteil",
+    "phone": "0142071349",
+    "description": "Fromagerie",
+    "picture": "https://picsum.photos/64",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "fromagerie",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 7,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "NicolasWines@gmail.com",
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Nicolas",
+    "address": "27 Rue du Général Leclerc, 94000 Créteil",
+    "phone": "0142071837",
+    "description": "Nicolas vin",
+    "picture": "https://picsum.photos/64",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "vinothèque",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 7,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "boulangerie@gmail.fr",
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Boulanger Eric",
+    "address": "18 Rue du Dr Plichon, 94000 Créteil",
+    "phone": "0142074853",
+    "description": "Boulangerie",
+    "picture": "https://picsum.photos/64",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Supermarché",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 7,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "boulangerie@gmail.fr",
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Local Paris",
+    "address": "142 Rue de Rivoli, 75001 Paris, FR",
+    "phone": "0142074853",
+    "description": "Boulangerie",
+    "picture": "https://picsum.photos/64",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Supermarché",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 7,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "boulangerie@gmail.fr",
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Boulanger Rennes",
+    "address": "18 Rue de Nemours, 35000 Rennes",
+    "phone": "0142074853",
+    "description": "Boulangerie",
+    "picture": "https://picsum.photos/64",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Supermarché",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 7,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  }
+]

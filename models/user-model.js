@@ -33,6 +33,7 @@ const userSchema = new Schema({
   phone: String,
   description: String,
   openingHours: Array,
+  timeSlot: Number,
   picture: String,
   siret: String,
   numVAT: String,

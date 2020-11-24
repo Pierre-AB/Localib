@@ -6,6 +6,36 @@ const mongoose = require('mongoose');
 const colors = require('colors');
 
 
+/***
+ *      ______                       __                                __      __                     
+ *     /      \                     |  \                              |  \    |  \                    
+ *    |  $$$$$$\  ______    ______  | $$  ______    _______  ______  _| $$_    \$$  ______   _______  
+ *    | $$ __\$$ /      \  /      \ | $$ /      \  /       \|      \|   $$ \  |  \ /      \ |       \ 
+ *    | $$|    \|  $$$$$$\|  $$$$$$\| $$|  $$$$$$\|  $$$$$$$ \$$$$$$\\$$$$$$  | $$|  $$$$$$\| $$$$$$$\
+ *    | $$ \$$$$| $$    $$| $$  | $$| $$| $$  | $$| $$      /      $$ | $$ __ | $$| $$  | $$| $$  | $$
+ *    | $$__| $$| $$$$$$$$| $$__/ $$| $$| $$__/ $$| $$_____|  $$$$$$$ | $$|  \| $$| $$__/ $$| $$  | $$
+ *     \$$    $$ \$$     \ \$$    $$| $$ \$$    $$ \$$     \\$$    $$  \$$  $$| $$ \$$    $$| $$  | $$
+ *      \$$$$$$   \$$$$$$$  \$$$$$$  \$$  \$$$$$$   \$$$$$$$ \$$$$$$$   \$$$$  \$$  \$$$$$$  \$$   \$$
+ *                                                                                                    
+ *                                                                                                    
+ *                                                                                                    
+ */
+
+
+
+/***
+ *    ______          _ _           
+ *    | ___ \        | (_)          
+ *    | |_/ /__ _  __| |_ _   _ ___ 
+ *    |    // _` |/ _` | | | | / __|
+ *    | |\ \ (_| | (_| | | |_| \__ \
+ *    \_| \_\__,_|\__,_|_|\__,_|___/
+ *                                  
+ *                                  
+ */
+
+ // On va chercher les Stores disponibles dans un radius (Distance) pour
+ // un code postal en particulier 
 
 const getStoreInRadius = (async (req, res, next) => {
   const { zipcode, distance } = req.params;
@@ -38,23 +68,34 @@ const getStoreInRadius = (async (req, res, next) => {
   });
 });
 
+/***
+ *    ______ _     _                       
+ *    |  _  (_)   | |                      
+ *    | | | |_ ___| |_ __ _ _ __   ___ ___ 
+ *    | | | | / __| __/ _` | '_ \ / __/ _ \
+ *    | |/ /| \__ \ || (_| | | | | (_|  __/
+ *    |___/ |_|___/\__\__,_|_| |_|\___\___|
+ *                                         
+ *                                         
+ */
 
+//Get distance à partir de la latitud et longitud 
 
-
-const getDistances = (async (req, res, next) => {
-  const { latlng, type } = req.params;
+router.get('/stores/distances/:latlng', (req, res, next) => {
+  const { latlng,  } = req.params;
   const [lat, lng] = latlng.split(',');
 
-  //par défaut c'est m
-  const multiplier = 0.001;
+  //par défaut c'est meters
+  const multiplier = 1;
 
-  const distances = await Store.aggregate([
+  Store
+  .aggregate([
     {
       $geoNear: {
         near: {type: 'Point', coordinates: [lng * 1, lat * 1]},
         distanceField: 'distance',
         distanceMultiplier: multiplier,
-        query: { businessType: type },
+        // query: { businessType: type },
       }
     },
     {
@@ -62,22 +103,35 @@ const getDistances = (async (req, res, next) => {
         distance: 1,
         fullName: 1,
         address: 1, 
-        businessType: 1
-      }
+        businessType: 1,
+        picture: 1,
+        location: 1,
     }
-  ]);
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      data: distances
     }
-  });
+  ])
+  .then(project => {
+      console.log(colors.green.inverse(project))
+      res.status(200).json(project);
+    })
+    .catch(error => {
+      res.json(error);
+    });
 });
 
+/***
+ *    ______            _            
+ *    | ___ \          | |           
+ *    | |_/ /___  _   _| |_ ___  ___ 
+ *    |    // _ \| | | | __/ _ \/ __|
+ *    | |\ \ (_) | |_| | ||  __/\__ \
+ *    \_| \_\___/ \__,_|\__\___||___/
+ *                                   
+ *                                   
+ */
 
 router.route('/stores/zipcode/:zipcode/distance/:distance').get(getStoreInRadius);
-router.route('/stores/distances/:latlng/type/:type').get(getDistances);
+//router.route('/stores/distances/:latlng/type/:type').get(getDistances); >> voir si c'est mieux
+
 
 
 

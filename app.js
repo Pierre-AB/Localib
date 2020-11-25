@@ -13,7 +13,7 @@ const session = require('express-session');
 
 
 mongoose
-  .connect('mongodb://localhost/localib', { 
+.connect(process.env.MONGODB_URI, {  
     useNewUrlParser: true,
     useCreateIndex: true,
     useNewUrlParser: true,

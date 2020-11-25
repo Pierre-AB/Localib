@@ -19,8 +19,13 @@ import UserSettings from './pages/UserSettings';
 // import pages for Login, Sign up & Log out
 import Signup from './components/auth/Signup'
 
+// import pages for store views
+import StoreDetails from './components/StoreDetails/StoreDetails'
+
 // import page for product creation
+
 // import AddProduct from './components/Products/addProducts'
+
 
 
 function App() {
@@ -37,7 +42,10 @@ function App() {
         <Route exact path="/mapView" component={MapView} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/userSettings" component={UserSettings} />
-        
+
+        {/* Store Details */}
+        <Route exact path="/storeDetails/:id" component={StoreDetails} />
+
         {/* Login & signup */}
         <Route exact path="/signup" component={Signup} />
 

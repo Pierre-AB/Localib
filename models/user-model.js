@@ -33,6 +33,7 @@ const userSchema = new Schema({
   phone: String,
   description: String,
   openingHours: Array,
+  timeSlot: Number,
   picture: String,
   siret: String,
   numVAT: String,
@@ -46,7 +47,7 @@ const userSchema = new Schema({
 
 // Geocode & create location field
 
-userSchema.pre('save', async function(next) {
+userSchema.pre('save', async function (next) {
   const loc = await geocoder.geocode(this.address);
   this.location = {
     type: 'Point',

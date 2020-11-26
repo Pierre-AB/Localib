@@ -9,7 +9,7 @@ export default service;
 function signup(email, password) {
   return service.post('/signup', {email, password}).then(response => response.data)
 }
-export {signup}
+export { signup }
 
 // function loggedin() {
 //   return service.get('/loggedin').then(response => response.data)

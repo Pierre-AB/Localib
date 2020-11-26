@@ -4,6 +4,7 @@ const Store = require('../models/user-model');
 const geocoder = require('../utils/geocoder')
 const mongoose = require('mongoose');
 const colors = require('colors');
+const User = require('../models/user-model');
 
 
 /***
@@ -34,15 +35,15 @@ const colors = require('colors');
  *                                  
  */
 
- // On va chercher les Stores disponibles dans un radius (Distance) pour
- // un code postal en particulier 
+// On va chercher les Stores disponibles dans un radius (Distance) pour
+// un code postal en particulier 
 
 const getStoreInRadius = (async (req, res, next) => {
   const { zipcode, distance } = req.params;
 
   // Get lat/lng from geocoder
   const loc = await geocoder.geocode(zipcode)
-  const locFR = loc.filter(e => e.countryCode === "FR") 
+  const locFR = loc.filter(e => e.countryCode === "FR")
 
   console.log(colors.green.inverse(locFR))
 
@@ -82,34 +83,34 @@ const getStoreInRadius = (async (req, res, next) => {
 //Get distance à partir de la latitud et longitud 
 
 router.get('/stores/distances/:latlng', (req, res, next) => {
-  const { latlng,  } = req.params;
+  const { latlng, } = req.params;
   const [lat, lng] = latlng.split(',');
 
   //par défaut c'est meters
   const multiplier = 1;
 
   Store
-  .aggregate([
-    {
-      $geoNear: {
-        near: {type: 'Point', coordinates: [lng * 1, lat * 1]},
-        distanceField: 'distance',
-        distanceMultiplier: multiplier,
-        // query: { businessType: type },
+    .aggregate([
+      {
+        $geoNear: {
+          near: { type: 'Point', coordinates: [lng * 1, lat * 1] },
+          distanceField: 'distance',
+          distanceMultiplier: multiplier,
+          // query: { businessType: type },
+        }
+      },
+      {
+        $project: {
+          distance: 1,
+          fullName: 1,
+          address: 1,
+          businessType: 1,
+          picture: 1,
+          location: 1,
+        }
       }
-    },
-    {
-      $project: {
-        distance: 1,
-        fullName: 1,
-        address: 1, 
-        businessType: 1,
-        picture: 1,
-        location: 1,
-    }
-    }
-  ])
-  .then(project => {
+    ])
+    .then(project => {
       console.log(colors.green.inverse(project))
       res.status(200).json(project);
     })
@@ -132,6 +133,39 @@ router.get('/stores/distances/:latlng', (req, res, next) => {
 
 router.route('/stores/zipcode/:zipcode/distance/:distance').get(getStoreInRadius);
 //router.route('/stores/distances/:latlng/type/:type').get(getDistances); >> voir si c'est mieux
+
+
+
+/**
+$$$$$$$\  $$$$$$$$\ $$$$$$$$\  $$$$$$\  $$$$$$\ $$\       $$$$$$\
+$$  __$$\ $$  _____|\__$$  __|$$  __$$\ \_$$  _|$$ |     $$  __$$\
+$$ |  $$ |$$ |         $$ |   $$ /  $$ |  $$ |  $$ |     $$ /  \__|
+$$ |  $$ |$$$$$\       $$ |   $$$$$$$$ |  $$ |  $$ |     \$$$$$$\
+$$ |  $$ |$$  __|      $$ |   $$  __$$ |  $$ |  $$ |      \____$$\
+$$ |  $$ |$$ |         $$ |   $$ |  $$ |  $$ |  $$ |     $$\   $$ |
+$$$$$$$  |$$$$$$$$\    $$ |   $$ |  $$ |$$$$$$\ $$$$$$$$\\$$$$$$  |
+\_______/ \________|   \__|   \__|  \__|\______|\________|\______/
+ */
+
+router.get(`/stores/:id`, (req, res, next) => {
+
+  const storeId = req.params.id;
+  console.log("params", req.params)
+  console.log("storeId", storeId)
+  User.findById(storeId)
+    .then(store => {
+      res.status(200).json(store)
+    })
+    .catch(err => {
+      res.status(400).json({ message: err })
+    })
+
+
+})
+
+
+
+
 
 
 

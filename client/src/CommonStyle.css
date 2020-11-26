@@ -77,6 +77,13 @@ h2 {
 }
 
 h3 {
+  text-align: left;
+  color: var(--accent-color);
+  font-weight: lighter;
+  margin: 1.5em 0 0.8em;
+}
+
+h4 {
   color: white;
   margin: 0 0 .2em 0;
   font-size: 1.3em;
@@ -158,6 +165,59 @@ button:hover {
 }
 
 .nearby-store-address p {
+  /* ... si déborde */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 210px;
+}
+
+/* CATEGORY STYLES */
+.horizontal-scroll-container .category-card {
+  margin-right: 1.3em;
+}
+
+.horizontal-scroll-container a:first-child {
+  margin-left: 1.3em;
+}
+
+.category-card {
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 150px;
+  min-width: 115px;
+  border-radius: 15px;
+}
+
+.category-store-info {
+  background: var(--blue-grey);
+  position: absolute;
+  bottom: 0;
+  padding: .6em .8em;
+  color: white;
+  text-align: left;
+  width: 100%;
+  border-radius: 0 0 15px 15px;
+}
+
+.category-store-info h4 {
+  font-size: .7em;
+  /* ... si déborde */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 85px;
+}
+
+.category-store-address {
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: bolder;
+  font-size: .5em;
+}
+
+.category-store-address p {
   /* ... si déborde */
   white-space: nowrap;
   overflow: hidden;

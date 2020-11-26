@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 
 import SearchBar from '../components/SearchBar'
 import NearbyStores from '../components/Maps/NearbyStores'
-import StoresByCategory from '../components/Maps/StoresByCategory'
+import StoresAlimentation from '../components/Maps/StoresAlimentation'
+import StoresEpicerieBoissons from '../components/Maps/StoresEpicerieBoissons'
+
 
 class SearchListResults extends Component {
   state = {
@@ -24,7 +26,8 @@ class SearchListResults extends Component {
         </div>
         <div className="categories-section">
           <h2>By categories</h2>
-          <StoresByCategory />
+          <StoresAlimentation />
+          <StoresEpicerieBoissons />
         </div>
       </div>
     );

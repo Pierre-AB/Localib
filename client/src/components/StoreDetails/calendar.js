@@ -1,6 +1,5 @@
-import React from 'react';
-import Datetime from 'react-datetime';
-import './calendar.css';
+import React, {useState} from 'react';
+
 
 /* Composant qui affichera le calendrier des disponibilités de la boutique sélectionnée 
 
@@ -15,8 +14,6 @@ Requisite dans le modèle:
 Quand le user clique sur
 
 */
-
-
 
 class Calendar extends React.Component {
 
@@ -36,10 +33,6 @@ class Calendar extends React.Component {
     return (
       <div>
         Test
-        <Datetime value={this.state.pickedTime} onChange={e => this.handleChange(e)} />
-
-
-
       </div>
     )
   }

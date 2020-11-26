@@ -114,7 +114,8 @@ router.get('/stores/distances/:latlng', (req, res, next) => {
       res.status(200).json(project);
     })
     .catch(error => {
-      res.json(error);
+      console.log(error)
+      res.status(500).json(error);
     });
 });
 
@@ -139,5 +140,3 @@ router.route('/stores/zipcode/:zipcode/distance/:distance').get(getStoreInRadius
 
 
 module.exports = router;
-
-

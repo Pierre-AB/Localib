@@ -76,6 +76,8 @@ class storesList extends Component {
 
 
   render(){
+    console.log("coucou", this.state.listOfStores)
+
     return(
 
       <div>
@@ -105,5 +107,3 @@ class storesList extends Component {
   }
 }
 export default storesList
-
-

@@ -23,7 +23,7 @@ class MapView extends Component {
         <Geolocated />
         <StoresList />
         <h1>MAP</h1>
-        {/* <Map /> */}
+        <Map />
       </div>
     );
   }

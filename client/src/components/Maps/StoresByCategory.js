@@ -12,8 +12,7 @@ class StoresByCategories extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // listOfStores: [],
-      storesByCategory: [],
+      listOfStores: [],
       latitude: "",
       longitude: ""
     };
@@ -35,11 +34,11 @@ class StoresByCategories extends Component {
           latitude: lat,
           longitude: lng
         })
-        axios.get(`http://localhost:5000/api/stores/supermarket`)
+        axios.get(`http://localhost:5000/api/stores/distances/${this.state.latitude},${this.state.longitude}/alimentation`)
 
           .then(responseFromApi => {
             this.setState({
-              storesByCategory: responseFromApi.data
+              listOfStores: responseFromApi.data
             })
           })
       })
@@ -57,10 +56,10 @@ class StoresByCategories extends Component {
       <div className="horizontal-scroll-container">
 
         {/* Loading stores message */}
-        {this.state.storesByCategory.length <= 0 && "Loading stores . . . "}
+        {this.state.listOfStores.length <= 0 && "Loading stores . . . "}
 
         {/* Display stores when loaded */}
-        {this.state.storesByCategory.map(store => {
+        {this.state.listOfStores.map(store => {
 
           // Use store picture as background
           let background = store.picture

@@ -1,14 +1,22 @@
 import React from 'react';
-import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
+import { GoogleMap, Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import { geolocated } from "react-geolocated";
 import axios from 'axios';
-import StoresList from './storesList'
+import mapStyles from "./mapStyles";
 
 require('dotenv').config();
 
 
-const MapsKey = process.env.GOOGLE_MAPS_API_KEY
+const mapContainerStyle = {
+  height: "100vh",
+  width: "100vw",
+};
 
+const options = {
+  styles: mapStyles,
+  disableDefaultUI: true,
+  zoomControl: true,
+};
 
 class MapContainer extends React.Component{
   constructor(props) {
@@ -62,10 +70,11 @@ class MapContainer extends React.Component{
 render() {
  
     return (
+      <div>
       <Map
         google={this.props.google}
+        // options={options}
         zoom={9}
-        // style={"./mapStyles.js"}
         initialCenter={{ 
           lat: 48.794878, 
           lng: 2.4614197
@@ -79,20 +88,27 @@ render() {
                   lat: store.location.coordinates[1], 
                   lng: store.location.coordinates[0]
                   }}
-                // icon= {{
-                //   url: '../../logo.svg',
-                //   // scaledSize: new window.google.maps.Size(30,30),
-                //   }}
               />
             )
           })
         }
 
+                     {/* <InfoWindow
+                  marker={this.state.activeMarker}
+                  visible={this.state.showingInfoWindow}
+                  onClose={this.onClose}
+                >
+                  <div>
+                    <h4>{store.fullname}</h4>
+                  </div>
+                </InfoWindow> */}
+
      </Map>
+     </div>
     );
   }
 }
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM"
+  apiKey: "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM",
   })(MapContainer);
 

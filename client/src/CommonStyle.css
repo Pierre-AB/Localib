@@ -1,5 +1,5 @@
 /* IMPORT NUNITO GOOGLE FONT */
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap');
 
 /* EVERYTHING BORDER BOX */
 *, ::before, ::after {
@@ -9,6 +9,7 @@
 /* COLORS VAR */
 :root {
   --accent-color: #baceac;
+  --blue-grey: #454f63;
   --black: #1d1d1d;
   --grey-bg: #f7f7fa;
   --grey: #aeb5c5;
@@ -44,9 +45,10 @@
 
 /* MAIN & COMMON STYLE */
 body {
-  background: grey;
+  background: #f7f7fa;
   color: var(--black);
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
+  padding: 0 1.3em 2.5em;
 }
 
 .btn {
@@ -66,4 +68,99 @@ body {
 
 .dark {
   background-color: var(--black);
+}
+
+h2 {
+  text-align: left;
+  color: var(--blue-grey);
+  margin-top: 1.5em;
+}
+
+h3 {
+  color: white;
+  margin: 0 0 .2em 0;
+  font-size: 1.3em;
+}
+
+p {
+  margin: 0;
+}
+
+
+/* BUTTON STYLE */
+button {
+  color: white;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: left;
+  background-color: var(--accent-color);
+  margin: 2.3em -1.4em 0 0;
+  padding: .8em 3em .8em 2em;
+  border: 0;
+  border-radius: 10px 0 0 10px;
+}
+
+button::before {
+  content: '\0000a0\0000a0\0000a0\2192\0000a0\0000a0';
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+
+/* SCROLLING CONTAINERS */
+.horizontal-scroll-container {
+  display: flex;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  margin: 0 -1.3em;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar { display: none; }
+
+
+/* NEARBY STYLES */
+.nearby-section {
+  text-align: right;
+}
+
+.horizontal-scroll-container .nearby-card {
+  margin-right: 1.3em;
+}
+
+.horizontal-scroll-container a:first-child {
+  margin-left: 1.3em;
+}
+
+.nearby-card {
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 190px;
+  min-width: 240px;
+  border-radius: 15px;
+}
+
+.nearby-store-info {
+  position: absolute;
+  bottom: 0;
+  padding: 1em;
+  color: white;
+  text-align: left;
+}
+
+.nearby-store-address {
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: bolder;
+  font-size: .8em;
+}
+
+.nearby-store-address p {
+  /* ... si déborde */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 210px;
 }

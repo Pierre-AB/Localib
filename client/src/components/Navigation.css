@@ -8,6 +8,7 @@
 
   .navbar.mobile {
     display: none;
+    height: 2.5em;
   }
 }
 

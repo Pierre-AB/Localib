@@ -159,18 +159,32 @@ router.get(`/stores/:id`, (req, res, next) => {
     .catch(err => {
       res.status(400).json({ message: err })
     })
-
-
 })
 
 
 
+/***
+ *    ########  ##    ##     ######     ###    ######## ########  ######    #######  ########  ##    ## 
+ *    ##     ##  ##  ##     ##    ##   ## ##      ##    ##       ##    ##  ##     ## ##     ##  ##  ##  
+ *    ##     ##   ####      ##        ##   ##     ##    ##       ##        ##     ## ##     ##   ####   
+ *    ########     ##       ##       ##     ##    ##    ######   ##   #### ##     ## ########     ##    
+ *    ##     ##    ##       ##       #########    ##    ##       ##    ##  ##     ## ##   ##      ##    
+ *    ##     ##    ##       ##    ## ##     ##    ##    ##       ##    ##  ##     ## ##    ##     ##    
+ *    ########     ##        ######  ##     ##    ##    ########  ######    #######  ##     ##    ##    
+ */
 
+router.get(`/stores/supermarket`, (req, res, next) => {
 
-
-
-
-
+  User.find({
+    businessType: "Supermarché"
+  })
+    .then(stores => {
+      res.status(200).json(stores)
+    })
+    .catch(err => {
+      res.status(400).json({ message: err })
+    })
+})
 
 
 module.exports = router;

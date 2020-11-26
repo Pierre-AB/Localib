@@ -47,27 +47,6 @@ class storesList extends Component {
     }
   }
 
-  // getCoordinates(position){
-  //   this.setState({
-  //     latitude: position.coords.latitude,
-  //     longitude: position.coords.longitude
-  //   })
-  //   this.getAllStores();
-  // }
-
-
-  // getAllStores() {
-  //   // const locationMaintenant = navigator.geolocation.getCurrentPosition()
-  //   // console.log("😀", locationMaintenant)
-  //   // this.getCoordinates(navigator.geolocation.getCurrentPosition(position))
-  //   // axios.get(`http://localhost:5000/api/stores/distances/${this.state.latitude},${this.state.longitude}}`)  
-  //   axios.get(`http://localhost:5000/api/stores/distances/48.794850700000005,2.4614814`)
-  //   .then(responseFromApi => {
-  //   this.setState({
-  //       listOfStores: responseFromApi.data
-  //     })
-  //   })
-  // }
 
   componentDidMount() {
     this.askLocation()

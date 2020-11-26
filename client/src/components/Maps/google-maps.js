@@ -109,6 +109,6 @@ render() {
   }
 }
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM",
+  apiKey: process.env.GOOGLE_MAPS_API_KEY
   })(MapContainer);
 

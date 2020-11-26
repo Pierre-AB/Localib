@@ -46,8 +46,13 @@
 /* MAIN & COMMON STYLE */
 body {
   background: #f7f7fa;
-  color: var(--black);
+  color: var(--blue-grey);
   font-family: 'Ubuntu', sans-serif;
+  
+}
+
+.page-container {
+  min-height: 100vh;
   padding: 0 1.3em 2.5em;
 }
 
@@ -60,6 +65,11 @@ body {
   border: 0;
   border-radius: 10px;
   text-decoration: none;
+}
+
+.btn-container {
+  text-align: right;
+  align-self: flex-end;
 }
 
 .green {
@@ -77,6 +87,13 @@ h2 {
 }
 
 h3 {
+  text-align: left;
+  color: var(--accent-color);
+  font-weight: lighter;
+  margin: 1.5em 0 0.8em;
+}
+
+h4 {
   color: white;
   margin: 0 0 .2em 0;
   font-size: 1.3em;
@@ -84,6 +101,21 @@ h3 {
 
 p {
   margin: 0;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex {
+  display: flex;
+}
+
+.middle {
+  align-items: center;
+  align-content: center;
+  justify-content: center;
 }
 
 
@@ -163,4 +195,74 @@ button:hover {
   overflow: hidden;
   text-overflow: ellipsis;
   width: 210px;
+}
+
+/* CATEGORY STYLES */
+.horizontal-scroll-container .category-card {
+  margin-right: 1.3em;
+}
+
+.horizontal-scroll-container a:first-child {
+  margin-left: 1.3em;
+}
+
+.category-card {
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 150px;
+  min-width: 115px;
+  border-radius: 15px;
+}
+
+.category-store-info {
+  background: var(--blue-grey);
+  position: absolute;
+  bottom: 0;
+  padding: .6em .8em;
+  color: white;
+  text-align: left;
+  width: 100%;
+  border-radius: 0 0 15px 15px;
+}
+
+.category-store-info h4 {
+  font-size: .7em;
+  /* ... si déborde */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 85px;
+}
+
+.category-store-address {
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: bolder;
+  font-size: .5em;
+}
+
+.category-store-address p {
+  /* ... si déborde */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 210px;
+}
+
+
+/* SUCCESS */
+.success-page svg {
+  font-size: 7em;
+  color: var(--accent-color);
+}
+
+.success-page h1 {
+  font-weight: normal;
+  margin-top: 1.5em;
+}
+
+.success-page p {
+  font-weight: normal;
+  margin-bottom: 2.5em;
 }

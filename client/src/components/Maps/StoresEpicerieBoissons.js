@@ -8,7 +8,7 @@ import { Link /* , withRouter */ } from 'react-router-dom';
 // import service, { storesDistance } from './map-service'
 
 
-class NearbyStores extends Component {
+class StoresEpicerieBoissons extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,7 +34,7 @@ class NearbyStores extends Component {
           latitude: lat,
           longitude: lng
         })
-        axios.get(`http://localhost:5000/api/stores/distances/${this.state.latitude},${this.state.longitude}`)
+        axios.get(`http://localhost:5000/api/stores/distances/${this.state.latitude},${this.state.longitude}/alimentation`)
 
           .then(responseFromApi => {
             this.setState({
@@ -53,33 +53,35 @@ class NearbyStores extends Component {
 
   render(){ 
     return(
-      <div className="horizontal-scroll-container">
+      <>
+        <h3>Epiceries et boissons</h3>
+        <div className="horizontal-scroll-container">
 
-        {/* Loading stores message */}
-        {this.state.listOfStores.length <= 0 && "Loading stores . . . "}
+          {/* Loading stores message */}
+          {this.state.listOfStores.length <= 0 && "Loading stores . . . "}
 
-        {/* Display stores when loaded */}
-        {this.state.listOfStores.map(store => {
+          {/* Display stores when loaded */}
+          {this.state.listOfStores.map(store => {
 
-          // Use store picture as background
-          let background = store.picture
-          
-          return (
-            <Link to={`/storeDetails/${store._id}`} >
-              <div key={store._id} className="nearby-card" style={{backgroundImage: `linear-gradient(0deg, rgba(29, 29, 29, 0.5), rgba(29, 29, 29, 0.2)), url(${background})`}}>
-                <div className="nearby-store-info">
-                  <h4>{store.fullName}</h4>
-                  <p className="nearby-store-address">{store.address}</p>
-                  <p className="nearby-store-address">{store.distance} meters</p>
+            // Use store picture as background
+            let background = store.picture
+            
+            return (
+              <Link to={`/storeDetails/${store._id}`} >
+                <div key={store._id} className="category-card" style={{backgroundImage: `linear-gradient(0deg, rgba(29, 29, 29, 0.5), rgba(29, 29, 29, 0.2)), url(${background})`}}>
+                  <div className="category-store-info">
+                    <h4>{store.fullName}</h4>
+                    <p className="category-store-address">{store.distance} meters</p>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          )
-        })
-        }
+              </Link>
+            )
+          })
+          }
 
-      </div>
+        </div>
+      </>
     )
   }
 }
-export default NearbyStores;
+export default StoresEpicerieBoissons;

@@ -7,43 +7,30 @@ import Calendar from 'react-calendar';
 // import Datetime from 'react-datetime';
 // import './calendar.css';
 
+var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-var wordDay = ''
-function nameDate(dayNumber) {
-  switch (dayNumber) {
-    case 1:
-      return wordDay = 'Monday';
-    case 2:
-      return wordDay = 'Tuesday';
-    case 3:
-      return wordDay = 'Wednesday';
-    case 4:
-      return wordDay = 'Thursday';
-    case 5:
-      return wordDay = 'Friday';
-    case 6:
-      return wordDay = 'Saturday';
-    case 7:
-      return wordDay = 'Sunday';
-    default:
-      return console.log("🚨 impossible date picked")
-  }
+function dateName(dateName) {
+  let dayNameIndex = dateName.getDay();
+  let dayDate = dateName.getDate();
+  let MonthNameIndex = dateName.getMonth()
+  return `${days[dayNameIndex]} ${dayDate} ${months[MonthNameIndex]}`
 }
-
-
 
 class StoreDetails extends React.Component {
 
   state = {
     store: {},
     pickedDate: new Date(),
-    day: '',
-    openinghours: {}
+    today: new Date(),
+    fullDayName: dateName(new Date()),
   }
 
   componentDidMount() {
     this.getSingleStore();
-    this.setState({ day: nameDate(new Date().getDay()) })
+    // let now = dateName(new Date())
+    // this.setState({ fullDayName: now })
+    console.log(this.state.today);
   }
 
   // GET STORE DETAILS
@@ -62,15 +49,18 @@ class StoreDetails extends React.Component {
 
   handleChange = (clickedDate) => {
     // format day to match DataBase
-    let realDay = clickedDate.getDay() + 1
-    nameDate(realDay);
 
+    // if (this.state.pickedDate.getDay() === this.state.today.getDay()) {
+    //   this.setState({
+
+    //   })
+    // }
     this.setState({
       pickedDate: clickedDate,
-      day: wordDay
+      fullDayName: dateName(clickedDate)
     })
-    console.log('This.state.pickedDate =', this.state.pickedDate)
-    console.log('This.state.day =', this.state.day)
+    // console.log('This.state.pickedDate =', this.state.pickedDate)
+    // console.log('This.state.day =', this.state.day)
   }
 
 
@@ -82,8 +72,13 @@ class StoreDetails extends React.Component {
   - Afficher les créneaux disponibles pour un rendez-vous ce jour en question.
   */
 
+  //ATTENTION ADD A STATE FOR THE DAY TO DETERMINE OPENING HOURS
+
   render() {
 
+
+    console.log(this.state.pickedDate)
+    console.log(this.state.today)
 
 
     return (
@@ -100,8 +95,9 @@ class StoreDetails extends React.Component {
                 onChange={this.handleChange}
                 pickedDate={this.state.pickedDate}
               />
-              <h3>{this.state.day}</h3>
-              <h3>{this.state.openinghours.day}</h3>
+              <h3>{this.state.fullDayName}</h3>
+
+              {/* <h3>{this.state.store.openingHours}</h3> */}
 
             </div>
           </div>

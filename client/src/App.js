@@ -26,6 +26,8 @@ import StoreDetails from './components/StoreDetails/StoreDetails'
 
 // import AddProduct from './components/Products/addProducts'
 
+// import success page
+import Success from './pages/Success'
 
 
 function App() {
@@ -51,6 +53,9 @@ function App() {
 
         {/* product create form */}
         {/* <Route exact path="/products" component={AddProduct} /> */}
+
+        {/* success page */}
+        <Route exact path="/success" component={Success} />
       </Switch>
     </div>
   );

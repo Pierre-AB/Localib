@@ -60,54 +60,47 @@ class SearchList extends Component {
       });
   };
 
-
-  // AXIOS.GET STORES (store id)
-  // AXIOS.GET PRODUITS (renvoie tous les produits)
-
-  
-     
-     // Search (front) sur PRODUITS [array de store ID contenant camemberts]
-     // Si productStoreId = StoreId ==> RENVOIE LES STORES
-     // Render
-
-
   componentDidMount() {
     this.askLocation()
     this.getProducts()
   }
 
   render(){ 
-    console.log("list of Products", this.state.listOfProducts);
-
     // Let's filter the name before rendering 
     const onNameFilter = this.state.listOfStores.filter(store => {
       // does the store's name matches the query ?
-      const matchName = store.fullName.includes(this.props.query);
+      const matchName = (store.fullName).toLowerCase().includes((this.props.query).toLowerCase());
       return matchName;
     })
+
 
     // Let's filter the products before rendering
 
     // Make an array of products matching
+    let ProductFilteredStoreId = []
+
     const onProductFilter = this.state.listOfProducts.filter(product => { // [array de store ID contenant camemberts]
       // does the store's have the product match in the query ?
-      const matchProduct = product.name.includes(this.props.query);
+      const matchProduct = (product.name).toLowerCase().includes((this.props.query).toLowerCase());
       return matchProduct;
     })
-    console.log("onproductfilter", onProductFilter);
 
-    // Make an array of store Id containing "query"
-    let ProductFilteredStoreId = []
-    onProductFilter.forEach(product => {
-      console.log("store ID", product.store_id)
-    })
-   
+    // Matching store ID of products and store ID of stores
+    onProductFilter.forEach(product => { // Boucle sur chaque produit
+      this.state.listOfStores.forEach(store => { // Boucle sur chaque store
+        if (product.store_id && store._id) { // Ne compare pas les undefined
+          if (product.store_id === store._id) { // Si store ID = store ID
+            ProductFilteredStoreId.push(store) // push dans ProductFilteredStoreId array
+          }
+        }
+      })   
+    })   
 
     // Switch rendering regarding content of the search bar
     let renderedList;
 
     if (this.props.query.length !== "") {
-      renderedList = [...onNameFilter /*, ...onProductFilter*/]
+      renderedList = [...onNameFilter, ...ProductFilteredStoreId]
     } else { // Par défaut, renvoie full listOfStores
       renderedList = this.state.listOfStores
     }
@@ -115,11 +108,10 @@ class SearchList extends Component {
 
     return(
       <>
-        <h3>Alimentation</h3>
-        <div className="horizontal-scroll-container">
+        <div className="vertical-scroll-container">
 
           {/* Loading stores message */}
-          {this.state.listOfStores.length <= 0 && "Loading stores . . . "}
+          {renderedList.length <= 0 && "Loading stores . . . "}
 
           {/* Display stores when loaded */}
           {renderedList.map(store => {
@@ -129,12 +121,15 @@ class SearchList extends Component {
             
             return (
               <Link to={`/storeDetails/${store._id}`} >
-                <div key={store._id} className="category-card" style={{backgroundImage: `linear-gradient(0deg, rgba(29, 29, 29, 0.5), rgba(29, 29, 29, 0.2)), url(${background})`}}>
-                  <div className="category-store-info">
+                <div key={store._id} className="vertical-list">
+                  <div className="vertical-list-image" style={{backgroundImage: `linear-gradient(0deg, rgba(29, 29, 29, 0.5), rgba(29, 29, 29, 0.2)), url(${background})`}}></div>
+                  <div className="vertical-store-info">
                     <h4>{store.fullName}</h4>
-                    <p className="category-store-address">{store.distance} meters</p>
+                    <p className="vertical-store-address">{store.address}</p>
+                    <p className="vertical-store-address">{store.distance} meters</p>
                   </div>
                 </div>
+                <hr />
               </Link>
             )
           })

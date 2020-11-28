@@ -153,6 +153,17 @@ button:hover {
 .horizontal-scroll-container::-webkit-scrollbar { display: none; }
 
 
+.vertical-scroll-container {
+  display: flex;
+  flex-direction: column;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  margin: 0 -1.3em;
+}
+
+.vertical-scroll-container::-webkit-scrollbar { display: none; }
+
+
 /* NEARBY STYLES */
 .nearby-section {
   text-align: right;
@@ -266,4 +277,62 @@ button:hover {
 .success-page p {
   font-weight: normal;
   margin-bottom: 2.5em;
+}
+
+
+/* SEARCH LIST STYLES */
+
+.vertical-list {
+  padding: 0 1.3em;
+  /* position: relative; */
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100px;
+}
+
+.vertical-scroll-container hr {
+  margin: 0;
+}
+
+.vertical-list-image {
+  min-width: 70px;
+  height: 70px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 15px;
+}
+
+.vertical-store-info {
+  /* position: absolute; */
+  /* right: 0; */
+  padding: 1em;
+  color: var(--blue-grey);
+  text-align: left;
+}
+
+.vertical-scroll-container a {
+  text-decoration: none;
+}
+
+.vertical-store-info h4, .vertical-store-info p {
+  color: inherit;
+
+  /* ... si déborde */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 230px;
+}
+
+.vertical-store-info h4 {
+  font-size: 1.3em;
+}
+
+.vertical-store-address {
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: normal;
+  font-size: .8em;
 }

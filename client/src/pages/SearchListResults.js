@@ -17,7 +17,6 @@ class SearchListResults extends Component {
     return (
       <div className="page-container">
         <SearchBar query={this.state.query} updateQuery={this.updateQuery} />
-        List results
         <SearchList query={this.state.query} />
       </div>
     );

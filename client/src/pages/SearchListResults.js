@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 
 import SearchBar from '../components/SearchBar'
-import NearbyStores from '../components/Maps/NearbyStores'
-import StoresAlimentation from '../components/Maps/StoresAlimentation'
-import StoresEpicerieBoissons from '../components/Maps/StoresEpicerieBoissons'
+import SearchList from '../components/Maps/SearchList'
 
 
 class SearchListResults extends Component {
@@ -20,6 +18,7 @@ class SearchListResults extends Component {
       <div className="page-container">
         <SearchBar query={this.state.query} updateQuery={this.updateQuery} />
         List results
+        <SearchList query={this.state.query} />
       </div>
     );
   }

@@ -121,6 +121,7 @@ p {
 
 /* BUTTON STYLE */
 button {
+  cursor: pointer;
   color: white;
   text-transform: uppercase;
   font-weight: 700;

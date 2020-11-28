@@ -45,13 +45,13 @@ const getStoreInRadius = (async (req, res, next) => {
   const loc = await geocoder.geocode(zipcode)
   const locFR = loc.filter(e => e.countryCode === "FR")
 
-  console.log(colors.green.inverse(locFR))
+  // console.log(colors.green.inverse(locFR))
 
   const lat = locFR[0].latitude
   const lng = locFR[0].longitude
 
-  console.log('🎢🎢🎢🎢🎢 LAT:', lat)
-  console.log('👽👽👽👽LON:', lng)
+  // console.log('🎢🎢🎢🎢🎢 LAT:', lat)
+  // console.log('👽👽👽👽LON:', lng)
 
   // Calc radius using radians
   // Divide dist by radius of Earth
@@ -152,7 +152,7 @@ router.get('/stores/distances/:latlng/alimentation', (req, res, next) => {
         })
     })
     .catch(error => {
-      console.log(error)
+      // console.log(error)
       res.status(500).json(error);
     });
 });
@@ -214,7 +214,7 @@ router.get('/stores/distances/:latlng/epicerie-boissons', (req, res, next) => {
         })
     })
     .catch(error => {
-      console.log(error)
+      // console.log(error)
       res.status(500).json(error);
     });
 });
@@ -276,7 +276,7 @@ router.get('/stores/distances/:latlng/informatique', (req, res, next) => {
         })
     })
     .catch(error => {
-      console.log(error)
+      // console.log(error)
       res.status(500).json(error);
     });
 });
@@ -338,7 +338,7 @@ router.get('/stores/distances/:latlng/puericulture-jouets', (req, res, next) => 
         })
     })
     .catch(error => {
-      console.log(error)
+      // console.log(error)
       res.status(500).json(error);
     });
 });
@@ -400,7 +400,7 @@ router.get('/stores/distances/:latlng/maison-deco', (req, res, next) => {
         })
     })
     .catch(error => {
-      console.log(error)
+      // console.log(error)
       res.status(500).json(error);
     });
 });
@@ -462,7 +462,7 @@ router.get('/stores/distances/:latlng/bricolage', (req, res, next) => {
         })
     })
     .catch(error => {
-      console.log(error)
+      // console.log(error)
       res.status(500).json(error);
     });
 });
@@ -509,11 +509,11 @@ router.get('/stores/distances/:latlng', (req, res, next) => {
       }
     ])
     .then(project => {
-      console.log(colors.green.inverse(project))
+      // console.log(colors.green.inverse(project))
       res.status(200).json(project);
     })
     .catch(error => {
-      console.log(error)
+      // console.log(error)
       res.status(500).json(error);
     });
 });
@@ -548,8 +548,8 @@ $$$$$$$  |$$$$$$$$\    $$ |   $$ |  $$ |$$$$$$\ $$$$$$$$\\$$$$$$  |
 router.get(`/stores/:id`, (req, res, next) => {
 
   const storeId = req.params.id;
-  console.log("params", req.params)
-  console.log("storeId", storeId)
+  // console.log("params", req.params)
+  // console.log("storeId", storeId)
   User.findById(storeId)
     .then(store => {
       res.status(200).json(store)

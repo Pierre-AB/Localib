@@ -40,7 +40,7 @@ const userSchema = new Schema({
   businessType: {
     type: String,
     // enum: ["fromagerie", "fleuriste", "legume", "Supermarché", "vinothèque"]
-    enum: ["Alimentation", "Epicerie-et-boissons", "Informatique", "Puériculture-et-jouets", "Maison-et-déco", "Bricolage", "Beauté, santé-et-bien-être", "Vêtements-chaussures-bijoux", "Sports-loisirs"]
+    enum: ["Alimentation", "Epicerie-et-boissons", "Informatique", "Puériculture-et-jouets", "Maison-et-déco", "Bricolage", "Beauté-santé-et-bien-être", "Vêtements-chaussures-bijoux", "Sports-loisirs"]
 
     // CHOIX DE CATEGORIES
     // - Alimentation

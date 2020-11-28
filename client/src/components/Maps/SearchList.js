@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+// Loader Icon
+import { useLoading, ThreeDots } from '@agney/react-loading';
 
 class SearchList extends Component {
   constructor(props) {
@@ -111,7 +113,7 @@ class SearchList extends Component {
         <div className="vertical-scroll-container">
 
           {/* Loading stores message */}
-          {renderedList.length <= 0 && "Loading stores . . . "}
+          {renderedList.length <= 0 && <ThreeDots width="30" />}
 
           {/* Display stores when loaded */}
           {renderedList.map(store => {

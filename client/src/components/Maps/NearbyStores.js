@@ -7,6 +7,9 @@ import { Link /* , withRouter */ } from 'react-router-dom';
 // import Geolocated from './geolocated';
 // import service, { storesDistance } from './map-service'
 
+// Loader Icon
+import { useLoading, ThreeDots } from '@agney/react-loading';
+
 
 class NearbyStores extends Component {
   constructor(props) {
@@ -56,7 +59,7 @@ class NearbyStores extends Component {
       <div className="horizontal-scroll-container">
 
         {/* Loading stores message */}
-        {this.state.listOfStores.length <= 0 && "Loading stores . . . "}
+        {this.state.listOfStores.length <= 0 && <ThreeDots width="30" />}
 
         {/* Display stores when loaded */}
         {this.state.listOfStores.map(store => {

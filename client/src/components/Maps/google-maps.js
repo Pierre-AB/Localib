@@ -1,68 +1,66 @@
+
 import React from 'react';
 import { GoogleMapReact, Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import { geolocated } from "react-geolocated";
 import axios from 'axios';
 import mapStyles from "./mapStyles";
 
-
 require('dotenv').config();
 
+const apiKey = "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM" // process.env.GOOGLE_MAPS_API_KEY; // "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM"
+// const mapContainerStyle = {
+//   height: "100vh",
+//   width: "100vw",
+// };
 
-const mapContainerStyle = {
-  height: "100vh",
-  width: "100vw",
-};
-
-const options = {
-  styles: mapStyles,
-  disableDefaultUI: true,
-  zoomControl: true,
-};
+// const options = {
+//   styles: mapStyles,
+//   disableDefaultUI: true,
+//   zoomControl: true,
+// };
 
 class MapContainer extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      listOfStores: [],
-      latitude: "",
-      longitude: "",
-      selected: null,
-      mapLoaded: false
+      listOfStores: [], // for stores
+      latitude: "", // avant de récupérer l'information du navigateur
+      longitude: "", // avant de récupérer l'information du navigateur
+      selected: null, // pour savoir si le store (le marker du store a été clické)
+      mapLoaded: false // si mapLoaded est ture, alors afficher la carte
     };
     this.askLocation = this.askLocation.bind(this);
   }
-
-  startApp() {
-    this.getLocation();
-  }
-
-
-  askLocation() {
+  // on a besoin de connaître la Location du navigateur afin d'obtenir latitude et longitude
+  askLocation() { 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
+        // pour récupérer les coordinates
         const lat = pos.coords.latitude
         const lng = pos.coords.longitude
         console.log('success geoloc 🗺', pos)
-        // success
+        // if success
         this.setState({
           latitude: lat,
           longitude: lng,
           mapLoaded: true
         })
+        // on appel la DB pour récupérer les stores à partir de latitude et longitude
         axios.get(`http://localhost:5000/api/stores/distances/${this.state.latitude},${this.state.longitude}`)
-
-          .then(responseFromApi => {
-            this.setState({
-              listOfStores: responseFromApi.data
-              
-            })
+        // On ajoute les stores au state pour les utiliser dans le render
+        .then(responseFromApi => {
+          this.setState({
+            listOfStores: responseFromApi.data            
           })
+        })
       })
-    } else {
+    } else { //si la geolocalisation n'a pas été activée 
+      // TO DO: ici il faudra proposer au client de renseigner une adresse s'il ne veut pas être geolocalisé
       alert("Please turn on your geolocalisation")
     }
   }
 
+  // on execute la function
   componentDidMount() {
     this.askLocation()
   }
@@ -71,14 +69,14 @@ class MapContainer extends React.Component{
 
 
 render() {
-
+  // Options de la carte
   const options = {
     disableDefaultUI: true,
     zoomControl: true,
 
   };
 
-
+  //logo Localib dans les markers de la carte
   const icon = { 
      url: `./icons/LogoMap.png`,
     origin: new window.google.maps.Point(0, 0),
@@ -86,11 +84,14 @@ render() {
     scaledSize: new window.google.maps.Size(30, 30),
   }
   
+  //pour vérifier si la carte a été chargée
   const mapLoaded = this.state.mapLoaded;
+  // vérifier si le marker a été sélectionné
   const selected = this.state.selected;
   
     return (
-      mapLoaded ?
+      mapLoaded ? // la carte a été chargée ?
+      // alors retourne: 
       <div>
       <Map
         google={this.props.google}
@@ -155,14 +156,16 @@ render() {
 
      </Map>
      </div>
-     : <h1> Map Loading </h1>
+     // la carte n'a pas été chargée ? retourne moi: 
+     :  <h1> Map Loading </h1>
     ) 
   }
 }
 
+//Pour récupérer le style de la carte (fichier JSON avec le format)
 MapContainer.defaultProps = mapStyles;
 
 export default GoogleApiWrapper({
-  apiKey: "insert KEY"
+  apiKey
   })(MapContainer);
 

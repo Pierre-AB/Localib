@@ -34,7 +34,7 @@ class StoresEpicerieBoissons extends Component {
           latitude: lat,
           longitude: lng
         })
-        axios.get(`http://localhost:5000/api/stores/distances/${this.state.latitude},${this.state.longitude}/alimentation`)
+        axios.get(`http://localhost:5000/api/stores/distances/${this.state.latitude},${this.state.longitude}/StoresEpicerieBoissons`)
 
           .then(responseFromApi => {
             this.setState({

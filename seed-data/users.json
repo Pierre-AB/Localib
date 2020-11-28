@@ -10,7 +10,7 @@
     "picture": "https://picsum.photos/64",
     "siret": "11111111111",
     "numVAT": "11111111111",
-    "businessType": "Supermarché",
+    "businessType": "Alimentation",
     "openingHours": [
       {
         "day": 1,
@@ -74,7 +74,7 @@
     "picture": "https://picsum.photos/64",
     "siret": "11111111111",
     "numVAT": "11111111111",
-    "businessType": "fromagerie",
+    "businessType": "Alimentation",
     "openingHours": [
       {
         "day": 1,
@@ -138,7 +138,7 @@
     "picture": "https://picsum.photos/64",
     "siret": "11111111111",
     "numVAT": "11111111111",
-    "businessType": "vinothèque",
+    "businessType": "Epicerie et boissons",
     "openingHours": [
       {
         "day": 1,
@@ -202,7 +202,7 @@
     "picture": "https://picsum.photos/64",
     "siret": "11111111111",
     "numVAT": "11111111111",
-    "businessType": "Supermarché",
+    "businessType": "Epicerie et boissons",
     "openingHours": [
       {
         "day": 1,
@@ -266,7 +266,7 @@
     "picture": "https://picsum.photos/64",
     "siret": "11111111111",
     "numVAT": "11111111111",
-    "businessType": "Supermarché",
+    "businessType": "Epicerie et boissons",
     "openingHours": [
       {
         "day": 1,
@@ -330,7 +330,7 @@
     "picture": "https://picsum.photos/64",
     "siret": "11111111111",
     "numVAT": "11111111111",
-    "businessType": "Supermarché",
+    "businessType": "Epicerie et boissons",
     "openingHours": [
       {
         "day": 1,

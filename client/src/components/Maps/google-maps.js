@@ -78,10 +78,10 @@ render() {
 
   //logo Localib dans les markers de la carte
   const icon = { 
-     url: `./icons/LogoMap.png`,
+    url: `https://res.cloudinary.com/dbsnbga7z/image/upload/v1606577861/localib/LogoMap_fy7h3i.png`,
     origin: new window.google.maps.Point(0, 0),
     anchor: new window.google.maps.Point(15, 15),
-    scaledSize: new window.google.maps.Size(30, 30),
+    scaledSize: new window.google.maps.Size(45, 60),
   }
   
   //pour vérifier si la carte a été chargée
@@ -116,28 +116,33 @@ render() {
                     selected: store
                   });
                   }}
-                  // icon={icon}
+                  icon={icon}
                 >
                  
 
           {selected ? (
           <InfoWindow
             position={{ 
-              lat: selected.lat,
-              lng: selected.lng }}
+              lat: store.location.coordinates[1],
+              lng: store.location.coordinates[0]
+               }}
+              visible= {true}
               onCloseClick={() => {
                   this.setState({
                     selected: null
                   });
                   }}
+            
           >
             <div>
               <h2>
-                  {selected.fullName}
+                  {store.fullName}
               </h2>
+              <p>hello</p>
             </div>
           </InfoWindow>
-        ) : null}
+        ) : null
+        }
 
               </Marker>
             )

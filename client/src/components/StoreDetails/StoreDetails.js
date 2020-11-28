@@ -105,21 +105,28 @@ class StoreDetails extends React.Component {
       dayString = 'Today'
     }
 
-    console.log("MatchDay=", matchDay)
-
-    console.log("avaiForPickedDay=", avaiForPickedDay[0])
-
-
-
     this.setState({
       pickedDate: clickedDate,
       fullDayName: dayString,
       dayAvailibility: avaiForPickedDay[0]
     })
-    // console.log('This.state.pickedDate =', this.state.pickedDate)
-    // console.log('This.state.day =', this.state.day)
+
   }
 
+
+  splitDay = (day) => {
+    let openAm = this.state.dayAvailibility.openAm;
+    let closeAm = this.state.dayAvailibility.closeAm;
+    let openPm = this.state.dayAvailibility.openPm;
+    let closePm = this.state.dayAvailibility.closePm;
+
+    let strOpenAm = openAm.split(":");
+    let strCloseAM = closeAm.split(":");
+    let strOpenPm = openPm.split(":");
+    let strClosePm = closePm.split(":");
+
+
+  }
 
 
   render() {

@@ -28,8 +28,8 @@ class AppointmentPicker extends React.Component {
       <div>
 
         <h3>Opening hours</h3>
-        <p>Morning from: {this.props.dayAvailibility.openAm} to {this.props.dayAvailibility.closeAm}</p>
-        <p>Afternoon from: {this.props.dayAvailibility.openPm} to {this.props.dayAvailibility.closePm}</p>
+        <p>Open from: {this.props.dayAvailibility.openAm} to {this.props.dayAvailibility.closeAm}</p>
+        <p>and from: {this.props.dayAvailibility.openPm} to {this.props.dayAvailibility.closePm}</p>
 
 
       </div>

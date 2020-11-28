@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
+
 import SearchBar from '../components/SearchBar'
+import NearbyStores from '../components/Maps/NearbyStores'
+import StoresAlimentation from '../components/Maps/StoresAlimentation'
+import StoresEpicerieBoissons from '../components/Maps/StoresEpicerieBoissons'
+
 
 class SearchListResults extends Component {
   state = {
@@ -12,9 +17,9 @@ class SearchListResults extends Component {
 
   render() {
     return (
-      <div>
+      <div className="page-container">
         <SearchBar query={this.state.query} updateQuery={this.updateQuery} />
-        Search List Results
+        List results
       </div>
     );
   }

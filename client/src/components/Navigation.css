@@ -8,6 +8,7 @@
 
   .navbar.mobile {
     display: none;
+    height: 2.5em;    
   }
 }
 
@@ -20,6 +21,7 @@
     display: block;
     position: fixed;
     bottom: 0;
+    z-index: 1;
   }
  }
 

@@ -1,2 +1,79 @@
+.top-detail-section {
+  height: 30vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  margin: 0 -1.3em;
+  z-index: 0;
+}
 
-    
+.relativeParent {
+  position: relative;
+  height: 30vh;
+}
+
+.detail-store-info {
+  position: absolute;
+  bottom: 35px;
+  padding: 1.3em;
+  text-align: left;
+}
+
+.top-detail-section h1 {
+  color: white;
+  margin: 0;
+}
+
+.bottom-detail-section {
+  background: var(--grey-bg);
+  border-radius: 15px 15px 0 0;
+  margin: -35px -1.3em;
+  z-index: 1;
+  padding: 1.5em 1.3em;
+  text-align: left;
+}
+
+.bottom-detail-section h3 {
+  margin: 0 0 1em;
+}
+
+.bottom-detail-section p {
+  font-size: .8em;
+}
+
+.tri-btn {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tri-btn a {
+  /* padding: 2em 2.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: .8em;
+  flex-grow: 1; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: .8em;
+  width: 26vw;
+  background: var(--accent-color);
+  padding: 1em;
+  color: white;
+  border-radius: 15px;
+  align-content: center;
+  justify-content: center;
+  font-weight: bolder;
+  margin-top: .5em;
+}
+
+hr {
+  height: 2px;
+  margin: 2em 0;
+  color: var(--border);
+  background-color: var(--border);
+  border: 0;
+}

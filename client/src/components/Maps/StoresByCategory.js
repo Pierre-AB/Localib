@@ -8,7 +8,7 @@ import { Link /* , withRouter */ } from 'react-router-dom';
 // import service, { storesDistance } from './map-service'
 
 
-class StoresEpicerieBoissons extends Component {
+class StoresByCategory extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,7 +34,7 @@ class StoresEpicerieBoissons extends Component {
           latitude: lat,
           longitude: lng
         })
-        axios.get(`http://localhost:5000/api/stores/distances/${this.state.latitude},${this.state.longitude}/category/Epicerie-et-boissons`)
+        axios.get(`http://localhost:5000/api/stores/distances/${this.state.latitude},${this.state.longitude}/category/${this.props.category}`)
 
           .then(responseFromApi => {
             this.setState({
@@ -54,7 +54,7 @@ class StoresEpicerieBoissons extends Component {
   render(){ 
     return(
       <>
-        <h3>Epiceries et boissons</h3>
+        <h3>{this.props.title}</h3>
         <div className="horizontal-scroll-container">
 
           {/* Loading stores message */}
@@ -84,4 +84,4 @@ class StoresEpicerieBoissons extends Component {
     )
   }
 }
-export default StoresEpicerieBoissons;
+export default StoresByCategory;

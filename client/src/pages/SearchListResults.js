@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import SearchBar from '../components/SearchBar'
 import NearbyStores from '../components/Maps/NearbyStores'
 import StoresAlimentation from '../components/Maps/StoresAlimentation'
-import StoresEpicerieBoissons from '../components/Maps/StoresEpicerieBoissons'
+import StoresByCategory from '../components/Maps/StoresByCategory'
 
 
 class SearchListResults extends Component {

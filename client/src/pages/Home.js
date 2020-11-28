@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 
 import SearchBar from '../components/SearchBar'
 import NearbyStores from '../components/Maps/NearbyStores'
-import StoresAlimentation from '../components/Maps/StoresAlimentation'
-import StoresEpicerieBoissons from '../components/Maps/StoresEpicerieBoissons'
+import StoresByCategory from '../components/Maps/StoresByCategory'
 
 
 class Home extends Component {
@@ -27,8 +26,14 @@ class Home extends Component {
           </div>
           <div className="categories-section">
             <h2>By categories</h2>
-            <StoresAlimentation />
-            <StoresEpicerieBoissons />
+            <StoresByCategory title="Alimentation" category="Alimentation"/>
+            <StoresByCategory title="Epicerie et boissons" category="Epicerie-et-boissons"/>
+            <StoresByCategory title="Informatique" category="Informatique"/>
+            <StoresByCategory title="Puériculture et jouets" category="Puériculture-et-jouets"/>
+            <StoresByCategory title="Bricolage" category="Bricolage"/>
+            <StoresByCategory title="Beauté, santé et bien-être" category="Beauté-santé-et-bien-être"/>
+            <StoresByCategory title="Vêtements, chaussures et bijoux" category="Vêtements-chaussures-bijoux"/>
+            <StoresByCategory title="Sports et loisirs" category="Sports-loisirs"/>
           </div>
         </div>
       </div>

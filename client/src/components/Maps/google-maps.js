@@ -1,8 +1,9 @@
 import React from 'react';
-import { GoogleMap, Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
+import { GoogleMapReact, Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import { geolocated } from "react-geolocated";
 import axios from 'axios';
 import mapStyles from "./mapStyles";
+
 
 require('dotenv').config();
 
@@ -24,7 +25,9 @@ class MapContainer extends React.Component{
     this.state = {
       listOfStores: [],
       latitude: "",
-      longitude: ""
+      longitude: "",
+      selected: null,
+      mapLoaded: false
     };
     this.askLocation = this.askLocation.bind(this);
   }
@@ -32,6 +35,7 @@ class MapContainer extends React.Component{
   startApp() {
     this.getLocation();
   }
+
 
   askLocation() {
     if (navigator.geolocation) {
@@ -43,8 +47,7 @@ class MapContainer extends React.Component{
         this.setState({
           latitude: lat,
           longitude: lng,
-          initLatitud: lat,
-          initLongitude: lng
+          mapLoaded: true
         })
         axios.get(`http://localhost:5000/api/stores/distances/${this.state.latitude},${this.state.longitude}`)
 
@@ -68,16 +71,35 @@ class MapContainer extends React.Component{
 
 
 render() {
- 
+
+  const options = {
+    disableDefaultUI: true,
+    zoomControl: true,
+
+  };
+
+
+  const icon = { 
+     url: `./icons/LogoMap.png`,
+    origin: new window.google.maps.Point(0, 0),
+    anchor: new window.google.maps.Point(15, 15),
+    scaledSize: new window.google.maps.Size(30, 30),
+  }
+  
+  const mapLoaded = this.state.mapLoaded;
+  const selected = this.state.selected;
+  
     return (
+      mapLoaded ?
       <div>
       <Map
         google={this.props.google}
-        // options={options}
-        zoom={9}
+        styles={this.props.mapStyle}
+        zoom={16}
+        options={options}
         initialCenter={{ 
-          lat: 48.794878, 
-          lng: 2.4614197
+          lat: this.state.latitude,  
+          lng: this.state.longitude
           }}
       >
         {this.state.listOfStores.map(store => {
@@ -88,7 +110,35 @@ render() {
                   lat: store.location.coordinates[1], 
                   lng: store.location.coordinates[0]
                   }}
-              />
+                  onClick={() => {
+                  this.setState({
+                    selected: store
+                  });
+                  }}
+                  // icon={icon}
+                >
+                 
+
+          {selected ? (
+          <InfoWindow
+            position={{ 
+              lat: selected.lat,
+              lng: selected.lng }}
+              onCloseClick={() => {
+                  this.setState({
+                    selected: null
+                  });
+                  }}
+          >
+            <div>
+              <h2>
+                  {selected.fullName}
+              </h2>
+            </div>
+          </InfoWindow>
+        ) : null}
+
+              </Marker>
             )
           })
         }
@@ -105,10 +155,14 @@ render() {
 
      </Map>
      </div>
-    );
+     : <h1> Map Loading </h1>
+    ) 
   }
 }
+
+MapContainer.defaultProps = mapStyles;
+
 export default GoogleApiWrapper({
-  apiKey: process.env.GOOGLE_MAPS_API_KEY
+  apiKey: "insert KEY"
   })(MapContainer);
 

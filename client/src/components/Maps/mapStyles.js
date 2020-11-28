@@ -1,4 +1,6 @@
-export default[
+export default{
+    mapStyle: [
+    
     {
         "featureType": "all",
         "elementType": "geometry.fill",
@@ -145,7 +147,7 @@ export default[
         "elementType": "geometry.fill",
         "stylers": [
             {
-                "color": "#c8d7d4"
+                "color": "#baceac"
             }
         ]
     },
@@ -167,4 +169,5 @@ export default[
             }
         ]
     }
-]
+],
+};

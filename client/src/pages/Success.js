@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { FaCheckCircle } from "react-icons/fa";
 
 class Success extends Component {
@@ -9,7 +10,7 @@ class Success extends Component {
         <h1>Success Message</h1>
         <p>{this.props.msg}Lorem ipsum</p>
         <div className="btn-container">
-          <button>Go back home</button>
+          <Link to={`/home`} ><button>Go back home</button></Link>
         </div>
       </div>
     );

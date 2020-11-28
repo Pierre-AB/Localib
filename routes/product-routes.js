@@ -59,7 +59,7 @@ router.get('/products/:id', (req, res, next) => {
   })
     .then(theResponse => {
       res.json(theResponse);
-      console.log(theResponse)
+      // console.log(theResponse)
     })
     .catch(err => {
       res.json(err);
@@ -113,5 +113,20 @@ router.delete('/products/:id', (req, res, next) => {
       res.json(error);
     });
 });
+
+
+// GET route => to bring the data
+router.get('/products', (req, res, next) => {
+  Product.find()
+    .then(allTheProducts => {
+      // console.log(allTheProducts)
+      res.status(200).json(allTheProducts);
+    })
+    .catch(err => {
+      // console.log(err);
+      res.status(500).json(err);
+    })
+});
+
 
 module.exports = router;

@@ -13,13 +13,14 @@
   display: flex;
   justify-content: center;
   align-content: center;
-  padding: .5em;
+  align-items: center;
+  padding: 1em .5em;
   border-radius: 0 10px 10px 0;
   flex-grow: 1;
 }
 
 .SearchBar {
-  width: 80vw;
+  width: auto;
   background: white;
   color: var(--grey);
   border-radius: 10px;

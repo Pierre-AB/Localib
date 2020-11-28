@@ -5,6 +5,9 @@ import { geolocated } from "react-geolocated";
 import axios from 'axios';
 import mapStyles from "./mapStyles";
 
+// Loader Icon
+import { useLoading, ThreeDots } from '@agney/react-loading';
+
 require('dotenv').config();
 
 const apiKey = "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM" // process.env.GOOGLE_MAPS_API_KEY; // "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM"
@@ -162,7 +165,7 @@ render() {
      </Map>
      </div>
      // la carte n'a pas été chargée ? retourne moi: 
-     :  <h1> Map Loading </h1>
+     :  <ThreeDots width="30" />
     ) 
   }
 }

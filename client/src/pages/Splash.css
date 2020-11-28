@@ -1,4 +1,4 @@
-.splash-page {
+.splash-mobile {
   background: 
   /* top, transparent red */ 
   linear-gradient(
@@ -21,4 +21,71 @@
   font-weight: 800;
   text-transform: uppercase;
   margin: 0.2em 0;
+  padding: 0 1.3em;
 }
+
+.splash-page p {
+  padding: 0 1.3em;
+}
+
+/* RESPONSIVE - DESKTOP VERSION */
+@media (min-width: 992px) { 
+  .splash-mobile {
+    background: none;
+    max-width: 600px;
+    align-self: flex-start;
+  }
+
+  .splash-page {
+    display: flex;
+    flex-direction: row;
+    padding: 0 10em;
+
+    background: 
+    /* top, transparent red */ 
+    linear-gradient(
+      rgba(29, 29, 29, 0.75), 
+      rgba(29, 29, 29, 0.75)
+    ),
+    /* bottom, image */
+    url(https://images.pexels.com/photos/702251/pexels-photo-702251.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+  }
+
+  .splash-page > div {
+    flex-grow: 1;
+  }
+
+  .splash-desktop {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    max-width: 700px;
+  }
+
+}
+
+
+/* RESPONSIVE - HIDE DESKTOP PARTS ON MOBILE */
+@media (max-width: 991.98px) { 
+  .desktop-only {
+    display: none;
+  }
+
+  .splash-mobile {
+    background: 
+    /* top, transparent red */ 
+    linear-gradient(
+      rgba(29, 29, 29, 0.75), 
+      rgba(29, 29, 29, 0.75)
+    ),
+    /* bottom, image */
+    url(https://images.pexels.com/photos/1833586/pexels-photo-1833586.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260);
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+  }
+ }

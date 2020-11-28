@@ -2,16 +2,27 @@ import React from 'react';
 import axios from 'axios';
 import './StoreDetails.css';
 import Calendar from 'react-calendar';
-import { SiInstacart } from "react-icons/si";
-import { SiGooglecalendar } from "react-icons/si";
-import { BsCameraVideoFill } from "react-icons/bs";
+import AppointmentPicker from './AppointmentPicker';
+// import { SiInstacart } from "react-icons/si";
+// import { SiGooglecalendar } from "react-icons/si";
+// import { BsCameraVideoFill } from "react-icons/bs";
+// import { DefaultLoadingElement } from '@react-google-maps/api/dist/LoadScript';
 
 // import Calendar from './calendar';
 // import Datetime from 'react-datetime';
 // import './calendar.css';
 
+
+
+
+//Name for the date
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+//APPOINTMENT PICKER INSTANCE
+
+
+//CONVERT DATE IN STRING
 
 function dateName(dateName) {
   let dayNameIndex = dateName.getDay();
@@ -20,6 +31,26 @@ function dateName(dateName) {
   return `${days[dayNameIndex]} ${dayDate} ${months[MonthNameIndex]}`
 }
 
+//Calculate the Time Remaining
+function compareDate(date) {
+  const total = Date.parse(date) - Date.parse(new Date());
+  // const seconds = Math.floor((total / 1000) % 60);
+  // const minutes = Math.floor((total / 1000 / 60) % 60);
+  // const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+  const days = Math.floor(total / (1000 * 60 * 60 * 24));
+  return {
+    total,
+    days
+    // hours,
+    // minutes,
+    // seconds
+  };
+}
+
+
+
+
+
 class StoreDetails extends React.Component {
 
   state = {
@@ -27,6 +58,8 @@ class StoreDetails extends React.Component {
     pickedDate: new Date(),
     today: new Date(),
     fullDayName: dateName(new Date()),
+    dayAvailibility: {},
+    isLoaded: false
   }
 
   componentDidMount() {
@@ -43,77 +76,68 @@ class StoreDetails extends React.Component {
     console.log("params", params)
     axios.get(`http://localhost:5000/api/stores/${params.id}`)
       .then(lookedUpStore => {
-        this.setState({ store: lookedUpStore.data });
+        this.setState({
+          store: lookedUpStore.data,
+          isLoaded: true
+        });
       }).catch(err => console.log("Error on getting store details:", err))
   }
 
 
-  // GET SELECTED DAY
+  // GET SELECTED DAY WRITTEN && SELECTED DAY AVAILABILITY
 
   handleChange = (clickedDate) => {
     // format day to match DataBase
 
-    // if (this.state.pickedDate.getDay() === this.state.today.getDay()) {
-    //   this.setState({
+    let dayOffset = compareDate(clickedDate);
+    let dayString = dateName(clickedDate)
+    let matchDay = clickedDate.getDay()
 
-    //   })
-    // }
+    const avaiForPickedDay = this.state.store.openingHours.filter(open =>
+      open.day === matchDay
+    )
+
+    // let todayAvail = this.state.store.openingHours[matchDay];
+
+    console.log('DayOffset=', dayOffset.days)
+
+    if (dayOffset.days === -1) {
+      dayString = 'Today'
+    }
+
+    console.log("MatchDay=", matchDay)
+
+    console.log("avaiForPickedDay=", avaiForPickedDay[0])
+
+
+
     this.setState({
       pickedDate: clickedDate,
-      fullDayName: dateName(clickedDate)
+      fullDayName: dayString,
+      dayAvailibility: avaiForPickedDay[0]
     })
     // console.log('This.state.pickedDate =', this.state.pickedDate)
     // console.log('This.state.day =', this.state.day)
   }
 
 
-  //APPOINTMENTS
-
-  /*
-  - Faire coincider le jour choisi avec les horaires d'ouvertures de ce store.
-  - Afficher les horaires d'ouverture du jour choisis.
-  - Afficher les créneaux disponibles pour un rendez-vous ce jour en question.
-  */
-
-  //ATTENTION ADD A STATE FOR THE DAY TO DETERMINE OPENING HOURS
 
   render() {
 
     // Use store picture as background
     let background = this.state.picture
-
+    const isLoaded = this.state.isLoaded
     return (
 
       <div>
-        <div className="below-nav">
-          <img src={this.state.store.picture} alt={this.state.fullName} />
-          <h1>{this.state.store.fullName}</h1>
-          <p>{this.state.store.description}</p>
-          <p>{this.state.store.address}</p>
-          <div className="">
-            <div className="">
-              <Calendar
-                // activeStartDate
-                onChange={this.handleChange}
-                pickedDate={this.state.pickedDate}
-              />
-              <h3>{this.state.fullDayName}</h3>
-
-              {/* <h3>{this.state.store.openingHours}</h3> */}
-
-            </div>
-          </div>
-        </div>
-
-
 
         <div className="page-container">
           <div className="top-detail-section" style={{ backgroundImage: `linear-gradient(0deg, rgba(29, 29, 29, 0.5), rgba(29, 29, 29, 0.2)), url(${background})` }}>
             <div className="relativeParent">
               <div className="detail-store-info">
-                <h1>{this.state.fullName}</h1>
-                <p className="nearby-store-address">{this.state.businessType}</p>
-                <p className="nearby-store-address">{this.state.address}</p>
+                <h1>{this.state.store.fullName}</h1>
+                <p className="nearby-store-address">{this.state.store.businessType}</p>
+                <p className="nearby-store-address">{this.state.store.address}</p>
               </div>
             </div>
           </div>
@@ -125,8 +149,22 @@ class StoreDetails extends React.Component {
             </div>
             <hr />
             <h3>Description</h3>
-            <p>{this.state.description}</p>
+            <p>{this.state.store.description}</p>
           </div>
+          <Calendar
+            // activeStartDate
+            onChange={this.handleChange}
+            pickedDate={this.state.pickedDate}
+            showNeighboringMonth={false}
+          // tileClassName={tileClassName}
+          />
+          <h3>{this.state.fullDayName}</h3>
+          {/* <AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} /> */}
+
+          {isLoaded ?
+            (<AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} dayAvailibility={this.state.dayAvailibility} />)
+            :
+            (<div>"loading..."</div>)}
         </div>
 
       </div>

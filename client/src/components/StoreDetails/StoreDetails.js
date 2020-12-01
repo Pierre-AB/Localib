@@ -125,6 +125,10 @@ class StoreDetails extends React.Component {
     let strOpenPm = openPm.split(":");
     let strClosePm = closePm.split(":");
 
+    function timeDifference(timeString) {
+
+
+    }
 
   }
 

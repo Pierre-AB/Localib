@@ -4,6 +4,8 @@ import { GoogleMapReact, Map, GoogleApiWrapper, Marker, InfoWindow } from 'googl
 import { geolocated } from "react-geolocated";
 import axios from 'axios';
 import mapStyles from "./mapStyles";
+import { Link, withRouter } from 'react-router-dom';
+
 
 // Loader Icon
 import { useLoading, ThreeDots } from '@agney/react-loading';
@@ -30,7 +32,10 @@ class MapContainer extends React.Component{
       latitude: "", // avant de récupérer l'information du navigateur
       longitude: "", // avant de récupérer l'information du navigateur
       selected: null, // pour savoir si le store (le marker du store a été clické)
-      mapLoaded: false // si mapLoaded est ture, alors afficher la carte
+      mapLoaded: false, // si mapLoaded est ture, alors afficher la carte
+      showingInfoWindow: false,
+      activeMarker: {},
+      selectedPlace: {},
     };
     this.askLocation = this.askLocation.bind(this);
   }
@@ -68,7 +73,21 @@ class MapContainer extends React.Component{
     this.askLocation()
   }
 
+  onMarkerClick = (props, marker, e) =>
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+    });
 
+  onMapClicked = (props) => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      })
+    }
+  };
 
 
 render() {
@@ -79,11 +98,12 @@ render() {
 
   };
 
+  
+
   //logo Localib dans les markers de la carte
   const icon = { 
     url: `https://res.cloudinary.com/dbsnbga7z/image/upload/v1606577861/localib/LogoMap_fy7h3i.png`,
     origin: new window.google.maps.Point(0, 0),
-    anchor: new window.google.maps.Point(15, 15),
     scaledSize: new window.google.maps.Size(45, 60),
   }
   
@@ -91,6 +111,8 @@ render() {
   const mapLoaded = this.state.mapLoaded;
   // vérifier si le marker a été sélectionné
   const selected = this.state.selected;
+
+  
   
     return (
       mapLoaded ? // la carte a été chargée ?
@@ -101,6 +123,7 @@ render() {
         styles={this.props.mapStyle}
         zoom={16}
         options={options}
+        onClick={this.onMapClicked}
         initialCenter={{ 
           lat: this.state.latitude,  
           lng: this.state.longitude
@@ -114,53 +137,26 @@ render() {
                   lat: store.location.coordinates[1], 
                   lng: store.location.coordinates[0]
                   }}
-                  onClick={() => {
-                  this.setState({
-                    selected: store
-                  });
-                  }}
-                  icon={icon}
-                >
-                 
-
-          {selected ? (
-          <InfoWindow
-            position={{ 
-              lat: store.location.coordinates[1],
-              lng: store.location.coordinates[0]
-               }}
-              visible= {true}
-              onCloseClick={() => {
-                  this.setState({
-                    selected: null
-                  });
-                  }}
-            
-          >
-            <div>
-              <h2>
-                  {store.fullName}
-              </h2>
-              <p>hello</p>
-            </div>
-          </InfoWindow>
-        ) : null
-        }
+                onClick={this.onMarkerClick}
+                icon={icon}
+                name={store.fullName}
+                address={store.address}
+                image={store.picture}
+                >           
 
               </Marker>
             )
           })
         }
-
-                     {/* <InfoWindow
-                  marker={this.state.activeMarker}
-                  visible={this.state.showingInfoWindow}
-                  onClose={this.onClose}
-                >
-                  <div>
-                    <h4>{store.fullname}</h4>
-                  </div>
-                </InfoWindow> */}
+        <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}>
+            <div>
+              <img src={this.state.selectedPlace.image} width="64" height="64"></img>
+              <h1>{this.state.selectedPlace.name}</h1>
+              <h3>{this.state.selectedPlace.address}</h3>
+            </div>
+        </InfoWindow>
 
      </Map>
      </div>

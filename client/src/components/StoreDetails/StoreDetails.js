@@ -19,11 +19,9 @@ import AppointmentPicker from './AppointmentPicker';
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-//APPOINTMENT PICKER INSTANCE
 
 
 //CONVERT DATE IN STRING
-
 function dateName(dateName) {
   let dayNameIndex = dateName.getDay();
   let dayDate = dateName.getDate();
@@ -47,6 +45,34 @@ function compareDate(date) {
   };
 }
 
+// Calculate Number of timeslot available per opening range
+function timeSlotCalc(openingTime, closingTime, timeStep) {
+
+  //                      [10, 0] , [12, 15], 10
+
+  let openingHours = openingTime[0] * 3600; // 36000
+  let openingMinutes = openingTime[1] * 60; // 0
+  let openingTotal = openingHours + openingMinutes; // 36000
+
+  let closingHours = closingTime[0] * 3600; // 43200
+  let closingMinutes = closingTime[1] * 60; // 900
+  let closingTotal = closingHours + closingMinutes; // 44100
+
+  let openingDifference = Math.abs(closingTotal - openingTotal) / 60; //Number of Minutes the store is open. -> (44100 - 36000) / 60 = 135
+
+  let timeslotNumber = Math.floor(openingDifference / timeStep); // 135 / 10 = 13,5.Floor = 13
+
+  return timeslotNumber;
+}
+
+
+//  ######   #######  ##     ## ########   #######  ##    ## ######## ##    ## ######## 
+// ##    ## ##     ## ###   ### ##     ## ##     ## ###   ## ##       ###   ##    ##    
+// ##       ##     ## #### #### ##     ## ##     ## ####  ## ##       ####  ##    ##    
+// ##       ##     ## ## ### ## ########  ##     ## ## ## ## ######   ## ## ##    ##    
+// ##       ##     ## ##     ## ##        ##     ## ##  #### ##       ##  ####    ##    
+// ##    ## ##     ## ##     ## ##        ##     ## ##   ### ##       ##   ###    ##    
+//  ######   #######  ##     ## ##         #######  ##    ## ######## ##    ##    ##    
 
 
 
@@ -59,7 +85,8 @@ class StoreDetails extends React.Component {
     today: new Date(),
     fullDayName: dateName(new Date()),
     dayAvailibility: {},
-    isLoaded: false
+    storeIsLoaded: false,
+    timeSlot: 10
   }
 
   componentDidMount() {
@@ -78,7 +105,7 @@ class StoreDetails extends React.Component {
       .then(lookedUpStore => {
         this.setState({
           store: lookedUpStore.data,
-          isLoaded: true
+          storeIsLoaded: true
         });
       }).catch(err => console.log("Error on getting store details:", err))
   }
@@ -90,13 +117,15 @@ class StoreDetails extends React.Component {
     // format day to match DataBase
 
     let dayOffset = compareDate(clickedDate);
-    let dayString = dateName(clickedDate)
-    let matchDay = clickedDate.getDay()
+    let dayString = dateName(clickedDate);
+    let matchDay = clickedDate.getDay();
 
     const avaiForPickedDay = this.state.store.openingHours.filter(open =>
       open.day === matchDay
     )
 
+    console.log("avaiForPickedDay[0]=", avaiForPickedDay[0])
+    console.log("avaiForPickedDay=", avaiForPickedDay)
     // let todayAvail = this.state.store.openingHours[matchDay];
 
     console.log('DayOffset=', dayOffset.days)
@@ -109,35 +138,56 @@ class StoreDetails extends React.Component {
       pickedDate: clickedDate,
       fullDayName: dayString,
       dayAvailibility: avaiForPickedDay[0]
-    })
+    }, this.splitDay);
+
 
   }
 
 
-  splitDay = (day) => {
-    let openAm = this.state.dayAvailibility.openAm;
+  splitDay = () => {
+
+    let dayAvaiArr = [];
+
+    // check closed hours
+    if (!this.state.dayAvailibility.openAm) {
+      return dayAvaiArr;
+    }
+
+    let openAm = this.state.dayAvailibility.openAm; // coming from state after click on calendar
     let closeAm = this.state.dayAvailibility.closeAm;
     let openPm = this.state.dayAvailibility.openPm;
     let closePm = this.state.dayAvailibility.closePm;
 
+
+    // get opening hours as an array
     let strOpenAm = openAm.split(":");
-    let strCloseAM = closeAm.split(":");
-    let strOpenPm = openPm.split(":");
-    let strClosePm = closePm.split(":");
+    let strCloseAm = closeAm.split(":");
 
-    function timeDifference(timeString) {
+    //calc number of slot per opening hours
+    let morningAvai = timeSlotCalc(strOpenAm, strCloseAm, this.state.timeSlot);
 
-
+    //check if not open on the afternoon
+    if (openPm) {
+      let strOpenPm = openPm.split(":");
+      let strClosePm = closePm.split(":");
+      let afternoonAvai = timeSlotCalc(strOpenPm, strClosePm, this.state.timeSlot);
+      dayAvaiArr.push(morningAvai, afternoonAvai);
+    } else {
+      dayAvaiArr.push(morningAvai);
     }
 
+    console.log("dayAvaiArr=", dayAvaiArr)
+
+    return dayAvaiArr;
   }
 
 
   render() {
 
     // Use store picture as background
-    let background = this.state.picture
-    const isLoaded = this.state.isLoaded
+    let background = this.state.picture;
+    const storeIsLoaded = this.state.storeIsLoaded;
+    // const availabilityloaded
     return (
 
       <div>
@@ -172,8 +222,8 @@ class StoreDetails extends React.Component {
           <h3>{this.state.fullDayName}</h3>
           {/* <AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} /> */}
 
-          {isLoaded ?
-            (<AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} dayAvailibility={this.state.dayAvailibility} />)
+          {storeIsLoaded ?
+            (<AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} dayAvailibility={this.state.dayAvailibility} dayAvaiArr={this.splitDay()} />)
             :
             (<div>"loading..."</div>)}
         </div>

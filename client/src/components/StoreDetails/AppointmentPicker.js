@@ -17,11 +17,28 @@ class AppointmentPicker extends React.Component {
   state = {
     // store: this.props.store
     pickedDate: this.props.pickedDate,
-    dayAvail: {}
+    dayAvail: this.props.dayAvaiArr,
+    morning: true,
+    afternoon: true,
+    noInterruption: false
   }
+  /* _________ANTOINE_______: 
+  - en terme de performance est ce mieux d'appeler une fonction ou un state ? 
+  - Est ce une bonne pratique de créer un state à partir d'un props ?
+  
+  ______________________________
+  */
+
+
+
+
 
 
   render() {
+
+    if (this.state.dayAvail.length > 1) {
+
+    }
 
 
     return (
@@ -31,7 +48,7 @@ class AppointmentPicker extends React.Component {
         <p>Open from: {this.props.dayAvailibility.openAm} to {this.props.dayAvailibility.closeAm}</p>
         <p>and from: {this.props.dayAvailibility.openPm} to {this.props.dayAvailibility.closePm}</p>
 
-
+        <h1>{this.props.dayAvaiArr[0]}</h1>
       </div>
     )
   }

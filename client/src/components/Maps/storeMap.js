@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import mapStyles from "./mapStyles";
 
 // Loader Icon
@@ -13,8 +13,27 @@ class StoreMap extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
+      showingInfoWindow: false,
+      activeMarker: {},
+      selectedPlace: {},
     };
   }
+
+  onMarkerClick = (props, marker, e) =>
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+    });
+
+  onMapClicked = (props) => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      })
+    }
+  };
 
 render() {
   // Options de la carte
@@ -40,7 +59,7 @@ render() {
       <Map
         google={this.props.google}
         styles={this.props.mapStyle}
-        zoom={25}
+        zoom={16}
         options={options}
         initialCenter={{ 
           lat: store.location.coordinates[1],  
@@ -48,16 +67,31 @@ render() {
           }}
       >
 
-              <Marker
-                key={store._id}
-                position={{ 
-                  lat: store.location.coordinates[1], 
-                  lng: store.location.coordinates[0]
-                  }}
-                  icon={icon}
-                >
+      <Marker
+        key={store._id}
+        position={{ 
+          lat: store.location.coordinates[1], 
+          lng: store.location.coordinates[0]
+          }}
+        onClick={this.onMarkerClick}
+        icon={icon}
+        name={store.fullName}
+        address={store.address}
+        image={store.picture}
+        distance={store.distance}                
+      >
 
-              </Marker>
+      </Marker>
+
+      <InfoWindow
+        marker={this.state.activeMarker}
+        visible={this.state.showingInfoWindow}>
+          <div>
+            <img src={this.state.selectedPlace.image} width="64" height="64"></img>
+            <h1>{this.state.selectedPlace.name}</h1>
+            <h3>{this.state.selectedPlace.address}</h3>
+          </div>
+      </InfoWindow>
             
 
 

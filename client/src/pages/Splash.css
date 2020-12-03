@@ -29,11 +29,30 @@
 }
 
 /* RESPONSIVE - DESKTOP VERSION */
+.splash-page-desktop {
+  display: flex;
+  flex-direction: row;
+}
+
+.splash-page-desktop img {
+  width: 45vw;
+  height: 100%;
+  object-fit: cover;
+}
+
 @media (min-width: 992px) { 
   .splash-mobile {
+    color: var(--blue-grey);
     background: none;
-    max-width: 600px;
     align-self: flex-start;
+    width: 100%;
+    padding: 5em;
+  }
+
+  .splash-mobile a {
+    min-width: 460px;
+    max-width: 460px;
+    align-self: center;
   }
 
   .splash-page {

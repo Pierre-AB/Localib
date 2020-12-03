@@ -11,21 +11,34 @@ import SearchBar from '../components/SearchBar'
 
 class MapView extends Component {
   state = {
-    query: ''
+    query: '',
+    isMobile: false
   }
 
   updateQuery = (newValue) => {
     this.setState({query: newValue});
   }
 
+  componentDidMount() {
+    window.addEventListener("resize", this.resize.bind(this));
+    this.resize();
+  }
+
+  resize() {
+      this.setState({isMobile: window.innerWidth <= 992});
+  }
+
+  componentWillUnmount() {
+      window.removeEventListener("resize", this.resize.bind(this));
+  }
+
   render() {
     return (
-      <div>
-        <SearchBar query={this.state.query} updateQuery={this.updateQuery} />
-        {/* <Geolocated />
-        <StoresList />
-        <h1>MAP</h1> */}
-        <Map />
+      <div className={`${this.state.isMobile ? "page-container-mobile" : "map-view page-container-desktop"}`}>
+        {this.state.isMobile ? (
+          <SearchBar query={this.state.query} updateQuery={this.updateQuery} />
+        ) : ""}
+        <Map query={this.state.query} />
       </div>
     );
   }

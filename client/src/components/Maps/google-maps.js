@@ -4,6 +4,7 @@ import { GoogleMapReact, Map, GoogleApiWrapper, Marker, InfoWindow } from 'googl
 import axios from 'axios';
 import mapStyles from "./mapStyles";
 import { Link, withRouter } from 'react-router-dom';
+import './Map.css';
 
 
 // Loader Icon
@@ -26,6 +27,7 @@ class MapContainer extends React.Component{
     super(props);
     this.state = {
       listOfStores: [], // for stores
+      listOfProducts: [],
       latitude: "", // avant de récupérer l'information du navigateur
       longitude: "", // avant de récupérer l'information du navigateur
       selected: null, // pour savoir si le store (le marker du store a été clické)
@@ -65,9 +67,26 @@ class MapContainer extends React.Component{
     }
   }
 
+  // Bring the products data
+  getProducts = () => {
+    axios
+      .get(`http://localhost:5000/api/products`)
+      .then((productsFromDb) => {
+        const allProducts = productsFromDb.data;
+        this.setState({
+          listOfProducts: allProducts
+        })
+        console.log("list of Products", this.state.listOfProducts);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   // on execute la function
   componentDidMount() {
-    this.askLocation()
+    this.askLocation();
+    this.getProducts();
   }
 
   onMarkerClick = (props, marker, e) =>
@@ -109,12 +128,56 @@ render() {
   // vérifier si le marker a été sélectionné
   const selected = this.state.selected;
 
+
+      // Let's filter the name before rendering 
+      const onNameFilter = this.state.listOfStores.filter(store => {
+        // does the store's name matches the query ?
+        const matchName = (store.fullName).toLowerCase().includes((this.props.query).toLowerCase());
+        return matchName;
+      })
   
+  
+      // Let's filter the products before rendering
+  
+      // Make an array of products matching
+      let ProductFilteredStoreId = []
+  
+      const onProductFilter = this.state.listOfProducts.filter(product => { // [array de store ID contenant camemberts]
+        // does the store's have the product match in the query ?
+        const matchProduct = (product.name).toLowerCase().includes((this.props.query).toLowerCase());
+        return matchProduct;
+      })
+  
+      // Matching store ID of products and store ID of stores
+      onProductFilter.forEach(product => { // Boucle sur chaque produit
+        this.state.listOfStores.forEach(store => { // Boucle sur chaque store
+          if (product.store_id && store._id) { // Ne compare pas les undefined
+            if (product.store_id === store._id) { // Si store ID = store ID
+              ProductFilteredStoreId.push(store) // push dans ProductFilteredStoreId array
+            }
+          }
+        })   
+      })   
+  
+      // Switch rendering regarding content of the search bar
+      let renderedList;
+  
+      if (this.props.query.length !== "") {
+        renderedList = [...onNameFilter, ...ProductFilteredStoreId]
+      } else { // Par défaut, renvoie full listOfStores
+        renderedList = this.state.listOfStores
+      }  
+
+
+      
+    // Use store picture as background
+    let background = this.state.selectedPlace.image;
+
   
     return (
       mapLoaded ? // la carte a été chargée ?
       // alors retourne: 
-      <div>
+      <div className="map-container-desktop">
       <Map
         google={this.props.google}
         styles={this.props.mapStyle}
@@ -149,12 +212,14 @@ render() {
         <InfoWindow
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}>
-            <div>
-              <img src={this.state.selectedPlace.image} width="64" height="64"></img>
-              <h1>{this.state.selectedPlace.name}</h1>
-              <h3>{this.state.selectedPlace.address}</h3>
-              <p>{this.state.selectedPlace.distance} meters</p>
-            </div>
+            {/* <Link to={`/storeDetails/${this.state.selectedPlace._id}`} > */}
+              <div key={this.state.selectedPlace._id} className="category-card" style={{backgroundImage: `linear-gradient(0deg, rgba(29, 29, 29, 0.5), rgba(29, 29, 29, 0.2)), url(${background})`}}>
+                <div className="category-store-info">
+                  <h4>{this.state.selectedPlace.name}</h4>
+                  <p className="category-store-address">{this.state.selectedPlace.distance} meters</p>
+                </div>
+              </div>
+            {/* </Link> */}
         </InfoWindow>
 
      </Map>

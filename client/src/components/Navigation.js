@@ -11,6 +11,7 @@ import { FaSearch } from "react-icons/fa";
 import { FaMap } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaCog } from "react-icons/fa";
+import SearchBar from './SearchBar';
 
 
 // Configure mobile nav buttons
@@ -37,48 +38,57 @@ const mobileNav = [{
 }]
 
 // Display nav
-const Navigation = (props) => {
-  return(
-    <>
+class Navigation extends React.Component {
+  state = {
+    query: ''
+  }
 
-      {/* Desktop Nav */}
-      <nav className="navbar desktop" role="navigation">
-        <div className="nav-container">
-          <Link to='/' className="navbar-logo">
-            <Logo />
-          </Link>
-          <div className="nav-menu">
-            <ul>
-              <li className="nav-link"><Link to='/home'>Home</Link></li>
-              {/* <li className="nav-link"><Link to='/listSearch'>ListView</Link></li> */}
-              <li className="nav-link"><Link to='/mapView'>Stores</Link></li>
-              <li className="nav-link"><Link to='/cart'>Cart</Link></li>
-              <li className="nav-link"><Link to='/userSettings'>Settings</Link></li>
-            </ul>
+  updateQuery = (newValue) => {
+    this.setState({query: newValue});
+  }
+
+  render() {
+    return(
+      <>
+        {/* Desktop Nav */}
+        <nav className="navbar desktop" role="navigation">
+          <div className="nav-container">
+            <Link to='/' className="navbar-logo">
+              <Logo />
+            </Link>
+            <SearchBar query={this.state.query} updateQuery={this.updateQuery} />
+            <div className="nav-menu">
+              <ul>
+                <li className="nav-link"><Link to='/home'>Home</Link></li>
+                {/* <li className="nav-link"><Link to='/listSearch'>ListView</Link></li> */}
+                <li className="nav-link"><Link to='/mapView'>Stores</Link></li>
+                <li className="nav-link"><Link to='/cart'>Cart</Link></li>
+                <li className="nav-link"><Link to='/userSettings'>Settings</Link></li>
+              </ul>
+            </div>
           </div>
-        </div>
-      </nav>
+        </nav>
 
-      {/* Mobile Nav */}
-      <nav className="navbar mobile" role="navigation">
-        <div className="nav-container">
-          {
-            mobileNav.map((tab, index) =>(
-              <div className="nav-item" key={`tab-${index}`}>
-                <Link to={tab.route}>
-                  <div className="nav-link">
-                    <tab.icon/>
-                    {/* <div className="nav-label">{tab.label}</div> */}
-                  </div>
-                </Link>
-              </div>
-            ))
-          }
-        </div>
-      </nav>
-
-    </>
-  )
+        {/* Mobile Nav */}
+        <nav className="navbar mobile" role="navigation">
+          <div className="nav-container">
+            {
+              mobileNav.map((tab, index) =>(
+                <div className="nav-item" key={`tab-${index}`}>
+                  <Link to={tab.route}>
+                    <div className="nav-link">
+                      <tab.icon/>
+                      {/* <div className="nav-label">{tab.label}</div> */}
+                    </div>
+                  </Link>
+                </div>
+              ))
+            }
+          </div>
+        </nav>
+      </>
+    )
+  }
 };
 
 export default Navigation;

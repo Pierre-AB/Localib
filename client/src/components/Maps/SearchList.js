@@ -63,8 +63,8 @@ class SearchList extends Component {
   };
 
   componentDidMount() {
-    this.askLocation()
-    this.getProducts()
+    this.askLocation();
+    this.getProducts();
   }
 
   render(){ 

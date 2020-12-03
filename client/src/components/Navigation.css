@@ -43,8 +43,8 @@
 
 .desktop .nav-container {
   padding: 1.5em 3em;
-  min-height: 67px;
-  max-height: 67px;
+  min-height: 85px;
+  max-height: 85px;
 }
 
 .mobile .nav-container {
@@ -81,6 +81,10 @@
 .navbar a:hover, .navbar a:focus, .navbar a:active {
   color: var(--accent-color);
   font-weight: 800;
+}
+
+.navbar-logo {
+  width: 150px;
 }
 
 

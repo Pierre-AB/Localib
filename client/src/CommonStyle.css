@@ -51,9 +51,14 @@ body {
   
 }
 
-.page-container {
+.page-container-mobile {
   min-height: 100vh;
   padding: 0 1.3em 2.5em;
+}
+
+.page-container-desktop {
+  min-height: 100vh;
+  padding: 67px 1.3em 2.5em;
 }
 
 .btn {
@@ -146,12 +151,12 @@ button:hover {
 .horizontal-scroll-container {
   display: flex;
   overflow-x: auto;
+  overflow-y: hidden; 
   flex-wrap: nowrap;
   margin: 0 -1.3em;
 }
 
 .horizontal-scroll-container::-webkit-scrollbar { display: none; }
-
 
 .vertical-scroll-container {
   display: flex;
@@ -165,11 +170,24 @@ button:hover {
 
 
 /* NEARBY STYLES */
-.nearby-section {
+.nearby-container-desktop {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nearby-container-desktop .nearby-card-desktop {
+  margin-right: 1.3em;
+  margin-bottom: 1.3em;
+}
+
+.nearby-section-mobile {
   text-align: right;
 }
 
-.horizontal-scroll-container .nearby-card {
+.horizontal-scroll-container .nearby-card-mobile {
   margin-right: 1.3em;
 }
 
@@ -177,7 +195,7 @@ button:hover {
   margin-left: 1.3em;
 }
 
-.nearby-card {
+.nearby-card-mobile {
   position: relative;
   background-repeat: no-repeat;
   background-position: center;
@@ -187,12 +205,34 @@ button:hover {
   border-radius: 15px;
 }
 
-.nearby-store-info {
+.nearby-card-desktop {
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 215px;
+  width: 100%;
+  max-width: 250px;
+  border-radius: 15px;
+}
+
+.nearby-store-info-mobile {
   position: absolute;
   bottom: 0;
   padding: 1em;
   color: white;
   text-align: left;
+}
+
+.nearby-store-info-desktop {
+  position: absolute;
+  bottom: 0;
+  padding: .7em;
+  color: white;
+  text-align: left;
+  background-color: #454f63b8;
+  width: 100%;
+  border-radius: 0 0 15px 15px;
 }
 
 .nearby-store-address {
@@ -201,7 +241,7 @@ button:hover {
   font-size: .8em;
 }
 
-.nearby-store-address p {
+.nearby-store-address, .nearby-store-title {
   /* ... si déborde */
   white-space: nowrap;
   overflow: hidden;

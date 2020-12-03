@@ -17,7 +17,8 @@ class NearbyStores extends Component {
     this.state = {
       listOfStores: [],
       latitude: "",
-      longitude: ""
+      longitude: "",
+      isMobile: false
     };
     this.askLocation = this.askLocation.bind(this);
   }
@@ -52,11 +53,23 @@ class NearbyStores extends Component {
 
   componentDidMount() {
     this.askLocation()
+    window.addEventListener("resize", this.resize.bind(this));
+    this.resize();
   }
+
+  resize() {
+      this.setState({isMobile: window.innerWidth <= 992});
+  }
+
+  componentWillUnmount() {
+      window.removeEventListener("resize", this.resize.bind(this));
+  }
+
+
 
   render(){ 
     return(
-      <div className="horizontal-scroll-container">
+      <div className={`${this.state.isMobile ? "horizontal-scroll-container" : "nearby-container-desktop"}`}>
 
         {/* Loading stores message */}
         {this.state.listOfStores.length <= 0 && <ThreeDots width="30" />}
@@ -69,9 +82,10 @@ class NearbyStores extends Component {
           
           return (
             <Link to={`/storeDetails/${store._id}`} >
-              <div key={store._id} className="nearby-card" style={{backgroundImage: `linear-gradient(0deg, rgba(29, 29, 29, 0.5), rgba(29, 29, 29, 0.2)), url(${background})`}}>
-                <div className="nearby-store-info">
-                  <h4>{store.fullName}</h4>
+              <div key={store._id} className={`${this.state.isMobile ? "nearby-card-mobile" : "nearby-card-desktop"}`} style={this.state.isMobile ? { backgroundImage:`linear-gradient(0deg, rgba(29, 29, 29, 0.5), rgba(29, 29, 29, 0.2)), url(${background})` } : {}} >
+                {this.state.isMobile ? "" : (<img className="nearby-card-desktop" src={`${background}`} />)}
+                <div className={`${this.state.isMobile ? "nearby-store-info-mobile" : "nearby-store-info-desktop"}`}>
+                  <h4 className="nearby-store-title">{store.fullName}</h4>
                   <p className="nearby-store-address">{store.address}</p>
                   <p className="nearby-store-address">{store.distance} meters</p>
                 </div>

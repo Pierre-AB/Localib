@@ -50,20 +50,53 @@ function timeSlotCalc(openingTime, closingTime, timeStep) {
 
   //                      [10, 0] , [12, 15], 10
 
-  let openingHours = openingTime[0] * 3600; // 36000
-  let openingMinutes = openingTime[1] * 60; // 0
-  let openingTotal = openingHours + openingMinutes; // 36000
+  let openingHours = openingTime[0] * 60; // 600
+  let openingMinutes = openingTime[1]; // 0
+  let openingTotal = openingHours + openingMinutes; // 600
 
-  let closingHours = closingTime[0] * 3600; // 43200
-  let closingMinutes = closingTime[1] * 60; // 900
-  let closingTotal = closingHours + closingMinutes; // 44100
+  let closingHours = closingTime[0] * 60; // 720
+  let closingMinutes = closingTime[1]; // 15
+  let closingTotal = closingHours + closingMinutes; // 735
 
-  let openingDifference = Math.abs(closingTotal - openingTotal) / 60; //Number of Minutes the store is open. -> (44100 - 36000) / 60 = 135
+  let openingDifference = Math.abs(closingTotal - openingTotal); //Number of Minutes the store is open. -> (735 - 600) = 135 Minutes
 
   let timeslotNumber = Math.floor(openingDifference / timeStep); // 135 / 10 = 13,5.Floor = 13
 
-  return timeslotNumber;
+  // Create the time slot Array
+  // Once I have the number of timeSlot I need to add on the opening hour the slot timeRange
+  let timeString = "";
+  let timeSlotArray = [];
+  let startTime = openingDifference;
+
+  for (let i = 0; i < timeslotNumber; i++) {
+    startTime = openingHours + timeStep // 600 + 10 = 610 -> i = 0
+    let startHour = startTime / 60 // 610 / 60 = 10,16
+    let rStartHour = Math.floor(startHour) // 10
+    let startMinutes = (startHour - rStartHour) * 60//  (10,16 - 10) * 60 =  10
+    let rStartMinutes = Math.Round(startMinutes) // 10
+
+    timeString = "" + rStartHour + ":" + rStartMinutes
+
+    timeSlotArray.push(timeString);
+
+    /* 
+  
+
+  Start with openingHours in minutes 
+  Add timeStep
+  Divide / 3600 to get hours
+  Modulo the 
+  */
+
+  }
+
+
+  return timeString;
 }
+
+
+
+
 
 
 //  ######   #######  ##     ## ########   #######  ##    ## ######## ##    ## ######## 
@@ -145,7 +178,6 @@ class StoreDetails extends React.Component {
 
 
   splitDay = () => {
-
     let dayAvaiArr = [];
 
     // check closed hours
@@ -164,19 +196,22 @@ class StoreDetails extends React.Component {
     let strCloseAm = closeAm.split(":");
 
     //calc number of slot per opening hours
-    let morningAvai = timeSlotCalc(strOpenAm, strCloseAm, this.state.timeSlot);
+    let morningAvaiSlotNum = timeSlotCalc(strOpenAm, strCloseAm, this.state.timeSlot);
+
+
 
     //check if not open on the afternoon
     if (openPm) {
       let strOpenPm = openPm.split(":");
       let strClosePm = closePm.split(":");
-      let afternoonAvai = timeSlotCalc(strOpenPm, strClosePm, this.state.timeSlot);
-      dayAvaiArr.push(morningAvai, afternoonAvai);
+      let afternoonAvaiSlotNum = timeSlotCalc(strOpenPm, strClosePm, this.state.timeSlot);
+      dayAvaiArr.push(morningAvaiSlotNum, afternoonAvaiSlotNum);
     } else {
-      dayAvaiArr.push(morningAvai);
+      dayAvaiArr.push(morningAvaiSlotNum);
     }
 
     console.log("dayAvaiArr=", dayAvaiArr)
+
 
     return dayAvaiArr;
   }
@@ -188,6 +223,10 @@ class StoreDetails extends React.Component {
     let background = this.state.picture;
     const storeIsLoaded = this.state.storeIsLoaded;
     // const availabilityloaded
+    const dayInfo = this.splitDay();
+
+    
+
     return (
 
       <div>
@@ -223,7 +262,7 @@ class StoreDetails extends React.Component {
           {/* <AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} /> */}
 
           {storeIsLoaded ?
-            (<AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} dayAvailibility={this.state.dayAvailibility} dayAvaiArr={this.splitDay()} />)
+            (<AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} dayAvailibility={this.state.dayAvailibility} dayAvaiArr={dayInfo} />)
             :
             (<div>"loading..."</div>)}
         </div>

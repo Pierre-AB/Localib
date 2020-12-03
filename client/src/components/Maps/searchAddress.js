@@ -175,5 +175,5 @@ MapContainer.defaultProps = mapStyles;
 
 export default GoogleApiWrapper({
   apiKey
-  })(MapContainer);
+ })(MapContainer);
 

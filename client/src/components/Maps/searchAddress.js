@@ -1,25 +1,16 @@
 
 import React from 'react';
-import { GoogleMapReact, Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 import axios from 'axios';
 import mapStyles from "./mapStyles";
-import { Link, withRouter } from 'react-router-dom';
 
 
 // Loader Icon
 import { useLoading, ThreeDots } from '@agney/react-loading';
 
 const apiKey = "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM" // process.env.GOOGLE_MAPS_API_KEY; // "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM"
-// const mapContainerStyle = {
-//   height: "100vh",
-//   width: "100vw",
-// };
-
-// const options = {
-//   styles: mapStyles,
-//   disableDefaultUI: true,
-//   zoomControl: true,
-// };
 
 class MapContainer extends React.Component{
   constructor(props) {
@@ -33,11 +24,12 @@ class MapContainer extends React.Component{
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
+      addressSearched: null
     };
-    this.askLocation = this.askLocation.bind(this);
+    this.searchLocation = this.searchLocation.bind(this);
   }
   // on a besoin de connaître la Location du navigateur afin d'obtenir latitude et longitude
-  askLocation() { 
+  searchLocation() { 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
         // pour récupérer les coordinates
@@ -67,7 +59,7 @@ class MapContainer extends React.Component{
 
   // on execute la function
   componentDidMount() {
-    this.askLocation()
+    this.searchLocation()
   }
 
   onMarkerClick = (props, marker, e) =>
@@ -85,6 +77,16 @@ class MapContainer extends React.Component{
       })
     }
   };
+
+  handleChange = (event) => {  
+    const {addressSearched, value} = event.target;
+    this.setState({[addressSearched]: value});
+    geocodeByAddress('Montevideo, Uruguay')
+      .then(results => getLatLng(results[0]))
+      .then(({ lat, lng }) =>
+        console.log('Successfully got latitude and longitude', { lat, lng })
+      );
+  }
 
 
 render() {
@@ -115,6 +117,9 @@ render() {
       mapLoaded ? // la carte a été chargée ?
       // alors retourne: 
       <div>
+      <GooglePlacesAutocomplete
+        onChange={ e => this.handleChange(e)}
+      />
       <Map
         google={this.props.google}
         styles={this.props.mapStyle}
@@ -170,5 +175,5 @@ MapContainer.defaultProps = mapStyles;
 
 export default GoogleApiWrapper({
   apiKey
-  })(MapContainer);
+ })(MapContainer);
 

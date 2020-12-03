@@ -3,6 +3,7 @@ import axios from 'axios';
 import './StoreDetails.css';
 import Calendar from 'react-calendar';
 import AppointmentPicker from './AppointmentPicker';
+import StoreMap from '../Maps/storeMap'
 // import { SiInstacart } from "react-icons/si";
 // import { SiGooglecalendar } from "react-icons/si";
 // import { BsCameraVideoFill } from "react-icons/bs";
@@ -169,7 +170,10 @@ class StoreDetails extends React.Component {
           {/* <AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} /> */}
 
           {isLoaded ?
-            (<AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} dayAvailibility={this.state.dayAvailibility} />)
+          <div>
+            <AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} dayAvailibility={this.state.dayAvailibility} />
+            <StoreMap store={this.state.store}/>
+          </div>
             :
             (<div>"loading..."</div>)}
         </div>

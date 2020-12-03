@@ -5,6 +5,7 @@ import Geolocated from '../components/Maps/geolocated';
 import StoresList from '../components/Maps/storesList'
 // import Map from '../components/Maps/maps'
 import Map from '../components/Maps/google-maps'
+
 import SearchBar from '../components/SearchBar'
 
 

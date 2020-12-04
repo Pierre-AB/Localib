@@ -6,6 +6,7 @@ import React from 'react';
 var morning = true;
 var afternoon = true;
 var noInterruption = false;
+var closed = false;
 
 
 class AppointmentPicker extends React.Component {
@@ -39,22 +40,26 @@ class AppointmentPicker extends React.Component {
       morning = false;
       afternoon = false;
       noInterruption = false;
+      closed = true;
     } else if (this.props.dayAvaiArr.length === 1) {
       morning = false;
       afternoon = false;
       noInterruption = true;
+      closed = false;
     } else if (this.props.dayAvaiArr.length > 1) {
       morning = true;
       afternoon = true;
+      closed = false;
     }
   }
 
   render() {
 
     this.openingType()
-    console.log("morning=", morning);
-    console.log("afternoon=", afternoon);
-    console.log("noInterruption=", noInterruption);
+    // console.log("morning=", morning);
+    // console.log("afternoon=", afternoon);
+    // console.log("noInterruption=", noInterruption);
+    console.log("this.props.dayAvaiArr", this.props.dayAvaiArr);
     console.log("this.props.dayAvaiArr.length=", this.props.dayAvaiArr.length);
 
     return (
@@ -66,16 +71,29 @@ class AppointmentPicker extends React.Component {
           (<div>
             <p>Open from: {this.props.dayAvailibility.openAm} to {this.props.dayAvailibility.closeAm}</p>
             <p>& from: {this.props.dayAvailibility.openPm} to {this.props.dayAvailibility.closePm}</p>
+
+            <h2>Morning:</h2>
+            {this.props.dayAvaiArr[0].map((time, index) => { return <div><button key={index}>{time}</button></div> })}
+
+            <h2>Afternoon:</h2>
+            {this.props.dayAvaiArr[1].map((time, index) => { return <div><button key={index}>{time}</button></div> })}
           </div>)
           : noInterruption ?
-            (<p>Open from: {this.props.dayAvailibility.openAm} to {this.props.dayAvailibility.closeAm}</p>)
+            (
+              <div>
+                <p>Open from: {this.props.dayAvailibility.openAm} to {this.props.dayAvailibility.closeAm}</p>
+                {this.props.dayAvaiArr[0].map((time, index) => { return <div><button key={index}>{time}</button></div> })}
+              </div>
+            )
+
             :
-            (<p>Closed</p>)
+            (<div>
+              <h2>closed</h2>
+              {`${this.props.store.fullName} will be glad to have you another day `}
+            </div>)
 
         }
 
-        <h1>{this.props.dayAvaiArr[0]}</h1>
-        <h1>{this.props.dayAvaiArr[1]}</h1>
       </div>
     )
   }

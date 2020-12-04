@@ -46,16 +46,23 @@ function compareDate(date) {
 }
 
 // Calculate Number of timeslot available per opening range
+// CREATE SLOT ARRAYS
 function timeSlotCalc(openingTime, closingTime, timeStep) {
 
   //                      [10, 0] , [12, 15], 10
 
-  let openingHours = openingTime[0] * 60; // 600
-  let openingMinutes = openingTime[1]; // 0
+  var timeSlotArray = [];
+
+  if (!openingTime) {
+    return timeSlotArray
+  }
+
+  let openingHours = Number(openingTime[0]) * 60; // 600
+  let openingMinutes = Number(openingTime[1]); // 0
   let openingTotal = openingHours + openingMinutes; // 600
 
-  let closingHours = closingTime[0] * 60; // 720
-  let closingMinutes = closingTime[1]; // 15
+  let closingHours = Number(closingTime[0]) * 60; // 720
+  let closingMinutes = Number(closingTime[1]); // 15
   let closingTotal = closingHours + closingMinutes; // 735
 
   let openingDifference = Math.abs(closingTotal - openingTotal); //Number of Minutes the store is open. -> (735 - 600) = 135 Minutes
@@ -64,34 +71,26 @@ function timeSlotCalc(openingTime, closingTime, timeStep) {
 
   // Create the time slot Array
   // Once I have the number of timeSlot I need to add on the opening hour the slot timeRange
-  let timeString = "";
-  let timeSlotArray = [];
-  let startTime = openingDifference;
+  var timeString = "";
+
+  var startTime = openingTotal;
 
   for (let i = 0; i < timeslotNumber; i++) {
-    startTime = openingHours + timeStep // 600 + 10 = 610 -> i = 0
-    let startHour = startTime / 60 // 610 / 60 = 10,16
+    let slot = startTime + timeStep // 600 + 10 = 610 -> i = 0
+    let startHour = slot / 60 // 610 / 60 = 10,16
     let rStartHour = Math.floor(startHour) // 10
     let startMinutes = (startHour - rStartHour) * 60//  (10,16 - 10) * 60 =  10
-    let rStartMinutes = Math.Round(startMinutes) // 10
+    let rStartMinutes = Math.round(startMinutes) // 10
 
     timeString = "" + rStartHour + ":" + rStartMinutes
 
     timeSlotArray.push(timeString);
-
-    /* 
-  
-
-  Start with openingHours in minutes 
-  Add timeStep
-  Divide / 3600 to get hours
-  Modulo the 
-  */
-
+    startTime = slot
   }
 
+  console.log("🥇 timeSlotArray =", timeSlotArray)
 
-  return timeString;
+  return timeSlotArray;
 }
 
 
@@ -119,7 +118,7 @@ class StoreDetails extends React.Component {
     fullDayName: dateName(new Date()),
     dayAvailibility: {},
     storeIsLoaded: false,
-    timeSlot: 10
+    timeSlot: 15
   }
 
   componentDidMount() {
@@ -225,7 +224,7 @@ class StoreDetails extends React.Component {
     // const availabilityloaded
     const dayInfo = this.splitDay();
 
-    
+
 
     return (
 

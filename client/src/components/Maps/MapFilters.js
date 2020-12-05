@@ -296,9 +296,7 @@ render() {
 }
 
 //Pour récupérer le style de la carte (fichier JSON avec le format)
-MapContainerSearchFilter.defaultProps = {
-  mapStyles
-};
+MapContainerSearchFilter.defaultProps = mapStyles;
 
 export default GoogleApiWrapper({
   apiKey

@@ -7,7 +7,7 @@ const orderModel = new Schema({
   products: [String],
   totalAmount: Number,
   appointmentDay: Date,
-  appointmentTime: "",
+  appointmentTime: String,
   comment: [String],
   status: {
     type: String,

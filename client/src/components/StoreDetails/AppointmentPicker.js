@@ -22,7 +22,8 @@ class AppointmentPicker extends React.Component {
   //ATTENTION ADD A STATE FOR THE DAY TO DETERMINE OPENING HOURS
 
   state = {
-    pickedTime: null
+    pickedTime: null,
+    timeClicked: false
   }
 
   /* _________ANTOINE_______: 
@@ -53,21 +54,20 @@ class AppointmentPicker extends React.Component {
 
 
   appointmentPick = (time) => {
-
     this.setState({
-      pickedTime: time
+      pickedTime: time,
+      timeClicked: true
     })
+  }
 
+  bookAppointment = () => {
+    this.props.createOrder(this.state.timeClicked)
   }
 
   render() {
 
     this.openingType()
-    // console.log("morning=", morning);
-    // console.log("afternoon=", afternoon);
-    // console.log("noInterruption=", noInterruption);
-    console.log("this.props.dayAvaiArr", this.props.dayAvaiArr);
-    console.log("this.props.dayAvaiArr.length=", this.props.dayAvaiArr.length);
+    const timeClicked = this.state.timeClicked
 
     return (
       <div>
@@ -82,14 +82,14 @@ class AppointmentPicker extends React.Component {
             <h2>Morning:</h2>
             {this.props.dayAvaiArr[0].map((time, index) => {
               return <div>
-                <button key={index} onClick={(time) => this.appointmentPick(time)}>{time}</button>
+                <button key={index} onClick={() => this.appointmentPick(time)}>{time}</button>
               </div>
             })}
 
             <h2>Afternoon:</h2>
             {this.props.dayAvaiArr[1].map((time, index) => {
               return <div>
-                <button key={index} onClick={(time) => this.appointmentPick(time)}>{time}</button>
+                <button key={index} onClick={() => this.appointmentPick(time)}>{time}</button>
               </div>
             })}
           </div>)
@@ -99,7 +99,7 @@ class AppointmentPicker extends React.Component {
                 <p>Open from: {this.props.dayAvailibility.openAm} to {this.props.dayAvailibility.closeAm}</p>
                 {this.props.dayAvaiArr[0].map((time, index) => {
                   return <div>
-                    <button key={index} onClick={(time) => this.appointmentPick(time)}>{time}</button>
+                    <button key={index} onClick={() => this.appointmentPick(time)}>{time}</button>
                   </div>
                 })}
               </div>
@@ -112,6 +112,17 @@ class AppointmentPicker extends React.Component {
             </div>)
 
         }
+        {timeClicked ?
+          (<div>
+            <form onSubmit={this.bookAppointment}>
+              <input type="submit" value="Book this appointment" />
+            </form>
+
+          </div>)
+          :
+          <div>
+
+          </div>}
 
       </div>
     )

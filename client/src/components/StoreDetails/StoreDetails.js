@@ -161,6 +161,29 @@ class StoreDetails extends React.Component {
   }
 
 
+  createOrder = (time) => {
+    const store_id = this.state.store._id;
+    const appointmentDay = this.state.pickedDate;
+    const appointmentTime = time;
+
+    axios.post('http://localhost:5000/api/orders', { store_id, appointmentDay, appointmentTime })
+      .then(response => console.log(response))
+      .match(err => console.log(err))
+
+
+  }
+
+  //  $$$$$$\                                  $$\     $$\                               
+  // $$  __$$\                                 $$ |    \__|                              
+  // $$ /  \__|$$\   $$\ $$$$$$$\   $$$$$$$\ $$$$$$\   $$\  $$$$$$\  $$$$$$$\   $$$$$$$\ 
+  // $$$$\     $$ |  $$ |$$  __$$\ $$  _____|\_$$  _|  $$ |$$  __$$\ $$  __$$\ $$  _____|
+  // $$  _|    $$ |  $$ |$$ |  $$ |$$ /        $$ |    $$ |$$ /  $$ |$$ |  $$ |\$$$$$$\  
+  // $$ |      $$ |  $$ |$$ |  $$ |$$ |        $$ |$$\ $$ |$$ |  $$ |$$ |  $$ | \____$$\ 
+  // $$ |      \$$$$$$  |$$ |  $$ |\$$$$$$$\   \$$$$  |$$ |\$$$$$$  |$$ |  $$ |$$$$$$$  |
+  // \__|       \______/ \__|  \__| \_______|   \____/ \__| \______/ \__|  \__|\_______/ 
+
+
+
   // GET SELECTED DAY WRITTEN && SELECTED DAY AVAILABILITY
 
   handleChange = (clickedDate) => {
@@ -292,7 +315,7 @@ class StoreDetails extends React.Component {
 
           {storeIsLoaded ? (
             <div>
-              <AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} dayAvailibility={this.state.dayAvailibility} dayAvaiArr={dayInfo} />
+              <AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} dayAvailibility={this.state.dayAvailibility} dayAvaiArr={dayInfo} createOrder={this.createOrder} />
               <StoreMap store={this.state.store} />
             </div>
           )

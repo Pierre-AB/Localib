@@ -1,66 +1,33 @@
 
 import React from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
-import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 import axios from 'axios';
 import mapStyles from "./mapStyles";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from 'react-places-autocomplete';
+import GoogleMap from './google-maps'
 
-
-// Loader Icon
-import { useLoading, ThreeDots } from '@agney/react-loading';
 
 const apiKey = "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM" // process.env.GOOGLE_MAPS_API_KEY; // "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM"
 
-class MapContainer extends React.Component{
+class MapContainerSearch extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
       listOfStores: [], // for stores
-      latitude: "", // avant de récupérer l'information du navigateur
-      longitude: "", // avant de récupérer l'information du navigateur
-      selected: null, // pour savoir si le store (le marker du store a été clické)
-      mapLoaded: false, // si mapLoaded est ture, alors afficher la carte
+      latitude: "", // avant de récupérer l'information de la recherche
+      longitude: "", // avant de récupérer l'information de la recherche 
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
-      addressSearched: null
+      addresseSearched: false,
+      addressValue: ""
     };
-    this.searchLocation = this.searchLocation.bind(this);
+    // this.searchLocation = this.searchLocation.bind(this);
   }
-  // on a besoin de connaître la Location du navigateur afin d'obtenir latitude et longitude
-  searchLocation() { 
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((pos) => {
-        // pour récupérer les coordinates
-        const lat = pos.coords.latitude
-        const lng = pos.coords.longitude
-        console.log('success geoloc 🗺', pos)
-        // if success
-        this.setState({
-          latitude: lat,
-          longitude: lng,
-          mapLoaded: true
-        })
-        // on appel la DB pour récupérer les stores à partir de latitude et longitude
-        axios.get(`http://localhost:5000/api/stores/distances/${this.state.latitude},${this.state.longitude}`)
-        // On ajoute les stores au state pour les utiliser dans le render
-        .then(responseFromApi => {
-          this.setState({
-            listOfStores: responseFromApi.data            
-          })
-        })
-      })
-    } else { //si la geolocalisation n'a pas été activée 
-      // TO DO: ici il faudra proposer au client de renseigner une adresse s'il ne veut pas être geolocalisé
-      alert("Please turn on your geolocalisation")
-    }
-  }
-
-  // on execute la function
-  componentDidMount() {
-    this.searchLocation()
-  }
+ 
 
   onMarkerClick = (props, marker, e) =>
     this.setState({
@@ -78,15 +45,40 @@ class MapContainer extends React.Component{
     }
   };
 
-  handleChange = (event) => {  
-    const {addressSearched, value} = event.target;
-    this.setState({[addressSearched]: value});
-    geocodeByAddress('Montevideo, Uruguay')
+  handleChange = address => {
+    this.setState({ address });
+  };
+ 
+  handleSelect = address => {
+    this.setState({ 
+      addressValue: address,
+      addresseSearched: false
+     });
+    geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
-      .then(({ lat, lng }) =>
-        console.log('Successfully got latitude and longitude', { lat, lng })
-      );
-  }
+      .then((pos) => {
+        // pour récupérer les coordinates
+        const lat = pos.lat
+        const lng = pos.lng
+        console.log('success geoloc 🗺', pos)
+        // if success
+        this.setState({
+          latitude: lat,
+          longitude: lng,
+          addresseSearched: true
+        })
+        // on appel la DB pour récupérer les stores à partir de latitude et longitude
+        axios.get(`http://localhost:5000/api/stores/distances/${this.state.latitude},${this.state.longitude}`)
+        // On ajoute les stores au state pour les utiliser dans le render
+        .then(responseFromApi => {
+          this.setState({
+            listOfStores: responseFromApi.data            
+          })
+        })
+      })
+  };
+
+  
 
 
 render() {
@@ -97,6 +89,24 @@ render() {
 
   };
 
+  const renderInput = ({ getInputProps, getSuggestionItemProps, suggestions }) => (
+    <div className="autocomplete-root">
+      <input className="form-control" {...getInputProps()} />
+      <div className="autocomplete-dropdown-container">
+        {suggestions.map(suggestion => (
+          <div {...getSuggestionItemProps(suggestion)} className="suggestion">
+            <span>{suggestion.description}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+
+  const onError = (status, clearSuggestions) => {
+    console.log('Google Maps API returned error with status: ', status)
+    clearSuggestions()
+  }
   
 
   //logo Localib dans les markers de la carte
@@ -106,20 +116,25 @@ render() {
     scaledSize: new window.google.maps.Size(45, 60),
   }
   
-  //pour vérifier si la carte a été chargée
-  const mapLoaded = this.state.mapLoaded;
-  // vérifier si le marker a été sélectionné
-  const selected = this.state.selected;
+  const addresseSearched = this.state.addresseSearched
 
   
   
     return (
-      mapLoaded ? // la carte a été chargée ?
-      // alors retourne: 
       <div>
-      <GooglePlacesAutocomplete
-        onChange={ e => this.handleChange(e)}
-      />
+      <PlacesAutocomplete
+        
+        value={this.state.addressValue}
+        onChange={addressValue => this.setState({ addressValue })}
+        onSelect={this.handleSelect}
+        onError={onError}
+        searchOptions={{componentRestrictions: { country: ['fr'] }}
+        }
+      >
+        {renderInput}
+      </PlacesAutocomplete>
+      {addresseSearched ?
+      <div>
       <Map
         google={this.props.google}
         styles={this.props.mapStyle}
@@ -165,15 +180,18 @@ render() {
      </Map>
      </div>
      // la carte n'a pas été chargée ? retourne moi: 
-     :  <ThreeDots width="30" />
+     :  <GoogleMap />
+      }
+      </div>
     ) 
   }
 }
 
 //Pour récupérer le style de la carte (fichier JSON avec le format)
-MapContainer.defaultProps = mapStyles;
+MapContainerSearch.defaultProps = mapStyles;
 
 export default GoogleApiWrapper({
   apiKey
- })(MapContainer);
+ })(MapContainerSearch);
+
 

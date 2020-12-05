@@ -21,8 +21,6 @@ class MapContainerSearchFilter extends React.Component{
       listOfProducts: [],
       latitude: "", // avant de récupérer l'information de la recherche
       longitude: "", // avant de récupérer l'information de la recherche
-      latitude: "",
-      longitude: "",
       selected: null,
       mapLoaded: false,
       showingInfoWindow: false,

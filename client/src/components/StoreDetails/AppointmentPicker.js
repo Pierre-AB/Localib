@@ -22,9 +22,7 @@ class AppointmentPicker extends React.Component {
   //ATTENTION ADD A STATE FOR THE DAY TO DETERMINE OPENING HOURS
 
   state = {
-    // store: this.props.store
-    pickedDate: this.props.pickedDate,
-    dayAvail: this.props.dayAvaiArr
+    pickedTime: null
   }
 
   /* _________ANTOINE_______: 
@@ -53,6 +51,15 @@ class AppointmentPicker extends React.Component {
     }
   }
 
+
+  appointmentPick = (time) => {
+
+    this.setState({
+      pickedTime: time
+    })
+
+  }
+
   render() {
 
     this.openingType()
@@ -73,16 +80,28 @@ class AppointmentPicker extends React.Component {
             <p>& from: {this.props.dayAvailibility.openPm} to {this.props.dayAvailibility.closePm}</p>
 
             <h2>Morning:</h2>
-            {this.props.dayAvaiArr[0].map((time, index) => { return <div><button key={index}>{time}</button></div> })}
+            {this.props.dayAvaiArr[0].map((time, index) => {
+              return <div>
+                <button key={index} onClick={(time) => this.appointmentPick(time)}>{time}</button>
+              </div>
+            })}
 
             <h2>Afternoon:</h2>
-            {this.props.dayAvaiArr[1].map((time, index) => { return <div><button key={index}>{time}</button></div> })}
+            {this.props.dayAvaiArr[1].map((time, index) => {
+              return <div>
+                <button key={index} onClick={(time) => this.appointmentPick(time)}>{time}</button>
+              </div>
+            })}
           </div>)
           : noInterruption ?
             (
               <div>
                 <p>Open from: {this.props.dayAvailibility.openAm} to {this.props.dayAvailibility.closeAm}</p>
-                {this.props.dayAvaiArr[0].map((time, index) => { return <div><button key={index}>{time}</button></div> })}
+                {this.props.dayAvaiArr[0].map((time, index) => {
+                  return <div>
+                    <button key={index} onClick={(time) => this.appointmentPick(time)}>{time}</button>
+                  </div>
+                })}
               </div>
             )
 

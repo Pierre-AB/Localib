@@ -6,7 +6,8 @@ const orderModel = new Schema({
   store_id: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   products: [String],
   totalAmount: Number,
-  appointment: Date,
+  appointmentDay: Date,
+  appointmentTime: "",
   comment: [String],
   status: {
     type: String,

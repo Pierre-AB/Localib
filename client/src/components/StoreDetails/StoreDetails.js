@@ -79,16 +79,20 @@ function timeSlotCalc(openingTime, closingTime, timeStep) {
   var startTime = openingTotal;
 
   for (let i = 0; i < timeslotNumber; i++) {
-    let slot = startTime + timeStep // 600 + 10 = 610 -> i = 0
+    let slot = startTime  // 600 + 10 = 610 -> i = 0
     let startHour = slot / 60 // 610 / 60 = 10,16
     let rStartHour = Math.floor(startHour) // 10
     let startMinutes = (startHour - rStartHour) * 60//  (10,16 - 10) * 60 =  10
     let rStartMinutes = Math.round(startMinutes) // 10
 
+    if (rStartMinutes.toString().length === 1) {
+      rStartMinutes = "0" + rStartMinutes.toString()
+    }
+
     timeString = "" + rStartHour + ":" + rStartMinutes
 
     timeSlotArray.push(timeString);
-    startTime = slot
+    startTime = slot + timeStep
   }
 
   console.log("🥇 timeSlotArray =", timeSlotArray)
@@ -130,6 +134,17 @@ class StoreDetails extends React.Component {
     // this.setState({ fullDayName: now })
     console.log(this.state.today);
   }
+
+  //  $$$$$$\            $$\                                              $$\ $$\           
+  // $$  __$$\           \__|                                             $$ |$$ |          
+  // $$ /  $$ |$$\   $$\ $$\  $$$$$$\   $$$$$$$\        $$$$$$$\ $$$$$$\  $$ |$$ | $$$$$$$\ 
+  // $$$$$$$$ |\$$\ $$  |$$ |$$  __$$\ $$  _____|      $$  _____|\____$$\ $$ |$$ |$$  _____|
+  // $$  __$$ | \$$$$  / $$ |$$ /  $$ |\$$$$$$\        $$ /      $$$$$$$ |$$ |$$ |\$$$$$$\  
+  // $$ |  $$ | $$  $$<  $$ |$$ |  $$ | \____$$\       $$ |     $$  __$$ |$$ |$$ | \____$$\ 
+  // $$ |  $$ |$$  /\$$\ $$ |\$$$$$$  |$$$$$$$  |      \$$$$$$$\\$$$$$$$ |$$ |$$ |$$$$$$$  |
+  // \__|  \__|\__/  \__|\__| \______/ \_______/        \_______|\_______|\__|\__|\_______/ 
+
+
 
   // GET STORE DETAILS
 
@@ -219,6 +234,18 @@ class StoreDetails extends React.Component {
   }
 
 
+  //                                      $$\                     
+  //                                     $$ |                    
+  //  $$$$$$\   $$$$$$\  $$$$$$$\   $$$$$$$ | $$$$$$\   $$$$$$\  
+  // $$  __$$\ $$  __$$\ $$  __$$\ $$  __$$ |$$  __$$\ $$  __$$\ 
+  // $$ |  \__|$$$$$$$$ |$$ |  $$ |$$ /  $$ |$$$$$$$$ |$$ |  \__|
+  // $$ |      $$   ____|$$ |  $$ |$$ |  $$ |$$   ____|$$ |      
+  // $$ |      \$$$$$$$\ $$ |  $$ |\$$$$$$$ |\$$$$$$$\ $$ |      
+  // \__|       \_______|\__|  \__| \_______| \_______|\__|      
+
+
+
+
   render() {
 
     // Use store picture as background
@@ -265,10 +292,10 @@ class StoreDetails extends React.Component {
 
           {storeIsLoaded ? (
             <div>
-            <AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} dayAvailibility={this.state.dayAvailibility} dayAvaiArr={dayInfo} />
-            <StoreMap store={this.state.store}/>
+              <AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} dayAvailibility={this.state.dayAvailibility} dayAvaiArr={dayInfo} />
+              <StoreMap store={this.state.store} />
             </div>
-            )
+          )
             :
             (<div>"loading..."</div>)}
         </div>

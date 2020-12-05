@@ -1,4 +1,4 @@
-// Only for desktop >> filter map by address & product/store 
+// BOTH FOR DESKTOP & MOBILE >> filter map by address & product/store 
 import React from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import axios from 'axios';
@@ -7,7 +7,9 @@ import mapStyles from "./mapStyles";
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import '../SearchBar.css';
 import { useLoading, ThreeDots } from '@agney/react-loading';
-import SearchMap from './SearchMapList'
+import SearchMap from './SearchMapList';
+import GoogleMap from './google-maps';
+import onAdressFilteredMap from './OnAddressFilteredMap';
 
 const apiKey = "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM" // process.env.GOOGLE_MAPS_API_KEY; // "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM"
 
@@ -19,14 +21,61 @@ class MapContainerSearchFilter extends React.Component{
       listOfStores: [], // for stores
       listOfProducts: [],
       latitude: "", // avant de récupérer l'information de la recherche
-      longitude: "", // avant de récupérer l'information de la recherche 
+      longitude: "", // avant de récupérer l'information de la recherche
+      selected: null,
+      mapLoaded: false,
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
       addresseSearched: false,
-      addressValue: ""
+      addressValue: "",
+      isMobile: false
     };
+    // this.searchLocation = this.searchLocation.bind(this);
   }
+
+  askLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((pos) => {
+        const lat = pos.coords.latitude
+        const lng = pos.coords.longitude
+        console.log('success geoloc 🗺', pos)
+        // success
+        this.setState({
+          latitude: lat,
+          longitude: lng,
+          mapLoaded: true
+        })
+        axios.get(`http://localhost:5000/api/stores/distances/${this.state.latitude},${this.state.longitude}`)
+
+          .then(responseFromApi => {
+            this.setState({
+              listOfStores: responseFromApi.data
+            })
+          })
+      })
+    } else {
+      alert("Please turn on your geolocalisation")
+    }
+  }
+
+  // Bring the products data
+  getProducts = () => {
+    axios
+      .get(`http://localhost:5000/api/products`)
+      .then((productsFromDb) => {
+        const allProducts = productsFromDb.data;
+        this.setState({
+          listOfProducts: allProducts,
+          latitude: this.state.latitude,
+          longitude: this.state.longitude
+        })
+        console.log("list of Products", this.state.listOfProducts);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
  
   onMarkerClick = (props, marker, e) =>
     this.setState({
@@ -77,26 +126,19 @@ class MapContainerSearchFilter extends React.Component{
       })
   };
 
-  // Bring the products data
-  getProducts = () => {
-    axios
-      .get(`http://localhost:5000/api/products`)
-      .then((productsFromDb) => {
-        const allProducts = productsFromDb.data;
-        this.setState({
-          listOfProducts: allProducts,
-          latitude: this.state.latitude,
-          longitude: this.state.longitude
-        })
-        console.log("list of Products", this.state.listOfProducts);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   componentDidMount() {
+    this.askLocation()
     this.getProducts()
+    window.addEventListener("resize", this.resize.bind(this));
+    this.resize();
+  }
+
+  resize() {
+      this.setState({isMobile: window.innerWidth <= 992});
+  }
+
+  componentWillUnmount() {
+      window.removeEventListener("resize", this.resize.bind(this));
   }
 
 
@@ -186,9 +228,9 @@ class MapContainerSearchFilter extends React.Component{
       renderedList = this.state.listOfStores
     }
 
-
+    // RENDER DE PAGE
     return (
-      <>
+      <div>
         <PlacesAutocomplete
           className="search-container SearchBar"
           value={this.state.addressValue}
@@ -201,15 +243,41 @@ class MapContainerSearchFilter extends React.Component{
         {renderInput}
         </PlacesAutocomplete>
 
+
+
+        
+                
+        {/* {addresseSearched ? 
+          (this.state.isMobile ? (
+            <searchAddress />
+          ) : (
+            <mapFilters />
+          ))
+         : 
+          (this.state.isMobile ? (
+            <GoogleMap />
+          ) : (
+            <div>Coucou, je suis la page desktop geoloc</div>
+          ))
+        } */}
+
+
+
+
+
+
+
+        {/* DIV englobante générale */}
         <div className="flex">
 
+          {/* DIV avec la liste des stores */}
           <div className="vertical-scroll-container">
+
           {/* Loading stores message */}
-          {/* {renderedList.length <= 0 && <ThreeDots width="30" />} */}
+          {renderedList.length <= 0 && <ThreeDots width="30" />}
 
           {/* Display stores when loaded */}
           {renderedList.map(store => {
-            // Use store picture as background
             let background = store.picture
             
             return (
@@ -228,20 +296,24 @@ class MapContainerSearchFilter extends React.Component{
           })}
           </div>
 
-          {addresseSearched ? (
-            <div>
-              <Map
-                google={this.props.google}
-                styles={this.props.mapStyle}
-                zoom={16}
-                options={options}
-                onClick={this.onMapClicked}
-                initialCenter={{ 
-                  lat: this.state.latitude,  
-                  lng: this.state.longitude
-                }}
-              >
+          {/* DIV avec la map */}
+          <div>
+            {this.state.mapLoaded ? ( // la carte a été chargée ? alors retourne:
 
+              <div>
+                <Map
+                  google={this.props.google}
+                  styles={this.props.mapStyle}
+                  zoom={16}
+                  options={options}
+                  onClick={
+                    this.onMapClicked
+                    }
+                  initialCenter={{ 
+                    lat: this.state.latitude,  
+                    lng: this.state.longitude
+                    }}
+                >
                 {renderedList.map(store => {
                   return (
                     <Marker
@@ -249,37 +321,37 @@ class MapContainerSearchFilter extends React.Component{
                       position={{ 
                         lat: store.location.coordinates[1], 
                         lng: store.location.coordinates[0]
-                      }}
+                        }}
                       onClick={this.onMarkerClick}
                       icon={icon}
                       name={store.fullName}
                       address={store.address}
                       image={store.picture}
                       distance={store.distance}
-                    >             
+                      id={store._id}
+                      >           
+
                     </Marker>
                   )
                 })}
-
                 <InfoWindow
                   marker={this.state.activeMarker}
                   visible={this.state.showingInfoWindow}>
-                  <div>
-                    <img src={this.state.selectedPlace.image} width="64" height="64"></img>
-                    <h1>{this.state.selectedPlace.name}</h1>
-                    <h3>{this.state.selectedPlace.address}</h3>
-                    <p>{this.state.selectedPlace.distance} meters</p>
-                  </div>
+                    <div>
+                      <img src={this.state.selectedPlace.image} width="64" height="64"></img>
+                      <h1>{this.state.selectedPlace.name}</h1>
+                      <h3>{this.state.selectedPlace.address}</h3>
+                      <p>{this.state.selectedPlace.distance} meters</p>
+                    </div>
                 </InfoWindow>
-
               </Map>
-            </div>
-          ) : ( // la carte n'a pas été chargée ? retourne moi: 
-            <SearchMap query={this.props.query}/>
-          )}
-
+            </div>            
+            ) : ( // la carte n'a pas été chargée ? retourne moi
+              <ThreeDots width="30" />
+            )}
+          </div>   
         </div>
-      </>
+      </div>
     ) 
   }
 }

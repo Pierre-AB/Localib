@@ -160,8 +160,9 @@ class SearchMapList extends Component {
 
     return(
       <>
-        <div className="vertical-scroll-container">
+        <div className="flex">
 
+          <div className="vertical-scroll-container">
           {/* Loading stores message */}
           {renderedList.length <= 0 && <ThreeDots width="30" />}
 
@@ -184,8 +185,8 @@ class SearchMapList extends Component {
                 <hr />
               </Link>
             )
-          })
-          }
+          })}
+          </div>
 
           <div>
             {

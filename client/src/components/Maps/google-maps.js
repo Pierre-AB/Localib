@@ -125,6 +125,9 @@ render() {
   
   //pour vérifier si la carte a été chargée
   const mapLoaded = this.state.mapLoaded;
+
+  // Use store picture as background
+  let background = this.state.selectedPlace.image;
     
     return (
       mapLoaded ? // la carte a été chargée ?

@@ -3,6 +3,7 @@ import axios from 'axios';
 import './StoreDetails.css';
 import Calendar from 'react-calendar';
 import AppointmentPicker from './AppointmentPicker';
+import StoreMap from '../Maps/storeMap'
 // import { SiInstacart } from "react-icons/si";
 // import { SiGooglecalendar } from "react-icons/si";
 // import { BsCameraVideoFill } from "react-icons/bs";
@@ -232,7 +233,7 @@ class StoreDetails extends React.Component {
 
       <div>
 
-        <div className="page-container">
+        <div className="page-container-mobile">
           <div className="top-detail-section" style={{ backgroundImage: `linear-gradient(0deg, rgba(29, 29, 29, 0.5), rgba(29, 29, 29, 0.2)), url(${background})` }}>
             <div className="relativeParent">
               <div className="detail-store-info">
@@ -262,8 +263,12 @@ class StoreDetails extends React.Component {
           <h3>{this.state.fullDayName}</h3>
           {/* <AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} /> */}
 
-          {storeIsLoaded ?
-            (<AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} dayAvailibility={this.state.dayAvailibility} dayAvaiArr={dayInfo} />)
+          {storeIsLoaded ? (
+            <div>
+            <AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} dayAvailibility={this.state.dayAvailibility} dayAvaiArr={dayInfo} />
+            <StoreMap store={this.state.store}/>
+            </div>
+            )
             :
             (<div>"loading..."</div>)}
         </div>

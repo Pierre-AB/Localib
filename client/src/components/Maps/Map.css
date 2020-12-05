@@ -1,0 +1,27 @@
+.map-view.page-container-desktop {
+  padding: 85px 0 0;
+}
+
+.map-container-desktop {
+  /* height: calc(100vh - (4em + 48px)); */
+  margin-top: calc(-4em - 48px);
+  margin-left: -1.3em;
+  width: 100vw;
+  height: 100vh;
+  /* z-index: -1;
+  position: fixed;
+  left: 0; */
+}
+
+/* .map-container-desktop > * {
+  position: relative !important;
+} */
+
+
+.gmnoprint, .gm-control-active.gm-fullscreen-control {
+  display: none;
+}
+
+.gm-style-iw.gm-style-iw-c {
+  /* background: transparent;   */
+}

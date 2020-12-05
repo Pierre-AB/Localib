@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
+import mapStyles from "./mapStyles";
+
 
 // Loader Icon
 import { useLoading, ThreeDots } from '@agney/react-loading';
 
-class SearchList extends Component {
+const apiKey = "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM" // process.env.GOOGLE_MAPS_API_KEY; // "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM"
+
+
+class SearchMapList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,6 +19,11 @@ class SearchList extends Component {
       listOfProducts: [],
       latitude: "",
       longitude: "",
+      selected: null, 
+      mapLoaded: false, 
+      showingInfoWindow: false,
+      activeMarker: {},
+      selectedPlace: {},
     };
     this.askLocation = this.askLocation.bind(this);
   }
@@ -30,7 +41,8 @@ class SearchList extends Component {
         // success
         this.setState({
           latitude: lat,
-          longitude: lng
+          longitude: lng,
+          mapLoaded: true
         })
         axios.get(`http://localhost:5000/api/stores/distances/${this.state.latitude},${this.state.longitude}`)
 
@@ -53,7 +65,9 @@ class SearchList extends Component {
       .then((productsFromDb) => {
         const allProducts = productsFromDb.data;
         this.setState({
-          listOfProducts: allProducts
+          listOfProducts: allProducts,
+          latitude: this.state.latitude,
+          longitude: this.state.longitude
         })
         console.log("list of Products", this.state.listOfProducts);
       })
@@ -63,9 +77,25 @@ class SearchList extends Component {
   };
 
   componentDidMount() {
-    this.askLocation();
-    this.getProducts();
+    this.askLocation()
+    this.getProducts()
   }
+
+  onMarkerClick = (props, marker, e) =>
+  this.setState({
+    selectedPlace: props,
+    activeMarker: marker,
+    showingInfoWindow: true, 
+  });
+
+  onMapClicked = (props) => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      })
+    }
+  };
 
   render(){ 
     // Let's filter the name before rendering 
@@ -106,6 +136,30 @@ class SearchList extends Component {
     } else { // Par défaut, renvoie full listOfStores
       renderedList = this.state.listOfStores
     }
+
+    const options = {
+      disableDefaultUI: true,
+      zoomControl: true,
+  
+    };
+  
+    
+  
+    //logo Localib dans les markers de la carte
+    const icon = { 
+      url: `https://res.cloudinary.com/dbsnbga7z/image/upload/v1606577861/localib/LogoMap_fy7h3i.png`,
+      origin: new window.google.maps.Point(0, 0),
+      scaledSize: new window.google.maps.Size(45, 60),
+    }
+
+    const selectedIcon = {
+      url: `https://picsum.photos/64`,
+      origin: new window.google.maps.Point(0, 0),
+      scaledSize: new window.google.maps.Size(45, 60),
+    }
+    
+    //pour vérifier si la carte a été chargée
+    const mapLoaded = this.state.mapLoaded;
     
 
     return(
@@ -137,9 +191,69 @@ class SearchList extends Component {
           })
           }
 
+          <div>
+            {
+              mapLoaded ? // la carte a été chargée ?
+              // alors retourne: 
+              <div>
+              <Map
+                google={this.props.google}
+                styles={this.props.mapStyle}
+                zoom={16}
+                options={options}
+                onClick={
+                  this.onMapClicked
+                  }
+                initialCenter={{ 
+                  lat: this.state.latitude,  
+                  lng: this.state.longitude
+                  }}
+              >
+              {renderedList.map(store => {
+                  return (
+                  <Marker
+                    key={store._id}
+                    position={{ 
+                      lat: store.location.coordinates[1], 
+                      lng: store.location.coordinates[0]
+                      }}
+                    onClick={this.onMarkerClick}
+                    icon={icon}
+                    name={store.fullName}
+                    address={store.address}
+                    image={store.picture}
+                    distance={store.distance}
+                    >           
+
+                  </Marker>
+                  )
+                })
+              }
+                <InfoWindow
+                  marker={this.state.activeMarker}
+                  visible={this.state.showingInfoWindow}>
+                    <div>
+                      <img src={this.state.selectedPlace.image} width="64" height="64"></img>
+                      <h1>{this.state.selectedPlace.name}</h1>
+                      <h3>{this.state.selectedPlace.address}</h3>
+                      <p>{this.state.selectedPlace.distance} meters</p>
+                    </div>
+                </InfoWindow>
+
+            </Map>
+            </div>
+            // la carte n'a pas été chargée ? retourne moi: 
+            :  <ThreeDots width="30" />
+            }
+          </div>
+
         </div>
       </>
     )
   }
 }
-export default SearchList;
+SearchMapList.defaultProps = mapStyles;
+
+export default GoogleApiWrapper({
+  apiKey
+  })(SearchMapList);

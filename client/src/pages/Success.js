@@ -5,7 +5,7 @@ import { FaCheckCircle } from "react-icons/fa";
 class Success extends Component {
   render() {
     return (
-      <div className="success-page page-container flex-column middle">
+      <div className="success-page page-container-mobile flex-column middle">
         <FaCheckCircle />
         <h1>Success Message</h1>
         <p>{this.props.msg}Lorem ipsum</p>

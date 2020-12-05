@@ -73,6 +73,8 @@ function timeSlotCalc(openingTime, closingTime, timeStep) {
   // Once I have the number of timeSlot I need to add on the opening hour the slot timeRange
   var timeString = "";
 
+  timeSlotArray.push()
+
   var startTime = openingTotal;
 
   for (let i = 0; i < timeslotNumber; i++) {

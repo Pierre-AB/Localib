@@ -123,7 +123,6 @@ render() {
     return (
       <div>
       <PlacesAutocomplete
-        
         value={this.state.addressValue}
         onChange={addressValue => this.setState({ addressValue })}
         onSelect={this.handleSelect}

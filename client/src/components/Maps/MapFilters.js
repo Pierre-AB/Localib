@@ -1,25 +1,29 @@
-// mobile maps
+// Only for desktop >> filter map by address & product/store 
 import React from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import mapStyles from "./mapStyles";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
 import '../SearchBar.css';
-import GoogleMap from './google-maps'
+import { useLoading, ThreeDots } from '@agney/react-loading';
+import SearchMap from './SearchMapList'
+
 
 
 
 
 const apiKey = "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM" // process.env.GOOGLE_MAPS_API_KEY; // "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM"
 
-class MapContainerSearch extends React.Component{
+class MapContainerSearchFilter extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
       listOfStores: [], // for stores
+      listOfProducts: [],
       latitude: "", // avant de récupérer l'information de la recherche
       longitude: "", // avant de récupérer l'information de la recherche 
       showingInfoWindow: false,
@@ -28,7 +32,6 @@ class MapContainerSearch extends React.Component{
       addresseSearched: false,
       addressValue: ""
     };
-    // this.searchLocation = this.searchLocation.bind(this);
   }
  
 
@@ -81,7 +84,39 @@ class MapContainerSearch extends React.Component{
       })
   };
 
-  
+    // Bring the products data
+    getProducts = () => {
+      axios
+        .get(`http://localhost:5000/api/products`)
+        .then((productsFromDb) => {
+          const allProducts = productsFromDb.data;
+          this.setState({
+            listOfProducts: allProducts,
+            latitude: this.state.latitude,
+            longitude: this.state.longitude
+          })
+          console.log("list of Products", this.state.listOfProducts);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+    componentDidMount() {
+      this.getProducts()
+    }
+
+
+/***
+ *    ______               _           
+ *    | ___ \             | |          
+ *    | |_/ /___ _ __   __| | ___ _ __ 
+ *    |    // _ \ '_ \ / _` |/ _ \ '__|
+ *    | |\ \  __/ | | | (_| |  __/ |   
+ *    \_| \_\___|_| |_|\__,_|\___|_|   
+ *                                     
+ *                                     
+ */
 
 
 render() {
@@ -91,6 +126,8 @@ render() {
     zoomControl: true,
 
   };
+
+  //Places autocomplete
 
   const renderInput = ({ getInputProps, getSuggestionItemProps, suggestions }) => (
     <div className="autocomplete-root">
@@ -106,6 +143,7 @@ render() {
     </div>
   );
 
+  //Places onError
 
   const onError = (status, clearSuggestions) => {
     console.log('Google Maps API returned error with status: ', status)
@@ -123,7 +161,46 @@ render() {
   const addresseSearched = this.state.addresseSearched
 
   
+    // Let's filter the name before rendering 
+    const onNameFilter = this.state.listOfStores.filter(store => {
+      // does the store's name matches the query ?
+      const matchName = (store.fullName).toLowerCase().includes((this.props.query).toLowerCase());
+      return matchName;
+    })
+
+
+    // Let's filter the products before rendering
+
+    // Make an array of products matching
+    let ProductFilteredStoreId = []
+
+    const onProductFilter = this.state.listOfProducts.filter(product => { // [array de store ID contenant camemberts]
+      // does the store's have the product match in the query ?
+      const matchProduct = (product.name).toLowerCase().includes((this.props.query).toLowerCase());
+      return matchProduct;
+    })
+
+    // Matching store ID of products and store ID of stores
+    onProductFilter.forEach(product => { // Boucle sur chaque produit
+      this.state.listOfStores.forEach(store => { // Boucle sur chaque store
+        if (product.store_id && store._id) { // Ne compare pas les undefined
+          if (product.store_id === store._id) { // Si store ID = store ID
+            ProductFilteredStoreId.push(store) // push dans ProductFilteredStoreId array
+          }
+        }
+      })   
+    })   
+
+    // Switch rendering regarding content of the search bar
+    let renderedList;
+
+    if (this.props.query.length !== "") {
+      renderedList = [...onNameFilter, ...ProductFilteredStoreId]
+    } else { // Par défaut, renvoie full listOfStores
+      renderedList = this.state.listOfStores
+    }
   
+
     return (
       <div >
       <PlacesAutocomplete
@@ -137,6 +214,31 @@ render() {
       >
         {renderInput}
       </PlacesAutocomplete>
+
+      {/* Loading stores message */}
+      {/* {renderedList.length <= 0 && <ThreeDots width="30" />} */}
+
+        {/* Display stores when loaded */}
+        {renderedList.map(store => {
+
+          // Use store picture as background
+          let background = store.picture
+          
+          return (
+            <Link to={`/storeDetails/${store._id}`} >
+              <div key={store._id} className="vertical-list">
+                <div className="vertical-list-image" style={{backgroundImage: `linear-gradient(0deg, rgba(29, 29, 29, 0.5), rgba(29, 29, 29, 0.2)), url(${background})`}}></div>
+                <div className="vertical-store-info">
+                  <h4>{store.fullName}</h4>
+                  <p className="vertical-store-address">{store.address}</p>
+                  <p className="vertical-store-address">{store.distance} meters</p>
+                </div>
+              </div>
+              <hr />
+            </Link>
+          )
+        })
+      }
       {addresseSearched ?
       <div>
       <Map
@@ -150,7 +252,7 @@ render() {
           lng: this.state.longitude
           }}
       >
-      {this.state.listOfStores.map(store => {
+      {renderedList.map(store => {
           return (
           <Marker
             key={store._id}
@@ -184,7 +286,7 @@ render() {
      </Map>
      </div>
      // la carte n'a pas été chargée ? retourne moi: 
-     : <GoogleMap />
+     :  <SearchMap query={this.props.query}/>
       }
       </div>
     ) 
@@ -192,10 +294,10 @@ render() {
 }
 
 //Pour récupérer le style de la carte (fichier JSON avec le format)
-MapContainerSearch.defaultProps = mapStyles;
+MapContainerSearchFilter.defaultProps = mapStyles;
 
 export default GoogleApiWrapper({
   apiKey
- })(MapContainerSearch);
+ })(MapContainerSearchFilter);
 
 

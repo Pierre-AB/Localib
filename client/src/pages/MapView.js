@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-import { geolocated } from "react-geolocated";
-import Geolocated from '../components/Maps/geolocated';
+
 
 import StoresList from '../components/Maps/storesList'
 // import Map from '../components/Maps/maps'
-import Map from '../components/Maps/google-maps'
-import Mapsearch from '../components/Maps/searchAddress'
 
 import SearchBar from '../components/SearchBar'
 
-import SearchMap from '../components/Maps/SearchMapList'
-
-
+import SearchMap from '../components/Maps/MapFilters' // for desktop
+import MapFilters from '../components/Maps/searchAddress'// for mobile
 
 
 class MapView extends Component {
@@ -41,9 +37,12 @@ class MapView extends Component {
     return (
       <div className={`${this.state.isMobile ? "page-container-mobile" : "map-view page-container-desktop"}`}>
         {this.state.isMobile ? (
-          <SearchBar query={this.state.query} updateQuery={this.updateQuery} />
-        ) : ""}
-        <Mapsearch query={this.state.query} />
+          <>
+          <SearchBar fromMapQuery={this.state.query} fromMapUpdateQuery={this.updateQuery} />
+          <MapFilters />
+          </>
+        ) : (<SearchMap query={this.state.query} />)}
+        
       </div>
     );
   }

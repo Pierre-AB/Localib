@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './SearchBar.css';
 import { FaFilter } from "react-icons/fa";
 
+
 function SearchBar(props) {
   return (
     <div className="SearchBar">
@@ -25,7 +26,7 @@ function SearchBar(props) {
         <div>
           <div class="search-container">
             <svg width="16" height="16" viewBox="0 0 16 16" className="searchbar-input-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.312 13.322a.3.3 0 010 .425l-.564.565a.3.3 0 01-.425 0l-3.036-3.035a.307.307 0 01-.087-.212v-.33A5.2 5.2 0 011.6 6.8a5.2 5.2 0 015.2-5.2 5.2 5.2 0 013.935 8.6h.33c.08 0 .155.03.212.087l3.035 3.035zM6.8 10.8c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z"></path></svg>
-            <input className="searchbar-input" placeholder="Search retailer or product" type="search" value={props.query} onChange={(e) => props.updateQuery(e.target.value)} />
+            <input className="searchbar-input" placeholder="Search retailer or product" type="search" value={props.fromNavQuery} onChange={(e) => props.fromNavUpdateQuery(e.target.value)} />
             <div className="fa-filter"><FaFilter /></div>
           </div>
         </div>

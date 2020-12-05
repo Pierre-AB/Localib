@@ -10,9 +10,6 @@ import SearchMap from '../components/Maps/MapFilters' // for desktop
 import MapFilters from '../components/Maps/searchAddress'// for mobile
 
 
-
-
-
 class MapView extends Component {
   state = {
     query: '',
@@ -41,7 +38,7 @@ class MapView extends Component {
       <div className={`${this.state.isMobile ? "page-container-mobile" : "map-view page-container-desktop"}`}>
         {this.state.isMobile ? (
           <>
-          <SearchBar query={this.state.query} updateQuery={this.updateQuery} />
+          <SearchBar fromMapQuery={this.state.query} fromMapUpdateQuery={this.updateQuery} />
           <MapFilters />
           </>
         ) : (<SearchMap query={this.state.query} />)}

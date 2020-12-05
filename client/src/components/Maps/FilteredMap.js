@@ -9,7 +9,6 @@ import '../SearchBar.css';
 import { useLoading, ThreeDots } from '@agney/react-loading';
 import SearchMap from './SearchMapList';
 import GoogleMap from './google-maps';
-import onAdressFilteredMap from './OnAddressFilteredMap';
 
 const apiKey = "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM" // process.env.GOOGLE_MAPS_API_KEY; // "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM"
 
@@ -22,6 +21,8 @@ class MapContainerSearchFilter extends React.Component{
       listOfProducts: [],
       latitude: "", // avant de récupérer l'information de la recherche
       longitude: "", // avant de récupérer l'information de la recherche
+      latitude: "",
+      longitude: "",
       selected: null,
       mapLoaded: false,
       showingInfoWindow: false,
@@ -197,33 +198,33 @@ class MapContainerSearchFilter extends React.Component{
       return matchName;
     })
 
-    // Let's filter the products before rendering
+    // // Let's filter the products before rendering
 
-    // Make an array of products matching
-    let ProductFilteredStoreId = []
+    // // Make an array of products matching
+    // let ProductFilteredStoreId = []
 
-    const onProductFilter = this.state.listOfProducts.filter(product => { // [array de store ID contenant camemberts]
-      // does the store's have the product match in the query ?
-      const matchProduct = (product.name).toLowerCase().includes((this.props.query).toLowerCase());
-      return matchProduct;
-    })
+    // const onProductFilter = this.state.listOfProducts.filter(product => { // [array de store ID contenant camemberts]
+    //   // does the store's have the product match in the query ?
+    //   const matchProduct = (product.name).toLowerCase().includes((this.props.query).toLowerCase());
+    //   return matchProduct;
+    // })
 
-    // Matching store ID of products and store ID of stores
-    onProductFilter.forEach(product => { // Boucle sur chaque produit
-      this.state.listOfStores.forEach(store => { // Boucle sur chaque store
-        if (product.store_id && store._id) { // Ne compare pas les undefined
-          if (product.store_id === store._id) { // Si store ID = store ID
-            ProductFilteredStoreId.push(store) // push dans ProductFilteredStoreId array
-          }
-        }
-      })   
-    })   
+    // // Matching store ID of products and store ID of stores
+    // onProductFilter.forEach(product => { // Boucle sur chaque produit
+    //   this.state.listOfStores.forEach(store => { // Boucle sur chaque store
+    //     if (product.store_id && store._id) { // Ne compare pas les undefined
+    //       if (product.store_id === store._id) { // Si store ID = store ID
+    //         ProductFilteredStoreId.push(store) // push dans ProductFilteredStoreId array
+    //       }
+    //     }
+    //   })   
+    // })   
 
     // Switch rendering regarding content of the search bar
     let renderedList;
 
     if (this.props.query.length !== "") {
-      renderedList = [...onNameFilter, ...ProductFilteredStoreId]
+      renderedList = [...onNameFilter /*, ...ProductFilteredStoreId*/]
     } else { // Par défaut, renvoie full listOfStores
       renderedList = this.state.listOfStores
     }
@@ -234,7 +235,7 @@ class MapContainerSearchFilter extends React.Component{
         <PlacesAutocomplete
           className="search-container SearchBar"
           value={this.state.addressValue}
-          onChange={addressValue => this.setState({ addressValue })}
+          onChange={addressValue => {this.setState({ addressValue })}}
           onSelect={this.handleSelect}
           onError={onError}
           searchOptions={{componentRestrictions: { country: ['fr'] }}
@@ -242,29 +243,6 @@ class MapContainerSearchFilter extends React.Component{
         >
         {renderInput}
         </PlacesAutocomplete>
-
-
-
-        
-                
-        {/* {addresseSearched ? 
-          (this.state.isMobile ? (
-            <searchAddress />
-          ) : (
-            <mapFilters />
-          ))
-         : 
-          (this.state.isMobile ? (
-            <GoogleMap />
-          ) : (
-            <div>Coucou, je suis la page desktop geoloc</div>
-          ))
-        } */}
-
-
-
-
-
 
 
         {/* DIV englobante générale */}
@@ -308,11 +286,15 @@ class MapContainerSearchFilter extends React.Component{
                   options={options}
                   onClick={
                     this.onMapClicked
-                    }
+                  }
                   initialCenter={{ 
                     lat: this.state.latitude,  
                     lng: this.state.longitude
-                    }}
+                  }}
+                  center={{
+                    lat: this.state.latitude,  
+                    lng: this.state.longitude
+                  }}
                 >
                 {renderedList.map(store => {
                   return (

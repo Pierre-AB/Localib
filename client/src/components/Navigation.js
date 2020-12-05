@@ -60,7 +60,7 @@ function Navigation (props) {
   
     if (match) {
       // If URL match
-      return <SearchBar fromNavQuery={props.fromMapQuery} fromNavUpdateQuery={(e) => props.fromMapUpdateQuery()} />;
+      return <SearchBar query={props.query} updateQuery={props.updateQuery} />;
     } else {
       return <div />
     }

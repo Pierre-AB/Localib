@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { GoogleMapReact, Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import axios from 'axios';
 import mapStyles from "./mapStyles";
 import { Link, withRouter } from 'react-router-dom';
@@ -106,11 +106,7 @@ render() {
   
   //pour vérifier si la carte a été chargée
   const mapLoaded = this.state.mapLoaded;
-  // vérifier si le marker a été sélectionné
-  const selected = this.state.selected;
-
-  
-  
+    
     return (
       mapLoaded ? // la carte a été chargée ?
       // alors retourne: 

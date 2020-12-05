@@ -3,11 +3,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link /* , withRouter */ } from 'react-router-dom';
-// import { GeolocatedProps, geolocated } from "react-geolocated";
-// import Geolocated from './geolocated';
-// import service, { storesDistance } from './map-service'
-
-// Loader Icon
 import { useLoading, ThreeDots } from '@agney/react-loading';
 
 

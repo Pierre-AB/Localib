@@ -5,8 +5,13 @@ import Geolocated from '../components/Maps/geolocated';
 import StoresList from '../components/Maps/storesList'
 // import Map from '../components/Maps/maps'
 import Map from '../components/Maps/google-maps'
+import Mapsearch from '../components/Maps/searchAddress'
 
 import SearchBar from '../components/SearchBar'
+
+import SearchMap from '../components/Maps/SearchMapList'
+
+
 
 
 class MapView extends Component {
@@ -20,12 +25,17 @@ class MapView extends Component {
 
   render() {
     return (
-      <div>
+      <div className="page-container">
+      <br></br>
+      <br></br>
+      <br></br>
+
         <SearchBar query={this.state.query} updateQuery={this.updateQuery} />
         {/* <Geolocated />
         <StoresList />
         <h1>MAP</h1> */}
-        <Map />
+        <Mapsearch/>
+        {/* <SearchMap query={this.state.query} /> */}
       </div>
     );
   }

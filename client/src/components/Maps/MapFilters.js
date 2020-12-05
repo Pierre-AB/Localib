@@ -11,6 +11,8 @@ import PlacesAutocomplete, {
 import '../SearchBar.css';
 import { useLoading, ThreeDots } from '@agney/react-loading';
 import SearchMap from './SearchMapList'
+import Navigation from '../Navigation'
+
 
 
 
@@ -294,7 +296,9 @@ render() {
 }
 
 //Pour récupérer le style de la carte (fichier JSON avec le format)
-MapContainerSearchFilter.defaultProps = mapStyles;
+MapContainerSearchFilter.defaultProps = {
+  mapStyles
+};
 
 export default GoogleApiWrapper({
   apiKey

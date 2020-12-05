@@ -8,6 +8,7 @@ import SearchBar from '../components/SearchBar'
 
 import SearchMap from '../components/Maps/MapFilters' // for desktop
 import MapFilters from '../components/Maps/searchAddress'// for mobile
+import Navigation from '../components/Navigation'
 
 
 
@@ -44,11 +45,12 @@ class MapView extends Component {
           <SearchBar query={this.state.query} updateQuery={this.updateQuery} />
           <MapFilters />
           </>
-        ) : (<SearchMap query={this.state.query} />)}
+        ) : (<SearchMap query={Navigation.props.query}/>)}
         
       </div>
     );
   }
 }
+
 
 export default MapView;

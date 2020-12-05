@@ -1,4 +1,4 @@
-
+//Map creation 
 import React from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import axios from 'axios';

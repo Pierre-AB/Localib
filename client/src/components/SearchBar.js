@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './SearchBar.css';
 import { FaFilter } from "react-icons/fa";
+import PlacesAutocomplete from '../components/Maps/PlacesAutocomplete'
 
 
 function SearchBar(props) {

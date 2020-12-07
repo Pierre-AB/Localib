@@ -160,14 +160,19 @@ class StoreDetails extends React.Component {
       }).catch(err => console.log("Error on getting store details:", err))
   }
 
+  // CREATE ORDERS Here =  Appointment booking
 
   createOrder = (time) => {
     const store_id = this.state.store._id;
     const appointmentDay = this.state.pickedDate;
     const appointmentTime = time;
+    const status = "confirmed"
 
-    axios.post('http://localhost:5000/api/orders', { store_id, appointmentDay, appointmentTime })
-      .then(response => console.log(response))
+    axios.post('http://localhost:5000/api/orders', { store_id, appointmentDay, appointmentTime, status })
+      .then(response => {
+        console.log(response)
+        console.log("ORDER PASSED TO BACK");
+      })
       .match(err => console.log(err))
 
 

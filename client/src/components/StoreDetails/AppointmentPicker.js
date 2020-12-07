@@ -61,7 +61,7 @@ class AppointmentPicker extends React.Component {
   }
 
   bookAppointment = () => {
-    this.props.createOrder(this.state.timeClicked)
+    this.props.createOrder(this.state.pickedTime)
   }
 
   render() {

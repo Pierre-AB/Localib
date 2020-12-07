@@ -1,14 +1,14 @@
-
+//Map creation 
 import React from 'react';
-import { GoogleMapReact, Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
-import { geolocated } from "react-geolocated";
+import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import axios from 'axios';
 import mapStyles from "./mapStyles";
+import { Link, withRouter } from 'react-router-dom';
+import './Map.css';
+
 
 // Loader Icon
 import { useLoading, ThreeDots } from '@agney/react-loading';
-
-require('dotenv').config();
 
 const apiKey = "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM" // process.env.GOOGLE_MAPS_API_KEY; // "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM"
 // const mapContainerStyle = {
@@ -27,10 +27,14 @@ class MapContainer extends React.Component{
     super(props);
     this.state = {
       listOfStores: [], // for stores
+      listOfProducts: [],
       latitude: "", // avant de récupérer l'information du navigateur
       longitude: "", // avant de récupérer l'information du navigateur
       selected: null, // pour savoir si le store (le marker du store a été clické)
-      mapLoaded: false // si mapLoaded est ture, alors afficher la carte
+      mapLoaded: false, // si mapLoaded est ture, alors afficher la carte
+      showingInfoWindow: false,
+      activeMarker: {},
+      selectedPlace: {},
     };
     this.askLocation = this.askLocation.bind(this);
   }
@@ -63,12 +67,43 @@ class MapContainer extends React.Component{
     }
   }
 
+  // Bring the products data
+  getProducts = () => {
+    axios
+      .get(`http://localhost:5000/api/products`)
+      .then((productsFromDb) => {
+        const allProducts = productsFromDb.data;
+        this.setState({
+          listOfProducts: allProducts
+        })
+        console.log("list of Products", this.state.listOfProducts);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   // on execute la function
   componentDidMount() {
-    this.askLocation()
+    this.askLocation();
+    this.getProducts();
   }
 
+  onMarkerClick = (props, marker, e) =>
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+    });
 
+  onMapClicked = (props) => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      })
+    }
+  };
 
 
 render() {
@@ -79,88 +114,68 @@ render() {
 
   };
 
+  
+
   //logo Localib dans les markers de la carte
   const icon = { 
     url: `https://res.cloudinary.com/dbsnbga7z/image/upload/v1606577861/localib/LogoMap_fy7h3i.png`,
     origin: new window.google.maps.Point(0, 0),
-    anchor: new window.google.maps.Point(15, 15),
     scaledSize: new window.google.maps.Size(45, 60),
   }
   
   //pour vérifier si la carte a été chargée
   const mapLoaded = this.state.mapLoaded;
-  // vérifier si le marker a été sélectionné
-  const selected = this.state.selected;
-  
+
+  // Use store picture as background
+  let background = this.state.selectedPlace.image;
+    
     return (
       mapLoaded ? // la carte a été chargée ?
       // alors retourne: 
-      <div>
+      <div className="map-container-desktop">
       <Map
         google={this.props.google}
         styles={this.props.mapStyle}
         zoom={16}
         options={options}
+        onClick={this.onMapClicked}
         initialCenter={{ 
           lat: this.state.latitude,  
           lng: this.state.longitude
           }}
       >
-        {this.state.listOfStores.map(store => {
-              return (
-              <Marker
-                key={store._id}
-                position={{ 
-                  lat: store.location.coordinates[1], 
-                  lng: store.location.coordinates[0]
-                  }}
-                  onClick={() => {
-                  this.setState({
-                    selected: store
-                  });
-                  }}
-                  icon={icon}
-                >
-                 
-
-          {selected ? (
-          <InfoWindow
+      {this.state.listOfStores.map(store => {
+          return (
+          <Marker
+            key={store._id}
             position={{ 
-              lat: store.location.coordinates[1],
+              lat: store.location.coordinates[1], 
               lng: store.location.coordinates[0]
-               }}
-              visible= {true}
-              onCloseClick={() => {
-                  this.setState({
-                    selected: null
-                  });
-                  }}
-            
-          >
-            <div>
-              <h2>
-                  {store.fullName}
-              </h2>
-              <p>hello</p>
-            </div>
-          </InfoWindow>
-        ) : null
-        }
+              }}
+            onClick={this.onMarkerClick}
+            icon={icon}
+            name={store.fullName}
+            address={store.address}
+            image={store.picture}
+            distance={store.distance}
+            >           
 
-              </Marker>
-            )
-          })
-        }
-
-                     {/* <InfoWindow
-                  marker={this.state.activeMarker}
-                  visible={this.state.showingInfoWindow}
-                  onClose={this.onClose}
-                >
-                  <div>
-                    <h4>{store.fullname}</h4>
-                  </div>
-                </InfoWindow> */}
+          </Marker>
+          )
+        })
+      }
+        <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}>
+            {/* <Link to={`/storeDetails/${this.state.selectedPlace._id}`} > */}
+              <div key={this.state.selectedPlace._id} className="category-card" style={{backgroundImage: `linear-gradient(0deg, rgba(29, 29, 29, 0.5), rgba(29, 29, 29, 0.2)), url(${background})`}}>
+                <div className="category-store-info">
+                  <h4>{this.state.selectedPlace.name}</h4>
+                  <p className="category-store-address">{this.state.selectedPlace.distance} meters</p>
+                </div>
+              </div>
+            {/* </Link> */}
+        </InfoWindow>
 
      </Map>
      </div>

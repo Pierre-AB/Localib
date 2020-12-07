@@ -15,7 +15,7 @@ class SearchListResults extends Component {
 
   render() {
     return (
-      <div className="page-container">
+      <div className="page-container-mobile">
         <SearchBar query={this.state.query} updateQuery={this.updateQuery} />
         <SearchList query={this.state.query} />
       </div>

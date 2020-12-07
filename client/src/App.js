@@ -30,35 +30,45 @@ import StoreDetails from './components/StoreDetails/StoreDetails'
 import Success from './pages/Success'
 
 
-function App() {
-  return (
-    <div className="App">
-      <Navigation />
-      <Switch>
-        {/* Splash Screen */}
-        <Route exact path="/" component={Splash} />
+class App extends React.Component {
+  state = {
+    query: ''
+  }
 
-        {/* Navbar */}
-        <Route exact path="/home" component={Home} />
-        <Route exact path="/listSearch" component={SearchListResults} />
-        <Route exact path="/mapView" component={MapView} />
-        <Route exact path="/cart" component={Cart} />
-        <Route exact path="/userSettings" component={UserSettings} />
+  updateQuery = (newValue) => {
+    this.setState({query: newValue});
+  }
 
-        {/* Store Details */}
-        <Route exact path="/storeDetails/:id" component={StoreDetails} />
-
-        {/* Login & signup */}
-        <Route exact path="/signup" component={Signup} />
-
-        {/* product create form */}
-        {/* <Route exact path="/products" component={AddProduct} /> */}
-
-        {/* success page */}
-        <Route exact path="/success" component={Success} />
-      </Switch>
-    </div>
-  );
+  render() {
+    return (
+      <div className="App">
+        <Navigation query={this.state.query} updateQuery={this.updateQuery} />
+        <Switch>
+          {/* Splash Screen */}
+          <Route exact path="/" component={Splash} />
+  
+          {/* Navbar */}
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/listSearch" component={SearchListResults} />
+          <Route exact path="/mapView" component={MapView} />
+          <Route exact path="/cart" component={Cart} />
+          <Route exact path="/userSettings" component={UserSettings} />
+  
+          {/* Store Details */}
+          <Route exact path="/storeDetails/:id" component={StoreDetails} />
+  
+          {/* Login & signup */}
+          <Route exact path="/signup" component={Signup} />
+  
+          {/* product create form */}
+          {/* <Route exact path="/products" component={AddProduct} /> */}
+  
+          {/* success page */}
+          <Route exact path="/success" component={Success} />
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default App;

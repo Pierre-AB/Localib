@@ -3,6 +3,7 @@ import axios from 'axios';
 import './StoreDetails.css';
 import Calendar from 'react-calendar';
 import AppointmentPicker from './AppointmentPicker';
+import StoreMap from '../Maps/storeMap'
 // import { SiInstacart } from "react-icons/si";
 // import { SiGooglecalendar } from "react-icons/si";
 // import { BsCameraVideoFill } from "react-icons/bs";
@@ -19,11 +20,9 @@ import AppointmentPicker from './AppointmentPicker';
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-//APPOINTMENT PICKER INSTANCE
 
 
 //CONVERT DATE IN STRING
-
 function dateName(dateName) {
   let dayNameIndex = dateName.getDay();
   let dayDate = dateName.getDate();
@@ -47,6 +46,66 @@ function compareDate(date) {
   };
 }
 
+// Calculate Number of timeslot available per opening range
+// CREATE SLOT ARRAYS
+function timeSlotCalc(openingTime, closingTime, timeStep) {
+
+  //                      [10, 0] , [12, 15], 10
+
+  var timeSlotArray = [];
+
+  if (!openingTime) {
+    return timeSlotArray
+  }
+
+  let openingHours = Number(openingTime[0]) * 60; // 600
+  let openingMinutes = Number(openingTime[1]); // 0
+  let openingTotal = openingHours + openingMinutes; // 600
+
+  let closingHours = Number(closingTime[0]) * 60; // 720
+  let closingMinutes = Number(closingTime[1]); // 15
+  let closingTotal = closingHours + closingMinutes; // 735
+
+  let openingDifference = Math.abs(closingTotal - openingTotal); //Number of Minutes the store is open. -> (735 - 600) = 135 Minutes
+
+  let timeslotNumber = Math.floor(openingDifference / timeStep); // 135 / 10 = 13,5.Floor = 13
+
+  // Create the time slot Array
+  // Once I have the number of timeSlot I need to add on the opening hour the slot timeRange
+  var timeString = "";
+
+  var startTime = openingTotal;
+
+  for (let i = 0; i < timeslotNumber; i++) {
+    let slot = startTime + timeStep // 600 + 10 = 610 -> i = 0
+    let startHour = slot / 60 // 610 / 60 = 10,16
+    let rStartHour = Math.floor(startHour) // 10
+    let startMinutes = (startHour - rStartHour) * 60//  (10,16 - 10) * 60 =  10
+    let rStartMinutes = Math.round(startMinutes) // 10
+
+    timeString = "" + rStartHour + ":" + rStartMinutes
+
+    timeSlotArray.push(timeString);
+    startTime = slot
+  }
+
+  console.log("🥇 timeSlotArray =", timeSlotArray)
+
+  return timeSlotArray;
+}
+
+
+
+
+
+
+//  ######   #######  ##     ## ########   #######  ##    ## ######## ##    ## ######## 
+// ##    ## ##     ## ###   ### ##     ## ##     ## ###   ## ##       ###   ##    ##    
+// ##       ##     ## #### #### ##     ## ##     ## ####  ## ##       ####  ##    ##    
+// ##       ##     ## ## ### ## ########  ##     ## ## ## ## ######   ## ## ##    ##    
+// ##       ##     ## ##     ## ##        ##     ## ##  #### ##       ##  ####    ##    
+// ##    ## ##     ## ##     ## ##        ##     ## ##   ### ##       ##   ###    ##    
+//  ######   #######  ##     ## ##         #######  ##    ## ######## ##    ##    ##    
 
 
 
@@ -59,7 +118,8 @@ class StoreDetails extends React.Component {
     today: new Date(),
     fullDayName: dateName(new Date()),
     dayAvailibility: {},
-    isLoaded: false
+    storeIsLoaded: false,
+    timeSlot: 15
   }
 
   componentDidMount() {
@@ -78,7 +138,7 @@ class StoreDetails extends React.Component {
       .then(lookedUpStore => {
         this.setState({
           store: lookedUpStore.data,
-          isLoaded: true
+          storeIsLoaded: true
         });
       }).catch(err => console.log("Error on getting store details:", err))
   }
@@ -90,13 +150,15 @@ class StoreDetails extends React.Component {
     // format day to match DataBase
 
     let dayOffset = compareDate(clickedDate);
-    let dayString = dateName(clickedDate)
-    let matchDay = clickedDate.getDay()
+    let dayString = dateName(clickedDate);
+    let matchDay = clickedDate.getDay();
 
     const avaiForPickedDay = this.state.store.openingHours.filter(open =>
       open.day === matchDay
     )
 
+    console.log("avaiForPickedDay[0]=", avaiForPickedDay[0])
+    console.log("avaiForPickedDay=", avaiForPickedDay)
     // let todayAvail = this.state.store.openingHours[matchDay];
 
     console.log('DayOffset=', dayOffset.days)
@@ -109,36 +171,67 @@ class StoreDetails extends React.Component {
       pickedDate: clickedDate,
       fullDayName: dayString,
       dayAvailibility: avaiForPickedDay[0]
-    })
+    }, this.splitDay);
+
 
   }
 
 
-  splitDay = (day) => {
-    let openAm = this.state.dayAvailibility.openAm;
+  splitDay = () => {
+    let dayAvaiArr = [];
+
+    // check closed hours
+    if (!this.state.dayAvailibility.openAm) {
+      return dayAvaiArr;
+    }
+
+    let openAm = this.state.dayAvailibility.openAm; // coming from state after click on calendar
     let closeAm = this.state.dayAvailibility.closeAm;
     let openPm = this.state.dayAvailibility.openPm;
     let closePm = this.state.dayAvailibility.closePm;
 
+
+    // get opening hours as an array
     let strOpenAm = openAm.split(":");
-    let strCloseAM = closeAm.split(":");
-    let strOpenPm = openPm.split(":");
-    let strClosePm = closePm.split(":");
+    let strCloseAm = closeAm.split(":");
+
+    //calc number of slot per opening hours
+    let morningAvaiSlotNum = timeSlotCalc(strOpenAm, strCloseAm, this.state.timeSlot);
 
 
+
+    //check if not open on the afternoon
+    if (openPm) {
+      let strOpenPm = openPm.split(":");
+      let strClosePm = closePm.split(":");
+      let afternoonAvaiSlotNum = timeSlotCalc(strOpenPm, strClosePm, this.state.timeSlot);
+      dayAvaiArr.push(morningAvaiSlotNum, afternoonAvaiSlotNum);
+    } else {
+      dayAvaiArr.push(morningAvaiSlotNum);
+    }
+
+    console.log("dayAvaiArr=", dayAvaiArr)
+
+
+    return dayAvaiArr;
   }
 
 
   render() {
 
     // Use store picture as background
-    let background = this.state.picture
-    const isLoaded = this.state.isLoaded
+    let background = this.state.picture;
+    const storeIsLoaded = this.state.storeIsLoaded;
+    // const availabilityloaded
+    const dayInfo = this.splitDay();
+
+
+
     return (
 
       <div>
 
-        <div className="page-container">
+        <div className="page-container-mobile">
           <div className="top-detail-section" style={{ backgroundImage: `linear-gradient(0deg, rgba(29, 29, 29, 0.5), rgba(29, 29, 29, 0.2)), url(${background})` }}>
             <div className="relativeParent">
               <div className="detail-store-info">
@@ -168,8 +261,12 @@ class StoreDetails extends React.Component {
           <h3>{this.state.fullDayName}</h3>
           {/* <AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} /> */}
 
-          {isLoaded ?
-            (<AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} dayAvailibility={this.state.dayAvailibility} />)
+          {storeIsLoaded ? (
+            <div>
+            <AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} dayAvailibility={this.state.dayAvailibility} dayAvaiArr={dayInfo} />
+            <StoreMap store={this.state.store}/>
+            </div>
+            )
             :
             (<div>"loading..."</div>)}
         </div>

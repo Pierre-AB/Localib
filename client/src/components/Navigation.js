@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navigation.css';
+import { useRouteMatch } from "react-router-dom";
+
+//Import Logo
+import { ReactComponent as Logo } from './logo.svg';
 
 // Import Font Icon
 import { FaHome } from "react-icons/fa";
@@ -8,7 +12,7 @@ import { FaSearch } from "react-icons/fa";
 import { FaMap } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaCog } from "react-icons/fa";
-
+import SearchBar from './SearchBar';
 
 // Configure mobile nav buttons
 const mobileNav = [{
@@ -33,22 +37,51 @@ const mobileNav = [{
   label: "Settings"
 }]
 
+
+// // Test URL to hide searchbar component on the nav
+// function DisplaySearchBar() {
+//   let match = useRouteMatch("/mapView");
+
+//   if (match) {
+//     // If URL match
+//     return <SearchBar query={props.query} updateQuery={props.updateQuery} />;
+//   } else {
+//     return <div />
+//   }
+// }
+
+
 // Display nav
-const Navigation = (props) => {
+function Navigation (props) {
+
+  // Test URL to hide searchbar component on the nav
+  function DisplaySearchBar() {
+    let match = useRouteMatch("/mapView");
+  
+    if (match) {
+      // If URL match
+      return <SearchBar query={props.query} updateQuery={props.updateQuery} />;
+    } else {
+      return <div />
+    }
+  }
+
   return(
     <>
-
       {/* Desktop Nav */}
       <nav className="navbar desktop" role="navigation">
         <div className="nav-container">
-          <Link to='/' className="navbar-logo">Logo</Link>
+          <Link to='/' className="navbar-logo">
+            <Logo />
+          </Link>
+          <DisplaySearchBar />
           <div className="nav-menu">
             <ul>
               <li className="nav-link"><Link to='/home'>Home</Link></li>
-              <li className="nav-link"><Link to='/listSearch'>ListView</Link></li>
-              <li className="nav-link"><Link to='/mapView'>MapView</Link></li>
+              <li className="nav-link"><Link to='/mapView'>Stores</Link></li>
               <li className="nav-link"><Link to='/cart'>Cart</Link></li>
               <li className="nav-link"><Link to='/userSettings'>Settings</Link></li>
+              
             </ul>
           </div>
         </div>
@@ -63,7 +96,6 @@ const Navigation = (props) => {
                 <Link to={tab.route}>
                   <div className="nav-link">
                     <tab.icon/>
-                    {/* <div className="nav-label">{tab.label}</div> */}
                   </div>
                 </Link>
               </div>
@@ -71,7 +103,6 @@ const Navigation = (props) => {
           }
         </div>
       </nav>
-
     </>
   )
 };

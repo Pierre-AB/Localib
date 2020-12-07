@@ -145,7 +145,6 @@ class StoreDetails extends React.Component {
   // \__|  \__|\__/  \__|\__| \______/ \_______/        \_______|\_______|\__|\__|\_______/ 
 
 
-
   // GET STORE DETAILS
 
   getSingleStore = () => {
@@ -159,6 +158,23 @@ class StoreDetails extends React.Component {
         });
       }).catch(err => console.log("Error on getting store details:", err))
   }
+
+  //GET BOOKED APPOINTMENTS
+
+  getBookedAppo = () => {
+    const { params } = this.props.match;
+    axios.get(`http://localhost:5000/api/orders/${params.id}`)
+      .then(response => {
+        const orders = response.data;
+        console.log(orders);
+
+      })
+      .match()
+
+  }
+
+
+
 
   // CREATE ORDERS Here =  Appointment booking
 
@@ -186,6 +202,26 @@ class StoreDetails extends React.Component {
   // $$ |      $$ |  $$ |$$ |  $$ |$$ |        $$ |$$\ $$ |$$ |  $$ |$$ |  $$ | \____$$\ 
   // $$ |      \$$$$$$  |$$ |  $$ |\$$$$$$$\   \$$$$  |$$ |\$$$$$$  |$$ |  $$ |$$$$$$$  |
   // \__|       \______/ \__|  \__| \_______|   \____/ \__| \______/ \__|  \__|\_______/ 
+
+
+  // Show only available timeslot
+  drawAvailability = () => {
+    /* 
+    1st Solution:
+    - order is created with store_id
+    - Load with the component the list of appointment available from the store.
+    - filter the appointments booked and DO NOT render them
+    - each time a new appointment is booked, the list of availability should be refreshed
+    
+    2nd Solution:
+    - API called each time a render is made.
+    
+    3rd Solution:
+    - TBD
+    */
+
+  }
+
 
 
 
@@ -278,8 +314,8 @@ class StoreDetails extends React.Component {
 
     // Use store picture as background
     let background = this.state.picture;
+
     const storeIsLoaded = this.state.storeIsLoaded;
-    // const availabilityloaded
     const dayInfo = this.splitDay();
 
 

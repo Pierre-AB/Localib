@@ -3,6 +3,8 @@ const ordersRoute = express.Router();
 
 const Order = require('../models/order-model')
 
+//CREATE A NEW ORDER / APPOINTMENT
+
 ordersRoute.post('/orders', (req, res, next) => {
   // const { client_id, store_id, products, totalAmount, appointmentDay, appointmentTime, comment, status } = req.body;
   const { store_id, products, totalAmount, appointmentDay, appointmentTime, comment, status } = req.body;
@@ -31,8 +33,15 @@ ordersRoute.post('/orders', (req, res, next) => {
 
 })
 
-ordersRoute.get('/order', (req, res, next) => {
+// RETRIEVE APPOINTMENTS FOR A STORE
 
+ordersRoute.get('/orders/:id', (req, res, next) => {
+  Order.findOne({ store_id: req.params.id })
+    .then(response => {
+      console.log("🍫 ORDER FROM DB=", response.data);
+      res.status(200).json('ORDERS RETRIEVED')
+    })
+    .match(err => console.log("🥕", err));
 
 })
 

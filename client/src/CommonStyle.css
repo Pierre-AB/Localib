@@ -376,3 +376,8 @@ button:hover {
   font-weight: normal;
   font-size: .8em;
 }
+
+.desktop-map-container {
+  display: flex;
+  flex-direction: row;
+}

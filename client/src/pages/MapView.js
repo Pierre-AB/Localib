@@ -12,6 +12,7 @@ import Navigation from '../components/Navigation'
 
 
 
+import FilteredMap from '../components/Maps/FilteredMap' // common for desktop & mobile
 
 
 class MapView extends Component {
@@ -40,13 +41,12 @@ class MapView extends Component {
   render() {
     return (
       <div className={`${this.state.isMobile ? "page-container-mobile" : "map-view page-container-desktop"}`}>
+
         {this.state.isMobile ? (
-          <>
           <SearchBar query={this.state.query} updateQuery={this.updateQuery} />
-          <MapFilters />
-          </>
-        ) : (<SearchMap query={"boul"}/>)}
+        ) : ""}
         
+        <FilteredMap query={this.state.query} />
       </div>
     );
   }

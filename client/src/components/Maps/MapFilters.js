@@ -67,7 +67,7 @@ class MapContainerSearchFilter extends React.Component{
           addresseSearched: true
         })
         // on appel la DB pour récupérer les stores à partir de latitude et longitude
-        axios.get(`http://localhost:5000/api/stores/distances/${this.state.latitude},${this.state.longitude}`)
+        axios.get(`${process.env.REACT_APP_APIURL || ""}/api/stores/distances/${this.state.latitude},${this.state.longitude}`)
         // On ajoute les stores au state pour les utiliser dans le render
         .then(responseFromApi => {
           this.setState({
@@ -80,7 +80,7 @@ class MapContainerSearchFilter extends React.Component{
   // Bring the products data
   getProducts = () => {
     axios
-      .get(`http://localhost:5000/api/products`)
+      .get(`${process.env.REACT_APP_APIURL || ""}/api/products`)
       .then((productsFromDb) => {
         const allProducts = productsFromDb.data;
         this.setState({

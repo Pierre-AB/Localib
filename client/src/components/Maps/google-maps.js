@@ -53,7 +53,7 @@ class MapContainer extends React.Component{
           mapLoaded: true
         })
         // on appel la DB pour récupérer les stores à partir de latitude et longitude
-        axios.get(`http://localhost:5000/api/stores/distances/${this.state.latitude},${this.state.longitude}`)
+        axios.get(`${process.env.REACT_APP_APIURL || ""}api/stores/distances/${this.state.latitude},${this.state.longitude}`)
         // On ajoute les stores au state pour les utiliser dans le render
         .then(responseFromApi => {
           this.setState({

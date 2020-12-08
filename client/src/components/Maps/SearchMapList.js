@@ -44,7 +44,7 @@ class SearchMapList extends Component {
           longitude: lng,
           mapLoaded: true
         })
-        axios.get(`http://localhost:5000/api/stores/distances/${this.state.latitude},${this.state.longitude}`)
+        axios.get(`${process.env.REACT_APP_APIURL || ""}/api/stores/distances/${this.state.latitude},${this.state.longitude}`)
 
           .then(responseFromApi => {
             this.setState({
@@ -61,7 +61,7 @@ class SearchMapList extends Component {
   // Bring the products data
   getProducts = () => {
     axios
-      .get(`http://localhost:5000/api/products`)
+      .get(`${process.env.REACT_APP_APIURL || ""}/api/products`)
       .then((productsFromDb) => {
         const allProducts = productsFromDb.data;
         this.setState({

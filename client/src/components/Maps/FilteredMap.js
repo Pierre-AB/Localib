@@ -202,10 +202,10 @@ class MapContainerSearchFilter extends React.Component{
     let ProductFilteredStoreId = []
 
     const onProductFilter = this.state.listOfProducts.filter(product => { // [array de store ID contenant camemberts]
-      // does the store's have the product match in the query ?
+      // does the store's have the product match in the query?
       console.log("Product :",product)
-      const matchProduct = product.name && product.name.toLowerCase().includes((this.props.query).toLowerCase());
-      return matchProduct;
+      const matchProduct = product.name && product.name.toLowerCase().includes((this.props.query).toLowerCase()); 
+      return matchProduct; 
     })
 
     // Matching store ID of products and store ID of stores

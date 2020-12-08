@@ -198,25 +198,26 @@ class MapContainerSearchFilter extends React.Component{
 
     // // Let's filter the products before rendering
 
-    // // Make an array of products matching
-    // let ProductFilteredStoreId = []
+    // Make an array of products matching
+    let ProductFilteredStoreId = []
 
-    // const onProductFilter = this.state.listOfProducts.filter(product => { // [array de store ID contenant camemberts]
-    //   // does the store's have the product match in the query ?
-    //   const matchProduct = (product.name).toLowerCase().includes((this.props.query).toLowerCase());
-    //   return matchProduct;
-    // })
+    const onProductFilter = this.state.listOfProducts.filter(product => { // [array de store ID contenant camemberts]
+      // does the store's have the product match in the query ?
+      console.log("Product :",product)
+      const matchProduct = product.name && product.name.toLowerCase().includes((this.props.query).toLowerCase());
+      return matchProduct;
+    })
 
-    // // Matching store ID of products and store ID of stores
-    // onProductFilter.forEach(product => { // Boucle sur chaque produit
-    //   this.state.listOfStores.forEach(store => { // Boucle sur chaque store
-    //     if (product.store_id && store._id) { // Ne compare pas les undefined
-    //       if (product.store_id === store._id) { // Si store ID = store ID
-    //         ProductFilteredStoreId.push(store) // push dans ProductFilteredStoreId array
-    //       }
-    //     }
-    //   })   
-    // })   
+    // Matching store ID of products and store ID of stores
+    onProductFilter.forEach(product => { // Boucle sur chaque produit
+      this.state.listOfStores.forEach(store => { // Boucle sur chaque store
+        if (product.store_id && store._id) { // Ne compare pas les undefined
+          if (product.store_id === store._id) { // Si store ID = store ID
+            ProductFilteredStoreId.push(store) // push dans ProductFilteredStoreId array
+          }
+        }
+      })   
+    })   
 
     // Switch rendering regarding content of the search bar
     let renderedList;

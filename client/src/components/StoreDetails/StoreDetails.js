@@ -156,20 +156,23 @@ class StoreDetails extends React.Component {
           store: lookedUpStore.data,
           storeIsLoaded: true
         });
-      }).catch(err => console.log("Error on getting store details:", err))
+      })
+      // .then(() => {this.getBookedAppo()})
+      .catch(err => console.log("Error on getting store details:", err))
   }
 
   //GET BOOKED APPOINTMENTS
 
   getBookedAppo = () => {
-    const { params } = this.props.match;
-    axios.get(`http://localhost:5000/api/orders/${params.id}`)
+    let store = this.state.store._id
+    console.log("🏚 store/id=", store.id)
+    axios.get(`http://localhost:5000/api/orders/${store}`)
       .then(response => {
         const orders = response.data;
-        console.log(orders);
+        console.log("⏰ ORDERS from API=",orders);
 
       })
-      .match()
+      .match(err => console.log(err))
 
   }
 

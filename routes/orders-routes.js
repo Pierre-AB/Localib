@@ -36,7 +36,7 @@ ordersRoute.post('/orders', (req, res, next) => {
 // RETRIEVE APPOINTMENTS FOR A STORE
 
 ordersRoute.get('/orders/:id', (req, res, next) => {
-  Order.findOne({ store_id: req.params.id })
+  Order.find({ store_id: req.store.id })
     .then(response => {
       console.log("🍫 ORDER FROM DB=", response.data);
       res.status(200).json('ORDERS RETRIEVED')

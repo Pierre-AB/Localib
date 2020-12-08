@@ -51,7 +51,7 @@ class SearchList extends Component {
   // Bring the products data
   getProducts = () => {
     axios
-      .get(`http://localhost:5000/api/products`)
+      .get(`${process.env.REACT_APP_APIURL || ""}/api/products`)
       .then((productsFromDb) => {
         const allProducts = productsFromDb.data;
         this.setState({

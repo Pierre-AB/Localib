@@ -69,8 +69,17 @@ class AppointmentPicker extends React.Component {
     this.openingType()
     const timeClicked = this.state.timeClicked
 
+    function unclickedButton(event, time) {
+      event.stopPropagation() // unclick / release when we click on a button.
+      this.appointmentPick(time)
+    }
+
     return (
-      <div>
+      <div onClick={() => {
+        this.setState({
+          timeClicked: false
+        })
+      }}>
 
         <h3>Opening hours</h3>
 
@@ -81,15 +90,15 @@ class AppointmentPicker extends React.Component {
 
             <h2>Morning:</h2>
             {this.props.dayAvaiArr[0].map((time, index) => {
-              return <div>
-                <button key={index} onClick={() => this.appointmentPick(time)}>{time}</button>
+              return <div key={index}>
+                <button onClick={(event) => { unclickedButton(event, time) }}> {time}</button>
               </div>
             })}
 
             <h2>Afternoon:</h2>
             {this.props.dayAvaiArr[1].map((time, index) => {
-              return <div>
-                <button key={index} onClick={() => this.appointmentPick(time)}>{time}</button>
+              return <div key={index} >
+                <button onClick={(event) => { unclickedButton(event, time) }}>{time}</button>
               </div>
             })}
           </div>)
@@ -98,8 +107,8 @@ class AppointmentPicker extends React.Component {
               <div>
                 <p>Open from: {this.props.dayAvailibility.openAm} to {this.props.dayAvailibility.closeAm}</p>
                 {this.props.dayAvaiArr[0].map((time, index) => {
-                  return <div>
-                    <button key={index} onClick={() => this.appointmentPick(time)}>{time}</button>
+                  return <div key={index}>
+                    <button onClick={(event) => { unclickedButton(event, time) }}>{time}</button>
                   </div>
                 })}
               </div>

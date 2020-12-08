@@ -130,6 +130,7 @@ class StoreDetails extends React.Component {
 
   componentDidMount() {
     this.getSingleStore();
+
     // let now = dateName(new Date())
     // this.setState({ fullDayName: now })
     console.log(this.state.today);
@@ -156,8 +157,9 @@ class StoreDetails extends React.Component {
           store: lookedUpStore.data,
           storeIsLoaded: true
         });
+
+
       })
-      // .then(() => {this.getBookedAppo()})
       .catch(err => console.log("Error on getting store details:", err))
   }
 
@@ -165,14 +167,14 @@ class StoreDetails extends React.Component {
 
   getBookedAppo = () => {
     let store = this.state.store._id
-    console.log("🏚 store/id=", store.id)
-    axios.get(`http://localhost:5000/api/orders/${store}`)
+    console.log("🏚 store/id=", store._id)
+    axios.get(`http://localhost:5000/api/orders?storeId=${encodeURIComponent(store)}`)
       .then(response => {
         const orders = response.data;
-        console.log("⏰ ORDERS from API=",orders);
+        console.log("⏰ ORDERS from API=", orders);
 
       })
-      .match(err => console.log(err))
+      .catch(err => console.log(err))
 
   }
 
@@ -192,7 +194,7 @@ class StoreDetails extends React.Component {
         console.log(response)
         console.log("ORDER PASSED TO BACK");
       })
-      .match(err => console.log(err))
+      .catch(err => console.log(err))
 
 
   }

@@ -36,7 +36,7 @@ class StoresByCategory extends Component {
           latitude: lat,
           longitude: lng
         })
-        axios.get(`http://localhost:5000/api/stores/distances/${this.state.latitude},${this.state.longitude}/category/${this.props.category}`)
+        axios.get(`${process.env.REACT_APP_APIURL || ""}/api/stores/distances/${this.state.latitude},${this.state.longitude}/category/${this.props.category}`)
 
           .then(responseFromApi => {
             this.setState({

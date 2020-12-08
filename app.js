@@ -50,6 +50,9 @@ app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
+
+
+
 //SESSION
 // On aura besoin d'un "store" quand on sera en production.
 app.use(session({
@@ -81,6 +84,16 @@ app.use('/api', require('./routes/auth-routes'));
 app.use('/api', require('./routes/product-routes'));
 app.use('/api', require('./routes/orders-routes'));
 app.use('/api', require('./routes/store-routes'));
+
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+// For any other routes: serve client/build/index.html SPA
+app.use((req, res, next) => {
+  res.sendFile(`${__dirname}/client/build/index.html`), err => {
+    if (err) { next(err) }
+  }
+});
+
 
 
 

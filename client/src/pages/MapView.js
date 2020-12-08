@@ -8,6 +8,7 @@ import SearchBar from '../components/SearchBar'
 
 import SearchMap from '../components/Maps/MapFilters' // for desktop
 import MapFilters from '../components/Maps/searchAddress'// for mobile
+import FilteredMap from '../components/Maps/FilteredMap' // common for desktop & mobile
 
 
 class MapView extends Component {
@@ -36,13 +37,12 @@ class MapView extends Component {
   render() {
     return (
       <div className={`${this.state.isMobile ? "page-container-mobile" : "map-view page-container-desktop"}`}>
+
         {this.state.isMobile ? (
-          <>
-          <SearchBar fromMapQuery={this.state.query} fromMapUpdateQuery={this.updateQuery} />
-          <MapFilters />
-          </>
-        ) : (<SearchMap query={this.state.query} />)}
+          <SearchBar query={this.state.query} updateQuery={this.updateQuery} />
+        ) : ""}
         
+        <FilteredMap query={this.state.query} />
       </div>
     );
   }

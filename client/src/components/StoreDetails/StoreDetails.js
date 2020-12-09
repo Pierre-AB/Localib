@@ -120,6 +120,7 @@ class StoreDetails extends React.Component {
 
   state = {
     store: {},
+    orders: [],
     pickedDate: new Date(),
     today: new Date(),
     fullDayName: dateName(new Date()),
@@ -131,9 +132,11 @@ class StoreDetails extends React.Component {
   componentDidMount() {
     this.getSingleStore();
 
-    // let now = dateName(new Date())
-    // this.setState({ fullDayName: now })
-    console.log(this.state.today);
+    const day = new Date().getDay();
+    this.setState({
+      pickedDate: this.state.store.openingHours
+    })
+
   }
 
   //  $$$$$$\            $$\                                              $$\ $$\           
@@ -156,8 +159,7 @@ class StoreDetails extends React.Component {
         this.setState({
           store: lookedUpStore.data,
           storeIsLoaded: true
-        });
-
+        }, this.getBookedAppo);
 
       })
       .catch(err => console.log("Error on getting store details:", err))
@@ -168,17 +170,18 @@ class StoreDetails extends React.Component {
   getBookedAppo = () => {
     let store = this.state.store._id
     console.log("🏚 store/id=", store._id)
-    axios.get(`http://localhost:5000/api/orders?storeId=${encodeURIComponent(store)}`)
+    axios.get(`http://localhost:5000/api/orders?storeId=${encodeURIComponent(store)}`) // QUERY STRING
       .then(response => {
-        const orders = response.data;
-        console.log("⏰ ORDERS from API=", orders);
+        const ordersFromApi = response.data;
+        console.log("⏰ ORDERS from API=", ordersFromApi);
+        this.setState({
+          orders: ordersFromApi
+        })
 
       })
       .catch(err => console.log(err))
 
   }
-
-
 
 
   // CREATE ORDERS Here =  Appointment booking
@@ -376,3 +379,4 @@ class StoreDetails extends React.Component {
 }
 
 export default StoreDetails
+

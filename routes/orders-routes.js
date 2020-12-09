@@ -11,7 +11,7 @@ ordersRoute.get('/orders', (req, res, next) => {
   Order.find({ store_id: storeId })
     .then(response => {
       console.log("🍫 ORDER FROM DB=", response);
-      res.status(200).json('ORDERS RETRIEVED')
+      res.status(200).json(response)
     })
     .catch(err => { console.log("🥕", err) });
 

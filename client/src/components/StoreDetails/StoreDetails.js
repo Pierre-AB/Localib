@@ -228,6 +228,20 @@ class StoreDetails extends React.Component {
     - TBD
     */
 
+    const ordersOnPickedDate = this.state.orders.filter(order => {
+      const orderDate = new Date(order.appointmentDay) // need to translate the string into a date to apply a date related method
+      const selectedDate = this.state.pickedDate
+
+      // console.log("OrderDate=", orderDate);
+      // console.log("selectedDate=", selectedDate);
+      return orderDate.getFullYear() === selectedDate.getFullYear() && orderDate.getMonth() === selectedDate.getMonth() && orderDate.getDate() === selectedDate.getDate()
+
+    })
+
+    //Works but select the day before ????
+
+    console.log("ordersOnPickedDate=", ordersOnPickedDate)
+    console.log("this.state.pickedDate=", this.state.pickedDate)
   }
 
 
@@ -326,6 +340,7 @@ class StoreDetails extends React.Component {
     const storeIsLoaded = this.state.storeIsLoaded;
     const dayInfo = this.splitDay();
 
+    if (this.state.orders.length > 0 && this.state.pickedDate) { this.drawAvailability(); }
 
 
     return (

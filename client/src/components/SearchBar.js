@@ -1,10 +1,26 @@
-import React, { Component } from 'react';
+import React, {  useState, Component } from 'react';
 import './SearchBar.css';
 import { FaFilter } from "react-icons/fa";
 import PlacesAutocomplete from '../components/Maps/PlacesAutocomplete'
 
 
 function SearchBar(props) {
+
+const [addressValue, setAddressValue] = useState("")
+
+ const sendAddressToParent = (event, addressValue) => {
+    props.handleSelect(addressValue);
+    event.preventDefault();
+}
+
+const sendHandleSelection = (event) => {
+  props.handleChange(addressValue);
+  event.preventDefault();
+}
+
+const updateState = (addressValue) => {
+  setAddressValue(addressValue)
+}
 
   const renderInput = ({ getInputProps, getSuggestionItemProps, suggestions }) => (
     <div className="autocomplete-root" >
@@ -26,13 +42,12 @@ function SearchBar(props) {
           <div className="searchbar-place-input-wrapper">
             <div>
               <svg width="16" height="16" viewBox="0 0 16 16" className="searchbar-input-icon"><path fillRule="evenodd" clipRule="evenodd" d="M8 1.6a4.8 4.8 0 00-4.797 4.62L3.2 6.4c0 1.778.6 2.334 3.782 7.436a1.2 1.2 0 002.036 0l.952-1.516c2.307-3.648 2.81-4.31 2.83-5.824V6.4A4.8 4.8 0 008 1.6zm0 11.6L5.568 9.34C4.575 7.737 4.4 7.289 4.4 6.4a3.6 3.6 0 017.196-.17l.004.17c0 1.364-.38 1.636-3.6 6.8zM6 6.4a2 2 0 114 0 2 2 0 01-4 0z"></path></svg>
-                <input className="searchbar-input" placeholder="My address"/>
+                {/* <input className="searchbar-input" placeholder="My address"/> */}
                 <PlacesAutocomplete
                   className="searchbar-input"
-                  value={this.state.addressValue}
-                  onChange={addressValue => {this.setState({ addressValue })}}
-                  onSelect={this.handleSelect}
-                  onError={onError}
+                  value={(addressValue) => {updateState(addressValue)}}
+                  onChange={(e, addressValue) => {sendAddressToParent({ e, addressValue})}}
+                  onSelect={(e) => {sendHandleSelection(e)}}
                   searchOptions={{componentRestrictions: { country: ['fr'] }}
                   }
                 >

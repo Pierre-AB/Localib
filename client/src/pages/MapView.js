@@ -83,10 +83,22 @@ class MapView extends Component {
   };
 
   render() {
+    const {query, latitude, longitude, addresseSearched, listOfStores} = this.state;
     return (
       <div className={`${this.state.isMobile ? "page-container-mobile" : "map-view page-container-desktop"}`}>
-        <SearchBar query={this.state.query} updateQuery={this.updateQuery} />
-        <FilteredMap query={this.state.query} />
+        <SearchBar 
+        query={this.state.query} 
+        updateQuery={this.updateQuery} 
+        handleSelect={this.handleSelect}
+        handleChange={this.handleChange}
+        />
+        <FilteredMap 
+        query={query}
+        searchedLatitude={latitude}
+        searchedLongitude={longitude}
+        addresseSearched={addresseSearched}
+        listOfStores={listOfStores}
+         />
       </div>
     );
   }

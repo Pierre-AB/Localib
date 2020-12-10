@@ -95,7 +95,7 @@ function timeSlotCalc(openingTime, closingTime, timeStep) {
     startTime = slot + timeStep
   }
 
-  console.log("🥇 timeSlotArray =", timeSlotArray)
+  // console.log("🥇 timeSlotArray =", timeSlotArray)
 
   return timeSlotArray;
 }
@@ -126,7 +126,8 @@ class StoreDetails extends React.Component {
     fullDayName: dateName(new Date()),
     dayAvailibility: {},
     storeIsLoaded: false,
-    timeSlot: 15
+    timeSlot: 15,
+    nonAvaiTime:[]
   }
 
   componentDidMount() {
@@ -153,7 +154,7 @@ class StoreDetails extends React.Component {
 
   getSingleStore = () => {
     const { params } = this.props.match;
-    console.log("params", params)
+    // console.log("params", params)
     axios.get(`http://localhost:5000/api/stores/${params.id}`)
       .then(lookedUpStore => {
         this.setState({
@@ -169,7 +170,7 @@ class StoreDetails extends React.Component {
 
   getBookedAppo = () => {
     let store = this.state.store._id
-    console.log("🏚 store/id=", store._id)
+    // console.log("🏚 store/id=", store._id)
     axios.get(`http://localhost:5000/api/orders?storeId=${encodeURIComponent(store)}`) // QUERY STRING
       .then(response => {
         const ordersFromApi = response.data;
@@ -188,14 +189,14 @@ class StoreDetails extends React.Component {
 
   createOrder = (time) => {
     const store_id = this.state.store._id;
-    const appointmentDay = this.state.pickedDate;
+    const appointmentDay = `${this.state.pickedDate.getFullYear()}-${this.state.pickedDate.getMonth() + 1}-${this.state.pickedDate.getDate()}`; // Record in server the date in a string format to avoid time offset due to local time from the browser
     const appointmentTime = time;
     const status = "confirmed"
 
     axios.post('http://localhost:5000/api/orders', { store_id, appointmentDay, appointmentTime, status })
       .then(response => {
-        console.log(response)
-        console.log("ORDER PASSED TO BACK");
+        // console.log(response)
+        // console.log("ORDER PASSED TO BACK");
       })
       .catch(err => console.log(err))
 
@@ -214,31 +215,21 @@ class StoreDetails extends React.Component {
 
   // Show only available timeslot
   drawAvailability = () => {
-    /* 
-    1st Solution:
-    - order is created with store_id
-    - Load with the component the list of appointment available from the store.
-    - filter the appointments booked and DO NOT render them
-    - each time a new appointment is booked, the list of availability should be refreshed
-    
-    2nd Solution:
-    - API called each time a render is made.
-    
-    3rd Solution:
-    - TBD
-    */
 
-    const ordersOnPickedDate = this.state.orders.filter(order => {
+    // once all the orders from the selected store have been retrieved, filter the one matching with the pickedDate (clicked on the calendar)
+      const ordersOnPickedDate = this.state.orders.filter(order => {
       const orderDate = new Date(order.appointmentDay) // need to translate the string into a date to apply a date related method
       const selectedDate = this.state.pickedDate
 
-      // console.log("OrderDate=", orderDate);
-      // console.log("selectedDate=", selectedDate);
       return orderDate.getFullYear() === selectedDate.getFullYear() && orderDate.getMonth() === selectedDate.getMonth() && orderDate.getDate() === selectedDate.getDate()
 
     })
 
-    //Works but select the day before ????
+    // if ordersOnPickedDate is empty skip this part
+    if (ordersOnPickedDate.length > 1){
+      
+
+    }
 
     console.log("ordersOnPickedDate=", ordersOnPickedDate)
     console.log("this.state.pickedDate=", this.state.pickedDate)
@@ -260,11 +251,11 @@ class StoreDetails extends React.Component {
       open.day === matchDay
     )
 
-    console.log("avaiForPickedDay[0]=", avaiForPickedDay[0])
-    console.log("avaiForPickedDay=", avaiForPickedDay)
+    // console.log("avaiForPickedDay[0]=", avaiForPickedDay[0])
+    // console.log("avaiForPickedDay=", avaiForPickedDay)
     // let todayAvail = this.state.store.openingHours[matchDay];
 
-    console.log('DayOffset=', dayOffset.days)
+    // console.log('DayOffset=', dayOffset.days)
 
     if (dayOffset.days === -1) {
       dayString = 'Today'
@@ -313,7 +304,7 @@ class StoreDetails extends React.Component {
       dayAvaiArr.push(morningAvaiSlotNum);
     }
 
-    console.log("dayAvaiArr=", dayAvaiArr)
+    // console.log("dayAvaiArr=", dayAvaiArr)
 
 
     return dayAvaiArr;
@@ -339,6 +330,8 @@ class StoreDetails extends React.Component {
 
     const storeIsLoaded = this.state.storeIsLoaded;
     const dayInfo = this.splitDay();
+
+    console.log('🚨 this.state.pickedDate=', this.state.pickedDate)
 
     if (this.state.orders.length > 0 && this.state.pickedDate) { this.drawAvailability(); }
 

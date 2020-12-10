@@ -134,7 +134,7 @@ class StoreDetails extends React.Component {
   getSingleStore = () => {
     const { params } = this.props.match;
     console.log("params", params)
-    axios.get(`http://localhost:5000/api/stores/${params.id}`)
+    axios.get(`${process.env.REACT_APP_APIURL || ""}/api/stores/${params.id}`)
       .then(lookedUpStore => {
         this.setState({
           store: lookedUpStore.data,

@@ -54,17 +54,17 @@ const mobileNav = [{
 // Display nav
 function Navigation (props) {
 
-  // Test URL to hide searchbar component on the nav
-  function DisplaySearchBar() {
-    let match = useRouteMatch("/mapView");
+  // // Test URL to hide searchbar component on the nav
+  // function DisplaySearchBar() {
+  //   let match = useRouteMatch("/mapView");
   
-    if (match) {
-      // If URL match
-      return <SearchBar query={props.query} updateQuery={props.updateQuery} />;
-    } else {
-      return <div />
-    }
-  }
+  //   if (match) {
+  //     // If URL match
+  //     return <SearchBar query={props.query} updateQuery={props.updateQuery} />;
+  //   } else {
+  //     return <div />
+  //   }
+  // }
 
   return(
     <>
@@ -74,14 +74,13 @@ function Navigation (props) {
           <Link to='/' className="navbar-logo">
             <Logo />
           </Link>
-          <DisplaySearchBar />
+          {/* <DisplaySearchBar /> */}
           <div className="nav-menu">
             <ul>
               <li className="nav-link"><Link to='/home'>Home</Link></li>
               <li className="nav-link"><Link to='/mapView'>Stores</Link></li>
               <li className="nav-link"><Link to='/cart'>Cart</Link></li>
               <li className="nav-link"><Link to='/userSettings'>Settings</Link></li>
-              
             </ul>
           </div>
         </div>

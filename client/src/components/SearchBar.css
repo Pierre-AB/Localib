@@ -1,6 +1,5 @@
 .SearchBar {
   width: auto;
-  min-width: 600px;
   height: 40px;
   border-radius: 10px;
   box-shadow: 0 0 20px 0 rgba(67,95,113,0.2);
@@ -13,6 +12,16 @@
   display: -webkit-flex;
   display: -ms-flexbox;
 }
+
+@media (min-width: 992px) {
+  .searchbar-desktop-position {
+    position: absolute;
+    min-width: 600px;
+    top: 24px;
+    left: 290px;
+  }
+}
+
 
 .SearchBar svg {
   fill: var(--blue-grey);

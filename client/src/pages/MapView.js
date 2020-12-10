@@ -41,11 +41,7 @@ class MapView extends Component {
   render() {
     return (
       <div className={`${this.state.isMobile ? "page-container-mobile" : "map-view page-container-desktop"}`}>
-
-        {this.state.isMobile ? (
-          <SearchBar query={this.state.query} updateQuery={this.updateQuery} />
-        ) : ""}
-        
+        <SearchBar query={this.state.query} updateQuery={this.updateQuery} />
         <FilteredMap query={this.state.query} />
       </div>
     );

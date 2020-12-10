@@ -231,7 +231,7 @@ class MapContainerSearchFilter extends React.Component{
     // RENDER DE PAGE
     return (
       <div>
-        <PlacesAutocomplete
+        {/* <PlacesAutocomplete
           className="search-container SearchBar"
           value={this.state.addressValue}
           onChange={addressValue => {this.setState({ addressValue })}}
@@ -241,7 +241,7 @@ class MapContainerSearchFilter extends React.Component{
           }
         >
         {renderInput}
-        </PlacesAutocomplete>
+        </PlacesAutocomplete> */}
 
 
         {/* DIV englobante générale */}

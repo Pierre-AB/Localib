@@ -213,42 +213,6 @@ class StoreDetails extends React.Component {
   // \__|       \______/ \__|  \__| \_______|   \____/ \__| \______/ \__|  \__|\_______/ 
 
 
-  // Show only available timeslot
-  drawAvailability = () => {
-
-    var nonAvaiTimeArr = []
-
-
-    // once all the orders from the selected store have been retrieved, filter the one matching with the pickedDate (clicked on the calendar)
-    const ordersOnPickedDate = this.state.orders.filter(order => {
-      const orderDate = new Date(order.appointmentDay) // need to translate the string into a date to apply a date related method
-      const selectedDate = this.state.pickedDate
-      return orderDate.getFullYear() === selectedDate.getFullYear() && orderDate.getMonth() === selectedDate.getMonth() && orderDate.getDate() === selectedDate.getDate()
-
-    })
-
-    // if ordersOnPickedDate is empty skip this part
-    if (ordersOnPickedDate.length > 1) {
-      ordersOnPickedDate.map(el => {
-        nonAvaiTimeArr.push(el)
-      })
-      this.setState({
-        nonAvaiTime: nonAvaiTimeArr
-      })
-
-    } else {
-      this.setState({
-        nonAvaiTime: nonAvaiTimeArr
-      })
-
-    }
-
-    console.log("ordersOnPickedDate=", ordersOnPickedDate)
-    console.log("this.state.pickedDate=", this.state.pickedDate)
-  }
-
-
-
 
   // GET SELECTED DAY WRITTEN && SELECTED DAY AVAILABILITY
 
@@ -267,23 +231,54 @@ class StoreDetails extends React.Component {
       dayString = 'Today'
     }
 
-
-
-
-
-
-
-
     this.setState({
       pickedDate: clickedDate,
       fullDayName: dayString,
       dayAvailibility: avaiForPickedDay[0]
-    }, this.splitDay);
+    }, this.drawAvailability);
 
 
   }
 
 
+  // Show only available timeslot
+  drawAvailability = () => {
+
+    var nonAvaiTimeArr = []
+
+
+    // once all the orders from the selected store have been retrieved, filter the one matching with the pickedDate (clicked on the calendar)
+    const ordersOnPickedDate = this.state.orders.filter(order => {
+      const orderDate = new Date(order.appointmentDay) // need to translate the string into a date to apply a date related method
+      const selectedDate = this.state.pickedDate
+      return orderDate.getFullYear() === selectedDate.getFullYear() && orderDate.getMonth() === selectedDate.getMonth() && orderDate.getDate() === selectedDate.getDate()
+
+    })
+
+    // if ordersOnPickedDate is empty skip this part
+    if (ordersOnPickedDate.length > 0) {
+      //Get an array of Timing to put on grey color.
+      nonAvaiTimeArr = ordersOnPickedDate.map(el => {
+        return el.appointmentTime
+      })
+      this.setState({
+        nonAvaiTime: nonAvaiTimeArr
+      })
+
+    } else {
+      this.setState({
+        nonAvaiTime: nonAvaiTimeArr
+      })
+
+    }
+
+    console.log("ordersOnPickedDate=", ordersOnPickedDate)
+    console.log("this.state.pickedDate=", this.state.pickedDate)
+    console.log("this.state.nonAvaiTime=", this.state.nonAvaiTime)
+  }
+
+  // Triggered after HandleChange setState line 274. 
+  // SplitDay calc number of store
   splitDay = () => {
     let dayAvaiArr = [];
 
@@ -344,6 +339,8 @@ class StoreDetails extends React.Component {
     const storeIsLoaded = this.state.storeIsLoaded;
     const dayInfo = this.splitDay();
 
+    const nonAvaiTime = this.state.nonAvaiTime;
+
     console.log('🚨 this.state.pickedDate=', this.state.pickedDate)
 
     // if (this.state.orders.length > 0 && this.state.pickedDate) { this.drawAvailability()}
@@ -385,7 +382,14 @@ class StoreDetails extends React.Component {
 
           {storeIsLoaded ? (
             <div>
-              <AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} dayAvailibility={this.state.dayAvailibility} dayAvaiArr={dayInfo} createOrder={this.createOrder} />
+              <AppointmentPicker
+                store={this.state.store}
+                pickedDate={this.state.pickedDate}
+                dayAvailibility={this.state.dayAvailibility}
+                dayAvaiArr={dayInfo}
+                createOrder={this.createOrder}
+                nonAvaiTime={nonAvaiTime}
+              />
               <StoreMap store={this.state.store} />
             </div>
           )

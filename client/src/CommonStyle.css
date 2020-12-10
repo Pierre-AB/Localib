@@ -175,12 +175,14 @@ button:hover {
   flex-wrap: wrap;
   align-content: center;
   align-items: center;
-  justify-content: space-between;
+  justify-content:flex-start;
 }
 
-.nearby-container-desktop .nearby-card-desktop {
-  margin-right: 1.3em;
-  margin-bottom: 1.3em;
+.nearby-card-desktop-container {
+  margin: 1.3em 1.3em 0 0; 
+  position: relative;
+  height: 215px;
+  border-radius: 15px;
 }
 
 .nearby-section-mobile {

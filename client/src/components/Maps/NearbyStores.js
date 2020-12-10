@@ -77,7 +77,7 @@ class NearbyStores extends Component {
           
           return (
             <Link to={`/storeDetails/${store._id}`} >
-              <div key={store._id} className={`${this.state.isMobile ? "nearby-card-mobile" : "nearby-card-desktop"}`} style={this.state.isMobile ? { backgroundImage:`linear-gradient(0deg, rgba(29, 29, 29, 0.5), rgba(29, 29, 29, 0.2)), url(${background})` } : {}} >
+              <div key={store._id} className={`${this.state.isMobile ? "nearby-card-mobile" : "nearby-card-desktop-container"}`} style={this.state.isMobile ? { backgroundImage:`linear-gradient(0deg, rgba(29, 29, 29, 0.5), rgba(29, 29, 29, 0.2)), url(${background})` } : {}} >
                 {this.state.isMobile ? "" : (<img className="nearby-card-desktop" src={`${background}`} />)}
                 <div className={`${this.state.isMobile ? "nearby-store-info-mobile" : "nearby-store-info-desktop"}`}>
                   <h4 className="nearby-store-title">{store.fullName}</h4>

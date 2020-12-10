@@ -20,7 +20,9 @@ import FilteredMap from '../components/Maps/FilteredMap' // common for desktop &
 
 
 class MapView extends Component {
-  state = {
+  constructor(props) {
+    super(props);
+    this.state = {
     query: '',
     isMobile: false,
     addressValue: "",
@@ -28,8 +30,9 @@ class MapView extends Component {
     latitude: "", 
     longitude: "", 
     listOfStores: [],
+    mapLoaded: false
   }
-
+}
   updateQuery = (newValue) => {
     this.setState({query: newValue});
   }
@@ -82,8 +85,17 @@ class MapView extends Component {
       })
   };
 
+  searchAroundMe = () => {
+    this.setState({
+      latitude: "",
+      longitude: "",
+      addresseSearched: false
+    })
+  }
+
+
   render() {
-    const {query, latitude, longitude, addresseSearched, listOfStores} = this.state;
+    const {query, latitude, longitude, addresseSearched, listOfStores, addressValue, mapLoaded} = this.state;
     return (
       <div className={`${this.state.isMobile ? "page-container-mobile" : "map-view page-container-desktop"}`}>
         <SearchBar 
@@ -91,6 +103,7 @@ class MapView extends Component {
         updateQuery={this.updateQuery} 
         handleSelect={this.handleSelect}
         handleChange={this.handleChange}
+        searchAroundMe={this.searchAroundMe}
         />
         <FilteredMap 
         query={query}
@@ -98,6 +111,8 @@ class MapView extends Component {
         searchedLongitude={longitude}
         addresseSearched={addresseSearched}
         listOfStores={listOfStores}
+        addressValue={addressValue}
+        mapLoaded={mapLoaded}
          />
       </div>
     );

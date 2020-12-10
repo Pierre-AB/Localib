@@ -17,17 +17,17 @@ class MapContainerSearchFilter extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      listOfStores: [], // for stores
+      listOfStores: this.props.listOfStores, // for stores
       listOfProducts: [],
-      latitude: "", // avant de récupérer l'information de la recherche
-      longitude: "", // avant de récupérer l'information de la recherche
+      latitude: this.props.searchedLatitude, // avant de récupérer l'information de la recherche
+      longitude: this.props.searchedLongitude, // avant de récupérer l'information de la recherche
       selected: null,
-      mapLoaded: false,
+      mapLoaded: this.props.mapLoaded,
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
-      addresseSearched: false,
-      addressValue: "",
+      addresseSearched: this.props.addresseSearched,
+      addressValue: this.props.addressValue,
       isMobile: false
     };
     // this.searchLocation = this.searchLocation.bind(this);
@@ -96,34 +96,7 @@ class MapContainerSearchFilter extends React.Component{
     this.setState({ address });
   };
  
-  handleSelect = address => {
-    this.setState({ 
-      addressValue: address,
-      addresseSearched: false
-     });
-    geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
-      .then((pos) => {
-        // pour récupérer les coordinates
-        const lat = pos.lat
-        const lng = pos.lng
-        console.log('success geoloc 🗺', pos)
-        // if success
-        this.setState({
-          latitude: lat,
-          longitude: lng,
-          addresseSearched: true
-        })
-        // on appel la DB pour récupérer les stores à partir de latitude et longitude
-        axios.get(`${process.env.REACT_APP_APIURL || ""}/api/stores/distances/${this.state.latitude},${this.state.longitude}`)
-        // On ajoute les stores au state pour les utiliser dans le render
-        .then(responseFromApi => {
-          this.setState({
-            listOfStores: responseFromApi.data            
-          })
-        })
-      })
-  };
+
 
   componentDidMount() {
     this.askLocation()
@@ -223,26 +196,14 @@ class MapContainerSearchFilter extends React.Component{
     let renderedList;
 
     if (this.props.query.length !== "") {
-      renderedList = [...onNameFilter /*, ...ProductFilteredStoreId*/]
+      renderedList = [...onNameFilter, ...ProductFilteredStoreId]
     } else { // Par défaut, renvoie full listOfStores
       renderedList = this.state.listOfStores
-    }
+    } 
 
     // RENDER DE PAGE
     return (
       <div>
-        {/* <PlacesAutocomplete
-          className="search-container SearchBar"
-          value={this.state.addressValue}
-          onChange={addressValue => {this.setState({ addressValue })}}
-          onSelect={this.handleSelect}
-          onError={onError}
-          searchOptions={{componentRestrictions: { country: ['fr'] }}
-          }
-        >
-        {renderInput}
-        </PlacesAutocomplete> */}
-
 
         {/* DIV englobante générale */}
         <div className="flex">
@@ -287,12 +248,12 @@ class MapContainerSearchFilter extends React.Component{
                     this.onMapClicked
                   }
                   initialCenter={{ 
-                    lat: this.state.latitude,  
-                    lng: this.state.longitude
+                    lat: this.props.latitude,  
+                    lng: this.props.longitude
                   }}
                   center={{
-                    lat: this.state.latitude,  
-                    lng: this.state.longitude
+                    lat: this.props.searchedLatitude || this.state.latitude,
+                    lng: this.props.searchedLongitude || this.state.longitude 
                   }}
                 >
                 {renderedList.map(store => {

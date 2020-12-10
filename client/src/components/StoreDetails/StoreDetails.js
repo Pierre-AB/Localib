@@ -127,7 +127,7 @@ class StoreDetails extends React.Component {
     dayAvailibility: {},
     storeIsLoaded: false,
     timeSlot: 15,
-    nonAvaiTime:[]
+    nonAvaiTime: []
   }
 
   componentDidMount() {
@@ -216,18 +216,30 @@ class StoreDetails extends React.Component {
   // Show only available timeslot
   drawAvailability = () => {
 
+    var nonAvaiTimeArr = []
+
+
     // once all the orders from the selected store have been retrieved, filter the one matching with the pickedDate (clicked on the calendar)
-      const ordersOnPickedDate = this.state.orders.filter(order => {
+    const ordersOnPickedDate = this.state.orders.filter(order => {
       const orderDate = new Date(order.appointmentDay) // need to translate the string into a date to apply a date related method
       const selectedDate = this.state.pickedDate
-
       return orderDate.getFullYear() === selectedDate.getFullYear() && orderDate.getMonth() === selectedDate.getMonth() && orderDate.getDate() === selectedDate.getDate()
 
     })
 
     // if ordersOnPickedDate is empty skip this part
-    if (ordersOnPickedDate.length > 1){
-      
+    if (ordersOnPickedDate.length > 1) {
+      ordersOnPickedDate.map(el => {
+        nonAvaiTimeArr.push(el)
+      })
+      this.setState({
+        nonAvaiTime: nonAvaiTimeArr
+      })
+
+    } else {
+      this.setState({
+        nonAvaiTime: nonAvaiTimeArr
+      })
 
     }
 
@@ -251,15 +263,16 @@ class StoreDetails extends React.Component {
       open.day === matchDay
     )
 
-    // console.log("avaiForPickedDay[0]=", avaiForPickedDay[0])
-    // console.log("avaiForPickedDay=", avaiForPickedDay)
-    // let todayAvail = this.state.store.openingHours[matchDay];
-
-    // console.log('DayOffset=', dayOffset.days)
-
     if (dayOffset.days === -1) {
       dayString = 'Today'
     }
+
+
+
+
+
+
+
 
     this.setState({
       pickedDate: clickedDate,
@@ -333,7 +346,7 @@ class StoreDetails extends React.Component {
 
     console.log('🚨 this.state.pickedDate=', this.state.pickedDate)
 
-    if (this.state.orders.length > 0 && this.state.pickedDate) { this.drawAvailability(); }
+    // if (this.state.orders.length > 0 && this.state.pickedDate) { this.drawAvailability()}
 
 
     return (

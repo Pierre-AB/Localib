@@ -72,7 +72,7 @@ class MapView extends Component {
         this.setState({
           latitude: lat,
           longitude: lng,
-          addresseSearched: true
+          addresseSearched: true // in order to recharge the map
         })
         // on appel la DB pour récupérer les stores à partir de latitude et longitude
         axios.get(`${process.env.REACT_APP_APIURL || ""}/api/stores/distances/${this.state.latitude},${this.state.longitude}`)

@@ -62,6 +62,7 @@ class Home extends Component {
             <StoresByCategory title="Epicerie et boissons" category="Epicerie-et-boissons"/>
             {/* <StoresByCategory title="Informatique" category="Informatique"/>
             <StoresByCategory title="Puériculture et jouets" category="Puériculture-et-jouets"/>
+            <StoresByCategory title="Maison et décoration" category="Maison-et-déco"/>
             <StoresByCategory title="Bricolage" category="Bricolage"/>
             <StoresByCategory title="Beauté, santé et bien-être" category="Beauté-santé-et-bien-être"/>
             <StoresByCategory title="Vêtements, chaussures et bijoux" category="Vêtements-chaussures-bijoux"/>

@@ -20,7 +20,7 @@ function SearchBar(props) {
   );
 
   return (
-    <div className="SearchBar">
+    <div className="SearchBar searchbar-desktop-position">
       <div className="searchbar-place-submit">
         <div className="searchbar-place">
           <div className="searchbar-place-input-wrapper">

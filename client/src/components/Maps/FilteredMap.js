@@ -248,7 +248,7 @@ class MapContainerSearchFilter extends React.Component{
         <div className="flex">
 
           {/* DIV avec la liste des stores */}
-          <div className="vertical-scroll-container">
+          <div style={this.state.isMobile ? {display:"none"} : {display:"block"}} className="vertical-scroll-container">
 
           {/* Loading stores message */}
           {renderedList.length <= 0 && <ThreeDots width="30" />}

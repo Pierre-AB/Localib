@@ -22,6 +22,11 @@
   }
 }
 
+@media (max-width: 992px) {
+  .mobile-address-input {
+    display: none;
+  }
+}
 
 .SearchBar svg {
   fill: var(--blue-grey);

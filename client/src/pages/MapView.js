@@ -6,8 +6,8 @@ import StoresList from '../components/Maps/storesList'
 
 import SearchBar from '../components/SearchBar'
 
-import SearchMap from '../components/Maps/MapFilters' // for desktop
-import MapFilters from '../components/Maps/searchAddress'// for mobile
+// import SearchMap from '../components/Maps/MapFilters' // for desktop
+// import MapFilters from '../components/Maps/searchAddress'// for mobile
 import Navigation from '../components/Navigation'
 
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
-import mapStyles from "./mapStyles";
+import mapStyles from "../mapStyles";
 import '../SearchBar.css';
 
 
@@ -101,7 +101,7 @@ class SearchMapList extends Component {
     // Let's filter the name before rendering 
     const onNameFilter = this.state.listOfStores.filter(store => {
       // does the store's name matches the query ?
-      const matchName = (store.fullName).toLowerCase().includes((this.props.query).toLowerCase());
+      const matchName = store.fullName && store.fullName.toLowerCase().includes(this.props.query.toLowerCase());
       return matchName;
     })
 
@@ -113,7 +113,7 @@ class SearchMapList extends Component {
 
     const onProductFilter = this.state.listOfProducts.filter(product => { // [array de store ID contenant camemberts]
       // does the store's have the product match in the query ?
-      const matchProduct = (product.name).toLowerCase().includes((this.props.query).toLowerCase());
+      const matchProduct = product.name && product.name.toLowerCase().includes(this.props.query.toLowerCase());
       return matchProduct;
     })
 

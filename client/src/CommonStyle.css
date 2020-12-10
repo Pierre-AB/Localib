@@ -163,7 +163,7 @@ button:hover {
   flex-direction: column;
   overflow-x: auto;
   flex-wrap: nowrap;
-  margin: 0 -1.3em;
+  margin: 0 -1.3em 0 0;
 }
 
 .vertical-category-container {

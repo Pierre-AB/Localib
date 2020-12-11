@@ -50,7 +50,7 @@ router.get('/products/:id', (req, res, next) => {
  */
 
  router.post('/products', fileUploader.single('image'), (req, res, next) => {
-  const { store_id, name, description, picture, price, category,Tags } = req.body;
+  const { store_id, name, description, price, category,Tags } = req.body;
 
   let picture;
   if (req.file) {

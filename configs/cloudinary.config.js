@@ -11,7 +11,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: { 
-    folder: 'lolalib', 
+    folder: 'localib', 
     allowedFormats: ['jpg', 'png'],
     public_id: (req, file) => file.originalname 
   }

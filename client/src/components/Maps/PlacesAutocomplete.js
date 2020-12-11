@@ -12,7 +12,8 @@ import {
 import axios from 'axios';
 
 
-const apiKey = "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM" 
+//const apiKey = "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM" 
+const apiKey = `${process.env.REACT_APP_GOOGLE_MAP_API_KEY}` 
 
 
 class PlacesAutocomplete extends React.Component {

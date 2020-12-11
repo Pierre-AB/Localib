@@ -4,8 +4,8 @@ import { FaFilter } from "react-icons/fa";
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { GoogleApiWrapper } from 'google-maps-react';
 
-const apiKey = "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM" // process.env.GOOGLE_MAPS_API_KEY; // "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM"
-
+//const apiKey = "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM" 
+const apiKey = `${process.env.REACT_APP_GOOGLE_MAP_API_KEY}`
 
 class SearchBar extends React.Component {
   constructor(props) {

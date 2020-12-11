@@ -1,5 +1,7 @@
 const express = require('express');
 const authRoutes = express.Router();
+const fileUploader = require('../configs/cloudinary.config');
+
 
 const bcrypt = require('bcryptjs');
 const User = require('../models/user-model');
@@ -12,7 +14,7 @@ const User = require('../models/user-model');
 // ##    ##  ##  ##    ##  ##   ###         ##     ## ##        
 //  ######  ####  ######   ##    ##          #######  ##        
 
-authRoutes.post('/signup', (req, res, next) => {
+authRoutes.post('/signup', fileUploader.single('image'), (req, res, next) => {
 
   const { email, password, type, fullName, address, zip, geoloc, phone, description, openingHours, picture, siret, numVAT, businessType } = req.body;
 
@@ -84,7 +86,7 @@ authRoutes.post('/signup', (req, res, next) => {
     phone,
     description,
     openingHours,
-    picture,
+    picture: req.file && req.file.path || 'https://res.cloudinary.com/dbsnbga7z/image/upload/v1602449425/Ironring/Profile_cssetb.png',
     siret,
     numVAT,
     businessType

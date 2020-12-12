@@ -34,7 +34,7 @@
 }
 
 .bottom-detail-section h3 {
-  margin: 0 0 1em;
+  margin: 0 0 1.3em;
 }
 
 .bottom-detail-section p {
@@ -76,4 +76,151 @@ hr {
   color: var(--border);
   background-color: var(--border);
   border: 0;
+}
+
+
+/* CALENDAR */
+
+.pickRDV h3 {
+  color: var(--blue-grey);
+}
+
+.react-calendar {
+  background: var(--accent-color);
+  width: 100vw;
+  margin: 0 0 0 -1.3em;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.react-calendar__tile {
+  /* height: 100px;
+  width: 100px; */
+}
+
+button.react-calendar__tile.react-calendar__tile--active.react-calendar__tile--range.react-calendar__tile--rangeStart.react-calendar__tile--rangeEnd.react-calendar__tile--rangeBothEnds.react-calendar__month-view__days__day {
+  color: white;
+  font-weight: bolder;
+}
+
+.react-calendar__month-view__days__day:nth-child(10) {
+  color: yellow;
+}
+
+.react-calendar__month-view__days {
+  width: 100px;
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden; 
+  flex-wrap: nowrap !important;
+  width: 100vw;
+  margin: 0 auto 1em;
+  padding-top: 0;
+}
+
+.react-calendar__month-view__days > button {
+  background: transparent;
+  text-align: center;
+  min-width: 86px;
+  margin-top: 0;
+  padding: 1em auto 2em;
+}
+
+.react-calendar__month-view__days > button::before {
+  content: "";
+}
+
+.react-calendar__month-view__weekdays {
+  display: none !important;
+}
+
+button.react-calendar__navigation__arrow.react-calendar__navigation__prev2-button, button.react-calendar__navigation__arrow.react-calendar__navigation__next2-button {
+  display: none;
+}
+
+button.react-calendar__navigation__arrow.react-calendar__navigation__prev-button::before, button.react-calendar__navigation__arrow.react-calendar__navigation__next-button::before {
+  content: "";
+}
+
+.react-calendar__navigation {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+button.react-calendar__navigation__label, button.react-calendar__navigation__arrow.react-calendar__navigation__next-button, button.react-calendar__navigation__arrow.react-calendar__navigation__prev-button {
+  text-align: center;
+  margin: 1em 0 0 0;
+}
+
+button.react-calendar__navigation__label::before {
+  content: "";
+}
+
+button.react-calendar__tile.react-calendar__month-view__days__day {
+  margin-left: 0 !important;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.weekDayName {
+  margin-bottom: 0.5em;
+  font-size: .7em;
+  color: inherit;
+}
+
+.opening-hours-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 0 0 -1.3em;
+  padding: 1.3em;
+  font-size: .8em;
+  background: white;
+  width: 100vw;
+  height: 40px;
+}
+
+.opening-hours-container h3 {
+  margin: 0 1em 0 0;
+}
+
+.opening-hours {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.appointmentPickerContainer {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1em;
+}
+
+.appointmentPickerBtn::before {
+  content: "";
+}
+
+.appointmentPickerBtn {
+  width: 100%;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background-color: transparent;
+  color: var(--blue-grey);
+  font-weight: normal;
+}
+
+.appointmentPickerBtnDiv {
+  width: 20%;
 }

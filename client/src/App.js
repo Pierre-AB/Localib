@@ -18,6 +18,7 @@ import UserSettings from './pages/UserSettings';
 
 // import pages for Login, Sign up & Log out
 import Signup from './components/auth/Signup'
+import Login from './components/auth/Login'
 
 
 // import service
@@ -68,11 +69,17 @@ class App extends React.Component {
     })
   }
 
+  // COMMENT FAIRE POUR LA LIGNE 89 ????
+
 
   render() {
     return (
       <div className="App">
-        <Navigation query={this.state.query} updateQuery={this.updateQuery} />
+        <Navigation
+          query={this.state.query}
+          updateQuery={this.updateQuery}
+          loggedInUser={this.state.loggedInUser}
+        />
         <Switch>
           {/* Splash Screen */}
           <Route exact path="/" component={Splash} />
@@ -91,7 +98,7 @@ class App extends React.Component {
 
           {/* Login & signup */}
           <Route exact path="/signup" render={() => <Signup updateUser={this.updateLoggedInUser} />} />
-          {/* <Route exact path="/login" render={() => <Login updateUser={this.updateLoggedInUser} />} /> */}
+          <Route exact path="/login" render={() => <Login updateUser={this.updateLoggedInUser} />} />
 
           {/* product create form */}
           {/* <Route exact path="/products" component={AddProduct} /> */}

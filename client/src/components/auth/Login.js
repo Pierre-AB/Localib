@@ -1,27 +1,23 @@
 import React, { Component } from 'react';
-import { signup } from './auth-service'
+import { login } from './auth-service'
 import { Link } from 'react-router-dom';
 
 import './SignForm.css';
 
-class Signup extends Component {
+class Login extends Component {
 
 
   // Consumer Type is Hardcoded here-----------|
-  state = { email: '', password: '', type: '' }
+  state = { email: '', password: '' }
 
   handleFormSubmit = (event) => {
     event.preventDefault();
     const email = this.state.email;
     const password = this.state.password;
-    const type = 'consumer';
 
-    console.log('🍒🍒🍒🍒 JUSQUE LA')
-
-    signup(email, password, type)
+    login(email, password)
       .then(response => {
-        // this.props.updateUser(response)
-        console.log("🌶🌶🌶", response.data)
+        this.props.updateUser(response)
         this.setState({ email: "", password: "", type: "" });
       })
       .catch(error => console.log(error))
@@ -50,9 +46,9 @@ class Signup extends Component {
           {/* <label>Password:</label> */}
           <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={e => this.handleChange(e)} />
 
-          <Link to={"/"} className="I-am-retailer">I am a retailer</Link>
+          {/* <Link to={"/"} className="I-am-retailer">I am a retailer</Link> */}
 
-          <button type="submit">Register</button>
+          <button type="submit">Check-In</button>
 
         </form>
       </div>
@@ -60,4 +56,4 @@ class Signup extends Component {
   }
 }
 
-export default Signup;
+export default Login;

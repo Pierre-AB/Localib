@@ -81,7 +81,6 @@ class StoreDetails extends React.Component {
     // Use store picture as background
     let background = this.state.picture;
 
-
     return (
 
       <div>

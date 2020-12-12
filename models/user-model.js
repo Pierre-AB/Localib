@@ -12,7 +12,7 @@ const userSchema = new Schema({
   fullName: String,
   address: {
     type: String,
-    required: [true, 'Please add an address']
+    // required: [true, 'Please add an address']
   },
   location: {
     type: {

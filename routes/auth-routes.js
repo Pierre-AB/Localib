@@ -76,6 +76,8 @@ authRoutes.post('/signup', fileUploader.single('image'), (req, res, next) => {
 
   //LOCATION DATA IS CREATED IN USER MODEL THROUGH GEOCODER.
 
+  console.log("ookkkkk")
+
   const newUser = new User({
     email,
     password: hashPass,

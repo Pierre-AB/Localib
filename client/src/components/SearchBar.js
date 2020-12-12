@@ -45,6 +45,7 @@ class SearchBar extends React.Component {
     }
   }
 
+  //in order to change searchbar and execute the parent function
   onSelectFunction(addressValue) {
      this.setState({ addressValue });
      this.props.handleSelect(addressValue)

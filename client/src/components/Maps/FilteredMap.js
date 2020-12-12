@@ -260,6 +260,7 @@ class MapContainerSearchFilter extends React.Component{
               <div>
                 <Map
                   google={this.props.google}
+                  className="desktopFilteredMap"
                   styles={this.props.mapStyle}
                   zoom={16}
                   options={options}

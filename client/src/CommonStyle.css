@@ -352,6 +352,7 @@ button:hover {
   align-items: center;
   justify-content: flex-start;
   height: 100px;
+  min-width: 400px;
 }
 
 .vertical-scroll-container hr {
@@ -402,4 +403,11 @@ button:hover {
 .desktop-map-container {
   display: flex;
   flex-direction: row;
+}
+
+@media (min-width: 992px) { 
+  .desktopFilteredMap {
+    width: calc(100% - 400px + 1.3em) !important;
+    height: calc(100% - 85px) !important;
+  }
 }

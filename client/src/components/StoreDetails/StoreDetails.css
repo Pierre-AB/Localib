@@ -225,6 +225,10 @@ button.react-calendar__tile.react-calendar__month-view__days__day {
   width: 20%;
 }
 
-.Non-AvailableTime{
+.Non-AvailableTime {
   background-color: red;
+}
+
+button.bookAppointmentBtn {
+  margin-right: -7.9em;
 }

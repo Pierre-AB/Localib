@@ -23,7 +23,8 @@ class AppointmentPicker extends React.Component {
 
   state = {
     pickedTime: null,
-    timeClicked: false
+    timeClicked: false,
+    pickedDate: this.props.pickedDate
   }
 
   /* _________ANTOINE_______: 
@@ -68,10 +69,10 @@ class AppointmentPicker extends React.Component {
   // Add className to hour picker button in order to know if the user can select or not this timeslot.
   defDayAvaiArr = (index) => {
 
-    let condiAvai = [];
+    let condiClassTimeArr = [];
 
     const nonAvaiTime = this.props.nonAvaiTime;
-    condiAvai = this.props.dayAvaiArr[index].map((time, index) => {
+    condiClassTimeArr = this.props.dayAvaiArr[index].map((time, index) => {
 
       if (nonAvaiTime.includes(time)) {
         return <div key={index} >
@@ -90,8 +91,8 @@ class AppointmentPicker extends React.Component {
       }
     })
 
-    // console.log('je passe par là et je rend condiAvai=', condiAvai)
-    return condiAvai || null
+    // console.log('je passe par là et je rend condiClassTimeArr=', condiClassTimeArr)
+    return condiClassTimeArr || null
   }
 
 
@@ -172,5 +173,3 @@ class AppointmentPicker extends React.Component {
 
 export default AppointmentPicker
 
-
-  // < p > and from: { this.props.dayAvailibility.openPm } to { this.props.dayAvailibility.closePm }</p >

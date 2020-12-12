@@ -4,6 +4,7 @@ import './StoreDetails.css';
 import Calendar from 'react-calendar';
 import AppointmentPicker from './AppointmentPicker';
 import StoreMap from '../Maps/storeMap'
+import { isThisISOWeek } from 'date-fns/esm';
 // import { SiInstacart } from "react-icons/si";
 // import { SiGooglecalendar } from "react-icons/si";
 // import { BsCameraVideoFill } from "react-icons/bs";
@@ -133,10 +134,10 @@ class StoreDetails extends React.Component {
   componentDidMount() {
     this.getSingleStore();
 
-    const day = new Date().getDay();
-    this.setState({
-      pickedDate: this.state.store.openingHours
-    })
+    // const day = new Date().getDay();
+    // this.setState({
+    //   pickedDate: this.state.store.openingHours
+    // })
 
   }
 
@@ -166,6 +167,8 @@ class StoreDetails extends React.Component {
       .catch(err => console.log("Error on getting store details:", err))
   }
 
+
+
   //GET BOOKED APPOINTMENTS
 
   getBookedAppo = () => {
@@ -177,10 +180,19 @@ class StoreDetails extends React.Component {
         console.log("⏰ ORDERS from API=", ordersFromApi);
         this.setState({
           orders: ordersFromApi
-        })
+        }, this.dateToDisplay)
 
       })
       .catch(err => console.log(err))
+
+  }
+  // Temporary memory to implement
+  dateToDisplay = () => {
+    if (this.state.pickedDate) {
+      this.handleChange(this.state.pickedDate)
+    } else {
+      this.handleChange(new Date())
+    }
 
   }
 

@@ -56,28 +56,28 @@ class SearchBar extends React.Component {
   <div>
       <input {...getInputProps()} className="searchbar-input" id="mobile-address-input" style={this.state.isMobile ? {display:"none"} : {display:"block"}} placeholder="My address"/>
 
-      <div className="autocomplete-dropdown-container">
-        {loading && <div>Loading...</div>}
-        {suggestions.map(suggestion => {
-          const className = suggestion.active
-            ? 'suggestion-item--active'
-            : 'suggestion-item';
-          // inline style for demonstration purpose
-          const style = suggestion.active
-            ? { backgroundColor: '#baceac', cursor: 'pointer' } //#fafafa
-            : { backgroundColor: '#ffffff', cursor: 'pointer' }; //#ffffff
-          return (
-            <div
-              {...getSuggestionItemProps(suggestion, {
-                className,
-                style,
-              })}
-            >
-              <span>{suggestion.description}</span>
-            </div>
-          );
-        })}
-      </div>
+    <div className="autocomplete-dropdown-container">
+      {loading && <div>Loading...</div>}
+      {suggestions.map(suggestion => {
+        const className = suggestion.active
+          ? 'suggestion-item--active'
+          : 'suggestion-item';
+        // inline style for demonstration purpose
+        {/* const style = suggestion.active
+          ? { backgroundColor: '#baceac', cursor: 'pointer' } //#fafafa
+          : { backgroundColor: '#ffffff', cursor: 'pointer' }; //#ffffff */}
+        return (
+          <div
+            {...getSuggestionItemProps(suggestion, {
+              className,
+              // style,
+            })}
+          >
+            <span>{suggestion.description}</span>
+          </div>
+        );
+      })}
+    </div>
   </div>
   )
     );
@@ -116,7 +116,7 @@ class SearchBar extends React.Component {
             <div className="search-container">
               <svg id="mobile-magnifier-input" width="16" height="16" viewBox="0 0 16 16" className="searchbar-input-icon"><path fillRule="evenodd" clipRule="evenodd" d="M14.312 13.322a.3.3 0 010 .425l-.564.565a.3.3 0 01-.425 0l-3.036-3.035a.307.307 0 01-.087-.212v-.33A5.2 5.2 0 011.6 6.8a5.2 5.2 0 015.2-5.2 5.2 5.2 0 013.935 8.6h.33c.08 0 .155.03.212.087l3.035 3.035zM6.8 10.8c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z"></path></svg>
               <input id="mobile-product-input" className="searchbar-input" placeholder="Search retailer or product" type="search" value={this.props.query} onChange={(e) => this.props.updateQuery(e.target.value)} />
-              <div className="fa-filter"><FaFilter /></div>
+              {/* <div className="fa-filter"><FaFilter /></div> */}
             </div>
           </div>
         </div>

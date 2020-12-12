@@ -21,6 +21,7 @@ import Signup from './components/auth/Signup'
 
 // import pages for store views
 import StoreDetails from './components/StoreDetails/StoreDetails'
+import StorePickADate from './components/StoreDetails/StorePickADate'
 
 // import page for product creation
 
@@ -56,6 +57,7 @@ class App extends React.Component {
   
           {/* Store Details */}
           <Route exact path="/storeDetails/:id" component={StoreDetails} />
+          <Route exact path="/storeDetails/RDV/:id" component={StorePickADate} />
   
           {/* Login & signup */}
           <Route exact path="/signup" component={Signup} />

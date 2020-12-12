@@ -16,7 +16,7 @@
 @media (min-width: 992px) {
   .searchbar-desktop-position {
     position: absolute;
-    min-width: 600px;
+    /* min-width: 600px; */
     top: 24px;
     left: 290px;
   }
@@ -80,6 +80,7 @@
 }
 
 .searchbar-input {
+  border-radius: 10px;
   height: 40px;
   -webkit-box-flex: 1;
   -webkit-flex: 1 0 0;
@@ -181,4 +182,28 @@ span.searchbar-input-icon:after {
   right: 0;
   top: 0;
   background: transparent;
+}
+
+.autocomplete-dropdown-container {
+  padding: .7em;
+  border-radius: 15px;
+  text-align: left;
+  cursor: 'pointer';
+  background: white;
+}
+
+/* input[aria-expanded="true"] .autocomplete-dropdown-container {
+  cursor: 'pointer';
+  background: white;
+} */
+
+
+.suggestion-item {
+  padding: .5em 0;
+  color: var(--blue-grey);
+}
+
+.suggestion-item--active {
+  padding: .5em 0;
+  color: var(--accent-color);
 }

@@ -29,8 +29,9 @@ class MapView extends Component {
     addresseSearched: false,
     latitude: "", 
     longitude: "", 
-    listOfStores: [],
-    mapLoaded: false
+    listOfSearchedStores: [],
+    mapLoaded: false,
+    centerGeolocated: false
   }
 }
   updateQuery = (newValue) => {
@@ -59,7 +60,8 @@ class MapView extends Component {
   handleSelect = address => {
     this.setState({ 
       addressValue: address,
-      addresseSearched: false
+      addresseSearched: false,
+      centerGeolocated: false
      });
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
@@ -79,7 +81,7 @@ class MapView extends Component {
         // On ajoute les stores au state pour les utiliser dans le render
         .then(responseFromApi => {
           this.setState({
-            listOfStores: responseFromApi.data            
+            listOfSearchedStores: responseFromApi.data            
           })
         })
       })
@@ -87,15 +89,16 @@ class MapView extends Component {
 
   searchAroundMe = () => {
     this.setState({
+      addresseSearched: false,
       latitude: "",
       longitude: "",
-      addresseSearched: false
+      centerGeolocated: true
     })
   }
 
 
   render() {
-    const {query, latitude, longitude, addresseSearched, listOfStores, addressValue, mapLoaded} = this.state;
+    const {query, latitude, longitude, addresseSearched, centerGeolocated, listOfSearchedStores, addressValue, mapLoaded} = this.state;
     return (
       <div className={`${this.state.isMobile ? "page-container-mobile" : "map-view page-container-desktop"}`}>
         <SearchBar 
@@ -110,9 +113,11 @@ class MapView extends Component {
         searchedLatitude={latitude}
         searchedLongitude={longitude}
         addresseSearched={addresseSearched}
-        listOfStores={listOfStores}
+        listOfSearchedStores={listOfSearchedStores}
         addressValue={addressValue}
         mapLoaded={mapLoaded}
+        handleSelect={this.handleSelect}
+        centerGeolocated={centerGeolocated}
          />
       </div>
     );

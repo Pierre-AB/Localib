@@ -46,18 +46,35 @@ class SearchBar extends React.Component {
   }
 
   render() {
-
-    const renderInput = ({ getInputProps, getSuggestionItemProps, suggestions }) => (
-    <div className="autocomplete-root" >
+    //we can change the style: https://developers.google.com/maps/documentation/javascript/places-autocomplete#style-autocomplete
+    const renderInput = (({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+  <div>
     <input {...getInputProps()} className="searchbar-input" id="mobile-address-input" style={this.state.isMobile ? {display:"none"} : {display:"block"}} placeholder="My address"/>
-      <div className="autocomplete-dropdown-container" placeholder="My address">
-        {suggestions.map(suggestion => (
-          <div {...getSuggestionItemProps(suggestion)} className="suggestion">
+
+    <div className="autocomplete-dropdown-container">
+      {loading && <div>Loading...</div>}
+      {suggestions.map(suggestion => {
+        const className = suggestion.active
+          ? 'suggestion-item--active'
+          : 'suggestion-item';
+        // inline style for demonstration purpose
+        const style = suggestion.active
+          ? { backgroundColor: '#baceac', cursor: 'pointer' } //#fafafa
+          : { backgroundColor: '#ffffff', cursor: 'pointer' }; //#ffffff
+        return (
+          <div
+            {...getSuggestionItemProps(suggestion, {
+              className,
+              style,
+            })}
+          >
             <span>{suggestion.description}</span>
           </div>
-        ))}
-      </div>
+        );
+      })}
     </div>
+  </div>
+)
     );
 
       return (

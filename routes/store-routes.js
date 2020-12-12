@@ -174,6 +174,7 @@ router.get('/stores/distances/:latlng', (req, res, next) => {
       },
       {
         $project: {
+          // $round : [distance, 0],
           distance: 1,
           fullName: 1,
           address: 1,

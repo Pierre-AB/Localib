@@ -22,14 +22,13 @@ class AppointmentPicker extends React.Component {
   //ATTENTION ADD A STATE FOR THE DAY TO DETERMINE OPENING HOURS
 
   state = {
-    // store: this.props.store
-    pickedDate: this.props.pickedDate,
-    dayAvail: this.props.dayAvaiArr
+    pickedTime: null,
+    timeClicked: false
   }
 
   /* _________ANTOINE_______: 
-  - en terme de performance est ce mieux d'appeler une fonction ou un state ? 
-  - Est ce une bonne pratique de créer un state à partir d'un props ?
+  - en terme de performance est ce mieux d'appeler une fonction ou un state ? C'est identique.
+  - Est ce une bonne pratique de créer un state à partir d'un props ? Non quand on initialise un state il ne changera pas forcément et on aura pas nécessairement la bonne valeur du state.
   
   ______________________________
   */
@@ -53,46 +52,104 @@ class AppointmentPicker extends React.Component {
     }
   }
 
+
+  appointmentPick = (time) => {
+    this.setState({
+      pickedTime: time,
+      timeClicked: true
+    })
+  }
+
+  bookAppointment = () => {
+    this.props.createOrder(this.state.pickedTime)
+  }
+
+  //                                      $$\                     
+  //                                     $$ |                    
+  //  $$$$$$\   $$$$$$\  $$$$$$$\   $$$$$$$ | $$$$$$\   $$$$$$\  
+  // $$  __$$\ $$  __$$\ $$  __$$\ $$  __$$ |$$  __$$\ $$  __$$\ 
+  // $$ |  \__|$$$$$$$$ |$$ |  $$ |$$ /  $$ |$$$$$$$$ |$$ |  \__|
+  // $$ |      $$   ____|$$ |  $$ |$$ |  $$ |$$   ____|$$ |      
+  // $$ |      \$$$$$$$\ $$ |  $$ |\$$$$$$$ |\$$$$$$$\ $$ |      
+  // \__|       \_______|\__|  \__| \_______| \_______|\__|      
+
+
+
+
   render() {
 
     this.openingType()
-    // console.log("morning=", morning);
-    // console.log("afternoon=", afternoon);
-    // console.log("noInterruption=", noInterruption);
-    console.log("this.props.dayAvaiArr", this.props.dayAvaiArr);
-    console.log("this.props.dayAvaiArr.length=", this.props.dayAvaiArr.length);
+    const timeClicked = this.state.timeClicked
 
     return (
       <div>
+        <div onClick={() => {
+          this.setState({
+            timeClicked: false
+          })
+        }}>
+          <h3>Opening hours</h3>
 
-        <h3>Opening hours</h3>
-
-        { morning && afternoon ?
-          (<div>
-            <p>Open from: {this.props.dayAvailibility.openAm} to {this.props.dayAvailibility.closeAm}</p>
-            <p>& from: {this.props.dayAvailibility.openPm} to {this.props.dayAvailibility.closePm}</p>
-
-            <h2>Morning:</h2>
-            {this.props.dayAvaiArr[0].map((time, index) => { return <div><button key={index}>{time}</button></div> })}
-
-            <h2>Afternoon:</h2>
-            {this.props.dayAvaiArr[1].map((time, index) => { return <div><button key={index}>{time}</button></div> })}
-          </div>)
-          : noInterruption ?
-            (
-              <div>
-                <p>Open from: {this.props.dayAvailibility.openAm} to {this.props.dayAvailibility.closeAm}</p>
-                {this.props.dayAvaiArr[0].map((time, index) => { return <div><button key={index}>{time}</button></div> })}
-              </div>
-            )
-
-            :
+          {morning && afternoon ?
             (<div>
-              <h2>closed</h2>
-              {`${this.props.store.fullName} will be glad to have you another day `}
-            </div>)
+              <p>Open from: {this.props.dayAvailibility.openAm} to {this.props.dayAvailibility.closeAm}</p>
+              <p>& from: {this.props.dayAvailibility.openPm} to {this.props.dayAvailibility.closePm}</p>
 
-        }
+              <h2>Morning:</h2>
+              {this.props.dayAvaiArr[0].map((time, index) => {
+                return <div key={index}>
+                  <button onClick={(event) => {
+                    event.stopPropagation()
+                    this.appointmentPick(time)
+                  }}> {time}</button>
+                </div>
+              })}
+
+              <h2>Afternoon:</h2>
+              {this.props.dayAvaiArr[1].map((time, index) => {
+                return <div key={index} >
+                  <button onClick={(event) => {
+                    event.stopPropagation()
+                    this.appointmentPick(time)
+                  }}>{time}</button>
+                </div>
+              })}
+            </div>)
+            : noInterruption ?
+              (
+                <div>
+                  <p>Open from: {this.props.dayAvailibility.openAm} to {this.props.dayAvailibility.closeAm}</p>
+                  {this.props.dayAvaiArr[0].map((time, index) => {
+                    return <div key={index}>
+                      <button onClick={(event) => {
+                        event.stopPropagation()
+                        this.appointmentPick(time)
+                      }}>{time}</button>
+                    </div>
+                  })}
+                </div>
+              )
+
+              :
+              (<div>
+                <h2>closed</h2>
+                {`${this.props.store.fullName} will be glad to have you another day `}
+              </div>)
+
+          }
+        </div>
+
+        {timeClicked ?
+          (<div>
+            <form onSubmit={this.bookAppointment}>
+              <input type="submit" value="Book this appointment" />
+            </form>
+
+          </div>)
+          :
+          <div>
+
+          </div>}
 
       </div>
     )

@@ -74,22 +74,28 @@ function timeSlotCalc(openingTime, closingTime, timeStep) {
   // Once I have the number of timeSlot I need to add on the opening hour the slot timeRange
   var timeString = "";
 
+  timeSlotArray.push()
+
   var startTime = openingTotal;
 
   for (let i = 0; i < timeslotNumber; i++) {
-    let slot = startTime + timeStep // 600 + 10 = 610 -> i = 0
+    let slot = startTime  // 600 + 10 = 610 -> i = 0
     let startHour = slot / 60 // 610 / 60 = 10,16
     let rStartHour = Math.floor(startHour) // 10
     let startMinutes = (startHour - rStartHour) * 60//  (10,16 - 10) * 60 =  10
     let rStartMinutes = Math.round(startMinutes) // 10
 
+    if (rStartMinutes.toString().length === 1) {
+      rStartMinutes = "0" + rStartMinutes.toString()
+    }
+
     timeString = "" + rStartHour + ":" + rStartMinutes
 
     timeSlotArray.push(timeString);
-    startTime = slot
+    startTime = slot + timeStep
   }
 
-  console.log("🥇 timeSlotArray =", timeSlotArray)
+  // console.log("🥇 timeSlotArray =", timeSlotArray)
 
   return timeSlotArray;
 }
@@ -114,34 +120,99 @@ class StoreDetails extends React.Component {
 
   state = {
     store: {},
+    orders: [],
     pickedDate: new Date(),
     today: new Date(),
     fullDayName: dateName(new Date()),
     dayAvailibility: {},
     storeIsLoaded: false,
-    timeSlot: 15
+    timeSlot: 15,
+    nonAvaiTime: []
   }
 
   componentDidMount() {
     this.getSingleStore();
-    // let now = dateName(new Date())
-    // this.setState({ fullDayName: now })
-    console.log(this.state.today);
+
+    const day = new Date().getDay();
+    this.setState({
+      pickedDate: this.state.store.openingHours
+    })
+
   }
+
+  //  $$$$$$\            $$\                                              $$\ $$\           
+  // $$  __$$\           \__|                                             $$ |$$ |          
+  // $$ /  $$ |$$\   $$\ $$\  $$$$$$\   $$$$$$$\        $$$$$$$\ $$$$$$\  $$ |$$ | $$$$$$$\ 
+  // $$$$$$$$ |\$$\ $$  |$$ |$$  __$$\ $$  _____|      $$  _____|\____$$\ $$ |$$ |$$  _____|
+  // $$  __$$ | \$$$$  / $$ |$$ /  $$ |\$$$$$$\        $$ /      $$$$$$$ |$$ |$$ |\$$$$$$\  
+  // $$ |  $$ | $$  $$<  $$ |$$ |  $$ | \____$$\       $$ |     $$  __$$ |$$ |$$ | \____$$\ 
+  // $$ |  $$ |$$  /\$$\ $$ |\$$$$$$  |$$$$$$$  |      \$$$$$$$\\$$$$$$$ |$$ |$$ |$$$$$$$  |
+  // \__|  \__|\__/  \__|\__| \______/ \_______/        \_______|\_______|\__|\__|\_______/ 
+
 
   // GET STORE DETAILS
 
   getSingleStore = () => {
     const { params } = this.props.match;
-    console.log("params", params)
+    // console.log("params", params)
     axios.get(`${process.env.REACT_APP_APIURL || ""}/api/stores/${params.id}`)
+    // axios.get(`http://localhost:5000/api/stores/${params.id}`)
       .then(lookedUpStore => {
         this.setState({
           store: lookedUpStore.data,
           storeIsLoaded: true
-        });
-      }).catch(err => console.log("Error on getting store details:", err))
+        }, this.getBookedAppo);
+
+      })
+      .catch(err => console.log("Error on getting store details:", err))
   }
+
+  //GET BOOKED APPOINTMENTS
+
+  getBookedAppo = () => {
+    let store = this.state.store._id
+    // console.log("🏚 store/id=", store._id)
+    axios.get(`http://localhost:5000/api/orders?storeId=${encodeURIComponent(store)}`) // QUERY STRING
+      .then(response => {
+        const ordersFromApi = response.data;
+        console.log("⏰ ORDERS from API=", ordersFromApi);
+        this.setState({
+          orders: ordersFromApi
+        })
+
+      })
+      .catch(err => console.log(err))
+
+  }
+
+
+  // CREATE ORDERS Here =  Appointment booking
+
+  createOrder = (time) => {
+    const store_id = this.state.store._id;
+    const appointmentDay = `${this.state.pickedDate.getFullYear()}-${this.state.pickedDate.getMonth() + 1}-${this.state.pickedDate.getDate()}`; // Record in server the date in a string format to avoid time offset due to local time from the browser
+    const appointmentTime = time;
+    const status = "confirmed"
+
+    axios.post('http://localhost:5000/api/orders', { store_id, appointmentDay, appointmentTime, status })
+      .then(response => {
+        // console.log(response)
+        // console.log("ORDER PASSED TO BACK");
+      })
+      .catch(err => console.log(err))
+
+
+  }
+
+  //  $$$$$$\                                  $$\     $$\                               
+  // $$  __$$\                                 $$ |    \__|                              
+  // $$ /  \__|$$\   $$\ $$$$$$$\   $$$$$$$\ $$$$$$\   $$\  $$$$$$\  $$$$$$$\   $$$$$$$\ 
+  // $$$$\     $$ |  $$ |$$  __$$\ $$  _____|\_$$  _|  $$ |$$  __$$\ $$  __$$\ $$  _____|
+  // $$  _|    $$ |  $$ |$$ |  $$ |$$ /        $$ |    $$ |$$ /  $$ |$$ |  $$ |\$$$$$$\  
+  // $$ |      $$ |  $$ |$$ |  $$ |$$ |        $$ |$$\ $$ |$$ |  $$ |$$ |  $$ | \____$$\ 
+  // $$ |      \$$$$$$  |$$ |  $$ |\$$$$$$$\   \$$$$  |$$ |\$$$$$$  |$$ |  $$ |$$$$$$$  |
+  // \__|       \______/ \__|  \__| \_______|   \____/ \__| \______/ \__|  \__|\_______/ 
+
 
 
   // GET SELECTED DAY WRITTEN && SELECTED DAY AVAILABILITY
@@ -157,12 +228,6 @@ class StoreDetails extends React.Component {
       open.day === matchDay
     )
 
-    console.log("avaiForPickedDay[0]=", avaiForPickedDay[0])
-    console.log("avaiForPickedDay=", avaiForPickedDay)
-    // let todayAvail = this.state.store.openingHours[matchDay];
-
-    console.log('DayOffset=', dayOffset.days)
-
     if (dayOffset.days === -1) {
       dayString = 'Today'
     }
@@ -171,12 +236,50 @@ class StoreDetails extends React.Component {
       pickedDate: clickedDate,
       fullDayName: dayString,
       dayAvailibility: avaiForPickedDay[0]
-    }, this.splitDay);
+    }, this.drawAvailability);
 
 
   }
 
 
+  // Show only available timeslot
+  drawAvailability = () => {
+
+    var nonAvaiTimeArr = []
+
+
+    // once all the orders from the selected store have been retrieved, filter the one matching with the pickedDate (clicked on the calendar)
+    const ordersOnPickedDate = this.state.orders.filter(order => {
+      const orderDate = new Date(order.appointmentDay) // need to translate the string into a date to apply a date related method
+      const selectedDate = this.state.pickedDate
+      return orderDate.getFullYear() === selectedDate.getFullYear() && orderDate.getMonth() === selectedDate.getMonth() && orderDate.getDate() === selectedDate.getDate()
+
+    })
+
+    // if ordersOnPickedDate is empty skip this part
+    if (ordersOnPickedDate.length > 0) {
+      //Get an array of Timing to put on grey color.
+      nonAvaiTimeArr = ordersOnPickedDate.map(el => {
+        return el.appointmentTime
+      })
+      this.setState({
+        nonAvaiTime: nonAvaiTimeArr
+      })
+
+    } else {
+      this.setState({
+        nonAvaiTime: nonAvaiTimeArr
+      })
+
+    }
+
+    console.log("ordersOnPickedDate=", ordersOnPickedDate)
+    console.log("this.state.pickedDate=", this.state.pickedDate)
+    console.log("this.state.nonAvaiTime=", this.state.nonAvaiTime)
+  }
+
+  // Triggered after HandleChange setState line 274. 
+  // SplitDay calc number of store
   splitDay = () => {
     let dayAvaiArr = [];
 
@@ -210,21 +313,38 @@ class StoreDetails extends React.Component {
       dayAvaiArr.push(morningAvaiSlotNum);
     }
 
-    console.log("dayAvaiArr=", dayAvaiArr)
+    // console.log("dayAvaiArr=", dayAvaiArr)
 
 
     return dayAvaiArr;
   }
 
 
+  //                                      $$\                     
+  //                                     $$ |                    
+  //  $$$$$$\   $$$$$$\  $$$$$$$\   $$$$$$$ | $$$$$$\   $$$$$$\  
+  // $$  __$$\ $$  __$$\ $$  __$$\ $$  __$$ |$$  __$$\ $$  __$$\ 
+  // $$ |  \__|$$$$$$$$ |$$ |  $$ |$$ /  $$ |$$$$$$$$ |$$ |  \__|
+  // $$ |      $$   ____|$$ |  $$ |$$ |  $$ |$$   ____|$$ |      
+  // $$ |      \$$$$$$$\ $$ |  $$ |\$$$$$$$ |\$$$$$$$\ $$ |      
+  // \__|       \_______|\__|  \__| \_______| \_______|\__|      
+
+
+
+
   render() {
 
     // Use store picture as background
     let background = this.state.picture;
+
     const storeIsLoaded = this.state.storeIsLoaded;
-    // const availabilityloaded
     const dayInfo = this.splitDay();
 
+    const nonAvaiTime = this.state.nonAvaiTime;
+
+    console.log('🚨 this.state.pickedDate=', this.state.pickedDate)
+
+    // if (this.state.orders.length > 0 && this.state.pickedDate) { this.drawAvailability()}
 
 
     return (
@@ -263,10 +383,17 @@ class StoreDetails extends React.Component {
 
           {storeIsLoaded ? (
             <div>
-            <AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} dayAvailibility={this.state.dayAvailibility} dayAvaiArr={dayInfo} />
-            <StoreMap store={this.state.store}/>
+              <AppointmentPicker
+                store={this.state.store}
+                pickedDate={this.state.pickedDate}
+                dayAvailibility={this.state.dayAvailibility}
+                dayAvaiArr={dayInfo}
+                createOrder={this.createOrder}
+                nonAvaiTime={nonAvaiTime}
+              />
+              <StoreMap store={this.state.store} />
             </div>
-            )
+          )
             :
             (<div>"loading..."</div>)}
         </div>
@@ -278,3 +405,4 @@ class StoreDetails extends React.Component {
 }
 
 export default StoreDetails
+

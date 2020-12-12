@@ -207,6 +207,7 @@ class StoreDetails extends React.Component {
 
     axios.post('http://localhost:5000/api/orders', { store_id, appointmentDay, appointmentTime, status })
       .then(response => {
+        this.getBookedAppo()
         // console.log(response)
         // console.log("ORDER PASSED TO BACK");
       })

@@ -214,7 +214,7 @@ class MapContainerSearchFilter extends React.Component{
 
     if (this.props.query !== "") {
       fullList = [...onNameFilter, ...ProductFilteredStoreId]
-      renderedList = [...new Set(fullList)]
+      renderedList = [...new Set(fullList)] // melanger les deux
     } else {
       renderedList = this.state.listOfStores
     }

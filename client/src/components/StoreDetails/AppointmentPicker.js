@@ -157,7 +157,7 @@ class AppointmentPicker extends React.Component {
               {this.defDayAvaiArr(1)}
             </div>
             ) : noInterruption ? (
-              <div>
+              <div className="appointmentPickerContainer">
                 {/* <p>Open from: {this.props.dayAvailibility.openAm} to {this.props.dayAvailibility.closeAm}</p> */}
                 {this.defDayAvaiArr(0)}
               </div>
@@ -168,7 +168,7 @@ class AppointmentPicker extends React.Component {
         {timeClicked ?
           (<div>
             <form onSubmit={this.bookAppointment}>
-              <button type="submit">Je bloque ce créneau</button>
+              <button className="bookAppointmentBtn" type="submit">Je bloque ce créneau</button>
             </form>
 
           </div>)

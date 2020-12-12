@@ -209,11 +209,12 @@ class MapContainerSearchFilter extends React.Component{
     })   
 
     // Switch rendering regarding content of the search bar
-    let renderedList;
+    let fullList;
+    let renderedList
 
     if (this.props.query !== "") {
-      renderedList = [...onNameFilter, ...ProductFilteredStoreId]
-      // renderedList = preRender.filter((item, index) => preRender.indexOf(item) !== index)
+      fullList = [...onNameFilter, ...ProductFilteredStoreId]
+      renderedList = [...new Set(fullList)] // melanger les deux
     } else {
       renderedList = this.state.listOfStores
     }
@@ -260,6 +261,7 @@ class MapContainerSearchFilter extends React.Component{
               <div>
                 <Map
                   google={this.props.google}
+                  className="desktopFilteredMap"
                   styles={this.props.mapStyle}
                   zoom={16}
                   options={options}
@@ -300,14 +302,20 @@ class MapContainerSearchFilter extends React.Component{
                 <InfoWindow
                   marker={this.state.activeMarker}
                   visible={this.state.showingInfoWindow}>
-                    <div id="iw-container">
-                      <h1 className="iw-title">{this.state.selectedPlace.name}</h1>
-                      <img src={this.state.selectedPlace.image} width="64" height="64"></img>
-                      <h2>{this.state.selectedPlace.address}</h2>
-                      <p>{Math.floor(this.state.selectedPlace.distance)} meters</p>
-                      <form target="print_popup" action={`http://www.google.com/maps/place/${this.state.selectedPlace.latitude},${this.state.selectedPlace.longitude}`}>
-                        <button type="submit">GO</button>
-                      </form>
+                  <div key={this.state.selectedPlace.id} className={`${this.state.isMobile ? "nearby-card-mobile" : "nearby-card-desktop-container"}`} style={this.state.isMobile ? { backgroundImage:`linear-gradient(0deg, rgba(29, 29, 29, 0.5), rgba(29, 29, 29, 0.2)), url(${this.state.selectedPlace.image})` } : {}} >                      
+                  {this.state.isMobile ? "" : (<img className="nearby-card-desktop" src={`${this.state.selectedPlace.image}`} />)}
+                  {/* <h1 className="iw-title">{this.state.selectedPlace.name}</h1> */}
+                      {/* <img src={this.state.selectedPlace.image} width="64" height="64"></img> */}
+                      <div className={`${this.state.isMobile ? "nearby-store-info-mobile" : "nearby-store-info-desktop"}`}>
+                          <h4 className="nearby-store-title">{this.state.selectedPlace.name}</h4>
+                          <p className="nearby-store-address">{this.state.selectedPlace.address}</p>
+                          <p className="nearby-store-address">{Math.floor(this.state.selectedPlace.distance)} meters</p>
+                          <form target="_blank" action={`http://www.google.com/maps/place/${this.state.selectedPlace.latitude},${this.state.selectedPlace.longitude}` }>
+                              <button type="submit">GO</button>
+                          </form>
+                      </div>
+                      {/* <h2>{this.state.selectedPlace.address}</h2>
+                      <p>{Math.floor(this.state.selectedPlace.distance)} meters</p> */}
                     </div>
                 </InfoWindow>
               </Map>

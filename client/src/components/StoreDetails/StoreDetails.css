@@ -224,3 +224,7 @@ button.react-calendar__tile.react-calendar__month-view__days__day {
 .appointmentPickerBtnDiv {
   width: 20%;
 }
+
+.Non-AvailableTime{
+  background-color: red;
+}

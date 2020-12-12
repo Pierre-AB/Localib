@@ -23,7 +23,8 @@ class AppointmentPicker extends React.Component {
 
   state = {
     pickedTime: null,
-    timeClicked: false
+    timeClicked: false,
+    pickedDate: this.props.pickedDate
   }
 
   /* _________ANTOINE_______: 
@@ -60,9 +61,43 @@ class AppointmentPicker extends React.Component {
     })
   }
 
+  // Send hour selected to the parents StoreDetails
   bookAppointment = () => {
     this.props.createOrder(this.state.pickedTime)
   }
+
+  // Add className to hour picker button in order to know if the user can select or not this timeslot.
+  defDayAvaiArr = (index) => {
+
+    let condiClassTimeArr = [];
+
+    const nonAvaiTime = this.props.nonAvaiTime;
+    condiClassTimeArr = this.props.dayAvaiArr[index].map((time, index) => {
+
+      if (nonAvaiTime.includes(time)) {
+        return <div className="appointmentPickerBtnDiv" key={index} >
+          <button className="appointmentPickerBtn Non-AvailableTime" onClick={(event) => {
+            event.stopPropagation()
+            this.appointmentPick(time)
+          }}> {time}</button>
+        </div>
+      } else {
+        return <div className="appointmentPickerBtnDiv" key={index} >
+          <button className="appointmentPickerBtn AvailableTime" onClick={(event) => {
+            event.stopPropagation()
+            this.appointmentPick(time)
+          }}> {time}</button>
+        </div>
+      }
+    })
+
+    // console.log('je passe par là et je rend condiClassTimeArr=', condiClassTimeArr)
+    return condiClassTimeArr || null
+  }
+
+
+
+
 
   //                                      $$\                     
   //                                     $$ |                    
@@ -80,6 +115,7 @@ class AppointmentPicker extends React.Component {
 
     this.openingType()
     const timeClicked = this.state.timeClicked
+
 
     return (
       <div>
@@ -112,44 +148,19 @@ class AppointmentPicker extends React.Component {
             <div className="appointmentPickerContainer">
               {/* <p>Open from: {this.props.dayAvailibility.openAm} to {this.props.dayAvailibility.closeAm}</p>
               <p>& from: {this.props.dayAvailibility.openPm} to {this.props.dayAvailibility.closePm}</p> */}
-              {/* <h2>Morning:</h2> */}
 
-              {this.props.dayAvaiArr[0].map((time, index) => {
-                return <div className="appointmentPickerBtnDiv" key={index}>
-                  <button className="appointmentPickerBtn" onClick={(event) => {
-                    event.stopPropagation()
-                    this.appointmentPick(time)
-                  }}> {time}</button>
-                </div>
-              })}
+              {/* <h2>Morning:</h2> */}
+              {this.defDayAvaiArr(0)}
 
               {/* <h2>Afternoon:</h2> */}
-              {this.props.dayAvaiArr[1].map((time, index) => {
-                return <div className="appointmentPickerBtnDiv" key={index} >
-                  <button className="appointmentPickerBtn" onClick={(event) => {
-                    event.stopPropagation()
-                    this.appointmentPick(time)
-                  }}>{time}</button>
-                </div>
-              })}
-            </div>)
-            : noInterruption ?
-              (
-                <div>
-                  {/* <p>Open from: {this.props.dayAvailibility.openAm} to {this.props.dayAvailibility.closeAm}</p> */}
-                  {this.props.dayAvaiArr[0].map((time, index) => {
-                    return <div key={index}>
-                      <button onClick={(event) => {
-                        event.stopPropagation()
-                        this.appointmentPick(time)
-                      }}>{time}</button>
-                    </div>
-                  })}
-                </div>
-              )
-
-              :
-              (<div></div>)
+              {this.defDayAvaiArr(1)}
+            </div>
+            ) : noInterruption ? (
+              <div>
+                {/* <p>Open from: {this.props.dayAvailibility.openAm} to {this.props.dayAvailibility.closeAm}</p> */}
+                {this.defDayAvaiArr(0)}
+              </div>
+              ) : (<div></div>)
           }
         </div>
 
@@ -172,5 +183,3 @@ class AppointmentPicker extends React.Component {
 
 export default AppointmentPicker
 
-
-  // < p > and from: { this.props.dayAvailibility.openPm } to { this.props.dayAvailibility.closePm }</p >

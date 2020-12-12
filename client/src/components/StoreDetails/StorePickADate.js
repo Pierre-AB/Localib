@@ -134,12 +134,6 @@ class StorePickADate extends React.Component {
   componentDidMount() {
     this.getSingleStore();
     this.scrollDateOnLoad();
-
-    const day = new Date().getDay();
-    this.setState({
-      pickedDate: this.state.store.openingHours
-    })
-
   }
 
   //  $$$$$$\            $$\                                              $$\ $$\           
@@ -180,10 +174,20 @@ class StorePickADate extends React.Component {
         console.log("⏰ ORDERS from API=", ordersFromApi);
         this.setState({
           orders: ordersFromApi
-        })
+        }, this.dateToDisplay)
 
       })
       .catch(err => console.log(err))
+
+  }
+  // Temporary memory to implement
+  dateToDisplay = () => {
+    if (this.state.pickedDate) {
+      this.handleChange(this.state.pickedDate)
+    } else {
+      this.handleChange(new Date())
+      // Ajoute la classe
+    }
 
   }
 

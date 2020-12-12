@@ -74,15 +74,15 @@ class AppointmentPicker extends React.Component {
     condiAvai = this.props.dayAvaiArr[index].map((time, index) => {
 
       if (nonAvaiTime.includes(time)) {
-        return <div key={index} className='Non-AvailableTime'>
-          <button onClick={(event) => {
+        return <div key={index} >
+          <button className='Non-AvailableTime' onClick={(event) => {
             event.stopPropagation()
             this.appointmentPick(time)
           }}> {time}</button>
         </div>
       } else {
-        return <div key={index} className='AvailableTime'>
-          <button onClick={(event) => {
+        return <div key={index} >
+          <button className='AvailableTime' onClick={(event) => {
             event.stopPropagation()
             this.appointmentPick(time)
           }}> {time}</button>
@@ -90,7 +90,7 @@ class AppointmentPicker extends React.Component {
       }
     })
 
-    console.log('je passe par là et je rend condiAvai=', condiAvai)
+    // console.log('je passe par là et je rend condiAvai=', condiAvai)
     return condiAvai || null
   }
 

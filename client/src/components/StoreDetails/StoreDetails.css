@@ -77,3 +77,7 @@ hr {
   background-color: var(--border);
   border: 0;
 }
+
+.Non-AvailableTime{
+  background-color: red;
+}

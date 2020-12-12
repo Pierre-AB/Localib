@@ -45,36 +45,41 @@ class SearchBar extends React.Component {
     }
   }
 
+  onSelectFunction(addressValue) {
+     this.setState({ addressValue });
+     this.props.handleSelect(addressValue)
+  }
+
   render() {
     //we can change the style: https://developers.google.com/maps/documentation/javascript/places-autocomplete#style-autocomplete
     const renderInput = (({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
   <div>
-    <input {...getInputProps()} className="searchbar-input" id="mobile-address-input" style={this.state.isMobile ? {display:"none"} : {display:"block"}} placeholder="My address"/>
+      <input {...getInputProps()} className="searchbar-input" id="mobile-address-input" style={this.state.isMobile ? {display:"none"} : {display:"block"}} placeholder="My address"/>
 
-    <div className="autocomplete-dropdown-container">
-      {loading && <div>Loading...</div>}
-      {suggestions.map(suggestion => {
-        const className = suggestion.active
-          ? 'suggestion-item--active'
-          : 'suggestion-item';
-        // inline style for demonstration purpose
-        const style = suggestion.active
-          ? { backgroundColor: '#baceac', cursor: 'pointer' } //#fafafa
-          : { backgroundColor: '#ffffff', cursor: 'pointer' }; //#ffffff
-        return (
-          <div
-            {...getSuggestionItemProps(suggestion, {
-              className,
-              style,
-            })}
-          >
-            <span>{suggestion.description}</span>
-          </div>
-        );
-      })}
-    </div>
+      <div className="autocomplete-dropdown-container">
+        {loading && <div>Loading...</div>}
+        {suggestions.map(suggestion => {
+          const className = suggestion.active
+            ? 'suggestion-item--active'
+            : 'suggestion-item';
+          // inline style for demonstration purpose
+          const style = suggestion.active
+            ? { backgroundColor: '#baceac', cursor: 'pointer' } //#fafafa
+            : { backgroundColor: '#ffffff', cursor: 'pointer' }; //#ffffff
+          return (
+            <div
+              {...getSuggestionItemProps(suggestion, {
+                className,
+                style,
+              })}
+            >
+              <span>{suggestion.description}</span>
+            </div>
+          );
+        })}
+      </div>
   </div>
-)
+  )
     );
 
       return (
@@ -87,7 +92,7 @@ class SearchBar extends React.Component {
                 className="searchbar-input"
                 value={this.state.addressValue}
                 onChange={addressValue => {this.setState({ addressValue })}}
-                onSelect={this.props.handleSelect}
+                onSelect={adresseValue => {this.onSelectFunction(adresseValue)}}
                 searchOptions={{componentRestrictions: { country: ['fr'] }}
                 }
               >

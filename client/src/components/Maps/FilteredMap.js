@@ -111,6 +111,11 @@ class MapContainerSearchFilter extends React.Component{
       this.setState({
         listOfStores: this.props.listOfSearchedStores,
       })
+    }else if (prevProps.centerGeolocated !== this.props.centerGeolocated && this.props.centerGeolocated === true) {
+      // this.askLocation()
+      this.setState({
+        listOfStores: this.state.initialListOfStores
+      })
     } 
   }
  
@@ -206,11 +211,14 @@ class MapContainerSearchFilter extends React.Component{
     // Switch rendering regarding content of the search bar
     let renderedList;
 
-    if (this.props.query.length !== "") {
+    if (this.props.query !== "") {
       renderedList = [...onNameFilter, ...ProductFilteredStoreId]
+      // renderedList = preRender.filter((item, index) => preRender.indexOf(item) !== index)
     } else {
       renderedList = this.state.listOfStores
     }
+
+
 
     // RENDER DE PAGE
     return (

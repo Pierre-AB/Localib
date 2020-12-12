@@ -122,7 +122,7 @@ class StoreDetails extends React.Component {
     store: {},
     orders: [],
     pickedDate: new Date(),
-    today: new Date(),
+    today: new Date().getDate(),
     fullDayName: dateName(new Date()),
     dayAvailibility: {},
     storeIsLoaded: false,

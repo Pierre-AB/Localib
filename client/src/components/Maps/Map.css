@@ -25,3 +25,25 @@
 .gm-style-iw.gm-style-iw-c {
   /* background: transparent;   */
 }
+
+#iw-container  .iw-title {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  padding: 10px;
+  background-color: #baceac;
+  color: white;
+  margin: 1px;
+  border-radius: 2px 2px 0 0; /* In accordance with the rounding of the default infowindow corners. */
+}
+
+.gm-style-iw {
+  width: 350px !important;
+  top: 0 !important;
+  left: 0 !important;
+  background-color: #fff;
+  box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
+  border: 1px solid #baceac;
+  border-radius: 2px 2px 0 0;
+}
+

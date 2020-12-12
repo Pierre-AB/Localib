@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import mapStyles from "./mapStyles";
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
-import '../SearchBar.css';
+import './Map.css';
 import { useLoading, ThreeDots } from '@agney/react-loading';
 // import SearchMap from './SearchMapList';
 import GoogleMap from './google-maps';
@@ -18,19 +18,24 @@ class MapContainerSearchFilter extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      listOfStores: this.props.listOfStores, // for stores
+      listOfStores: [], // for stores
+      listOfSearchedStores: this.props.listOfSearchedStores, // for stores
       listOfProducts: [],
       latitude: this.props.searchedLatitude, // avant de récupérer l'information de la recherche
       longitude: this.props.searchedLongitude, // avant de récupérer l'information de la recherche
+      initialLatitud: "",
+      initialLongitude:"",
+      initialListOfStores: {},
       selected: null,
       mapLoaded: this.props.mapLoaded,
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
-      addresseSearched: this.props.addresseSearched,
+      addresseSearched: false,
       addressValue: this.props.addressValue,
       isMobile: false
     };
+    
     // this.searchLocation = this.searchLocation.bind(this);
   }
 
@@ -44,13 +49,16 @@ class MapContainerSearchFilter extends React.Component{
         this.setState({
           latitude: lat,
           longitude: lng,
+          initialLatitud: lat,
+          initialLongitude: lng,
           mapLoaded: true
         })
         axios.get(`${process.env.REACT_APP_APIURL || ""}/api/stores/distances/${this.state.latitude},${this.state.longitude}`)
 
           .then(responseFromApi => {
             this.setState({
-              listOfStores: responseFromApi.data
+              listOfStores: responseFromApi.data,
+              initialListOfStores: responseFromApi.data
             })
           })
       })
@@ -96,8 +104,16 @@ class MapContainerSearchFilter extends React.Component{
   handleChange = address => {
     this.setState({ address });
   };
- 
 
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.listOfSearchedStores !== this.props.listOfSearchedStores) {
+      this.setState({
+        listOfStores: this.props.listOfSearchedStores,
+      })
+    } 
+  }
+ 
 
   componentDidMount() {
     this.askLocation()
@@ -112,6 +128,7 @@ class MapContainerSearchFilter extends React.Component{
 
   componentWillUnmount() {
       window.removeEventListener("resize", this.resize.bind(this));
+      this.props.handleSelect()
   }
 
 
@@ -133,34 +150,27 @@ class MapContainerSearchFilter extends React.Component{
       zoomControl: true,
     };
 
-    //Places autocomplete
-    const renderInput = ({ getInputProps, getSuggestionItemProps, suggestions }) => (
-      <div className="autocomplete-root">
-        <input className="form-control" {...getInputProps()} />
-        <div className="autocomplete-dropdown-container">
-          {suggestions.map(suggestion => (
-            <div {...getSuggestionItemProps(suggestion)} className="suggestion">
-              <span>{suggestion.description}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
 
-    //Places onError
-    const onError = (status, clearSuggestions) => {
-      console.log('Google Maps API returned error with status: ', status)
-      clearSuggestions()
-    }
 
     //logo Localib dans les markers de la carte
-    const icon = { 
+    const icon = {
       url: `https://res.cloudinary.com/dbsnbga7z/image/upload/v1606577861/localib/LogoMap_fy7h3i.png`,
       origin: new window.google.maps.Point(0, 0),
       scaledSize: new window.google.maps.Size(45, 60),
     }
+
+    const icon1 = {
+      url: `https://picsum.photos/64`,
+      origin: new window.google.maps.Point(0, 0),
+      scaledSize: new window.google.maps.Size(45, 60),
+    }
+      
+
+    // if (this.props.listOfSearchedStores.length !== 0) {
+    //   this.state.addresseSearched = true
+    // }
     
-    const addresseSearched = this.state.addresseSearched
+    const addresseSearched = this.props.addresseSearched
 
 
     // Let's filter the name before rendering 
@@ -198,9 +208,9 @@ class MapContainerSearchFilter extends React.Component{
 
     if (this.props.query.length !== "") {
       renderedList = [...onNameFilter, ...ProductFilteredStoreId]
-    } else { // Par défaut, renvoie full listOfStores
+    } else {
       renderedList = this.state.listOfStores
-    } 
+    }
 
     // RENDER DE PAGE
     return (
@@ -226,7 +236,7 @@ class MapContainerSearchFilter extends React.Component{
                   <div className="vertical-store-info">
                     <h4>{store.fullName}</h4>
                     <p className="vertical-store-address">{store.address}</p>
-                    <p className="vertical-store-address">{store.distance} meters</p>
+                    <p className="vertical-store-address">{Math.floor(store.distance)} meters</p>
                   </div>
                 </div>
                 <hr />
@@ -249,8 +259,8 @@ class MapContainerSearchFilter extends React.Component{
                     this.onMapClicked
                   }
                   initialCenter={{ 
-                    lat: this.props.latitude,  
-                    lng: this.props.longitude
+                    lat: this.props.searchedLatitude || this.state.latitude,  
+                    lng: this.props.searchedLongitude || this.state.longitude 
                   }}
                   center={{
                     lat: this.props.searchedLatitude || this.state.latitude,
@@ -271,6 +281,8 @@ class MapContainerSearchFilter extends React.Component{
                       address={store.address}
                       image={store.picture}
                       distance={store.distance}
+                      latitude={store.location.coordinates[1]}
+                      longitude={store.location.coordinates[0]}
                       id={store._id}
                       >           
 
@@ -280,11 +292,14 @@ class MapContainerSearchFilter extends React.Component{
                 <InfoWindow
                   marker={this.state.activeMarker}
                   visible={this.state.showingInfoWindow}>
-                    <div>
+                    <div id="iw-container">
+                      <h1 className="iw-title">{this.state.selectedPlace.name}</h1>
                       <img src={this.state.selectedPlace.image} width="64" height="64"></img>
-                      <h1>{this.state.selectedPlace.name}</h1>
-                      <h3>{this.state.selectedPlace.address}</h3>
-                      <p>{this.state.selectedPlace.distance} meters</p>
+                      <h2>{this.state.selectedPlace.address}</h2>
+                      <p>{Math.floor(this.state.selectedPlace.distance)} meters</p>
+                      <form target="print_popup" action={`http://www.google.com/maps/place/${this.state.selectedPlace.latitude},${this.state.selectedPlace.longitude}`}>
+                        <button type="submit">GO</button>
+                      </form>
                     </div>
                 </InfoWindow>
               </Map>

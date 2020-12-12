@@ -6,7 +6,9 @@ import './SignForm.css';
 
 class Signup extends Component {
 
-  state = { email: '', password: '', type: this.props.type }
+
+  // Consumer Type is Hardcoded here-----------|
+  state = { email: '', password: '', type: 'consumer' }
 
   handleFormSubmit = (event) => {
     event.preventDefault();
@@ -17,7 +19,7 @@ class Signup extends Component {
     signup(email, password, type)
       .then(response => {
         this.props.updateUser(response)
-        this.setState({ email: "", password: "",type:"" });        
+        this.setState({ email: "", password: "", type: "" });
       })
       .catch(error => console.log(error))
   }

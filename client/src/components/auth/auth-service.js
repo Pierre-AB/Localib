@@ -7,19 +7,19 @@ const service = axios.create({
 export default service;
 
 function signup(email, password) {
-  return service.post('/signup', {email, password}).then(response => response.data)
+  return service.post('/signup', { email, password }).then(response => response.data)
 }
 export { signup }
 
-// function loggedin() {
-//   return service.get('/loggedin').then(response => response.data)
-// }
-// export {loggedin}
+function loggedIn() {
+  return service.get('/loggedin').then(response => response.data)
+}
+export { loggedIn }
 
-// function login(username, password) {
-//   return service.post('/login', {username, password}).then(response => response.data)
-// }
-// export {login}
+function login(username, password) {
+  return service.post('/login', { username, password }).then(response => response.data)
+}
+export { login }
 
 // function logout() {
 //   return service.post('/logout', {}).then(response => response.data)

@@ -16,7 +16,8 @@ class StoresByCategory extends Component {
     this.state = {
       listOfStores: [],
       latitude: "",
-      longitude: ""
+      longitude: "",
+      isMobile: false
     };
     this.askLocation = this.askLocation.bind(this);
   }
@@ -50,14 +51,24 @@ class StoresByCategory extends Component {
   }
 
   componentDidMount() {
-    this.askLocation()
+    this.askLocation();
+    window.addEventListener("resize", this.resize.bind(this));
+    this.resize();
+  }
+
+  resize() {
+      this.setState({isMobile: window.innerWidth <= 992});
+  }
+
+  componentWillUnmount() {
+      window.removeEventListener("resize", this.resize.bind(this));
   }
 
   render(){ 
     return(
-      <>
+      <div className={`${this.state.isMobile ? "" : "category-section-container"}`}>
         <h3>{this.props.title}</h3>
-        <div className="horizontal-scroll-container">
+        <div className={`${this.state.isMobile ? "horizontal-scroll-container" : "vertical-category-container"}`}>
 
           {/* Loading stores message */}
           {this.state.listOfStores.length <= 0 && <ThreeDots width="30" />}
@@ -82,7 +93,7 @@ class StoresByCategory extends Component {
           }
 
         </div>
-      </>
+      </div>
     )
   }
 }

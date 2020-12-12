@@ -4,7 +4,6 @@ import './StoreDetails.css';
 import Calendar from 'react-calendar';
 import AppointmentPicker from './AppointmentPicker';
 import StoreMap from '../Maps/storeMap'
-import { isThisISOWeek } from 'date-fns/esm';
 // import { SiInstacart } from "react-icons/si";
 // import { SiGooglecalendar } from "react-icons/si";
 // import { BsCameraVideoFill } from "react-icons/bs";
@@ -117,7 +116,7 @@ function timeSlotCalc(openingTime, closingTime, timeStep) {
 
 
 
-class StoreDetails extends React.Component {
+class StorePickADate extends React.Component {
 
   state = {
     store: {},
@@ -128,17 +127,13 @@ class StoreDetails extends React.Component {
     dayAvailibility: {},
     storeIsLoaded: false,
     timeSlot: 15,
-    nonAvaiTime: []
+    nonAvaiTime: [],
+    centerCalendarDay: new Date().getDate()
   }
 
   componentDidMount() {
     this.getSingleStore();
-
-    // const day = new Date().getDay();
-    // this.setState({
-    //   pickedDate: this.state.store.openingHours
-    // })
-
+    this.scrollDateOnLoad();
   }
 
   //  $$$$$$\            $$\                                              $$\ $$\           
@@ -168,8 +163,6 @@ class StoreDetails extends React.Component {
       .catch(err => console.log("Error on getting store details:", err))
   }
 
-
-
   //GET BOOKED APPOINTMENTS
 
   getBookedAppo = () => {
@@ -193,6 +186,7 @@ class StoreDetails extends React.Component {
       this.handleChange(this.state.pickedDate)
     } else {
       this.handleChange(new Date())
+      // Ajoute la classe
     }
 
   }
@@ -208,7 +202,6 @@ class StoreDetails extends React.Component {
 
     axios.post('http://localhost:5000/api/orders', { store_id, appointmentDay, appointmentTime, status })
       .then(response => {
-        this.getBookedAppo()
         // console.log(response)
         // console.log("ORDER PASSED TO BACK");
       })
@@ -333,6 +326,9 @@ class StoreDetails extends React.Component {
     return dayAvaiArr;
   }
 
+  scrollDateOnLoad () {
+    document.querySelector('.react-calendar__month-view__days').scrollLeft = this.state.centerCalendarDay * 86;
+  }
 
   //                                      $$\                     
   //                                     $$ |                    
@@ -360,6 +356,17 @@ class StoreDetails extends React.Component {
 
     // if (this.state.orders.length > 0 && this.state.pickedDate) { this.drawAvailability()}
 
+    // TEST CASS CALENDRIER 
+    const tileContent = ({ date, view }) => (
+      (view === 'month' && date.getDay() === 1) ? (<div className="weekDayName">lun</div>) : 
+      (view === 'month' && date.getDay() === 2) ? (<div className="weekDayName">mar</div>) :
+      (view === 'month' && date.getDay() === 3) ? (<div className="weekDayName">mer</div>) : 
+      (view === 'month' && date.getDay() === 4) ? (<div className="weekDayName">jeu</div>) : 
+      (view === 'month' && date.getDay() === 5) ? (<div className="weekDayName">ven</div>) : 
+      (view === 'month' && date.getDay() === 6) ? (<div className="weekDayName">sam</div>) : 
+      (view === 'month' && date.getDay() === 0) ? (<div className="weekDayName">dim</div>) : null
+    );   
+
 
     return (
 
@@ -375,24 +382,18 @@ class StoreDetails extends React.Component {
               </div>
             </div>
           </div>
-          <div className="bottom-detail-section">
-            <div className="tri-btn">
-              <a href='#'>Conseils vidéo</a>
-              <a href='#'>Prendre RDV</a>
-              <a href='#'>Voir les produits</a>
-            </div>
-            <hr />
-            <h3>Description</h3>
-            <p>{this.state.store.description}</p>
+          <div className="bottom-detail-section pickRDV">
+            <h3>Prendre un rendez-vous</h3>
           </div>
           <Calendar
             // activeStartDate
             onChange={this.handleChange}
             pickedDate={this.state.pickedDate}
             showNeighboringMonth={false}
-          // tileClassName={tileClassName}
+            tileContent={tileContent}
+            // tileClassName={tileClassName}
           />
-          <h3>{this.state.fullDayName}</h3>
+          {/* <h3>{this.state.fullDayName}</h3> */}
           {/* <AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} /> */}
 
           {storeIsLoaded ? (
@@ -405,7 +406,7 @@ class StoreDetails extends React.Component {
                 createOrder={this.createOrder}
                 nonAvaiTime={nonAvaiTime}
               />
-              <StoreMap store={this.state.store} />
+              {/* <StoreMap store={this.state.store} /> */}
             </div>
           )
             :
@@ -418,5 +419,4 @@ class StoreDetails extends React.Component {
   }
 }
 
-export default StoreDetails
-
+export default StorePickADate

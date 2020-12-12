@@ -2,13 +2,13 @@
 import React from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import axios from 'axios';
-import mapStyles from "./mapStyles";
+import mapStyles from "../mapStyles";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
 import '../SearchBar.css';
-import GoogleMap from './google-maps'
+import GoogleMap from '../google-maps'
 
 
 

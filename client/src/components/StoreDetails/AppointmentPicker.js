@@ -76,15 +76,15 @@ class AppointmentPicker extends React.Component {
     condiClassTimeArr = this.props.dayAvaiArr[index].map((time, index) => {
 
       if (nonAvaiTime.includes(time)) {
-        return <div key={index} >
-          <button className='Non-AvailableTime' onClick={(event) => {
+        return <div className="appointmentPickerBtnDiv" key={index} >
+          <button className="appointmentPickerBtn Non-AvailableTime" onClick={(event) => {
             event.stopPropagation()
             this.appointmentPick(time)
           }}> {time}</button>
         </div>
       } else {
-        return <div key={index} >
-          <button className='AvailableTime' onClick={(event) => {
+        return <div className="appointmentPickerBtnDiv" key={index} >
+          <button className="appointmentPickerBtn AvailableTime" onClick={(event) => {
             event.stopPropagation()
             this.appointmentPick(time)
           }}> {time}</button>
@@ -125,40 +125,50 @@ class AppointmentPicker extends React.Component {
             timeClicked: false
           })
         }}>
-          <h3>Opening hours</h3>
 
-          {morning && afternoon ?
-            (<div>
-              <p>Open from: {this.props.dayAvailibility.openAm} to {this.props.dayAvailibility.closeAm}</p>
-              <p>& from: {this.props.dayAvailibility.openPm} to {this.props.dayAvailibility.closePm}</p>
+          <div className="opening-hours-container">
+            <h3>Opening hours</h3>
+            {morning && afternoon ? (
+              <div className="opening-hours">
+                <p>{this.props.dayAvailibility.openAm} - {this.props.dayAvailibility.closeAm},&nbsp;</p>
+                <p>{this.props.dayAvailibility.openPm} - {this.props.dayAvailibility.closePm}</p>
+              </div>
+            ) : noInterruption ? (
+              <div className="opening-hours">
+                <p>{this.props.dayAvailibility.openAm} - {this.props.dayAvailibility.closeAm}</p>
+              </div>
+            ) : (
+              <div className="opening-hours">
+                <p>Closed</p>
+                {/* {`${this.props.store.fullName} will be glad to have you another day `} */}
+              </div>
+            )}
+          </div>
 
-              <h2>Morning:</h2>
+          {morning && afternoon ? (
+            <div className="appointmentPickerContainer">
+              {/* <p>Open from: {this.props.dayAvailibility.openAm} to {this.props.dayAvailibility.closeAm}</p>
+              <p>& from: {this.props.dayAvailibility.openPm} to {this.props.dayAvailibility.closePm}</p> */}
+
+              {/* <h2>Morning:</h2> */}
               {this.defDayAvaiArr(0)}
 
-              <h2>Afternoon:</h2>
+              {/* <h2>Afternoon:</h2> */}
               {this.defDayAvaiArr(1)}
-            </div>)
-            : noInterruption ?
-              (
-                <div>
-                  <p>Open from: {this.props.dayAvailibility.openAm} to {this.props.dayAvailibility.closeAm}</p>
-                  {this.defDayAvaiArr(0)}
-                </div>
-              )
-
-              :
-              (<div>
-                <h2>closed</h2>
-                {`${this.props.store.fullName} will be glad to have you another day `}
-              </div>)
-
+            </div>
+            ) : noInterruption ? (
+              <div>
+                {/* <p>Open from: {this.props.dayAvailibility.openAm} to {this.props.dayAvailibility.closeAm}</p> */}
+                {this.defDayAvaiArr(0)}
+              </div>
+              ) : (<div></div>)
           }
         </div>
 
         {timeClicked ?
           (<div>
             <form onSubmit={this.bookAppointment}>
-              <input type="submit" value="Book this appointment" />
+              <button type="submit">Je bloque ce créneau</button>
             </form>
 
           </div>)

@@ -1,6 +1,5 @@
 .SearchBar {
   width: auto;
-  min-width: 600px;
   height: 40px;
   border-radius: 10px;
   box-shadow: 0 0 20px 0 rgba(67,95,113,0.2);
@@ -13,6 +12,21 @@
   display: -webkit-flex;
   display: -ms-flexbox;
 }
+
+@media (min-width: 992px) {
+  .searchbar-desktop-position {
+    position: absolute;
+    min-width: 600px;
+    top: 24px;
+    left: 290px;
+  }
+}
+
+/* @media (max-width: 992px) {
+  .mobile-address-input {
+    display: none;
+  }
+} */
 
 .SearchBar svg {
   fill: var(--blue-grey);
@@ -51,6 +65,8 @@
 
 .searchbar-place-around-me-button.dl-button {
   height: 40px;
+  position: absolute;
+  top: 0;
 }
 
 .searchbar-input-icon {
@@ -155,4 +171,14 @@
 
 .search-container .fa-filter svg {
   fill: white;
+}
+
+span.searchbar-input-icon:after {
+  bottom: 0;
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  background: transparent;
 }

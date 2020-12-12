@@ -10,7 +10,8 @@ import './Map.css';
 // Loader Icon
 import { useLoading, ThreeDots } from '@agney/react-loading';
 
-const apiKey = "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM" // process.env.GOOGLE_MAPS_API_KEY; // "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM"
+//const apiKey = "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM" 
+const apiKey = `${process.env.REACT_APP_GOOGLE_MAP_API_KEY}`
 // const mapContainerStyle = {
 //   height: "100vh",
 //   width: "100vw",
@@ -70,7 +71,7 @@ class MapContainer extends React.Component{
   // Bring the products data
   getProducts = () => {
     axios
-      .get(`http://localhost:5000/api/products`)
+      .get(`${process.env.REACT_APP_APIURL || ""}/api/products`)
       .then((productsFromDb) => {
         const allProducts = productsFromDb.data;
         this.setState({

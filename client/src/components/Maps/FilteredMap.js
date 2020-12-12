@@ -5,12 +5,13 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import mapStyles from "./mapStyles";
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
-import '../SearchBar.css';
+import './Map.css';
 import { useLoading, ThreeDots } from '@agney/react-loading';
-import SearchMap from './SearchMapList';
+// import SearchMap from './SearchMapList';
 import GoogleMap from './google-maps';
 
-const apiKey = "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM" // process.env.GOOGLE_MAPS_API_KEY; // "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM"
+
+const apiKey = `${process.env.REACT_APP_GOOGLE_MAP_API_KEY}`// process.env.GOOGLE_MAPS_API_KEY; // "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM"
 
 
 class MapContainerSearchFilter extends React.Component{
@@ -18,18 +19,23 @@ class MapContainerSearchFilter extends React.Component{
     super(props);
     this.state = {
       listOfStores: [], // for stores
+      listOfSearchedStores: this.props.listOfSearchedStores, // for stores
       listOfProducts: [],
-      latitude: "", // avant de récupérer l'information de la recherche
-      longitude: "", // avant de récupérer l'information de la recherche
+      latitude: this.props.searchedLatitude, // avant de récupérer l'information de la recherche
+      longitude: this.props.searchedLongitude, // avant de récupérer l'information de la recherche
+      initialLatitud: "",
+      initialLongitude:"",
+      initialListOfStores: {},
       selected: null,
-      mapLoaded: false,
+      mapLoaded: this.props.mapLoaded,
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
       addresseSearched: false,
-      addressValue: "",
+      addressValue: this.props.addressValue,
       isMobile: false
     };
+    
     // this.searchLocation = this.searchLocation.bind(this);
   }
 
@@ -43,13 +49,16 @@ class MapContainerSearchFilter extends React.Component{
         this.setState({
           latitude: lat,
           longitude: lng,
+          initialLatitud: lat,
+          initialLongitude: lng,
           mapLoaded: true
         })
-        axios.get(`http://localhost:5000/api/stores/distances/${this.state.latitude},${this.state.longitude}`)
+        axios.get(`${process.env.REACT_APP_APIURL || ""}/api/stores/distances/${this.state.latitude},${this.state.longitude}`)
 
           .then(responseFromApi => {
             this.setState({
-              listOfStores: responseFromApi.data
+              listOfStores: responseFromApi.data,
+              initialListOfStores: responseFromApi.data
             })
           })
       })
@@ -95,35 +104,21 @@ class MapContainerSearchFilter extends React.Component{
   handleChange = address => {
     this.setState({ address });
   };
- 
-  handleSelect = address => {
-    this.setState({ 
-      addressValue: address,
-      addresseSearched: false
-     });
-    geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
-      .then((pos) => {
-        // pour récupérer les coordinates
-        const lat = pos.lat
-        const lng = pos.lng
-        console.log('success geoloc 🗺', pos)
-        // if success
-        this.setState({
-          latitude: lat,
-          longitude: lng,
-          addresseSearched: true
-        })
-        // on appel la DB pour récupérer les stores à partir de latitude et longitude
-        axios.get(`${process.env.REACT_APP_APIURL || ""}/api/stores/distances/${this.state.latitude},${this.state.longitude}`)
-        // On ajoute les stores au state pour les utiliser dans le render
-        .then(responseFromApi => {
-          this.setState({
-            listOfStores: responseFromApi.data            
-          })
-        })
+
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.listOfSearchedStores !== this.props.listOfSearchedStores) {
+      this.setState({
+        listOfStores: this.props.listOfSearchedStores,
       })
-  };
+    }else if (prevProps.centerGeolocated !== this.props.centerGeolocated && this.props.centerGeolocated === true) {
+      // this.askLocation()
+      this.setState({
+        listOfStores: this.state.initialListOfStores
+      })
+    } 
+  }
+ 
 
   componentDidMount() {
     this.askLocation()
@@ -138,6 +133,7 @@ class MapContainerSearchFilter extends React.Component{
 
   componentWillUnmount() {
       window.removeEventListener("resize", this.resize.bind(this));
+      this.props.handleSelect()
   }
 
 
@@ -159,95 +155,80 @@ class MapContainerSearchFilter extends React.Component{
       zoomControl: true,
     };
 
-    //Places autocomplete
-    const renderInput = ({ getInputProps, getSuggestionItemProps, suggestions }) => (
-      <div className="autocomplete-root">
-        <input className="form-control" {...getInputProps()} />
-        <div className="autocomplete-dropdown-container">
-          {suggestions.map(suggestion => (
-            <div {...getSuggestionItemProps(suggestion)} className="suggestion">
-              <span>{suggestion.description}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
 
-    //Places onError
-    const onError = (status, clearSuggestions) => {
-      console.log('Google Maps API returned error with status: ', status)
-      clearSuggestions()
-    }
 
     //logo Localib dans les markers de la carte
-    const icon = { 
+    const icon = {
       url: `https://res.cloudinary.com/dbsnbga7z/image/upload/v1606577861/localib/LogoMap_fy7h3i.png`,
       origin: new window.google.maps.Point(0, 0),
       scaledSize: new window.google.maps.Size(45, 60),
     }
+
+    const icon1 = {
+      url: `https://picsum.photos/64`,
+      origin: new window.google.maps.Point(0, 0),
+      scaledSize: new window.google.maps.Size(45, 60),
+    }
+      
+
+    // if (this.props.listOfSearchedStores.length !== 0) {
+    //   this.state.addresseSearched = true
+    // }
     
-    const addresseSearched = this.state.addresseSearched
+    const addresseSearched = this.props.addresseSearched
 
 
     // Let's filter the name before rendering 
     const onNameFilter = this.state.listOfStores.filter(store => {
       // does the store's name matches the query ?
-      const matchName = (store.fullName).toLowerCase().includes((this.props.query).toLowerCase());
+      const matchName = store.fullName && store.fullName.toLowerCase().includes(this.props.query.toLowerCase());
       return matchName;
     })
 
     // // Let's filter the products before rendering
 
-    // // Make an array of products matching
-    // let ProductFilteredStoreId = []
+    // Make an array of products matching
+    let ProductFilteredStoreId = []
 
-    // const onProductFilter = this.state.listOfProducts.filter(product => { // [array de store ID contenant camemberts]
-    //   // does the store's have the product match in the query ?
-    //   const matchProduct = (product.name).toLowerCase().includes((this.props.query).toLowerCase());
-    //   return matchProduct;
-    // })
+    const onProductFilter = this.state.listOfProducts.filter(product => { // [array de store ID contenant camemberts]
+      // does the store's have the product match in the query?
+      console.log("Product :",product)
+      const matchProduct = product.name && product.name.toLowerCase().includes(this.props.query.toLowerCase()); 
+      return matchProduct; 
+    })
 
-    // // Matching store ID of products and store ID of stores
-    // onProductFilter.forEach(product => { // Boucle sur chaque produit
-    //   this.state.listOfStores.forEach(store => { // Boucle sur chaque store
-    //     if (product.store_id && store._id) { // Ne compare pas les undefined
-    //       if (product.store_id === store._id) { // Si store ID = store ID
-    //         ProductFilteredStoreId.push(store) // push dans ProductFilteredStoreId array
-    //       }
-    //     }
-    //   })   
-    // })   
+    // Matching store ID of products and store ID of stores
+    onProductFilter.forEach(product => { // Boucle sur chaque produit
+      this.state.listOfStores.forEach(store => { // Boucle sur chaque store
+        if (product.store_id && store._id) { // Ne compare pas les undefined
+          if (product.store_id === store._id) { // Si store ID = store ID
+            ProductFilteredStoreId.push(store) // push dans ProductFilteredStoreId array
+          }
+        }
+      })   
+    })   
 
     // Switch rendering regarding content of the search bar
     let renderedList;
 
-    if (this.props.query.length !== "") {
-      renderedList = [...onNameFilter /*, ...ProductFilteredStoreId*/]
-    } else { // Par défaut, renvoie full listOfStores
+    if (this.props.query !== "") {
+      renderedList = [...onNameFilter, ...ProductFilteredStoreId]
+      // renderedList = preRender.filter((item, index) => preRender.indexOf(item) !== index)
+    } else {
       renderedList = this.state.listOfStores
     }
+
+
 
     // RENDER DE PAGE
     return (
       <div>
-        <PlacesAutocomplete
-          className="search-container SearchBar"
-          value={this.state.addressValue}
-          onChange={addressValue => {this.setState({ addressValue })}}
-          onSelect={this.handleSelect}
-          onError={onError}
-          searchOptions={{componentRestrictions: { country: ['fr'] }}
-          }
-        >
-        {renderInput}
-        </PlacesAutocomplete>
-
 
         {/* DIV englobante générale */}
         <div className="flex">
 
           {/* DIV avec la liste des stores */}
-          <div className="vertical-scroll-container">
+          <div style={this.state.isMobile ? {display:"none"} : {display:"block"}} className="vertical-scroll-container">
 
           {/* Loading stores message */}
           {renderedList.length <= 0 && <ThreeDots width="30" />}
@@ -263,7 +244,7 @@ class MapContainerSearchFilter extends React.Component{
                   <div className="vertical-store-info">
                     <h4>{store.fullName}</h4>
                     <p className="vertical-store-address">{store.address}</p>
-                    <p className="vertical-store-address">{store.distance} meters</p>
+                    <p className="vertical-store-address">{Math.floor(store.distance)} meters</p>
                   </div>
                 </div>
                 <hr />
@@ -286,12 +267,12 @@ class MapContainerSearchFilter extends React.Component{
                     this.onMapClicked
                   }
                   initialCenter={{ 
-                    lat: this.state.latitude,  
-                    lng: this.state.longitude
+                    lat: this.props.searchedLatitude || this.state.latitude,  
+                    lng: this.props.searchedLongitude || this.state.longitude 
                   }}
                   center={{
-                    lat: this.state.latitude,  
-                    lng: this.state.longitude
+                    lat: this.props.searchedLatitude || this.state.latitude,
+                    lng: this.props.searchedLongitude || this.state.longitude 
                   }}
                 >
                 {renderedList.map(store => {
@@ -308,6 +289,8 @@ class MapContainerSearchFilter extends React.Component{
                       address={store.address}
                       image={store.picture}
                       distance={store.distance}
+                      latitude={store.location.coordinates[1]}
+                      longitude={store.location.coordinates[0]}
                       id={store._id}
                       >           
 
@@ -317,11 +300,14 @@ class MapContainerSearchFilter extends React.Component{
                 <InfoWindow
                   marker={this.state.activeMarker}
                   visible={this.state.showingInfoWindow}>
-                    <div>
+                    <div id="iw-container">
+                      <h1 className="iw-title">{this.state.selectedPlace.name}</h1>
                       <img src={this.state.selectedPlace.image} width="64" height="64"></img>
-                      <h1>{this.state.selectedPlace.name}</h1>
-                      <h3>{this.state.selectedPlace.address}</h3>
-                      <p>{this.state.selectedPlace.distance} meters</p>
+                      <h2>{this.state.selectedPlace.address}</h2>
+                      <p>{Math.floor(this.state.selectedPlace.distance)} meters</p>
+                      <form target="print_popup" action={`http://www.google.com/maps/place/${this.state.selectedPlace.latitude},${this.state.selectedPlace.longitude}`}>
+                        <button type="submit">GO</button>
+                      </form>
                     </div>
                 </InfoWindow>
               </Map>

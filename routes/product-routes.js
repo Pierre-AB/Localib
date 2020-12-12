@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Product = require('../models/product-model');
 const User = require('../models/user-model');
+const fileUploader = require('../configs/cloudinary.config');
+
 
 const router = express.Router();
 
@@ -47,12 +49,20 @@ router.get('/products/:id', (req, res, next) => {
  *     ######  ##     ## ######## ##     ##    ##    ######## 
  */
 
- router.post('/products', (req, res, next) => {
-  const { store_id, name, description, picture, price, category,Tags } = req.body;
+ router.post('/products', fileUploader.single('image'), (req, res, next) => {
+  const { store_id, name, description, price, category,Tags } = req.body;
+
+  let picture;
+  if (req.file) {
+    picture = req.file.path;
+  } else {
+    picture = undefined;
+  }
+
   Product.create({
     store_id: req.session.currentUser._id, // à tester
     name, 
-    picture, 
+    picture: req.file && req.file.path || "https://res.cloudinary.com/dbsnbga7z/image/upload/v1602529400/Ironring/empty%20project.png.png", 
     price, 
     category,
     Tags
@@ -82,7 +92,8 @@ router.put('/products/:id', (req, res, next) => {
   }
 
   Product.findByIdAndUpdate(req.params.id, req.body)
-    .then(() => {
+    .then((product) => {
+      product.picture = req.file.path
       res.json({ message: `Product with ${req.params.id} is updated successfully.` });
     })
     .catch(err => {

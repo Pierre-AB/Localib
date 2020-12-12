@@ -3,11 +3,13 @@ import React from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import mapStyles from "./mapStyles";
+import mapStyles from "../mapStyles";
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import '../SearchBar.css';
 import { useLoading, ThreeDots } from '@agney/react-loading';
 import SearchMap from './SearchMapList'
+import Navigation from '../../Navigation'
+
 
 const apiKey = "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM" // process.env.GOOGLE_MAPS_API_KEY; // "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM"
 

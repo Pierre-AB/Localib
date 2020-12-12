@@ -7,7 +7,8 @@ import mapStyles from "./mapStyles";
 
 require('dotenv').config();
 
-const apiKey = "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM" 
+//const apiKey = "AIzaSyAVzE_dUQuFDCTq5dXGYztOiz4YJbe4yjM" 
+const apiKey = `${process.env.REACT_APP_GOOGLE_MAP_API_KEY}`
 
 class StoreMap extends React.Component{
   constructor(props) {

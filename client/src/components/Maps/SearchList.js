@@ -51,7 +51,7 @@ class SearchList extends Component {
   // Bring the products data
   getProducts = () => {
     axios
-      .get(`http://localhost:5000/api/products`)
+      .get(`${process.env.REACT_APP_APIURL || ""}/api/products`)
       .then((productsFromDb) => {
         const allProducts = productsFromDb.data;
         this.setState({
@@ -73,7 +73,7 @@ class SearchList extends Component {
     // Let's filter the name before rendering 
     const onNameFilter = this.state.listOfStores.filter(store => {
       // does the store's name matches the query ?
-      const matchName = (store.fullName).toLowerCase().includes((this.props.query).toLowerCase());
+      const matchName = store.fullName && store.fullName.toLowerCase().includes(this.props.query.toLowerCase());
       return matchName;
     })
 
@@ -85,7 +85,7 @@ class SearchList extends Component {
 
     const onProductFilter = this.state.listOfProducts.filter(product => { // [array de store ID contenant camemberts]
       // does the store's have the product match in the query ?
-      const matchProduct = (product.name).toLowerCase().includes((this.props.query).toLowerCase());
+      const matchProduct = product.name && product.name.toLowerCase().includes(this.props.query.toLowerCase());
       return matchProduct;
     })
 

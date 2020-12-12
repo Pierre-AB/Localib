@@ -84,7 +84,7 @@ class StoresByCategory extends Component {
                 <div key={store._id} className="category-card" style={{backgroundImage: `linear-gradient(0deg, rgba(29, 29, 29, 0.5), rgba(29, 29, 29, 0.2)), url(${background})`}}>
                   <div className="category-store-info">
                     <h4>{store.fullName}</h4>
-                    <p className="category-store-address">{store.distance} meters</p>
+                    <p className="category-store-address">{Math.floor(store.distance)} meters</p>
                   </div>
                 </div>
               </Link>

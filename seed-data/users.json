@@ -7,7 +7,7 @@
     "address": "22 Rue du Général Leclerc, 94000 Créteil",
     "phone": "0142001830",
     "description": "Supermarché de Créteil",
-    "picture": "https://picsum.photos/64",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607971485/localib/Auchan_sab8ik.jpg",
     "siret": "11111111111",
     "numVAT": "11111111111",
     "businessType": "Alimentation",
@@ -71,7 +71,7 @@
     "address": "43 Rue du Général Leclerc, 94000 Créteil",
     "phone": "0142001349",
     "description": "Fromagerie",
-    "picture": "https://picsum.photos/64",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607971898/localib/fromagerie_vpurhg.jpg",
     "siret": "11111111111",
     "numVAT": "11111111111",
     "businessType": "Alimentation",
@@ -135,7 +135,7 @@
     "address": "20 Rue du Général Leclerc, 94000 Créteil",
     "phone": "0142001830",
     "description": "Nicolas vin",
-    "picture": "https://picsum.photos/64",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607972036/localib/nicolas_e3lsrt.jpg",
     "siret": "11111111111",
     "numVAT": "11111111111",
     "businessType": "Epicerie-et-boissons",
@@ -192,14 +192,14 @@
     ]
   },
   {
-    "email": "boulangerie@gmail.fr",
+    "email": "Boulangerieatisserie@gmail.fr",
     "password": "azerty123",
     "type": "store",
     "fullName": "Boulanger Eric",
     "address": "18 Rue du Dr Plichon, 94000 Créteil",
     "phone": "0142004853",
-    "description": "Boulangerie",
-    "picture": "https://picsum.photos/64",
+    "description": "Boulangerie Patisserie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607971898/localib/boulangerie-eric-kayser-paris-154226661632_habkzo.jpg",
     "siret": "11111111111",
     "numVAT": "11111111111",
     "businessType": "Epicerie-et-boissons",
@@ -256,14 +256,14 @@
     ]
   },
   {
-    "email": "boulangerie@gmail.fr",
+    "email": "Lessaveursdecergy@hotmail.fr", 
     "password": "azerty123",
     "type": "store",
-    "fullName": "Local Paris",
-    "address": "142 Rue de Rivoli, 05001 Paris, FR",
-    "phone": "0142004853",
-    "description": "Boulangerie",
-    "picture": "https://picsum.photos/64",
+    "fullName": "Les saveurs de cergy",
+    "address": "Saint Christophe FR, 37 Avenue de Mondétour, 95800 Cergy",
+    "phone": "0134439266",
+    "description": "Boulangerie Patisserie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607880572/localib/Boulangerie1_h57ua6.jpg",
     "siret": "11111111111",
     "numVAT": "11111111111",
     "businessType": "Epicerie-et-boissons",
@@ -320,17 +320,1233 @@
     ]
   },
   {
-    "email": "boulangerie@gmail.fr",
+    "email": "Placedumarché@hotmail.fr", 
     "password": "azerty123",
     "type": "store",
-    "fullName": "Boulanger Rennes",
-    "address": "18 Rue de Nemours, 35000 Rennes",
-    "phone": "0142004853",
-    "description": "Boulangerie",
-    "picture": "https://picsum.photos/64",
+    "fullName": "Boulangerie, Pâtisserie, Place du marché",
+    "address": "7 Place du Marché, 95800 Cergy, FR",
+    "phone": "0983080869",
+    "description": "Boulangerie Patisserie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607880571/localib/Boulangerie2_ly15r6.jpg",
     "siret": "11111111111",
     "numVAT": "11111111111",
     "businessType": "Epicerie-et-boissons",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "Saint-Christophe@gmail.fr", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Les Délices de Saint-Christophe",
+    "address": "5 Place du Thyrse, 95800 Cergy, FR",
+    "phone": "0954115956",
+    "description": "Boulangerie Patisserie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607880571/localib/Boulangerie6_dklpex.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Epicerie-et-boissons",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "Linandes@gmail.fr", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Boulangerie Des Linandes",
+    "address": "1 Place des Linandes, 95000 Cergy, FR",
+    "phone": "0130300226",
+    "description": "Boulangerie Patisserie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607880571/localib/Boulangerie_krq2ck.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Epicerie-et-boissons",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "Gourmets@gmail.fr", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Comptoir des Gourmets",
+    "address": "50 Avenue de la Plaine des Sports, 95800 Cergy, FR",
+    "phone": "0130389471",
+    "description": "Boulangerie Patisserie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607880571/localib/Boulangerie6_dklpex.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Epicerie-et-boissons",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "Boulangerie@gmail.fr", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Boulangerie Patisserie de cergy",
+    "address": "5 Rue des Vendanges Prochaines, 95800 Cergy, FR",
+    "phone": "0130309061",
+    "description": "Boulangerie Patisserie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607880571/localib/Boulangerie4_oqzc7x.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Epicerie-et-boissons",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "fromage@gmail.fr", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "LE TEMPLE DU FROMAGE à VAUREAL",
+    "address": "7 Place du Cœur Battant, 95490 Vauréal, FR",
+    "phone": "0130360729",
+    "description": "Fromagerie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607880686/localib/Fromagerie3_kbrqjl.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Alimentation",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "fromage@gmail.fr", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Sultana Fromages",
+    "address": "10 Cour des Frontons, 95800 Cergy, FR",
+    "phone": "0626399265",
+    "description": "Fromagerie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607880686/localib/Fromagerie2_stbmgq.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Alimentation",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "maisonpassos@gmail.fr", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Maison Passos",
+    "address": "28 Rue de la Roquette, 75011 Paris, FR",
+    "phone": "0148057896",
+    "description": "Boulangerie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607967475/localib/Boulangerie1.1_jqso4r.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Alimentation",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },  
+  {
+    "email": "jeanne@gmail.com", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "La Boulangerie de Jeanne",
+    "address": "109 Avenue Ledru Rollin, 75011 Paris, FR",
+    "phone": "0148060355",
+    "description": "Boulangerie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607967474/localib/Boulangerie1.6_vt727l.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Alimentation",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "baguette@gmail.com", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "La baguette de paris",
+    "address": "2 Rue Basfroi, 75011 Paris, FR",
+    "phone": "0174306190",
+    "description": "Boulangerie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607967474/localib/Boulangerie1.7_jzwwf2.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Alimentation",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "painblanc@gmail.com", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Pain Blanc",
+    "address": "195 Boulevard Voltaire, 75011 Paris, FR",
+    "phone": "0143708941",
+    "description": "Boulangerie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607967474/localib/Boulangerie1.4_ynh3ye.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Alimentation",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "Aux Castelblangeois@gmail.com", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Aux Castelblangeois",
+    "address": "162 Avenue Ledru Rollin, 75011 Paris, FR",
+    "phone": "0967305407",
+    "description": "Boulangerie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607967474/localib/Boulangerie1.7_jzwwf2.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Alimentation",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "landemaine@gmail.com", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "MAISON LANDEMAINE VOLTAIRE",
+    "address": "130 Rue de la Roquette, 75011 Paris, FR",
+    "phone": "0143799803",
+    "description": "Boulangerie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607967475/localib/Boulangerie1.5_yuekfj.png",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Alimentation",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "dupain@gmail.com", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Boulangerie Dupain",
+    "address": "20 Boulevard des Filles du Calvaire, 75011 Paris, FR",
+    "phone": "0158307236",
+    "description": "Boulangerie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607880572/localib/Boulangerie1_h57ua6.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Alimentation",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "Univers@gmail.com", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "L'Univers du Fromage",
+    "address": "16 Rue Chanzy, 75011 Paris, FR",
+    "phone": "0981855176",
+    "description": "Fromagerie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607970047/localib/Formagerie1.1_v4bsaa.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Alimentation",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "Nanina@gmail.com", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Nanina fromages",
+    "address": "24 Rue Basfroi, 75011 Paris, FR",
+    "phone": "0981855155",
+    "description": "Fromagerie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607880686/localib/Fromagerie3_kbrqjl.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Alimentation",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "Acdm@gmail.com", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Fromagerie Acdm",
+    "address": "28 Rue d'Aligre, 75012 Paris FR",
+    "phone": "0143415064",
+    "description": "Fromagerie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607970333/localib/fromagerie6_ybklfa.png",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Alimentation",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "Fromageriedereuilly@gmail.com", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Fromagerie de Reuilly",
+    "address": "25 Rue Erard, 75012 Paris, FR",
+    "phone": "0682814679",
+    "description": "Fromagerie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607970047/localib/Formagerie1.3_c4emdb.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Alimentation",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "Julhes@gmail.com", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Julhès Paris - Charonne Fromagerie",
+    "address": "120 Rue de Charonne, 75011 Paris, FR",
+    "phone": "0682814679",
+    "description": "Fromagerie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607970047/localib/Formagerie1.4_cfufs9.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Alimentation",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "Charlicot@gmail.com", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Charlicot Fromagerie",
+    "address": "6 Rue de la Folie Méricourt, 75011 Paris, FR",
+    "phone": "0158309632",
+    "description": "Fromagerie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607970189/localib/fromagerie5_baw7ic.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Alimentation",
     "openingHours": [
       {
         "day": 1,

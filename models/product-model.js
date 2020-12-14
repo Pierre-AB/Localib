@@ -9,7 +9,7 @@ const productSchema = new Schema({
   price: Number,
   category: {
     type: [String],
-    enum: ['fromage', 'fleur', 'legume', 'fruit', 'outillage', 'luminaire']
+    enum: ['fromage', 'fleur', 'legume', 'fruit', 'outillage', 'luminaire', "pain-viennoiserie", "vin"]
   },
   Tags: [String]
 },

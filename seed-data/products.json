@@ -1,6 +1,5 @@
 [
   {
-    "store_id": "à modifier",
     "name": "Camembert",
     "description": "le classique de Normandie",
     "picture": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Camembert_de_Normandie_%28AOP%29_11.jpg/1024px-Camembert_de_Normandie_%28AOP%29_11.jpg",
@@ -12,7 +11,6 @@
     ]
   },
   {
-    "store_id": "à modifier",
     "name": "Comté",
     "description": "le classique du Jura",
     "picture": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Comte_AOP.jpg/1024px-Comte_AOP.jpg",
@@ -24,7 +22,6 @@
     ]
   },
   {
-    "store_id": "à modifier",
     "name": "Poire",
     "description": "Juteuse et subtile",
     "picture": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Pears.jpg",

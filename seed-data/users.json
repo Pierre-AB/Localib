@@ -192,13 +192,13 @@
     ]
   },
   {
-    "email": "boulangerie@gmail.fr",
+    "email": "Boulangerie Patisserie@gmail.fr",
     "password": "azerty123",
     "type": "store",
     "fullName": "Boulanger Eric",
     "address": "18 Rue du Dr Plichon, 94000 Créteil",
     "phone": "0142004853",
-    "description": "Boulangerie",
+    "description": "Boulangerie Patisserie",
     "picture": "https://picsum.photos/64",
     "siret": "11111111111",
     "numVAT": "11111111111",
@@ -256,13 +256,13 @@
     ]
   },
   {
-    "email": "boulangerie@gmail.fr",
+    "email": "Boulangerie Patisserie@gmail.fr",
     "password": "azerty123",
     "type": "store",
     "fullName": "Local Paris",
-    "address": "142 Rue de Rivoli, 05001 Paris, FR",
+    "address": "142 Rue de Rivoli, 75001 Paris, FR",
     "phone": "0142004853",
-    "description": "Boulangerie",
+    "description": "Boulangerie Patisserie",
     "picture": "https://picsum.photos/64",
     "siret": "11111111111",
     "numVAT": "11111111111",
@@ -320,17 +320,529 @@
     ]
   },
   {
-    "email": "boulangerie@gmail.fr",
+    "email": "Boulangerie Patisserie@gmail.fr",
     "password": "azerty123",
     "type": "store",
-    "fullName": "Boulanger Rennes",
-    "address": "18 Rue de Nemours, 35000 Rennes",
+    "fullName": "Boulangerie de Rennes",
+    "address": "18 Rue de Nemours, 35000 Rennes, FR",
     "phone": "0142004853",
-    "description": "Boulangerie",
+    "description": "Boulangerie Patisserie",
     "picture": "https://picsum.photos/64",
     "siret": "11111111111",
     "numVAT": "11111111111",
     "businessType": "Epicerie-et-boissons",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "Lessaveursdecergy@hotmail.fr", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Les saveurs de cergy",
+    "address": "Saint Christophe FR, 37 Avenue de Mondétour, 95800 Cergy",
+    "phone": "0134439266",
+    "description": "Boulangerie Patisserie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607880572/localib/Boulangerie1_h57ua6.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Epicerie-et-boissons",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "Placedumarché@hotmail.fr", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Boulangerie, Pâtisserie, Place du marché",
+    "address": "7 Place du Marché, 95800 Cergy, FR",
+    "phone": "0983080869",
+    "description": "Boulangerie Patisserie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607880571/localib/Boulangerie2_ly15r6.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Epicerie-et-boissons",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "Saint-Christophe@gmail.fr", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Les Délices de Saint-Christophe",
+    "address": "5 Place du Thyrse, 95800 Cergy, FR",
+    "phone": "0954115956",
+    "description": "Boulangerie Patisserie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607880571/localib/Boulangerie6_dklpex.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Epicerie-et-boissons",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "Linandes@gmail.fr", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Boulangerie Des Linandes",
+    "address": "1 Place des Linandes, 95000 Cergy, FR",
+    "phone": "0130300226",
+    "description": "Boulangerie Patisserie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607880571/localib/Boulangerie_krq2ck.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Epicerie-et-boissons",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "Gourmets@gmail.fr", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Comptoir des Gourmets",
+    "address": "50 Avenue de la Plaine des Sports, 95800 Cergy, FR",
+    "phone": "0130389471",
+    "description": "Boulangerie Patisserie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607880571/localib/Boulangerie6_dklpex.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Epicerie-et-boissons",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "Boulangerie@gmail.fr", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Boulangerie Patisserie de cergy",
+    "address": "5 Rue des Vendanges Prochaines, 95800 Cergy, FR",
+    "phone": "0130309061",
+    "description": "Boulangerie Patisserie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607880571/localib/Boulangerie4_oqzc7x.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Epicerie-et-boissons",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "fromage@gmail.fr", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "LE TEMPLE DU FROMAGE à VAUREAL",
+    "address": "7 Place du Cœur Battant, 95490 Vauréal, FR",
+    "phone": "0130360729",
+    "description": "Fromagerie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607880686/localib/Fromagerie3_kbrqjl.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Alimentation",
+    "openingHours": [
+      {
+        "day": 1,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 2,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 3,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 4,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 5,
+        "openAm": "09:00",
+        "closeAm": "12:30",
+        "openPm": "14:00",
+        "closePm": "19:00"
+      },
+      {
+        "day": 6,
+        "openAm": "09:00",
+        "closeAm": "19:00",
+        "openPm": null,
+        "closePm": null
+      },
+      {
+        "day": 0,
+        "openAm": null,
+        "closeAm": null,
+        "openPm": null,
+        "closePm": null
+      }
+    ]
+  },
+  {
+    "email": "fromage@gmail.fr", 
+    "password": "azerty123",
+    "type": "store",
+    "fullName": "Sultana Fromages",
+    "address": "10 Cour des Frontons, 95800 Cergy, FR",
+    "phone": "0626399265",
+    "description": "Fromagerie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607880686/localib/Fromagerie2_stbmgq.jpg",
+    "siret": "11111111111",
+    "numVAT": "11111111111",
+    "businessType": "Alimentation",
     "openingHours": [
       {
         "day": 1,

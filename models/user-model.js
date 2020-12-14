@@ -7,7 +7,7 @@ const userSchema = new Schema({
   password: String,
   type: {
     type: String,
-    enum: ['store', 'consumer',]
+    enum: ['store', 'consumer']
   },
   fullName: String,
   address: {
@@ -60,6 +60,7 @@ const userSchema = new Schema({
 // Geocode & create location field
 
 userSchema.pre('save', async function (next) {
+  // const err = new Error("🧀 The error comes from Pre middleware mongoose save user-model")
   const loc = await geocoder.geocode(this.address);
   this.location = {
     type: 'Point',
@@ -72,9 +73,10 @@ userSchema.pre('save', async function (next) {
     country: loc[0].countryCode
   };
 
+  // throw new Error("🧀 The error comes from Pre middleware mongoose save user-model")
   // // Do not save address in DB
   // this.address = undefined;
-  // next();
+  // next(err);
 });
 
 

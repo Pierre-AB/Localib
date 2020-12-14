@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { signup } from './auth-service'
+import { consumerSignup } from './auth-service'
 import { Link } from 'react-router-dom';
 
 import './SignForm.css';
@@ -7,24 +7,24 @@ import './SignForm.css';
 class Signup extends Component {
 
 
-  // Consumer Type is Hardcoded here-----------|
+
   state = { email: '', password: '', type: '' }
 
   handleFormSubmit = (event) => {
     event.preventDefault();
     const email = this.state.email;
     const password = this.state.password;
-    const type = 'consumer';
+    const type = 'consumer'; // Consumer Type is Hardcoded here
 
     console.log('🍒🍒🍒🍒 JUSQUE LA')
 
-    signup(email, password, type)
-      .then(response => {
+    consumerSignup(email, password, type)
+      .then(newConsumer => {
         // this.props.updateUser(response)
-        console.log("🌶🌶🌶", response.data)
+        console.log("🌶🌶🌶", newConsumer)
         this.setState({ email: "", password: "", type: "" });
-      })
-      .catch(error => console.log(error))
+        this.props.updateUser(newConsumer)
+      }).catch(error => console.log(error))
   }
 
   handleChange = (event) => {

@@ -78,9 +78,10 @@ function Navigation (props) {
           <div className="nav-menu">
             <ul>
               <li className="nav-link"><Link to='/home'>Home</Link></li>
-              <li className="nav-link"><Link to='/mapView'>Stores</Link></li>
-              <li className="nav-link"><Link to='/cart'>Cart</Link></li>
-              <li className="nav-link"><Link to='/userSettings'>Settings</Link></li>
+              <li className="nav-link"><Link to='/mapView'>Les commerces</Link></li>
+              <li className="nav-link"><Link to='/commandes'>Mes commandes</Link></li>
+              {/* <li className="nav-link"><Link to='/cart'>Cart</Link></li>
+              <li className="nav-link"><Link to='/userSettings'>Settings</Link></li> */}
             </ul>
           </div>
         </div>

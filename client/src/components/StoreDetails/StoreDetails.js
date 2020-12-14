@@ -4,7 +4,7 @@ import './StoreDetails.css';
 import { Link } from 'react-router-dom';
 // import Calendar from 'react-calendar';
 // import AppointmentPicker from './AppointmentPicker';
-// import StoreMap from '../Maps/storeMap'
+import StoreMap from '../Maps/storeMap'
 // import { isThisISOWeek } from 'date-fns/esm';
 // import { SiInstacart } from "react-icons/si";
 // import { SiGooglecalendar } from "react-icons/si";
@@ -335,6 +335,8 @@ class StoreDetails extends React.Component {
   // }
 
 
+
+
   //                                      $$\                     
   //                                     $$ |                    
   //  $$$$$$\   $$$$$$\  $$$$$$$\   $$$$$$$ | $$$$$$\   $$$$$$\  
@@ -352,7 +354,7 @@ class StoreDetails extends React.Component {
     // Use store picture as background
     let background = this.state.picture;
 
-    // const storeIsLoaded = this.state.storeIsLoaded;
+    const storeIsLoaded = this.state.storeIsLoaded;
     // const dayInfo = this.splitDay();
 
     // // const nonAvaiTime = this.state.nonAvaiTime;
@@ -361,11 +363,9 @@ class StoreDetails extends React.Component {
 
     // if (this.state.orders.length > 0 && this.state.pickedDate) { this.drawAvailability()}
 
-
     return (
 
       <div>
-
         <div className="page-container-mobile">
           <div className="top-detail-section" style={{ backgroundImage: `linear-gradient(0deg, rgba(29, 29, 29, 0.5), rgba(29, 29, 29, 0.2)), url(${background})` }}>
             <div className="relativeParent">
@@ -396,21 +396,45 @@ class StoreDetails extends React.Component {
           <h3>{this.state.fullDayName}</h3> */}
           {/* <AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} /> */}
 
-          {/* {storeIsLoaded ? (
+          {storeIsLoaded ? (
             <div>
-              <AppointmentPicker
+              {/* <AppointmentPicker
                 store={this.state.store}
                 pickedDate={this.state.pickedDate}
                 dayAvailibility={this.state.dayAvailibility}
                 dayAvaiArr={dayInfo}
                 createOrder={this.createOrder}
                 nonAvaiTime={nonAvaiTime}
-              />
+              /> */}
               <StoreMap store={this.state.store} />
+                          
+              <div className="product-list-container">
+                <li className="product-row">
+                  <div className="product-img-and-name">
+                    <img className="product-picture" src="https://www.vitafruits.fr/146-medium_default/chou-brocoli.jpg"/>
+                    <span className="product-name">Broccolis</span>
+                  </div>
+                  <div className="product-weight-and-price">
+                    <span className="product-weight">300g</span>
+                    <div className="product-price">
+                      <span className="product-price-value">3.01€</span>
+                      <span className="product-price-unity">/kg</span>
+                    </div>
+                  </div>
+                  <div className="book-products" style={{display: "flex"}}>
+                    <span>-</span>
+                    <span className="product-quantity">0</span>
+                    <span>+</span>
+                  </div>
+                </li>
+              </div>
+
+
             </div>
+
           )
             :
-            (<div>"loading..."</div>)} */}
+            (<div>"loading..."</div>)}
         </div>
 
       </div>

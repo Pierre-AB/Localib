@@ -58,10 +58,11 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  font-size: .8em;
+  font-size: 12px;
+  text-decoration: none;
   width: 26vw;
   background: var(--accent-color);
-  padding: 1em;
+  padding: .5em 1em;
   color: white;
   border-radius: 15px;
   align-content: center;
@@ -231,4 +232,79 @@ button.react-calendar__tile.react-calendar__month-view__days__day {
 
 button.bookAppointmentBtn {
   margin-right: -7.9em;
+}
+
+.storeDetailsMap {
+  width: calc(100vw - 2.6em) !important;
+  height: 25vh !important;
+  margin: auto;
+  border-radius: 15px;
+  position: relative !important;
+}
+
+.product-list-container {
+  margin-top: 1.3em;
+}
+
+.product-row {
+  background:#f0f4f8;
+  height: 50px;
+  border-radius: 15px;
+  padding: 1em;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 0;
+}
+
+.book-products {
+  position: absolute;
+  background-color: var(--accent-color);
+  right: 0;
+  top: 0;
+  height: 50px;
+  border-radius: 0 15px 15px 0;
+  z-index: 1;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-evenly;
+}
+
+.book-products span {
+  color: white;
+}
+
+.product-quantity {
+  font-weight: bolder;
+}
+
+.product-img-and-name {
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+
+.product-weight-and-price {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  font-size: .8em;
+}
+
+.product-picture {
+  height: 47px;
+  width: 47px;
+  object-fit: cover;
+}
+
+.product-weight {
+  color: var(--grey);
+}
+
+.product-price {
+  margin-left: 1.5em;
 }

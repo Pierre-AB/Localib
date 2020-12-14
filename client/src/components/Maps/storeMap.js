@@ -60,6 +60,7 @@ render() {
       // alors retourne: 
       <div>
       <Map
+        className="storeDetailsMap" 
         google={this.props.google}
         styles={this.props.mapStyle}
         zoom={16}

@@ -65,23 +65,8 @@ class Navigation extends React.Component {
   //     return <div />
   //   }
   // }
-
-  state = {
-    loggedIn: false
-  }
-
-  checkIfLoggedUser = () => {
-
-    if (this.props.loggedInUser) {
-      this.setState({
-        loggedIn: true
-      })
-    }
-  }
-
   render() {
 
-    const loggedIn = this.state.loggedIn;
 
     return (
       <>
@@ -95,16 +80,10 @@ class Navigation extends React.Component {
             <div className="nav-menu">
               <ul>
                 <li className="nav-link"><Link to='/home'>Home</Link></li>
-                <li className="nav-link"><Link to='/mapView'>Stores</Link></li>
-                {loggedIn ? (<>
-                  <li className="nav-link"><Link to='/myOrders'>My Orders</Link></li>
-                  <li className="nav-link"><Link to='/logout'>Logout</Link></li>
-                </>)
-                  : (<>
-                    <li className="nav-link"><Link to='/signup'>Register</Link></li>
-                    <li className="nav-link"><Link to='/login'>Check-in</Link></li>
-                  </>
-                  )}
+                <li className="nav-link"><Link to='/mapView'>Les commerces</Link></li>
+                <li className="nav-link"><Link to='/commandes'>Mes commandes</Link></li>
+                {/* <li className="nav-link"><Link to='/cart'>Cart</Link></li>
+              <li className="nav-link"><Link to='/userSettings'>Settings</Link></li> */}
               </ul>
             </div>
           </div>
@@ -127,11 +106,13 @@ class Navigation extends React.Component {
           </div>
         </nav>
       </>
+
     )
+
+
+
+
   }
-
-
-
-};
+}
 
 export default Navigation;

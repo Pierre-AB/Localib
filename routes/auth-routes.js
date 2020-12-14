@@ -82,7 +82,7 @@ authRoutes.post('/signup', fileUploader.single('image'), (req, res, next) => {
     email,
     password: hashPass,
     type,
-    fullName,
+    fullName,Y
     address,
     zip,
     phone,

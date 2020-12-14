@@ -64,6 +64,8 @@ class StoreDetails extends React.Component {
 
 
 
+
+
   //                                      $$\                     
   //                                     $$ |                    
   //  $$$$$$\   $$$$$$\  $$$$$$$\   $$$$$$$ | $$$$$$\   $$$$$$\  
@@ -84,7 +86,6 @@ class StoreDetails extends React.Component {
     return (
 
       <div>
-
         <div className="page-container-mobile">
           <div className="top-detail-section" style={{ backgroundImage: `linear-gradient(0deg, rgba(29, 29, 29, 0.5), rgba(29, 29, 29, 0.2)), url(${background})` }}>
             <div className="relativeParent">

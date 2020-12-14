@@ -302,11 +302,9 @@ class MapContainerSearchFilter extends React.Component{
                 <InfoWindow
                   marker={this.state.activeMarker}
                   visible={this.state.showingInfoWindow}>
-                  <div key={this.state.selectedPlace.id} className={`${this.state.isMobile ? "nearby-card-mobile" : "nearby-card-desktop-container"}`} style={this.state.isMobile ? { backgroundImage:`linear-gradient(0deg, rgba(29, 29, 29, 0.5), rgba(29, 29, 29, 0.2)), url(${this.state.selectedPlace.image})` } : {}} >                      
-                  {this.state.isMobile ? "" : (<img className="nearby-card-desktop" src={`${this.state.selectedPlace.image}`} />)}
-                  {/* <h1 className="iw-title">{this.state.selectedPlace.name}</h1> */}
-                      {/* <img src={this.state.selectedPlace.image} width="64" height="64"></img> */}
-                      <div className={`${this.state.isMobile ? "nearby-store-info-mobile" : "nearby-store-info-desktop"}`}>
+                  <div key={this.state.selectedPlace.id} className={`${this.state.isMobile ? "nearby-card-infowindow-mobile" : "nearby-card-desktop-infowindow-container"}`} style={this.state.isMobile ? { backgroundImage:`linear-gradient(0deg, rgba(29, 29, 29, 0.5), rgba(29, 29, 29, 0.2)), url(${this.state.selectedPlace.image})` } : {}} >                      
+                  {this.state.isMobile ? "" : (<img className="nearby-card-infowindow-desktop" src={`${this.state.selectedPlace.image}`} />)}
+                      <div className={`${this.state.isMobile ? "nearby-store-infowindow-mobile" : "nearby-store-infowindow-desktop"}`}>
                           <h4 className="nearby-store-title">{this.state.selectedPlace.name}</h4>
                           <p className="nearby-store-address">{this.state.selectedPlace.address}</p>
                           <p className="nearby-store-address">{Math.floor(this.state.selectedPlace.distance)} meters</p>
@@ -314,8 +312,6 @@ class MapContainerSearchFilter extends React.Component{
                               <button type="submit">GO</button>
                           </form>
                       </div>
-                      {/* <h2>{this.state.selectedPlace.address}</h2>
-                      <p>{Math.floor(this.state.selectedPlace.distance)} meters</p> */}
                     </div>
                 </InfoWindow>
               </Map>

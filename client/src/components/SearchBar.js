@@ -45,11 +45,17 @@ class SearchBar extends React.Component {
     }
   }
 
+  //in order to change searchbar and execute the parent function
+  onSelectFunction(addressValue) {
+     this.setState({ addressValue });
+     this.props.handleSelect(addressValue)
+  }
+
   render() {
     //we can change the style: https://developers.google.com/maps/documentation/javascript/places-autocomplete#style-autocomplete
     const renderInput = (({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
   <div>
-    <input {...getInputProps()} className="searchbar-input" id="mobile-address-input" style={this.state.isMobile ? {display:"none"} : {display:"block"}} placeholder="My address"/>
+      <input {...getInputProps()} className="searchbar-input" id="mobile-address-input" style={this.state.isMobile ? {display:"none"} : {display:"block"}} placeholder="My address"/>
 
     <div className="autocomplete-dropdown-container">
       {loading && <div>Loading...</div>}
@@ -74,7 +80,7 @@ class SearchBar extends React.Component {
       })}
     </div>
   </div>
-)
+  )
     );
 
       return (
@@ -87,7 +93,7 @@ class SearchBar extends React.Component {
                 className="searchbar-input"
                 value={this.state.addressValue}
                 onChange={addressValue => {this.setState({ addressValue })}}
-                onSelect={this.props.handleSelect}
+                onSelect={adresseValue => {this.onSelectFunction(adresseValue)}}
                 searchOptions={{componentRestrictions: { country: ['fr'] }}
                 }
               >

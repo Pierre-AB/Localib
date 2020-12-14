@@ -2,6 +2,8 @@
 import React from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import mapStyles from "./mapStyles";
+import '../Maps/Map.css';
+
 
 // Loader Icon
 
@@ -58,6 +60,7 @@ render() {
       // alors retourne: 
       <div>
       <Map
+        className="storeDetailsMap" 
         google={this.props.google}
         styles={this.props.mapStyle}
         zoom={16}
@@ -79,7 +82,9 @@ render() {
         name={store.fullName}
         address={store.address}
         image={store.picture}
-        distance={store.distance}                
+        distance={store.distance}    
+        latitude={store.location.coordinates[1]}
+        longitude={store.location.coordinates[0]}            
       >
 
       </Marker>
@@ -87,11 +92,17 @@ render() {
       <InfoWindow
         marker={this.state.activeMarker}
         visible={this.state.showingInfoWindow}>
-          <div>
-            <img src={this.state.selectedPlace.image} width="64" height="64"></img>
-            <h1>{this.state.selectedPlace.name}</h1>
-            <h3>{this.state.selectedPlace.address}</h3>
-          </div>
+          <div key={this.state.selectedPlace.id} className={`${this.state.isMobile ? "nearby-card-infowindow-mobile" : "nearby-card-desktop-infowindow-container"}`} style={this.state.isMobile ? { backgroundImage:`linear-gradient(0deg, rgba(29, 29, 29, 0.5), rgba(29, 29, 29, 0.2)), url(${this.state.selectedPlace.image})` } : {}} >                      
+                  {this.state.isMobile ? "" : (<img className="nearby-card-infowindow-desktop" src={`${this.state.selectedPlace.image}`} />)}
+                      <div className={`${this.state.isMobile ? "nearby-store-infowindow-mobile" : "nearby-store-infowindow-desktop"}`}>
+                          <h4 className="nearby-store-title">{this.state.selectedPlace.name}</h4>
+                          <p className="nearby-store-address">{this.state.selectedPlace.address}</p>
+                          <p className="nearby-store-address">{Math.floor(this.state.selectedPlace.distance)} meters</p>
+                          <form target="_blank" action={`http://www.google.com/maps/place/${this.state.selectedPlace.latitude},${this.state.selectedPlace.longitude}` }>
+                              <button type="submit">GO</button>
+                          </form>
+                      </div>
+                    </div>
       </InfoWindow>
             
 

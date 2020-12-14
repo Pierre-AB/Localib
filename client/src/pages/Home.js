@@ -52,7 +52,7 @@ class Home extends Component {
             <NearbyStores />
 
             {this.state.isMobile ? (
-              <Link to='/mapView'><button>See shops around me</button></Link>
+              <Link to='/mapView'><button>Autour de moi...</button></Link>
             ) : ""}
             
           </div>

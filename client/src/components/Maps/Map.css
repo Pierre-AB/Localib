@@ -48,3 +48,105 @@
 }
 
 
+.nearby-store-infowindow-desktop {
+  position: absolute;
+  bottom: 0;
+  /* padding: .7em; */
+  padding: 10px;
+  color: white;
+  text-align: left;
+  background-color: #454f63e0;
+  width: 100%;
+  border-radius: 0 0 15px 15px;
+  font-size: 1.5em;
+}
+
+.nearby-store-infowindow-mobile {
+  position: absolute;
+  bottom: 0;
+  padding: 10px;
+  color: white;
+  text-align: left;
+  background-color: #454f63ba;
+  min-width: 240px;
+  font-size: 1.3em;
+
+}
+
+.nearby-store-infowindow-mobile button {
+  cursor: pointer;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: left;
+  background-color:  var(--accent-color);
+  margin: 1.3em -1.4em 0 0;
+  padding: .4em 1.5em .4em 1em;
+  border: 0;
+  border-radius: 10px 0 0 10px;
+}
+
+.nearby-store-infowindow-desktop button{
+  cursor: pointer;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: left;
+  background-color:  var(--accent-color);
+  margin: 1.3em -1.4em 0 0;
+  padding: .4em 1.5em .4em 1em;
+  border: 0;
+  border-radius: 10px 0 0 10px;
+}
+
+.nearby-card-desktop-infowindow-container {
+  margin: 0; 
+  position: relative;
+  height: 215px;
+  border-radius: 15px;
+
+}
+
+.nearby-card-infowindow-mobile {
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 190px;
+  min-width: 240px;
+  border-radius: 15px;
+  
+}
+
+.nearby-card-infowindow-desktop {
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 215px;
+  width: 100%;
+  min-width: 250px;
+  border-radius: 15px;
+}
+
+.gm-style-iw {
+  width: 350px !important;
+  top: 0 !important;
+  left: 0 !important;
+  margin: 0;
+  background-color: #fff;
+  /* box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6); */
+  border-radius: 2px 2px 0 0;
+}
+
+.gm-style .gm-style-iw-c {
+  border-radius: 15px;
+  padding: 0;
+}
+
+.gm-style-iw-d {
+  background-color: transparent;
+  border-radius: 0px;
+  overflow: hidden !important;
+  color: #fff;
+}

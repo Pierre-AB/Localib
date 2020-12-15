@@ -81,6 +81,7 @@ class App extends React.Component {
           query={this.state.query}
           updateQuery={this.updateQuery}
           loggedInUser={this.state.loggedInUser}
+          updateUser={this.updateLoggedInUser}
         />
         <Switch>
           {/* Splash Screen */}

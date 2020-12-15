@@ -197,6 +197,7 @@ authRoutes.post('/consumerSignup', (req, res, next) => {
 
 authRoutes.post('/login', (req, res, next) => {
   const { email, password } = req.body
+  console.log("Email=", email);
 
   User.findOne({ email }).then(user => {
     if (!user) {

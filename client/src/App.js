@@ -73,6 +73,8 @@ class App extends React.Component {
 
 
   render() {
+
+
     return (
       <div className="App">
         <Navigation
@@ -92,8 +94,7 @@ class App extends React.Component {
           <Route exact path="/userSettings" component={UserSettings} />
 
           {/* Store Details */}
-          <Route exact path="/storeDetails/:id" component={StoreDetails} />
-          {/* <Route exact path="/storeDetails/:id" render={() => <StoreDetails loggedInUser={this.state.loggedInUser} />} /> */}
+          <Route exact path="/storeDetails/:id" render={(props) => <StoreDetails loggedInUser={this.state.loggedInUser} {...props} />} />
           <Route exact path="/storeDetails/appointment/:id" component={StorePickADate} />
 
           {/* Login & signup */}

@@ -27,10 +27,12 @@ class StoreDetails extends React.Component {
     storeIsLoaded: false,
     timeSlot: 15,
     nonAvaiTime: []
+
   }
 
   componentDidMount() {
     this.getSingleStore();
+    console.log(this.props.loggedInUser)
 
   }
 
@@ -98,8 +100,8 @@ class StoreDetails extends React.Component {
           </div>
           <div className="bottom-detail-section">
             <div className="tri-btn">
-              <a ><Link to={`/storeDetails/appointment/${this.state.store._id}`}>Conseils vidéo</Link></a>
-              <a ><Link to={`/storeDetails/appointment/${this.state.store._id}`}>Prendre RDV</Link></a>
+              <Link to={`/storeDetails/appointment/${this.state.store._id}`}>Conseils vidéo</Link>
+              <Link to={`/storeDetails/appointment/${this.state.store._id}`}>Prendre RDV</Link>
               <a href='#'>Voir les produits</a>
             </div>
             <hr />

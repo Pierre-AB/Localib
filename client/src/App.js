@@ -18,6 +18,12 @@ import UserSettings from './pages/UserSettings';
 
 // import pages for Login, Sign up & Log out
 import Signup from './components/auth/Signup'
+import Login from './components/auth/Login'
+
+
+// import service
+import { loggedIn } from './components/auth/auth-service'
+
 
 // import pages for store views
 import StoreDetails from './components/StoreDetails/StoreDetails'
@@ -33,17 +39,49 @@ import Success from './pages/Success'
 
 class App extends React.Component {
   state = {
-    query: ''
+    query: '',
+    loggedInUser: null
   }
 
   updateQuery = (newValue) => {
     this.setState({ query: newValue });
   }
 
+  fetchUser = () => {
+    if (this.state.loggedInUser === null) {
+      loggedIn()
+        .then(response => {
+          this.setState({ loggedInUser: response })
+        })
+        .catch(err => {
+          this.setState({ loggedInUser: false })
+        })
+    }
+  }
+
+  componentDidMount() {
+    this.fetchUser();
+  }
+
+  updateLoggedInUser = (userObj) => {
+    this.setState({
+      loggedInUser: userObj
+    })
+  }
+
+  // COMMENT FAIRE POUR LA LIGNE 89 ????
+
+
   render() {
+
+
     return (
       <div className="App">
-        <Navigation query={this.state.query} updateQuery={this.updateQuery} />
+        <Navigation
+          query={this.state.query}
+          updateQuery={this.updateQuery}
+          loggedInUser={this.state.loggedInUser}
+        />
         <Switch>
           {/* Splash Screen */}
           <Route exact path="/" component={Splash} />
@@ -56,11 +94,12 @@ class App extends React.Component {
           <Route exact path="/userSettings" component={UserSettings} />
 
           {/* Store Details */}
-          <Route exact path="/storeDetails/:id" component={StoreDetails} />
+          <Route exact path="/storeDetails/:id" render={(props) => <StoreDetails loggedInUser={this.state.loggedInUser} {...props} />} />
           <Route exact path="/storeDetails/appointment/:id" component={StorePickADate} />
 
-          {/* Login & signup */}
-          <Route exact path="/signup" component={Signup} />
+          {/* Signup, Login*/}
+          <Route exact path="/signup" render={() => <Signup updateUser={this.updateLoggedInUser} />} />
+          <Route exact path="/login" render={() => <Login updateUser={this.updateLoggedInUser} />} />
 
           {/* product create form */}
           {/* <Route exact path="/products" component={AddProduct} /> */}

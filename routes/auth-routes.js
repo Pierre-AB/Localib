@@ -5,16 +5,17 @@ const fileUploader = require('../configs/cloudinary.config');
 
 const bcrypt = require('bcryptjs');
 const User = require('../models/user-model');
+const Consumer = require('../models/consumer-model');
 
-//  ######  ####  ######   ##    ##         ##     ## ########  
-// ##    ##  ##  ##    ##  ###   ##         ##     ## ##     ## 
-// ##        ##  ##        ####  ##         ##     ## ##     ## 
-//  ######   ##  ##   #### ## ## ## ####### ##     ## ########  
-//       ##  ##  ##    ##  ##  ####         ##     ## ##        
-// ##    ##  ##  ##    ##  ##   ###         ##     ## ##        
-//  ######  ####  ######   ##    ##          #######  ##        
+//  ######  ########  #######  ########  ########     ######  ####  ######   ##    ## ##     ## ########  
+// ##    ##    ##    ##     ## ##     ## ##          ##    ##  ##  ##    ##  ###   ## ##     ## ##     ## 
+// ##          ##    ##     ## ##     ## ##          ##        ##  ##        ####  ## ##     ## ##     ## 
+//  ######     ##    ##     ## ########  ######       ######   ##  ##   #### ## ## ## ##     ## ########  
+//       ##    ##    ##     ## ##   ##   ##                ##  ##  ##    ##  ##  #### ##     ## ##        
+// ##    ##    ##    ##     ## ##    ##  ##          ##    ##  ##  ##    ##  ##   ### ##     ## ##        
+//  ######     ##     #######  ##     ## ########     ######  ####  ######   ##    ##  #######  ##        
 
-authRoutes.post('/signup', fileUploader.single('image'), (req, res, next) => {
+authRoutes.post('/storeSignup', fileUploader.single('image'), (req, res, next) => {
 
   const { email, password, type, fullName, address, zip, geoloc, phone, description, openingHours, picture, siret, numVAT, businessType } = req.body;
 
@@ -76,6 +77,8 @@ authRoutes.post('/signup', fileUploader.single('image'), (req, res, next) => {
 
   //LOCATION DATA IS CREATED IN USER MODEL THROUGH GEOCODER.
 
+  console.log("ookkkkk")
+
   const newUser = new User({
     email,
     password: hashPass,
@@ -86,7 +89,7 @@ authRoutes.post('/signup', fileUploader.single('image'), (req, res, next) => {
     phone,
     description,
     openingHours,
-    picture: req.file && req.file.path || 'https://res.cloudinary.com/dbsnbga7z/image/upload/v1602449425/Ironring/Profile_cssetb.png',
+    // picture: req.file && req.file.path || 'https://res.cloudinary.com/dbsnbga7z/image/upload/v1602449425/Ironring/Profile_cssetb.png',
     siret,
     numVAT,
     businessType
@@ -107,6 +110,81 @@ authRoutes.post('/signup', fileUploader.single('image'), (req, res, next) => {
 
 
 })
+
+//  ######   #######  ##    ##  ######  ##     ## ##     ## ######## ########      ######  ####  ######   ##    ## ##     ## ########  
+// ##    ## ##     ## ###   ## ##    ## ##     ## ###   ### ##       ##     ##    ##    ##  ##  ##    ##  ###   ## ##     ## ##     ## 
+// ##       ##     ## ####  ## ##       ##     ## #### #### ##       ##     ##    ##        ##  ##        ####  ## ##     ## ##     ## 
+// ##       ##     ## ## ## ##  ######  ##     ## ## ### ## ######   ########      ######   ##  ##   #### ## ## ## ##     ## ########  
+// ##       ##     ## ##  ####       ## ##     ## ##     ## ##       ##   ##            ##  ##  ##    ##  ##  #### ##     ## ##        
+// ##    ## ##     ## ##   ### ##    ## ##     ## ##     ## ##       ##    ##     ##    ##  ##  ##    ##  ##   ### ##     ## ##        
+//  ######   #######  ##    ##  ######   #######  ##     ## ######## ##     ##     ######  ####  ######   ##    ##  #######  ##        
+
+authRoutes.post('/consumerSignup', (req, res, next) => {
+
+  const { email, password, type } = req.body;
+
+  console.log(email);
+  console.log(password);
+  console.log(type);
+
+
+
+  if (!email) {
+    console.log("bloque a cause de lemail")
+    res.status(400).json({ message: "please provide an email address" })
+    return;
+  }
+
+  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+  if (!regex.test(password)) {
+    console.log("bloque a cause du password")
+    res.status(400).json({ message: "Password must have at least 6 characters, one cap letter AND one digit" })
+    return;
+  }
+
+  if (!type) {
+    console.log("bloque a cause du type")
+    res.status(400).json({ message: "Please check code, type of user is MANDATORY" })
+    return;
+  }
+
+  Consumer.findOne({ email })
+    .then(consumer => {
+      if (consumer) {
+        console.log(consumer)
+        res.status(400).json({ message: 'Email already taken' });
+        return;
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Consumer check went wrong' })
+    })
+
+
+
+  const salt = bcrypt.genSaltSync(10);
+  const hashPassCons = bcrypt.hashSync(password, salt);
+
+  const newConsumer = new Consumer({
+    email,
+    password: hashPassCons,
+    type
+  })
+
+  newConsumer.save()
+    .then(newConsumer => {
+      req.session.currentUser = newConsumer;
+      console.log("signup - req.session.currentUser", req.session.currentUser)
+      res.status(200).json(newConsumer);
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Saving newConsumer to database went wrong.' })
+    })
+
+})
+
+
+
 
 // ##        #######   ######   #### ##    ## 
 // ##       ##     ## ##    ##   ##  ###   ## 

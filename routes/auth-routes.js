@@ -199,12 +199,11 @@ authRoutes.post('/login', (req, res, next) => {
   const { email, password } = req.body
   console.log("Email=", email);
 
-  User.findOne({ email }).then(user => {
+  Consumer.findOne({ email }).then(user => {
     if (!user) {
       res.status(500).json({ message: 'Not registered user' })
       return;
     }
-
 
     if (bcrypt.compareSync(password, user.password) !== true) {
       res.status(500).json({ message: 'wrong credentials' });

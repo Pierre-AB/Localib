@@ -33,8 +33,8 @@ class Login extends Component {
       <div className="sign-page">
         {/* SIGNUP/LOGIN TABS */}
         <div className="sign-tabs">
-          <Link to={"/login"} className="sign-tab">Sign in</Link>
-          <Link to={"/signup"} className="sign-tab">Sign up</Link>
+          <Link to={"#"} className="sign-tab">Sign in</Link>
+          <Link to={"#"} className="sign-tab">Sign up</Link>
         </div>
 
         {/* SIGNUP CONTENT */}

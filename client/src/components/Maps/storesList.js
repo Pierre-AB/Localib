@@ -70,7 +70,7 @@ class storesList extends Component {
                 <div className="media-body">
                   <Link to={`/storeDetails/${store._id}`} className="TextLink"><h2 className="mt-0">{store.fullName}</h2></Link>
                   <h3>{store.address}</h3>
-                  <h3>{store.distance} meters</h3>
+                  <h3>{store.distance} mètres</h3>
                   <h4>{store.businessType}</h4>
                   <p>Latitude : {store.location.coordinates[1]}</p>
                   <p>Longitude: {store.location.coordinates[0]}</p>

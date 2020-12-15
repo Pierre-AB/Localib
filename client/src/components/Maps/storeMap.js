@@ -97,7 +97,7 @@ render() {
                       <div className={`${this.state.isMobile ? "nearby-store-infowindow-mobile" : "nearby-store-infowindow-desktop"}`}>
                           <h4 className="nearby-store-title">{this.state.selectedPlace.name}</h4>
                           <p className="nearby-store-address">{this.state.selectedPlace.address}</p>
-                          <p className="nearby-store-address">{Math.floor(this.state.selectedPlace.distance)} meters</p>
+                          <p className="nearby-store-address">{Math.floor(this.state.selectedPlace.distance)} mètres</p>
                           <form target="_blank" action={`http://www.google.com/maps/place/${this.state.selectedPlace.latitude},${this.state.selectedPlace.longitude}` }>
                               <button type="submit">GO</button>
                           </form>

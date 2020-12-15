@@ -21,13 +21,22 @@ class StoreDetails extends React.Component {
     store: {},
     orders: [],
     storeIsLoaded: false,
-    nonAvaiTime: []
-
+    nonAvaiTime: [],
+    timeSlot: 15,
+    nonAvaiTime: [],
+    listOfProducts: [],
+    storeProducts: []
   }
 
   componentDidMount() {
     this.getSingleStore();
     console.log(this.props.loggedInUser)
+    this.getProducts();
+
+    // const day = new Date().getDay();
+    // this.setState({
+    //   pickedDate: this.state.store.openingHours
+    // })
 
   }
 
@@ -58,6 +67,20 @@ class StoreDetails extends React.Component {
       .catch(err => console.log("Error on getting store details:", err))
   }
 
+  getProducts = () => {
+    axios
+      .get(`${process.env.REACT_APP_APIURL || ""}/api/products`)
+      .then((productsFromDb) => {
+        const allProducts = productsFromDb.data;
+        this.setState({
+          listOfProducts: allProducts,
+        })
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
 
 
 
@@ -79,6 +102,24 @@ class StoreDetails extends React.Component {
     let background = this.state.store.picture;
     const loggedUser = this.props.loggedInUser
     const storeIsLoaded = this.state.storeIsLoaded;
+    // const dayInfo = this.splitDay();
+
+    // // const nonAvaiTime = this.state.nonAvaiTime;
+
+    // console.log('🚨 this.state.pickedDate=', this.state.pickedDate)
+
+    // if (this.state.orders.length > 0 && this.state.pickedDate) { this.drawAvailability()}
+    let ProductFilteredStoreId = []
+    let store = this.state.store
+
+    this.state.listOfProducts.forEach(product => { // Boucle sur chaque produit
+          if (product.store_id === store._id) { // Si store ID = store ID
+            ProductFilteredStoreId.push(store) // push dans ProductFilteredStoreId array
+          }
+        
+      })   
+    
+    let productList = [...ProductFilteredStoreId]
 
     return (
 
@@ -104,23 +145,22 @@ class StoreDetails extends React.Component {
                   <Link to={`/storeDetails/appointment/${this.state.store._id}`}>Créer un compte pour prendre RDV</Link>
                 </>)
               }
-
-
-
               <a href='#'>Voir les produits</a>
             </div>
             <hr />
             <h3>Description</h3>
             <p>{this.state.store.description}</p>
           </div>
-
+          {storeIsLoaded ? (
+            <div>
+              <StoreMap store={this.state.store} />
+              <ListOfProducts product={productList}/>         
+            </div>
+            ) : "" }
         </div>
-
       </div>
-
     )
   }
 }
 
-export default StoreDetails
-
+export default StoreDetails;

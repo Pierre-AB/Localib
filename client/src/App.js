@@ -37,7 +37,7 @@ class App extends React.Component {
   }
 
   updateQuery = (newValue) => {
-    this.setState({query: newValue});
+    this.setState({ query: newValue });
   }
 
   render() {
@@ -47,24 +47,24 @@ class App extends React.Component {
         <Switch>
           {/* Splash Screen */}
           <Route exact path="/" component={Splash} />
-  
+
           {/* Navbar */}
           <Route exact path="/home" component={Home} />
           <Route exact path="/listSearch" component={SearchListResults} />
           <Route exact path="/mapView" component={MapView} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/userSettings" component={UserSettings} />
-  
+
           {/* Store Details */}
           <Route exact path="/storeDetails/:id" component={StoreDetails} />
-          <Route exact path="/storeDetails/RDV/:id" component={StorePickADate} />
-  
+          <Route exact path="/storeDetails/appointment/:id" component={StorePickADate} />
+
           {/* Login & signup */}
           <Route exact path="/signup" component={Signup} />
-  
+
           {/* product create form */}
           {/* <Route exact path="/products" component={AddProduct} /> */}
-  
+
           {/* success page */}
           <Route exact path="/success" component={Success} />
         </Switch>

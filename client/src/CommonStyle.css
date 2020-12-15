@@ -411,3 +411,12 @@ button:hover {
     height: calc(100% - 85px) !important;
   }
 }
+
+@media (max-width: 991.98px) { 
+  .desktopFilteredMap {
+    width: 100% !important;
+    height: 100% !important;
+    margin: calc(-1.3em - 40px) 0 0 -1.3em;
+    z-index: -1;
+  }
+}

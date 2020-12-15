@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import './StoreDetails.css';
 import { Link } from 'react-router-dom';
+import StoreMap from '../Maps/storeMap'
+import ListOfProducts from '../Products/listOfProducts'
 
 
 //  ######   #######  ##     ## ########   #######  ##    ## ######## ##    ## ######## 

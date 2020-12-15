@@ -21,6 +21,362 @@
       "lait_cru"
     ]
   },
+ {
+    "name": "Coulommiers",
+    "description": "le petit frère du brie",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607969216/localib/Coulommiers_dq6fg9.png",
+    "price": "2.25",
+    "category": "fromage",
+    "tags": [
+      "vache",
+      "lait_cru"
+    ]
+  },
+
+{
+    "name": "Morbier",
+    "description": "Le fromage de franche comté",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607969473/localib/Morbier_zruumh.jpg",
+    "price": "3.5",
+    "category": "fromage",
+    "tags": [
+      "vache",
+      "lait_vache"
+    ]
+  },
+
+{
+    "name": "Bleu d'Auvergne",
+    "description": "Fromage à pâte persillée",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607969680/localib/Bleu_d_Auvergne_01_ubeaun.jpg",
+    "price": "4.5",
+    "category": "fromage",
+    "tags": [
+      "vache",
+      "lait_vache"
+    ]
+  },
+
+{
+    "name": "Cantal",
+    "description": "Cantal affiné entre 30 jours et 6 mois",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607969884/localib/cantak_cluujy.jpg",
+    "price": "4.2",
+    "category": "fromage",
+    "tags": [
+      "vache",
+      "lait_vache"
+    ]
+  },
+
+{
+    "name": "COEUR DE NEUFCHÂTEL AOP - BIO",
+    "description": "Fabriqué en Haute Normandie. Le fromage au coeur tendre.",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607970037/localib/Fromage-Neufchatel-600x450_v2yrqj.jpg",
+    "price": "5.9",
+    "category": "fromage",
+    "tags": [
+      "vache",
+      "lait_vache"
+    ]
+  },
+
+{
+    "name": "COURONNE LOCHOISE",
+    "description": "Fromage de chèvre en forme de couronne produit en touraine",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607970167/localib/74-productZoom_ulblkg.jpg",
+    "price": "5.8",
+    "category": "fromage",
+    "tags": [
+      "chevre",
+      "lait_chevre"
+    ]
+  },
+
+ {
+    "name": "Baguette tradition",
+    "description": "La meilleure baguette",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607970722/localib/flute-e1516288055295_wx2xvb.jpg",
+    "price": "1.1",
+    "category": "pain-viennoiserie",
+    "tags": [
+      "frais",
+      "pain",
+      "croustillant"
+    ]
+  },
+
+ {
+    "name": "Pain au chocolat",
+    "description": "Le meilleur allié du matin",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607970857/localib/Pain_au_chocolat_Luc_Viatour_jzdzzr.jpg",
+    "price": "0.9",
+    "category": "pain-viennoiserie",
+    "tags": [
+      "frais",
+      "chocolat",
+      "croustillant"
+    ]
+  },
+
+   {
+    "name": "Croissant",
+    "description": "Le réconfort du matin",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607971011/localib/i139572-croissants-sans-beurre_we1aru.jpg",
+    "price": "0.8",
+    "category": "pain-viennoiserie",
+    "tags": [
+      "frais",
+      "croissant",
+      "croustillant",
+      "beurre"
+    ]
+  },
+
+    {
+    "name": "Pain de campagne",
+    "description": "Le pain de campagne",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607971223/localib/pain-de-campagne-maison_bhvcey.jpg",
+    "price": "2.8",
+    "category": "pain-viennoiserie",
+    "tags": [
+      "frais",
+      "campagne"     
+    ]
+  },
+
+    {
+    "name": "Baguette céréales",
+    "description": "La baguette aux céréales",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607971301/localib/ob_725415_photo-avec-logo-16_q7pbqy.jpg",
+    "price": "1.8",
+    "category": "pain-viennoiserie",
+    "tags": [
+      "frais",
+      "céréales"
+      
+    ]
+  },
+
+   {
+    "name": "Pain complet",
+    "description": "Le pain aux farines complètes",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607971407/localib/pain-complet-farinebio-016_tx04il.jpg",
+    "price": "2.5",
+    "category": "pain-viennoiserie",
+    "tags": [
+      "frais",
+      "farine",
+      "dietetique"
+      
+    ]
+  },
+
+   {
+    "name": "Pain au seigle",
+    "description": "Le pain qui fait du bien à la ligne",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607971475/localib/painj-complet_tbohzb.jpg",
+    "price": "2.7",
+    "category": "pain-viennoiserie",
+    "tags": [
+      "frais",
+      "seigle",
+      "dietetique"
+      
+    ]
+  },
+ {
+    "name": "Pain au chocolat aux amandes",
+    "description": "Le plus réconfortant, sans sucres ajoutés !",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607971591/localib/pain-au-chocolat-aux-amandes_euul6w.jpg",
+    "price": "1.3",
+    "category": "pain-viennoiserie",
+    "tags": [
+      "frais",
+      "chocolat",
+      "amandes"    
+    ]
+  },
+  {
+    "name": "Beaujolais nouveau 2020",
+    "description": "Le Beaujolais Nouveau 2020",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607972036/localib/BEAUJOLAIS_vlikcg.jpg",
+    "price": "5.25",
+    "category": "vins",
+    "tags": [
+      "vins",
+      "beaujolais",
+      "fruité"
+    ]
+  },
+  {
+    "name": "CHATEAU VAL JOANIS LES GRIOTTES 2018",
+    "description": "Fruité et charnu",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607972317/localib/chateau-val-joanis-griottes_nkya2z.jpg",
+    "price": "11.6",
+    "category": "vins",
+    "tags": [
+      "vins",
+      "charnu",
+      "fruité",
+      "éco-responsable"
+    ]
+  },
+  {
+    "name": "CHÂTEAU D'ARCINS 2015",
+    "description": "Riche et puissant",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607972599/localib/haut-medoc-chateau-d-arcins-cru-bourgeois-2015-75cl_gniwod.jpg",
+    "price": "14.35",
+    "category": "vins",
+    "tags": [
+      "vins",
+      "puissant",
+      "riche"
+    ]
+  },
+  {
+    "name": "CHÂTEAU SUAU 2015",
+    "description": "Le choix bio",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607972639/localib/chateau-suau-cotes-de-bordeaux-2015_pjugz7.jpg",
+    "price": "9.5",
+    "category": "vins",
+    "tags": [
+      "vins",
+      "puissant",
+      "riche"
+
+    ]
+  },
+  {
+    "name": "BERET NOIR SAINT MONT 2017",
+    "description": "Ce vin sombre, dense et opaque de couleur grenat vous offrira des effluves de fruits rouges, d’épices et de violettes",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607972741/localib/Plaimont_Beret-noir-600x600_xbkg5g.jpg",
+    "price": "7.0",
+    "category": "vins",
+    "tags": [
+      "vins",
+      "puissant",
+      "riche",
+      "bio"
+
+    ]
+  },
+
+    {
+    "name": "BERET BLANC SAINT-MONT 2017",
+    "description": "Avec sa robe de couleur jaune citron aux reflets vert, ce vin vous offre un nez franc ouvert sur les agrumes confits, les fruits exotiques",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607972886/localib/Plaimont_Beret-blanc-600x600_tpx7oh.jpg",
+    "price": "6.5",
+    "category": "vins",
+    "tags": [
+      "vins",
+      "agrumes",
+      "citron",
+      "blanc"
+
+    ]
+  },
+   {
+    "name": "Noël authentique",
+    "description": "Elégance et tradition se mélangent dans cette généreuse composition en rouge et blanc",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607973023/localib/bouquet-noel-authentique-430x430-37066_jyu77l.jpg",
+    "price": "39.0",
+    "category": "fleur",
+    "tags": [
+      "fleurs",
+      "bouquet",
+      "roses",
+      "rouge"
+    ]
+  },
+
+    {
+    "name": "Fleurs parfumées du jour",
+    "description": "Vous ne choisissez pas la composition exacte du bouquet. Nos fleuristes réalisent vos bouquets au fur et à mesure des arrivages du jour, sélectionnés pour leur prix, leur fraîcheur et leur provenance française.",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607973125/localib/bouquet-du-jour-430x430-36307_ffgn7j.jpg",
+    "price": "38.0",
+    "category": "fleur",
+    "tags": [
+      "fleurs",
+      "bouquet"
+    ]
+  },
+    {
+    "name": "Un bouquet d'orchidées",
+    "description": "Un magnifique bouquet composé de généreuses tiges d'orchidées Cymbidium blanc, accompagné de belles branches de mimosa 'Ballerina' et d'eucalyptus.",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607973347/localib/un-bouquet-d-orchidees-430x430-38934_pzt2rr.jpg",
+    "price": "39.0",
+    "category": "fleur",
+    "tags": [
+      "fleurs",
+      "bouquet",
+      "orchidées"
+
+    ]
+  },
+    {
+    "name": "Amaryllis Ferrari",
+    "description": "Succombez à l'élégance de cette variété d'amaryllis rouge. Ces magnifiques fleurs de saison, originaires d’Amérique du sud, vous séduiront par leur beauté et leur couleurs lumineuses",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607973125/localib/bouquet-du-jour-430x430-36307_ffgn7j.jpg",
+    "price": "29.0",
+    "category": "fleur",
+    "tags": [
+      "fleurs",
+      "bouquet",
+      "amaryllis"
+
+    ]
+  },
+      {
+    "name": "Le Parfum des Lys",
+    "description": "Admirez toute la beauté majestueuse du lys blanc au parfum royal dans un bouquet simple et raffiné",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607973410/localib/brassee-de-lys-saporo-430x430-38878_pr4oeb.jpg",
+    "price": "29.0",
+    "category": "fleur",
+    "tags": [
+      "fleurs",
+      "bouquet",
+      "lys"
+
+    ]
+  },
+  {
+    "name": "Fraises des bois",
+    "description": "Les délicieuses fraises des bois",
+    "picture": "https://res.cloudinary.com/dbsnbga7z/image/upload/v1607971732/localib/fraise-des-bois4780318458_b178a8b471_b_pxhvh3.webp",
+    "price": "4.5",
+    "category": "fruit",
+    "tags": [
+      "frais",
+      "fruit",
+      "gourmand"
+    ]
+  },
+
+  {
+    "name": "Radis",
+    "description": "croquant et frais",
+    "picture": "https://cdn3.fermedesaintemarthe.com/I-Autre-23182_1200x1200-radis-de-18-jours-ab.net.jpg",
+    "price": "3.65",
+    "category": "legume",
+    "tags": [
+      "frais",
+      "salade",
+      "healthy"
+    ]
+  },
+  {
+    "name": "Broccoli",
+    "description": "riche en minéraux",
+    "picture": "https://www.cookforyourlife.org/wp-content/uploads/2018/08/shutterstock_294838064-min-696x520.jpg",
+    "price": "2.80",
+    "category": "legume",
+    "tags": [
+      "frais",
+      "vert",
+      "healthy"
+    ]
+  },
   {
     "name": "Poire",
     "description": "Juteuse et subtile",
@@ -44,6 +400,7 @@
       "healthy"
     ]
   },
+
   {
     "name": "clou",
     "description": "solide et brillant",
@@ -78,30 +435,6 @@
       "lampe",
       "éclairage",
       "truc"
-    ]
-  },
-  {
-    "name": "radis",
-    "description": "croquant et frais",
-    "picture": "https://cdn3.fermedesaintemarthe.com/I-Autre-23182_1200x1200-radis-de-18-jours-ab.net.jpg",
-    "price": "3.65",
-    "category": "legume",
-    "tags": [
-      "frais",
-      "salade",
-      "healthy"
-    ]
-  },
-  {
-    "name": "broccoli",
-    "description": "riche en minéraux",
-    "picture": "https://www.cookforyourlife.org/wp-content/uploads/2018/08/shutterstock_294838064-min-696x520.jpg",
-    "price": "2.80",
-    "category": "legume",
-    "tags": [
-      "frais",
-      "vert",
-      "healthy"
     ]
   }
 ]

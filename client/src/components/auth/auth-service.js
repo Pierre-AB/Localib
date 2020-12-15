@@ -21,7 +21,7 @@ function login(username, password) {
 }
 export { login }
 
-// function logout() {
-//   return service.post('/logout', {}).then(response => response.data)
-// }
-// export {logout}
+function logout() {
+  return service.post('/logout', {}).then(response => response.data)
+}
+export {logout}

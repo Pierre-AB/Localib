@@ -20,12 +20,7 @@ class StoreDetails extends React.Component {
   state = {
     store: {},
     orders: [],
-    pickedDate: new Date(),
-    today: new Date().getDate(),
-    // fullDayName: dateName(new Date()),
-    dayAvailibility: {},
     storeIsLoaded: false,
-    timeSlot: 15,
     nonAvaiTime: []
 
   }
@@ -84,6 +79,7 @@ class StoreDetails extends React.Component {
 
     // Use store picture as background
     let background = this.state.picture;
+    const loggedUser = this.props.loggedInUser
 
     return (
 
@@ -101,7 +97,17 @@ class StoreDetails extends React.Component {
           <div className="bottom-detail-section">
             <div className="tri-btn">
               <Link to={`/storeDetails/appointment/${this.state.store._id}`}>Conseils vidéo</Link>
-              <Link to={`/storeDetails/appointment/${this.state.store._id}`}>Prendre RDV</Link>
+              {loggedUser ?
+                (<>
+                  <Link to={`/storeDetails/appointment/${this.state.store._id}`}>Prendre RDV</Link>
+                </>) :
+                (<>
+                  <Link to={`/storeDetails/appointment/${this.state.store._id}`}>Créer un compte pour prendre RDV</Link>
+                </>)
+              }
+
+
+
               <a href='#'>Voir les produits</a>
             </div>
             <hr />

@@ -66,7 +66,7 @@ class Navigation extends React.Component {
   //   }
   // }
   render() {
-
+    const loggedUser = this.props.loggedInUser
 
     return (
       <>
@@ -81,7 +81,13 @@ class Navigation extends React.Component {
               <ul>
                 <li className="nav-link"><Link to='/home'>Home</Link></li>
                 <li className="nav-link"><Link to='/mapView'>Les commerces</Link></li>
-                <li className="nav-link"><Link to='/commandes'>Mes commandes</Link></li>
+                {loggedUser ? (<>
+                  <li className="nav-link"><Link to='/commandes'>Mes commandes</Link></li>
+                  <li className="nav-link"><Link to='/logout'>Se déconnecter</Link></li>
+                </>) : (<>
+                  <li className="nav-link"><Link to='/consumerSignup'>S'enregistrer / s'authentifier</Link></li>
+                </>)}
+
                 {/* <li className="nav-link"><Link to='/cart'>Cart</Link></li>
               <li className="nav-link"><Link to='/userSettings'>Settings</Link></li> */}
               </ul>

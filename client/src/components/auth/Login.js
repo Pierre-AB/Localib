@@ -1,30 +1,26 @@
 import React, { Component } from 'react';
-import { consumerSignup } from './auth-service'
+import { login } from './auth-service'
 import { Link } from 'react-router-dom';
 
 import './SignForm.css';
 
-class Signup extends Component {
+class Login extends Component {
 
 
-
-  state = { email: '', password: '', type: '' }
+  // Consumer Type is Hardcoded here-----------|
+  state = { email: '', password: '' }
 
   handleFormSubmit = (event) => {
     event.preventDefault();
     const email = this.state.email;
     const password = this.state.password;
-    const type = 'consumer'; // Consumer Type is Hardcoded here
 
-    console.log('🍒🍒🍒🍒 JUSQUE LA')
-
-    consumerSignup(email, password, type)
-      .then(newConsumer => {
-        // this.props.updateUser(response)
-        console.log("🌶🌶🌶", newConsumer)
+    login(email, password)
+      .then(response => {
+        this.props.updateUser(response)
         this.setState({ email: "", password: "", type: "" });
-        this.props.updateUser(newConsumer)
-      }).catch(error => console.log(error))
+      })
+      .catch(error => console.log(error))
   }
 
   handleChange = (event) => {
@@ -50,9 +46,9 @@ class Signup extends Component {
           {/* <label>Password:</label> */}
           <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={e => this.handleChange(e)} />
 
-          <Link to={"/"} className="I-am-retailer">I am a retailer</Link>
+          {/* <Link to={"/"} className="I-am-retailer">I am a retailer</Link> */}
 
-          <button type="submit">Register</button>
+          <button type="submit">Check-In</button>
 
         </form>
       </div>
@@ -60,4 +56,4 @@ class Signup extends Component {
   }
 }
 
-export default Signup;
+export default Login;

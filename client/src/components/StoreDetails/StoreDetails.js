@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 // import Calendar from 'react-calendar';
 // import AppointmentPicker from './AppointmentPicker';
 import StoreMap from '../Maps/storeMap'
+import ListOfProducts from '../Products/listOfProducts'
 // import { isThisISOWeek } from 'date-fns/esm';
 // import { SiInstacart } from "react-icons/si";
 // import { SiGooglecalendar } from "react-icons/si";
@@ -129,11 +130,14 @@ class StoreDetails extends React.Component {
     dayAvailibility: {},
     storeIsLoaded: false,
     timeSlot: 15,
-    nonAvaiTime: []
+    nonAvaiTime: [],
+    listOfProducts: [],
+    storeProducts: []
   }
 
   componentDidMount() {
     this.getSingleStore();
+    this.getProducts();
 
     // const day = new Date().getDay();
     // this.setState({
@@ -168,6 +172,20 @@ class StoreDetails extends React.Component {
       })
       .catch(err => console.log("Error on getting store details:", err))
   }
+
+  getProducts = () => {
+    axios
+      .get(`${process.env.REACT_APP_APIURL || ""}/api/products`)
+      .then((productsFromDb) => {
+        const allProducts = productsFromDb.data;
+        this.setState({
+          listOfProducts: allProducts,
+        })
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
 
 
@@ -362,6 +380,17 @@ class StoreDetails extends React.Component {
     // console.log('🚨 this.state.pickedDate=', this.state.pickedDate)
 
     // if (this.state.orders.length > 0 && this.state.pickedDate) { this.drawAvailability()}
+    let ProductFilteredStoreId = []
+    let store = this.state.store
+
+    this.state.listOfProducts.forEach(product => { // Boucle sur chaque produit
+          if (product.store_id === store._id) { // Si store ID = store ID
+            ProductFilteredStoreId.push(store) // push dans ProductFilteredStoreId array
+          }
+        
+      })   
+    
+    let productList = [...ProductFilteredStoreId]
 
     return (
 
@@ -407,8 +436,8 @@ class StoreDetails extends React.Component {
                 nonAvaiTime={nonAvaiTime}
               /> */}
               <StoreMap store={this.state.store} />
-                          
-              <div className="product-list-container">
+              <ListOfProducts product={productList}/>         
+              {/* <div className="product-list-container">
                 <li className="product-row">
                   <div className="product-img-and-name">
                     <img className="product-picture" src="https://www.vitafruits.fr/146-medium_default/chou-brocoli.jpg"/>
@@ -427,7 +456,7 @@ class StoreDetails extends React.Component {
                     <span>+</span>
                   </div>
                 </li>
-              </div>
+              </div> */}
 
 
             </div>

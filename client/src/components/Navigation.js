@@ -85,7 +85,7 @@ class Navigation extends React.Component {
                   <li className="nav-link"><Link to='/commandes'>Mes commandes</Link></li>
                   <li className="nav-link"><Link to='/logout'>Se déconnecter</Link></li>
                 </>) : (<>
-                  <li className="nav-link"><Link to='/consumerSignup'>S'enregistrer / s'authentifier</Link></li>
+                  <li className="nav-link"><Link to='/signup'>S'enregistrer / s'authentifier</Link></li>
                 </>)}
 
                 {/* <li className="nav-link"><Link to='/cart'>Cart</Link></li>

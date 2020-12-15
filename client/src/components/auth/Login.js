@@ -7,7 +7,7 @@ import './SignForm.css';
 class Login extends Component {
 
 
-  // Consumer Type is Hardcoded here-----------|
+
   state = { email: '', password: '' }
 
   handleFormSubmit = (event) => {

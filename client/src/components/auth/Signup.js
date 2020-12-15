@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { consumerSignup } from './auth-service'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import './SignForm.css';
 
@@ -8,7 +8,7 @@ class Signup extends Component {
 
 
 
-  state = { email: '', password: '', type: '' }
+  state = { email: '', password: '', type: '', redirect: null }
 
   handleFormSubmit = (event) => {
     event.preventDefault();
@@ -22,8 +22,9 @@ class Signup extends Component {
       .then(newConsumer => {
         // this.props.updateUser(response)
         console.log("🌶🌶🌶", newConsumer)
-        this.setState({ email: "", password: "", type: "" });
+        this.setState({ email: "", password: "", type: "", redirect: '/mapView' });
         this.props.updateUser(newConsumer)
+        this.props.history.push('')
       }).catch(error => console.log(error))
   }
 
@@ -33,6 +34,10 @@ class Signup extends Component {
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} /> // Redirect to '/mapView' set line 25
+    }
+
     return (
       <div className="sign-page">
         {/* SIGNUP/LOGIN TABS */}

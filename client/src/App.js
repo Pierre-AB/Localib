@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import './CommonStyle.css';
 import { Switch, Route } from 'react-router-dom';
@@ -99,8 +98,8 @@ class App extends React.Component {
           <Route exact path="/storeDetails/appointment/:id" component={StorePickADate} />
 
           {/* Signup, Login*/}
-          <Route exact path="/signup" render={() => <Signup updateUser={this.updateLoggedInUser} />} />
-          <Route exact path="/login" render={() => <Login updateUser={this.updateLoggedInUser} />} />
+          <Route exact path="/signup" render={(props) => <Signup updateUser={this.updateLoggedInUser} {...props} />} />
+          <Route exact path="/login" render={(props) => <Login updateUser={this.updateLoggedInUser} {...props} />} />
 
           {/* product create form */}
           {/* <Route exact path="/products" component={AddProduct} /> */}

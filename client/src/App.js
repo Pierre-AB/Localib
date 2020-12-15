@@ -30,6 +30,9 @@ import StorePickADate from './components/StoreDetails/StorePickADate'
 // import success page
 import Success from './pages/Success'
 
+// filtered map 
+import MapContainerSearchFilter from './components/Maps/FilteredMap'
+
 
 class App extends React.Component {
   state = {
@@ -67,6 +70,8 @@ class App extends React.Component {
 
           {/* success page */}
           <Route exact path="/success" component={Success} />
+
+          {/* <Route exact path="/mapviewv" component={MapContainerSearchFilter}/> */}
         </Switch>
       </div>
     );

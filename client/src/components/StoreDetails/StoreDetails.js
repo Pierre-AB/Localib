@@ -385,7 +385,7 @@ class StoreDetails extends React.Component {
 
     this.state.listOfProducts.forEach(product => { // Boucle sur chaque produit
           if (product?.store_id === store._id) { // Si store ID = store ID
-            ProductFilteredStoreId.push(store) // push dans ProductFilteredStoreId array
+            ProductFilteredStoreId.push(product) // push dans ProductFilteredStoreId array
           }
         
       })   
@@ -436,7 +436,9 @@ class StoreDetails extends React.Component {
                 nonAvaiTime={nonAvaiTime}
               /> */}
               <StoreMap store={this.state.store} />
-              <ListOfProducts product={productList}/>         
+              {productList.map((products, i) => {
+                return <ListOfProducts {...products} key={i} />;
+              })}       
               {/* <div className="product-list-container">
                 <li className="product-row">
                   <div className="product-img-and-name">

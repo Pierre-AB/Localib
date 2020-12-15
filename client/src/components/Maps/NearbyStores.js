@@ -82,7 +82,7 @@ class NearbyStores extends Component {
                 <div className={`${this.state.isMobile ? "nearby-store-info-mobile" : "nearby-store-info-desktop"}`}>
                   <h4 className="nearby-store-title">{store.fullName}</h4>
                   <p className="nearby-store-address">{store.address}</p>
-                  <p className="nearby-store-address">{Math.floor(store.distance)} meters</p>
+                  <p className="nearby-store-address">{Math.floor(store.distance)} mètres</p>
                 </div>
               </div>
             </Link>

@@ -179,7 +179,7 @@ class SearchMapList extends Component {
                   <div className="vertical-store-info">
                     <h4>{store.fullName}</h4>
                     <p className="vertical-store-address">{store.address}</p>
-                    <p className="vertical-store-address">{store.distance} meters</p>
+                    <p className="vertical-store-address">{store.distance} mètres</p>
                   </div>
                 </div>
                 <hr />

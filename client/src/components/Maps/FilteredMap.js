@@ -2,7 +2,7 @@
 import React from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import mapStyles from "./mapStyles";
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import './Map.css';
@@ -164,10 +164,10 @@ class MapContainerSearchFilter extends React.Component{
       scaledSize: new window.google.maps.Size(45, 60),
     }
 
-    const icon1 = {
-      url: `https://picsum.photos/64`,
+    const icon2 = {
+      url: `https://res.cloudinary.com/dbsnbga7z/image/upload/v1608067773/localib/kisspng-google-maps-google-map-maker-pritchard-community-c-5b1d3f6256d146.5077443115286434263556_amolr1.png`,
       origin: new window.google.maps.Point(0, 0),
-      scaledSize: new window.google.maps.Size(45, 60),
+      scaledSize: new window.google.maps.Size(30, 40),
     }
       
 
@@ -245,7 +245,7 @@ class MapContainerSearchFilter extends React.Component{
                   <div className="vertical-store-info">
                     <h4>{store.fullName}</h4>
                     <p className="vertical-store-address">{store.address}</p>
-                    <p className="vertical-store-address">{Math.floor(store.distance)} meters</p>
+                    <p className="vertical-store-address">{Math.floor(store.distance)} mètres</p>
                   </div>
                 </div>
                 <hr />
@@ -277,6 +277,13 @@ class MapContainerSearchFilter extends React.Component{
                     lng: this.props.searchedLongitude || this.state.longitude 
                   }}
                 >
+                <Marker 
+                      position={{ 
+                        lat: this.props.searchedLatitude || this.state.latitude,  
+                        lng: this.props.searchedLongitude || this.state.longitude 
+                        }}    
+                        icon={icon2}             
+                />
                 {renderedList.map(store => {
                   return (
                     <Marker
@@ -305,11 +312,13 @@ class MapContainerSearchFilter extends React.Component{
                   <div key={this.state.selectedPlace.id} className={`${this.state.isMobile ? "nearby-card-infowindow-mobile" : "nearby-card-desktop-infowindow-container"}`} style={this.state.isMobile ? { backgroundImage:`linear-gradient(0deg, rgba(29, 29, 29, 0.5), rgba(29, 29, 29, 0.2)), url(${this.state.selectedPlace.image})` } : {}} >                      
                   {this.state.isMobile ? "" : (<img className="nearby-card-infowindow-desktop" src={`${this.state.selectedPlace.image}`} />)}
                       <div className={`${this.state.isMobile ? "nearby-store-infowindow-mobile" : "nearby-store-infowindow-desktop"}`}>
+                          {/* <Link to={`/storeDetails/${this.state.selectedPlace.id}`}> */}
                           <h4 className="nearby-store-title">{this.state.selectedPlace.name}</h4>
+                          {/* </Link> */}
                           <p className="nearby-store-address">{this.state.selectedPlace.address}</p>
-                          <p className="nearby-store-address">{Math.floor(this.state.selectedPlace.distance)} meters</p>
+                          <p className="nearby-store-address">{Math.floor(this.state.selectedPlace.distance)} mètres</p>
                           <form target="_blank" action={`http://www.google.com/maps/place/${this.state.selectedPlace.latitude},${this.state.selectedPlace.longitude}` }>
-                              <button type="submit">GO</button>
+                              <button type="submit">S’y rendre</button>
                           </form>
                       </div>
                     </div>

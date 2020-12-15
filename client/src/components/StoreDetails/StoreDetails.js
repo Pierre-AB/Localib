@@ -352,7 +352,7 @@ class StoreDetails extends React.Component {
   render() {
 
     // Use store picture as background
-    let background = this.state.picture;
+    let background = this.state.store.picture;
 
     const storeIsLoaded = this.state.storeIsLoaded;
     // const dayInfo = this.splitDay();

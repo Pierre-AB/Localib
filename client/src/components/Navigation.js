@@ -31,10 +31,6 @@ const mobileNav = [{
   route: "/cart",
   icon: FaShoppingCart,
   label: "Cart"
-},{
-  route: "/userSettings",
-  icon: FaCog,
-  label: "Settings"
 }]
 
 

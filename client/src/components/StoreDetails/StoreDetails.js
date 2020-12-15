@@ -142,7 +142,7 @@ class StoreDetails extends React.Component {
                   <Link to={`/storeDetails/appointment/${this.state.store._id}`}>Prendre RDV</Link>
                 </>) :
                 (<>
-                  <Link to={`/storeDetails/appointment/${this.state.store._id}`}>Créer un compte pour prendre RDV</Link>
+                  <Link to={`/signup`}>Créer un compte pour prendre RDV</Link>
                 </>)
               }
               <a href='#'>Voir les produits</a>

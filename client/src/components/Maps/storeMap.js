@@ -52,7 +52,7 @@ render() {
     url: `https://res.cloudinary.com/dbsnbga7z/image/upload/v1606577861/localib/LogoMap_fy7h3i.png`,
     origin: new window.google.maps.Point(0, 0),
     // anchor: new window.google.maps.Point(15, 15),
-    scaledSize: new window.google.maps.Size(60, 80),
+    scaledSize: new window.google.maps.Size(45, 60),
   }
   
   
@@ -60,6 +60,7 @@ render() {
       // alors retourne: 
       <div>
       <Map
+        className="storeDetailsMap" 
         google={this.props.google}
         styles={this.props.mapStyle}
         zoom={16}

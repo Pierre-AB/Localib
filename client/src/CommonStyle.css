@@ -164,6 +164,7 @@ button:hover {
   overflow-x: auto;
   flex-wrap: nowrap;
   margin: 0 -1.3em 0 0;
+  height: calc(100vh - 85px);
 }
 
 .vertical-category-container {
@@ -355,6 +356,10 @@ button:hover {
   min-width: 400px;
 }
 
+.vertical-list:hover {
+  background: var(--accent-color);
+}
+
 .vertical-scroll-container hr {
   margin: 0;
 }
@@ -410,4 +415,76 @@ button:hover {
     width: calc(100% - 400px + 1.3em) !important;
     height: calc(100% - 85px) !important;
   }
+}
+
+@media (max-width: 991.98px) { 
+  .desktopFilteredMap {
+    width: 100% !important;
+    height: calc(100% - 40px) !important;
+    margin: calc(-1.3em - 40px) 0 0 -1.3em;
+    z-index: -1;
+  }
+}
+
+.command-section-mobile h2 {
+  text-align: center;
+}
+
+.command-card {
+  background: #f0f4f8;
+  height: 100%;
+  width: 85vw;
+  margin: auto;
+  padding: 1em;
+  border-radius: 15px;
+  color: var(--blue-grey);
+}
+
+.command-title-infos {
+  display: flex;
+  margin-bottom: 1em;
+  font-size: .85em;
+}
+
+.command-reference {
+  color: var(--accent-color);
+  font-weight: bolder;
+}
+
+.whoTakesOrder {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: flex-start;
+}
+
+.whoTakesOrder h3 {
+  color: var(--blue-grey);
+  font-weight: bolder;
+  font-size: 1em;
+}
+
+.whoTakesOrder img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 1em;
+}
+
+.order-content {}
+
+.order-content-row {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  font-size: .85em;
+}
+
+.order-content-total-row {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+  font-weight: bolder;
 }

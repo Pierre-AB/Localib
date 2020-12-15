@@ -22,11 +22,11 @@
   }
 }
 
-/* @media (max-width: 992px) {
-  .mobile-address-input {
-    display: none;
+@media (max-width: 992px) {
+  .SearchBar {
+    margin-top: 1.3em;
   }
-} */
+}
 
 .SearchBar svg {
   fill: var(--blue-grey);

@@ -62,7 +62,8 @@ class AppointmentPicker extends React.Component {
   }
 
   // Send hour selected to the parents StoreDetails
-  bookAppointment = () => {
+  bookAppointment = (event) => {
+    event.preventDefault();
     this.props.createOrder(this.state.pickedTime)
   }
 

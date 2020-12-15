@@ -165,9 +165,9 @@ class MapContainerSearchFilter extends React.Component{
     }
 
     const icon2 = {
-      url: `https://res.cloudinary.com/dbsnbga7z/image/upload/v1608067773/localib/kisspng-google-maps-google-map-maker-pritchard-community-c-5b1d3f6256d146.5077443115286434263556_amolr1.png`,
+      url: `https://res.cloudinary.com/dbsnbga7z/image/upload/v1608069771/localib/NicePng_marker-circle-png_1015767_x5agnn.png`,
       origin: new window.google.maps.Point(0, 0),
-      scaledSize: new window.google.maps.Size(30, 40),
+      scaledSize: new window.google.maps.Size(60, 60),
     }
       
 

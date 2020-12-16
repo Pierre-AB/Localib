@@ -50,6 +50,12 @@
   min-height: 100vh;
 }
 
+@media (min-width: 992px) { 
+  .sign-form {
+    max-width: 650px;
+  }
+}
+
 .sign-form {
   display: flex;
   flex-direction: column;

@@ -20,6 +20,7 @@ import UserSettings from './pages/UserSettings';
 import Signup from './components/auth/Signup'
 import Login from './components/auth/Login'
 
+import FilteredMap from './components/Maps/FilteredMap' 
 
 // import service
 import { loggedIn } from './components/auth/auth-service'
@@ -103,7 +104,7 @@ class App extends React.Component {
 
           {/* product create form */}
           {/* <Route exact path="/products" component={AddProduct} /> */}
-
+          
           {/* success page */}
           <Route exact path="/success" component={Success} />
         </Switch>

@@ -112,7 +112,7 @@ class SearchList extends Component {
 
     return(
       <>
-        <div className="vertical-scroll-container">
+        <div id="searchlist" className="vertical-scroll-container">
 
           {/* Loading stores message */}
           {renderedList.length <= 0 && <ThreeDots width="30" />}

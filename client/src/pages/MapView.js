@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import axios from 'axios';
 
-
-
 import StoresList from '../components/Maps/storesList'
 // import Map from '../components/Maps/maps'
 
@@ -12,9 +10,6 @@ import SearchBar from '../components/SearchBar'
 // import SearchMap from '../components/Maps/MapFilters' // for desktop
 // import MapFilters from '../components/Maps/searchAddress'// for mobile
 import Navigation from '../components/Navigation'
-
-
-
 
 import FilteredMap from '../components/Maps/FilteredMap' // common for desktop & mobile
 
@@ -100,7 +95,7 @@ class MapView extends Component {
   render() {
     const {query, latitude, longitude, addresseSearched, centerGeolocated, listOfSearchedStores, addressValue, mapLoaded} = this.state;
     return (
-      <div className={`${this.state.isMobile ? "page-container-mobile" : "map-view page-container-desktop"}`}>
+      <div className={`${this.state.isMobile ? "page-container-mobile map-view-container" : "map-view page-container-desktop"}`}>
         <SearchBar 
         query={this.state.query} 
         updateQuery={this.updateQuery} 

@@ -65,9 +65,12 @@
   color: white;
   text-align: left;
   background-color: #454f63ba;
-  min-width: 240px;
+  min-width: 100%;
   font-size: 1.3em;
+}
 
+.gm-style .gm-style-iw-t::after {
+  background: #454653;
 }
 
 .nearby-store-infowindow-mobile button {
@@ -77,23 +80,25 @@
   font-weight: 700;
   text-align: left;
   background-color:  var(--accent-color);
-  margin: 1.3em -1.4em 0 0;
+  margin: 0.3em -1.3em 0.3em 0;
   padding: .4em 1.5em .4em 1em;
   border: 0;
   border-radius: 10px 0 0 10px;
+  float: right;
 }
 
-.nearby-store-infowindow-desktop button{
+.nearby-store-infowindow-desktop button {
   cursor: pointer;
   color: white;
   text-transform: uppercase;
   font-weight: 700;
   text-align: left;
   background-color:  var(--accent-color);
-  margin: 1.3em -1.4em 0 0;
+  margin: 0.3em -1.3em 0.3em 0;
   padding: .4em 1.5em .4em 1em;
   border: 0;
   border-radius: 10px 0 0 10px;
+  float: right;
 }
 
 .nearby-card-desktop-infowindow-container {
@@ -109,10 +114,9 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  height: 190px;
+  height: 230px;
   min-width: 240px;
   border-radius: 15px;
-  
 }
 
 .nearby-card-infowindow-desktop {

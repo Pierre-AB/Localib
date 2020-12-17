@@ -397,7 +397,7 @@ class StorePickADate extends React.Component {
           {/* <AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} /> */}
 
           {storeIsLoaded ? (
-            <div>
+            <div className="appointmentPickerDiv">
               <AppointmentPicker
                 store={this.state.store}
                 pickedDate={this.state.pickedDate}

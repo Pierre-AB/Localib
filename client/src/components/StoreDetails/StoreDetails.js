@@ -157,9 +157,11 @@ class StoreDetails extends React.Component {
           {storeIsLoaded ? (
             <div className="listOfProducts">
               <StoreMap store={this.state.store} />
-              {productList.map((products, i) => {
-                return <ListOfProducts key={i} {...products} />;
-              })}       
+              <div>
+                {productList.map((products, i) => {
+                  return <ListOfProducts key={i} {...products} />;
+                })}       
+              </div>
             </div>
             ) : "" }
         </div>

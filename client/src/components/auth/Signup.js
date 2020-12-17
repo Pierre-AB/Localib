@@ -29,7 +29,7 @@ class Signup extends Component {
         console.log("🌶🌶🌶", newConsumer)
         this.setState({ email: "", password: "", type: "", redirect: '/mapView' });
         this.props.updateUser(newConsumer)
- 
+
         this.props.history.goBack()
 
       }).catch(error => console.log(error))
@@ -61,8 +61,9 @@ class Signup extends Component {
 
           {/* <label>Password:</label> */}
           <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={e => this.handleChange(e)} />
+          <Link to={'/login'}>Vous avez déjà un compte ?</Link>
 
-          <button type="submit">Register</button>
+          <button type="submit">S'enregistrer</button>
 
         </form>
       </div>

@@ -99,7 +99,7 @@ class App extends React.Component {
 
           {/* Store Details */}
           <Route exact path="/storeDetails/:id" render={(props) => <StoreDetails loggedInUser={this.state.loggedInUser} {...props} />} />
-          <Route exact path="/storeDetails/appointment/:id" component={StorePickADate} />
+          <Route exact path="/storeDetails/appointment/:id" render={(props) => <StorePickADate loggedInUser={this.state.loggedInUser} {...props} />}/>
 
 
           {/* Signup, Login*/}

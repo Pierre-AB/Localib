@@ -116,12 +116,12 @@ class StoreDetails extends React.Component {
     let store = this.state.store
 
     this.state.listOfProducts.forEach(product => { // Boucle sur chaque produit
-          if (product?.store_id === store._id) { // Si store ID = store ID
-            ProductFilteredStoreId.push(product) // push dans ProductFilteredStoreId array
-          }
-        
-      })   
-    
+      if (product?.store_id === store._id) { // Si store ID = store ID
+        ProductFilteredStoreId.push(product) // push dans ProductFilteredStoreId array
+      }
+
+    })
+
     let productList = [...ProductFilteredStoreId]
 
     return (
@@ -148,7 +148,7 @@ class StoreDetails extends React.Component {
                   <Link to={`/signup`}>Créer un compte pour prendre RDV</Link>
                 </>)
               }
-              <a href='#'>Voir les produits</a>
+              {/* <a href='#'>Voir les produits</a> */}
             </div>
             <hr />
             <h3>Description</h3>
@@ -159,9 +159,9 @@ class StoreDetails extends React.Component {
               <StoreMap store={this.state.store} />
               {productList.map((products, i) => {
                 return <ListOfProducts key={i} {...products} />;
-              })}       
+              })}
             </div>
-            ) : "" }
+          ) : ""}
         </div>
       </div>
     )

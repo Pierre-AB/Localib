@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import './CommonStyle.css';
 import { Switch, Route } from 'react-router-dom';
@@ -36,6 +35,9 @@ import StorePickADate from './components/StoreDetails/StorePickADate'
 
 // import success page
 import Success from './pages/Success'
+
+// filtered map 
+import MapContainerSearchFilter from './components/Maps/FilteredMap'
 
 
 class App extends React.Component {
@@ -82,6 +84,7 @@ class App extends React.Component {
           query={this.state.query}
           updateQuery={this.updateQuery}
           loggedInUser={this.state.loggedInUser}
+          updateUser={this.updateLoggedInUser}
         />
         <Switch>
           {/* Splash Screen */}
@@ -99,14 +102,16 @@ class App extends React.Component {
           <Route exact path="/storeDetails/appointment/:id" component={StorePickADate} />
 
           {/* Signup, Login*/}
-          <Route exact path="/signup" render={() => <Signup updateUser={this.updateLoggedInUser} />} />
-          <Route exact path="/login" render={() => <Login updateUser={this.updateLoggedInUser} />} />
+          <Route exact path="/signup" render={(props) => <Signup updateUser={this.updateLoggedInUser} {...props} />} />
+          <Route exact path="/login" render={(props) => <Login updateUser={this.updateLoggedInUser} {...props} />} />
 
           {/* product create form */}
           {/* <Route exact path="/products" component={AddProduct} /> */}
           
           {/* success page */}
           <Route exact path="/success" component={Success} />
+
+          {/* <Route exact path="/mapviewv" component={MapContainerSearchFilter}/> */}
         </Switch>
       </div>
     );

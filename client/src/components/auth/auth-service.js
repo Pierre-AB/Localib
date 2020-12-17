@@ -16,8 +16,8 @@ function loggedIn() {
 }
 export { loggedIn }
 
-function login(username, password) {
-  return service.post('/login', { username, password }).then(response => response.data)
+function login(email, password) {
+  return service.post('/login', { email, password }).then(response => response.data)
 }
 export { login }
 

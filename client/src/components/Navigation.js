@@ -13,6 +13,7 @@ import { FaMap } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaCog } from "react-icons/fa";
 import SearchBar from './SearchBar';
+import { logout } from './auth/auth-service'
 
 // Configure mobile nav buttons
 const mobileNav = [{
@@ -79,9 +80,10 @@ class Navigation extends React.Component {
                 <li className="nav-link"><Link to='/mapView'>Les commerces</Link></li>
                 {loggedUser ? (<>
                   <li className="nav-link"><Link to='/commandes'>Mes commandes</Link></li>
-                  <li className="nav-link"><Link to='/logout'>Se déconnecter</Link></li>
+                  <li className="nav-link"><button onClick={(e) => { logout().then(() => this.props.updateUser(null)) }}>Se déconnecter</button></li>
                 </>) : (<>
-                  <li className="nav-link"><Link to='/signup'>S'enregistrer / s'authentifier</Link></li>
+                  <li className="nav-link"><Link to='/signup'>S'enregistrer </Link></li>
+                  <li className="nav-link"><Link to='/login'>s'authentifier</Link></li>
                 </>)}
 
                 {/* <li className="nav-link"><Link to='/cart'>Cart</Link></li>

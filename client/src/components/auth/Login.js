@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import { login } from './auth-service'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import './SignForm.css';
 
 class Login extends Component {
 
 
-  // Consumer Type is Hardcoded here-----------|
-  state = { email: '', password: '' }
+
+  state = {
+    email: '',
+    password: '',
+    redirect: null
+  }
 
   handleFormSubmit = (event) => {
     event.preventDefault();
@@ -18,7 +22,7 @@ class Login extends Component {
     login(email, password)
       .then(response => {
         this.props.updateUser(response)
-        this.setState({ email: "", password: "", type: "" });
+        this.setState({ email: "", password: "", type: "", redirect: '/mapView' });
       })
       .catch(error => console.log(error))
   }
@@ -29,12 +33,17 @@ class Login extends Component {
   }
 
   render() {
+
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} /> // Redirect to '/mapView' set line 25
+    }
+
     return (
       <div className="sign-page">
         {/* SIGNUP/LOGIN TABS */}
         <div className="sign-tabs">
-          <Link to={"/login"} className="sign-tab">Sign in</Link>
-          <Link to={"/signup"} className="sign-tab">Sign up</Link>
+          <Link to={"#"} className="sign-tab">Sign in</Link>
+          <Link to={"#"} className="sign-tab">Sign up</Link>
         </div>
 
         {/* SIGNUP CONTENT */}

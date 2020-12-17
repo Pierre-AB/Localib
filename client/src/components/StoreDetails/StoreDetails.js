@@ -77,7 +77,7 @@ class StoreDetails extends React.Component {
     }
     this.setState({
       orderProducts: orderProductsCopy
-    })
+    }, () => { this.props.fetchOrderProduct(this.state.orderProducts) })
   }
 
 

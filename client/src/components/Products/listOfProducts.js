@@ -15,28 +15,25 @@ class listOfProducts extends React.Component {
 
 
   addQty = (ev) => {
+
     this.setState({
-      qty: this.state.qty + 1,
-      selected: true
-    }, this.props.addToCart({ name: this.props.name, qty: this.state.qty }))
+      qty: this.state.qty + 1, //qty = 2 - this.state.qty = 2 + 1 
+    }, () => {
+      this.props.addToCart({ name: this.props.name, qty: 1 })
+      console.log("this.state.qty", this.state.qty)
+    })
 
   }
 
   removeQty = (ev) => {
-    if (this.state.qty === 1) {
-      this.setState({
-        selected: false,
-        qty: this.state.qty - 1
-      })
-    } else if (this.state.qty > 0) {
+    if (this.state.qty > 0) {
       this.setState({
         qty: this.state.qty - 1
       })
-      this.props.addToCart(this.props.name, this.state.qty)
+      this.props.addToCart({ name: this.props.name, qty: -1 })
     }
+
   }
-
-
 
   changeQty = (e) => {
     let productQtyDiv = e.target.querySelector(".book-products"); //e.target => product-img-and-name
@@ -54,6 +51,7 @@ class listOfProducts extends React.Component {
   render() {
     const selected = this.state.selected
     let product = this.props.products
+    const qty = this.state.qty
     return (
       <div>
 
@@ -71,7 +69,7 @@ class listOfProducts extends React.Component {
             <div className="book-products" style={{ display: "none" }}>
               <span onClick={this.removeQty}>-</span>
               {/* <input type="number" className='' value={this.state.qty} onChange={this.addQty}/> */}
-              <span className="product-quantity">{this.state.qty}</span>
+              <span className="product-quantity">{qty}</span>
               <span onClick={this.addQty}>+</span>
             </div>
           </li>

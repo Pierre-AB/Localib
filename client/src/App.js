@@ -43,7 +43,8 @@ import MapContainerSearchFilter from './components/Maps/FilteredMap'
 class App extends React.Component {
   state = {
     query: '',
-    loggedInUser: null
+    loggedInUser: null,
+    orderProducts: []
   }
 
   updateQuery = (newValue) => {
@@ -60,6 +61,10 @@ class App extends React.Component {
           this.setState({ loggedInUser: false })
         })
     }
+  }
+
+  fetchOrderProduct = (orderProducts) => {
+    this.setState({ orderProducts: orderProducts })
   }
 
   componentDidMount() {
@@ -98,8 +103,8 @@ class App extends React.Component {
           <Route exact path="/userSettings" component={UserSettings} />
 
           {/* Store Details */}
-          <Route exact path="/storeDetails/:id" render={(props) => <StoreDetails loggedInUser={this.state.loggedInUser} {...props} />} />
-          <Route exact path="/storeDetails/appointment/:id" render={(props) => <StorePickADate loggedInUser={this.state.loggedInUser} {...props} />}/>
+          <Route exact path="/storeDetails/:id" render={(props) => <StoreDetails loggedInUser={this.state.loggedInUser} fetchOrderProduct={this.fetchOrderProduct} {...props} />} />
+          <Route exact path="/storeDetails/appointment/:id" render={(props) => <StorePickADate loggedInUser={this.state.loggedInUser} {...props} />} />
 
 
           {/* Signup, Login*/}

@@ -16,7 +16,7 @@ import ListOfProducts from '../Products/listOfProducts'
 //  ######   #######  ##     ## ##         #######  ##    ## ######## ##    ##    ##    
 
 
-
+var ordersProductsArr = []
 
 class StoreDetails extends React.Component {
 
@@ -44,13 +44,44 @@ class StoreDetails extends React.Component {
 
   }
 
-  updateOrderProduct = (name, qty) => {
-    const productObject = {name, qty};
-    const ordersProductsArr = []
-    ordersProductsArr.push(productObject)
-    console.log("🍬🍬🍬🍬🍬🍬🍬", ordersProductsArr)
-    this.setState({orderProducts: ordersProductsArr})
+
+  // BRING  PRODUCTS AND QUANTITY FROM ListOfProduct (@object)
+
+  // updateOrderProduct = (name, qty) => {
+  //   const productObject = { name, qty };
+  //   const tmpOrdersProductsArr = []
+  //   ordersProductsArr.push(productObject)
+  //   console.log("🍬🍬🍬🍬🍬🍬🍬", ordersProductsArr)
+
+  // }
+
+
+
+
+  // funtion to add an item to `chart` state
+  addToCart = (newItem) => {
+    const orderProductsCopy = [...this.state.orderProducts];
+
+    // 1. search the presence of already present newItem
+    //    - if found: splice it, make a copy, add qty to previous one, push it
+    //    - otherwise, just push it
+
+    const itemIndex = this.state.orderProducts.findIndex(item => item.name === newItem.name)
+    if (itemIndex >= 0) {
+      orderProductsCopy.splice(itemIndex, 1);
+      const itemCopy = { ...this.state.orderProducts[itemIndex] }
+      itemCopy.qty += newItem.qty;
+      orderProductsCopy.push(itemCopy);
+    } else {
+      orderProductsCopy.push(newItem)
+    }
+    this.setState({
+      orderProducts: orderProductsCopy
+    })
   }
+
+
+
 
   //  $$$$$$\            $$\                                              $$\ $$\           
   // $$  __$$\           \__|                                             $$ |$$ |          
@@ -93,10 +124,10 @@ class StoreDetails extends React.Component {
       });
   };
 
-  
 
 
-  
+
+
 
   //                                      $$\                     
   //                                     $$ |                    
@@ -168,8 +199,8 @@ class StoreDetails extends React.Component {
               <StoreMap store={this.state.store} />
               <div>
                 {productList.map((products, i) => {
-                  return <ListOfProducts key={i} {...products} updateOrderProduct={this.updateOrderProduct}  />;
-                })}       
+                  return <ListOfProducts key={i} {...products} addToCart={this.addToCart} />;
+                })}
               </div>
             </div>
           ) : ""}

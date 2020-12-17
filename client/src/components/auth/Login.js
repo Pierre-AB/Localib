@@ -23,6 +23,7 @@ class Login extends Component {
       .then(response => {
         this.props.updateUser(response)
         this.setState({ email: "", password: "", type: "", redirect: '/mapView' });
+        this.props.history.goBack() // redirection to previous page.
       })
       .catch(error => console.log(error))
   }
@@ -34,9 +35,9 @@ class Login extends Component {
 
   render() {
 
-    if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} /> // Redirect to '/mapView' set line 25
-    }
+    // if (this.state.redirect) {
+    //   return <Redirect to={this.state.redirect} /> // Redirect to '/mapView' set line 25
+    // }
 
     return (
       <div className="sign-page">

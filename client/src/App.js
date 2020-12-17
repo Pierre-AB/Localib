@@ -12,14 +12,14 @@ import Navigation from './components/Navigation';
 import Home from './pages/Home';
 import SearchListResults from './pages/SearchListResults';
 import MapView from './pages/MapView';
-import Cart from './pages/Cart';
+import Cart from './components/Cart';
 import UserSettings from './pages/UserSettings';
 
 // import pages for Login, Sign up & Log out
 import Signup from './components/auth/Signup'
 import Login from './components/auth/Login'
 
-import FilteredMap from './components/Maps/FilteredMap' 
+import FilteredMap from './components/Maps/FilteredMap'
 
 // import service
 import { loggedIn } from './components/auth/auth-service'
@@ -94,12 +94,13 @@ class App extends React.Component {
           <Route exact path="/home" component={Home} />
           <Route exact path="/listSearch" component={SearchListResults} />
           <Route exact path="/mapView" component={MapView} />
-          <Route exact path="/cart" component={Cart} />
+          <Route exact path="/cart" render={(props) => <Cart loggedInUser={this.state.loggedInUser} {...props} />} />
           <Route exact path="/userSettings" component={UserSettings} />
 
           {/* Store Details */}
           <Route exact path="/storeDetails/:id" render={(props) => <StoreDetails loggedInUser={this.state.loggedInUser} {...props} />} />
-          <Route exact path="/storeDetails/appointment/:id" component={StorePickADate} />
+          <Route exact path="/storeDetails/appointment/:id" render={(props) => <StorePickADate loggedInUser={this.state.loggedInUser} {...props} />}/>
+
 
           {/* Signup, Login*/}
           <Route exact path="/signup" render={(props) => <Signup updateUser={this.updateLoggedInUser} {...props} />} />
@@ -107,7 +108,7 @@ class App extends React.Component {
 
           {/* product create form */}
           {/* <Route exact path="/products" component={AddProduct} /> */}
-          
+
           {/* success page */}
           <Route exact path="/success" component={Success} />
 

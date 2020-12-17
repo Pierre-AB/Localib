@@ -8,7 +8,12 @@ class Signup extends Component {
 
 
 
-  state = { email: '', password: '', type: '', redirect: null }
+  state = {
+    email: '',
+    password: '',
+    type: '',
+    redirect: null
+  }
 
   handleFormSubmit = (event) => {
     event.preventDefault();
@@ -24,7 +29,9 @@ class Signup extends Component {
         console.log("🌶🌶🌶", newConsumer)
         this.setState({ email: "", password: "", type: "", redirect: '/mapView' });
         this.props.updateUser(newConsumer)
-        this.props.history.push('')
+
+        this.props.history.goBack()
+
       }).catch(error => console.log(error))
   }
 
@@ -34,9 +41,9 @@ class Signup extends Component {
   }
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} /> // Redirect to '/mapView' set line 25
-    }
+    // if (this.state.redirect) {
+    //   return <Redirect to={this.state.redirect} /> // Redirect to '/mapView' set line 25
+    // }
 
     return (
       <div className="sign-page">
@@ -54,8 +61,9 @@ class Signup extends Component {
 
           {/* <label>Password:</label> */}
           <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={e => this.handleChange(e)} />
+          <Link to={'/login'}>Vous avez déjà un compte ?</Link>
 
-          <button type="submit">Register</button>
+          <button type="submit">S'enregistrer</button>
 
         </form>
       </div>

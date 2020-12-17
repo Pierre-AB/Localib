@@ -152,7 +152,7 @@ class StorePickADate extends React.Component {
     const { params } = this.props.match;
     // console.log("params", params)
     axios.get(`${process.env.REACT_APP_APIURL || ""}/api/stores/${params.id}`)
-    // axios.get(`http://localhost:5000/api/stores/${params.id}`)
+      // axios.get(`http://localhost:5000/api/stores/${params.id}`)
       .then(lookedUpStore => {
         this.setState({
           store: lookedUpStore.data,
@@ -195,12 +195,13 @@ class StorePickADate extends React.Component {
   // CREATE ORDERS Here =  Appointment booking
 
   createOrder = (time) => {
+    const client_id = this.props.loggedInUser._id
     const store_id = this.state.store._id;
     const appointmentDay = `${this.state.pickedDate.getFullYear()}-${this.state.pickedDate.getMonth() + 1}-${this.state.pickedDate.getDate()}`; // Record in server the date in a string format to avoid time offset due to local time from the browser
     const appointmentTime = time;
     const status = "confirmed"
 
-    axios.post('http://localhost:5000/api/orders', { store_id, appointmentDay, appointmentTime, status })
+    axios.post('http://localhost:5000/api/orders', { store_id, appointmentDay, appointmentTime, status, client_id })
       .then(response => {
         // console.log(response)
         // console.log("ORDER PASSED TO BACK");
@@ -334,7 +335,7 @@ class StorePickADate extends React.Component {
     return dayAvaiArr;
   }
 
-  scrollDateOnLoad () {
+  scrollDateOnLoad() {
     document.querySelector('.react-calendar__month-view__days').scrollLeft = this.state.centerCalendarDay * 86;
   }
 
@@ -353,7 +354,7 @@ class StorePickADate extends React.Component {
   render() {
 
     // Use store picture as background
-    let background = this.state.picture;
+    let background = this.state.store.picture;
 
     const storeIsLoaded = this.state.storeIsLoaded;
     const dayInfo = this.splitDay();
@@ -366,14 +367,14 @@ class StorePickADate extends React.Component {
 
     // TEST CASS CALENDRIER 
     const tileContent = ({ date, view }) => (
-      (view === 'month' && date.getDay() === 1) ? (<div className="weekDayName">lun</div>) : 
-      (view === 'month' && date.getDay() === 2) ? (<div className="weekDayName">mar</div>) :
-      (view === 'month' && date.getDay() === 3) ? (<div className="weekDayName">mer</div>) : 
-      (view === 'month' && date.getDay() === 4) ? (<div className="weekDayName">jeu</div>) : 
-      (view === 'month' && date.getDay() === 5) ? (<div className="weekDayName">ven</div>) : 
-      (view === 'month' && date.getDay() === 6) ? (<div className="weekDayName">sam</div>) : 
-      (view === 'month' && date.getDay() === 0) ? (<div className="weekDayName">dim</div>) : null
-    );   
+      (view === 'month' && date.getDay() === 1) ? (<div className="weekDayName">lun</div>) :
+        (view === 'month' && date.getDay() === 2) ? (<div className="weekDayName">mar</div>) :
+          (view === 'month' && date.getDay() === 3) ? (<div className="weekDayName">mer</div>) :
+            (view === 'month' && date.getDay() === 4) ? (<div className="weekDayName">jeu</div>) :
+              (view === 'month' && date.getDay() === 5) ? (<div className="weekDayName">ven</div>) :
+                (view === 'month' && date.getDay() === 6) ? (<div className="weekDayName">sam</div>) :
+                  (view === 'month' && date.getDay() === 0) ? (<div className="weekDayName">dim</div>) : null
+    );
 
 
     return (
@@ -399,7 +400,7 @@ class StorePickADate extends React.Component {
             pickedDate={this.state.pickedDate}
             showNeighboringMonth={false}
             tileContent={tileContent}
-            // tileClassName={tileClassName}
+          // tileClassName={tileClassName}
           />
           {/* <h3>{this.state.fullDayName}</h3> */}
           {/* <AppointmentPicker store={this.state.store} pickedDate={this.state.pickedDate} /> */}

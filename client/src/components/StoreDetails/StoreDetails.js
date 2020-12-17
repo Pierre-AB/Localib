@@ -28,7 +28,8 @@ class StoreDetails extends React.Component {
     timeSlot: 15,
     nonAvaiTime: [],
     listOfProducts: [],
-    storeProducts: []
+    storeProducts: [],
+    orderProducts: []
   }
 
   componentDidMount() {
@@ -41,6 +42,14 @@ class StoreDetails extends React.Component {
     //   pickedDate: this.state.store.openingHours
     // })
 
+  }
+
+  updateOrderProduct = (name, qty) => {
+    const productObject = {name, qty};
+    const ordersProductsArr = []
+    ordersProductsArr.push(productObject)
+    console.log("🍬🍬🍬🍬🍬🍬🍬", ordersProductsArr)
+    this.setState({orderProducts: ordersProductsArr})
   }
 
   //  $$$$$$\            $$\                                              $$\ $$\           
@@ -84,10 +93,10 @@ class StoreDetails extends React.Component {
       });
   };
 
+  
 
 
-
-
+  
 
   //                                      $$\                     
   //                                     $$ |                    
@@ -159,7 +168,7 @@ class StoreDetails extends React.Component {
               <StoreMap store={this.state.store} />
               <div>
                 {productList.map((products, i) => {
-                  return <ListOfProducts key={i} {...products} />;
+                  return <ListOfProducts key={i} {...products} updateOrderProduct={this.updateOrderProduct}  />;
                 })}       
               </div>
             </div>

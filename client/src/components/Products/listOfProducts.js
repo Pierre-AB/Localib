@@ -7,19 +7,36 @@ class listOfProducts extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      qty: 0
+      qty: 0,
+      selected: false
     };
   }
 
+
+
   addQty = (ev) => {
-    this.setState({qty: this.state.qty+1})
+    this.setState({
+      qty: this.state.qty+1,
+      selected: true
+    })
+    this.props.updateOrderProduct(this.props.name, this.state.qty)
   }
 
   removeQty = (ev) => {
-    if (this.state.qty > 0) {
-      this.setState({qty: this.state.qty-1})
-    } 
+    if (this.state.qty === 1) {
+      this.setState({
+        selected: false,
+        qty: this.state.qty-1
+      })
+    } else if (this.state.qty > 0){
+      this.setState({
+        qty: this.state.qty-1
+      })
+      this.props.updateOrderProduct(this.props.name, this.state.qty)
+    }
   }
+
+
 
   changeQty = (e) => {
     let productQtyDiv = e.target.querySelector(".book-products"); //e.target => product-img-and-name
@@ -35,7 +52,7 @@ class listOfProducts extends React.Component{
 
 
   render (){
-
+  const selected = this.state.selected
   let product = this.props.products
   return (
     <div>

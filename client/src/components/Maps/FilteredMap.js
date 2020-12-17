@@ -119,6 +119,10 @@ class MapContainerSearchFilter extends React.Component{
     } 
   }
  
+  redirectToStore = (storeId) => {
+    const { history } = this.props;
+    if(history) history.push(`/storeDetails/${storeId}`);
+   }
 
   componentDidMount() {
     this.askLocation()
@@ -313,7 +317,7 @@ class MapContainerSearchFilter extends React.Component{
                   {this.state.isMobile ? "" : (<img className="nearby-card-infowindow-desktop" src={`${this.state.selectedPlace.image}`} />)}
                       <div className={`${this.state.isMobile ? "nearby-store-infowindow-mobile" : "nearby-store-infowindow-desktop"}`}>
                           {/* <Link to={`/storeDetails/${this.state.selectedPlace.id}`}> */}
-                          <span onClick={() => this.props.history.push(`/storeDetails/${this.state.selectedPlace.id}`)}><h4 className="nearby-store-title">{this.state.selectedPlace.name}</h4></span>
+                          <h4 className="nearby-store-title" onClick={this.redirectToStore(this.state.selectedPlace.id)}>{this.state.selectedPlace.name}</h4>
                           {/* </Link> */}
                           <p className="nearby-store-address">{this.state.selectedPlace.address}</p>
                           <p className="nearby-store-address">{Math.floor(this.state.selectedPlace.distance)} mètres</p>

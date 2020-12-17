@@ -25,6 +25,7 @@
 @media (max-width: 992px) {
   .SearchBar {
     /* margin-top: 1.3em; */
+    max-width: calc(237px + 237px);
   }
 }
 
@@ -42,6 +43,7 @@
   display: -ms-flexbox;
   display: flex;
   position: relative;
+  max-width: 237px;
 }
 
 .searchbar-place {
@@ -61,6 +63,7 @@
   -webkit-flex: 1 0 0;
   -ms-flex: 1 0 0px;
   flex: 1 0 0;
+  min-width: 50px;
 }
 
 .searchbar-place-around-me-button.dl-button {

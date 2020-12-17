@@ -3,7 +3,7 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  margin: 0 -1.3em;
+  margin: -1.3em -1.3em 0;
   z-index: 0;
 }
 
@@ -286,6 +286,7 @@ button.bookAppointmentBtn {
   display: flex;
   align-items: center;
   align-content: center;
+  text-align: left;
 }
 
 .product-weight-and-price {
@@ -296,9 +297,11 @@ button.bookAppointmentBtn {
 }
 
 .product-picture {
-  height: 47px;
-  width: 47px;
+  height: 35px;
+  width: 35px;
   object-fit: cover;
+  border-radius: 5px;
+  margin-right: 1em;
 }
 
 .product-weight {
@@ -307,4 +310,8 @@ button.bookAppointmentBtn {
 
 .product-price {
   margin-left: 1.5em;
+}
+
+.product-picture, .product-name, .product-img-and-name {
+  pointer-events: none;
 }

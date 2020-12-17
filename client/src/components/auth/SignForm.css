@@ -54,12 +54,17 @@
   .sign-form {
     max-width: 650px;
   }
+
+  .sign-form button {
+    margin: 3em 0 0 30vw !important;
+  }
 }
 
 .sign-form {
   display: flex;
   flex-direction: column;
   padding: 3em 2em;
+  margin: auto;
 }
 
 .sign-form input {

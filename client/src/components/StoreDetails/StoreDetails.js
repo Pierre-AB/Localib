@@ -155,10 +155,10 @@ class StoreDetails extends React.Component {
             <p>{this.state.store.description}</p>
           </div>
           {storeIsLoaded ? (
-            <div>
+            <div className="listOfProducts">
               <StoreMap store={this.state.store} />
               {productList.map((products, i) => {
-                return <ListOfProducts {...products} key={i} />;
+                return <ListOfProducts key={i} {...products} />;
               })}       
             </div>
             ) : "" }

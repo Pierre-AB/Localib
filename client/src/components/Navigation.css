@@ -63,6 +63,7 @@
 
 .nav-menu li {
   display: inline-block;
+  height: 25px;
 }
 
 .nav-link {

@@ -429,9 +429,11 @@ div#searchlist {
 
 @media (max-width: 991.98px) { 
   .desktopFilteredMap {
-    position: block !important;
-    width: 100% !important;
-    height: calc(100% - 40px) !important;
+    position: initial !important;
+    /* width: 100% !important;
+    height: calc(100% - 40px) !important; */
+    width: 100vw !important;
+    height: calc(100vh - 40px) !important;
     margin: calc(-1.3em - 40px) 0 0 -1.3em;
     z-index: -1;
   }

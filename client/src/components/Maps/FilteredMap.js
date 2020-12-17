@@ -313,7 +313,7 @@ class MapContainerSearchFilter extends React.Component{
                   {this.state.isMobile ? "" : (<img className="nearby-card-infowindow-desktop" src={`${this.state.selectedPlace.image}`} />)}
                       <div className={`${this.state.isMobile ? "nearby-store-infowindow-mobile" : "nearby-store-infowindow-desktop"}`}>
                           {/* <Link to={`/storeDetails/${this.state.selectedPlace.id}`}> */}
-                          <h4 className="nearby-store-title">{this.state.selectedPlace.name}</h4>
+                          <h4 className="nearby-store-title" >{this.state.selectedPlace.name}</h4>
                           {/* </Link> */}
                           <p className="nearby-store-address">{this.state.selectedPlace.address}</p>
                           <p className="nearby-store-address">{Math.floor(this.state.selectedPlace.distance)} mètres</p>

@@ -110,8 +110,8 @@ class Cart extends Component {
                         return (
                           <div className="order-content">
                             <li className="order-content-row">
-                            <span>{product[0].name}</span>
-                            <span>{product[0].qty}</span>
+                            <span className="span-name">{product[0].name}</span>
+                            <span className="span-qty">{product[0].qty}</span>
                             <span>{product[0].price}€</span>
                             </li>
                           </div>

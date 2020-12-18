@@ -29,7 +29,8 @@ class StoreDetails extends React.Component {
     nonAvaiTime: [],
     listOfProducts: [],
     storeProducts: [],
-    orderProducts: []
+    orderProducts: [],
+    orderProductsFromApp: this.props.orderProducts
   }
 
   componentDidMount() {
@@ -200,7 +201,7 @@ class StoreDetails extends React.Component {
               <StoreMap store={this.state.store} />
               <div>
                 {productList.map((products, i) => {
-                  return <ListOfProducts key={i} {...products} addToCart={this.addToCart} />;
+                  return <ListOfProducts key={i} {...products} orderProductsFromApp={this.state.orderProductsFromApp} addToCart={this.addToCart} />;
                 })}
               </div>
             </div>

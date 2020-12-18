@@ -101,7 +101,7 @@ class App extends React.Component {
           <Route exact path="/userSettings" component={UserSettings} />
 
           {/* Store Details */}
-          <Route exact path="/storeDetails/:id" render={(props) => <StoreDetails loggedInUser={this.state.loggedInUser} fetchOrderProduct={this.fetchOrderProduct} {...props} />} />
+          <Route exact path="/storeDetails/:id" render={(props) => <StoreDetails loggedInUser={this.state.loggedInUser} fetchOrderProduct={this.fetchOrderProduct} orderProducts={this.state.orderProducts} {...props} />} />
           <Route exact path="/storeDetails/appointment/:id" render={(props) => <StorePickADate loggedInUser={this.state.loggedInUser} orderProducts={this.state.orderProducts} {...props} />} />
 
 

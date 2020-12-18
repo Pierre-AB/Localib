@@ -509,3 +509,12 @@ div#searchlist {
 .map-view-container {
   padding-top: 1.3em;
 }
+
+.span-qty{
+  width: 70px;
+}
+
+.span-name{
+  width: 90px;
+  text-align: left;
+}

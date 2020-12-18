@@ -19,8 +19,6 @@ import UserSettings from './pages/UserSettings';
 import Signup from './components/auth/Signup'
 import Login from './components/auth/Login'
 
-import FilteredMap from './components/Maps/FilteredMap'
-
 // import service
 import { loggedIn } from './components/auth/auth-service'
 
@@ -104,7 +102,7 @@ class App extends React.Component {
 
           {/* Store Details */}
           <Route exact path="/storeDetails/:id" render={(props) => <StoreDetails loggedInUser={this.state.loggedInUser} fetchOrderProduct={this.fetchOrderProduct} {...props} />} />
-          <Route exact path="/storeDetails/appointment/:id" render={(props) => <StorePickADate loggedInUser={this.state.loggedInUser} {...props} />} />
+          <Route exact path="/storeDetails/appointment/:id" render={(props) => <StorePickADate loggedInUser={this.state.loggedInUser} orderProducts={this.state.orderProducts} {...props} />} />
 
 
           {/* Signup, Login*/}

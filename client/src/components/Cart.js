@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 
 class Cart extends Component {
   state = {
     query: '',
-    isMobile: false
+    isMobile: false, 
+    order: []
   }
   
   updateQuery = (newValue) => {
@@ -11,6 +14,7 @@ class Cart extends Component {
   }  
   
   componentDidMount() {
+    this.getSingleStore()
     window.addEventListener("resize", this.resize.bind(this));
     this.resize();
   }
@@ -22,9 +26,30 @@ class Cart extends Component {
   componentWillUnmount() {
       window.removeEventListener("resize", this.resize.bind(this));
   }
+
+  //  $$$$$$\            $$\                                              $$\ $$\           
+  // $$  __$$\           \__|                                             $$ |$$ |          
+  // $$ /  $$ |$$\   $$\ $$\  $$$$$$\   $$$$$$$\        $$$$$$$\ $$$$$$\  $$ |$$ | $$$$$$$\ 
+  // $$$$$$$$ |\$$\ $$  |$$ |$$  __$$\ $$  _____|      $$  _____|\____$$\ $$ |$$ |$$  _____|
+  // $$  __$$ | \$$$$  / $$ |$$ /  $$ |\$$$$$$\        $$ /      $$$$$$$ |$$ |$$ |\$$$$$$\  
+  // $$ |  $$ | $$  $$<  $$ |$$ |  $$ | \____$$\       $$ |     $$  __$$ |$$ |$$ | \____$$\ 
+  // $$ |  $$ |$$  /\$$\ $$ |\$$$$$$  |$$$$$$$  |      \$$$$$$$\\$$$$$$$ |$$ |$$ |$$$$$$$  |
+  // \__|  \__|\__/  \__|\__| \______/ \_______/        \_______|\_______|\__|\__|\_______/ 
+
+  getSingleStore = () => {
+    axios.get(`${process.env.REACT_APP_APIURL || ""}/orders`)
+      .then(ordersFromDB => {
+        this.setState({
+          order: ordersFromDB
+        });
+
+      })
+      .catch(err => console.log("Error on getting store details:", err))
+  }
   
   
   render() {
+    const order = this.state.order
     return (
       <div>
         <div className={`${this.state.isMobile ? "page-container-mobile" : "page-container-desktop"}`}>

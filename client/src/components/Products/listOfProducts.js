@@ -19,7 +19,7 @@ class listOfProducts extends React.Component {
     this.setState({
       qty: this.state.qty + 1, //qty = 2 - this.state.qty = 2 + 1 
     }, () => {
-      this.props.addToCart({ name: this.props.name, qty: 1 })
+      this.props.addToCart({ name: this.props.name, qty: 1, price: this.props.price })
       console.log("this.state.qty", this.state.qty)
     })
 
@@ -30,7 +30,7 @@ class listOfProducts extends React.Component {
       this.setState({
         qty: this.state.qty - 1
       })
-      this.props.addToCart({ name: this.props.name, qty: -1 })
+      this.props.addToCart({ name: this.props.name, qty: -1, price: -this.props.price })
     }
 
   }

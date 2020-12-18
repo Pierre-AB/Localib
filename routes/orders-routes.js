@@ -7,14 +7,17 @@ const Order = require('../models/order-model')
 // RETRIEVE APPOINTMENTS FOR A STORE
 
 ordersRoute.get('/orders', (req, res, next) => {
+  console.log('user: 🤑', req.session.currentUser)
   const storeId = req.query.storeId
-  Order.find({ store_id: storeId })
+  Order.find() //({ store_id: storeId })
     .then(response => {
       console.log("🍫 ORDER FROM DB=", response);
       res.status(200).json(response)
     })
-    .catch(err => { console.log("🥕", err) });
-
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    })
 })
 
 

@@ -128,7 +128,8 @@ class StorePickADate extends React.Component {
     storeIsLoaded: false,
     timeSlot: 15,
     nonAvaiTime: [],
-    centerCalendarDay: new Date().getDate()
+    centerCalendarDay: new Date().getDate(),
+    orderProducts: this.props.orderProducts
   }
 
   componentDidMount() {
@@ -194,14 +195,15 @@ class StorePickADate extends React.Component {
 
   // CREATE ORDERS Here =  Appointment booking
 
-  createOrder = (time) => {
+  createOrder = (time, productList) => {
     const client_id = this.props.loggedInUser._id
     const store_id = this.state.store._id;
     const appointmentDay = `${this.state.pickedDate.getFullYear()}-${this.state.pickedDate.getMonth() + 1}-${this.state.pickedDate.getDate()}`; // Record in server the date in a string format to avoid time offset due to local time from the browser
     const appointmentTime = time;
     const status = "confirmed"
+    const products = productList // qui vient d'App.js
 
-    axios.post('http://localhost:5000/api/orders', { store_id, appointmentDay, appointmentTime, status, client_id })
+    axios.post('http://localhost:5000/api/orders', { store_id, appointmentDay, appointmentTime, status, client_id, products })
       .then(response => {
         // console.log(response)
         // console.log("ORDER PASSED TO BACK");
@@ -211,13 +213,6 @@ class StorePickADate extends React.Component {
 
   }
 
-  /**
-   
-                    APP
-      StoreDetails      StireOuckADate
-
-
-   */ 
 
   //  $$$$$$\                                  $$\     $$\                               
   // $$  __$$\                                 $$ |    \__|                              
@@ -414,6 +409,7 @@ class StorePickADate extends React.Component {
                 dayAvaiArr={dayInfo}
                 createOrder={this.createOrder}
                 nonAvaiTime={nonAvaiTime}
+                orderProducts={this.state.orderProducts}
               />
               {/* <StoreMap store={this.state.store} /> */}
             </div>

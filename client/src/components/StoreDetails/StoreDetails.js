@@ -71,6 +71,7 @@ class StoreDetails extends React.Component {
       orderProductsCopy.splice(itemIndex, 1);
       const itemCopy = { ...this.state.orderProducts[itemIndex] }
       itemCopy.qty += newItem.qty;
+      itemCopy.price += newItem.price;
       orderProductsCopy.push(itemCopy);
     } else {
       orderProductsCopy.push(newItem)

@@ -209,6 +209,11 @@ class StorePickADate extends React.Component {
 
     axios.post(`${process.env.REACT_APP_APIURL || ""}/api/orders`, { store_id, appointmentDay, appointmentTime, status, client_id, products, storeImg, storeName})
       .then(response => {
+        this.props.history.push("/success")
+        setTimeout(() => {
+          this.props.history.push("/cart")
+        }, 1500);
+
         // console.log(response)
         // console.log("ORDER PASSED TO BACK");
       })

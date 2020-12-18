@@ -451,6 +451,7 @@ div#searchlist {
   padding: 1em;
   border-radius: 15px;
   color: var(--blue-grey);
+  margin-bottom: 2em;
 }
 
 .command-title-infos {
@@ -510,11 +511,28 @@ div#searchlist {
   padding-top: 1.3em;
 }
 
-.span-qty{
+.span-qty {
   width: 70px;
 }
 
-.span-name{
-  width: 90px;
+.span-name {
+  width: 50%;
   text-align: left;
+}
+
+div.command-section-desktop h2 {
+  text-align: center;
+}
+
+.mobile-command-title {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  height: 30px;
+}
+
+.mobile-command-title h2 {
+  margin: 0;
+  height: 27px;
 }

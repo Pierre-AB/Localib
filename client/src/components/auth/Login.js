@@ -58,7 +58,7 @@ class Login extends Component {
 
           <Link to={'/signup'}>Vous n'avez pas encore de compte ?</Link>
 
-          <button type="submit">S'authentifier</button>
+          <button type="submit">Se connecter</button>
 
         </form>
       </div>

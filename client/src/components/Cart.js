@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { useLoading, ThreeDots } from '@agney/react-loading';
-
+import { logout } from './auth/auth-service'
 
 
 class Cart extends Component {
@@ -77,23 +77,31 @@ class Cart extends Component {
   render() {
 
     let allOrders = this.state.orders
+    const loggedUser = this.props.loggedInUser
 
     return (
-
-
 
       <div>
         <div className={`${this.state.isMobile ? "page-container-mobile" : "page-container-desktop"}`}>
           {/* <SearchBar query={this.state.query} updateQuery={this.updateQuery} /> */}   
           <div className={`${this.state.isMobile ? "command-section-mobile" : "command-section-desktop"}`}>
-            <h2>Mes commandes</h2>
+            {this.state.isMobile ? (
+              <div className="mobile-command-title">
+                <h2>Mes commandes</h2>
+                {loggedUser ? (
+                  <button className="logout-btn" onClick={(e) => { logout().then(() => this.props.updateUser(null)) }}><svg width="24" height="24"><g fill="none" fillRule="evenodd"><path stroke="#aeb5c5" d="M6.5 8.3V5.63c0-1.17.9-2.13 2-2.13h7c1.1 0 2 .95 2 2.13v11.74c0 1.17-.9 2.13-2 2.13h-7c-1.1 0-2-.95-2-2.13V14.7"></path><path fill="#aeb5c5" d="M12.8 11l-2.15-2.15a.5.5 0 11.7-.7L14 10.79a1 1 0 010 1.42l-2.65 2.64a.5.5 0 01-.7-.7L12.79 12H4.5a.5.5 0 010-1h8.3z"></path></g></svg></button>
+                ) : (<div />)}
+              </div>
+            ) : (
+              <h2>Mes commandes</h2>
+            )}
             <hr />
 
              {allOrders.length <= 0 && <ThreeDots width="30" />}
 
               {allOrders.map(order => {
-                return (
-                  
+
+                return (                  
                     <div className="command-card">
                       <div className="command-title-infos">
                         <span className="command-reference"> {order._id} </span>

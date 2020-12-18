@@ -6,8 +6,6 @@ import './SignForm.css';
 
 class Signup extends Component {
 
-
-
   state = {
     email: '',
     password: '',
@@ -63,7 +61,7 @@ class Signup extends Component {
           <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={e => this.handleChange(e)} />
           <Link to={'/login'}>Vous avez déjà un compte ?</Link>
 
-          <button type="submit">S'enregistrer</button>
+          <button type="submit">S'inscrire</button>
 
         </form>
       </div>

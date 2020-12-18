@@ -97,7 +97,7 @@ class App extends React.Component {
           <Route exact path="/home" component={Home} />
           <Route exact path="/listSearch" component={SearchListResults} />
           <Route exact path="/mapView" component={MapView} />
-          <Route exact path="/cart" render={(props) => <Cart loggedInUser={this.state.loggedInUser} {...props} />} />
+          <Route exact path="/cart" render={(props) => <Cart loggedInUser={this.state.loggedInUser} updateUser={this.updateLoggedInUser} {...props} />} />
           <Route exact path="/userSettings" component={UserSettings} />
 
           {/* Store Details */}

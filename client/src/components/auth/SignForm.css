@@ -56,7 +56,7 @@
   }
 
   .sign-form button {
-    margin: 3em 0 0 30vw !important;
+    margin: 3em 0 0 auto !important;
   }
 }
 

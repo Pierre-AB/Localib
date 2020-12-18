@@ -35,34 +35,9 @@ const mobileNav = [{
   label: "Cart"
 }]
 
-
-// // Test URL to hide searchbar component on the nav
-// function DisplaySearchBar() {
-//   let match = useRouteMatch("/mapView");
-
-//   if (match) {
-//     // If URL match
-//     return <SearchBar query={props.query} updateQuery={props.updateQuery} />;
-//   } else {
-//     return <div />
-//   }
-// }
-
-
 // Display nav
 class Navigation extends React.Component {
 
-  // // Test URL to hide searchbar component on the nav
-  // function DisplaySearchBar() {
-  //   let match = useRouteMatch("/mapView");
-
-  //   if (match) {
-  //     // If URL match
-  //     return <SearchBar query={props.query} updateQuery={props.updateQuery} />;
-  //   } else {
-  //     return <div />
-  //   }
-  // }
   render() {
     const loggedUser = this.props.loggedInUser
 

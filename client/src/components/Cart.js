@@ -18,7 +18,6 @@ class Cart extends Component {
   
   componentDidMount() {
     this.getOrders();
-    this.getStores();
     window.addEventListener("resize", this.resize.bind(this));
     this.resize();
   }
@@ -44,23 +43,23 @@ class Cart extends Component {
     axios.get(`${process.env.REACT_APP_APIURL || ""}/api/orders`)
       .then(ordersFromDB => {
         this.setState({
-          orders: ordersFromDB
+          orders: ordersFromDB.data
         });
 
       })
       .catch(err => console.log("Error on getting Orders", err))
   }
 
-  getStores = () => {
-    axios.get(`${process.env.REACT_APP_APIURL || ""}/api/stores`)
-      .then(storesFromDB => {
-        this.setState({
-          stores: storesFromDB
-        });
+  // getStores = () => {
+  //   axios.get(`${process.env.REACT_APP_APIURL || ""}/api/stores`)
+  //     .then(storesFromDB => {
+  //       this.setState({
+  //         stores: storesFromDB.data
+  //       });
 
-      })
-      .catch(err => console.log("Error on getting Orders", err))
-  }
+  //     })
+  //     .catch(err => console.log("Error on getting Orders", err))
+  // }
   
   
 
@@ -80,20 +79,6 @@ class Cart extends Component {
     let allOrders = this.state.orders
 
     return (
-      // <div>
-
-      // {allOrders.length <= 0 && <ThreeDots width="30" />}
-
-      //   {allOrders.map(order => {
-      //     return (
-            
-      //     )
-      //   })
-
-      //   }
-      // </div>
-
-
 
 
 
@@ -103,7 +88,70 @@ class Cart extends Component {
           <div className={`${this.state.isMobile ? "command-section-mobile" : "command-section-desktop"}`}>
             <h2>Mes commandes</h2>
             <hr />
-            <div className="command-card">
+
+             {allOrders.length <= 0 && <ThreeDots width="30" />}
+
+              {allOrders.map(order => {
+                return (
+                  
+                    <div className="command-card">
+                      <div className="command-title-infos">
+                        <span className="command-reference"> {order._id} </span>
+                        <span>&nbsp;• {order.appointmentDay} </span>
+                        <span>&nbsp;à {order.appointmentTime}</span>
+                      </div>
+                      <div className="whoTakesOrder">
+                        <img src="https://www.grange-aux-pains.com/images/boulangerie-lacanau-la-grange-aux-pains.jpg" />
+                        <h3>La boulangerie de Micheline</h3>
+                      </div>
+                      <hr />
+
+                      {order.products && order.products.map(product => {
+                        return (
+                          <div className="order-content">
+                            <li className="order-content-row">
+                            <span>{product[0].name}</span>
+                            <span>{product[0].qty}</span>
+                            <span>{product[0].price}€</span>
+                            </li>
+                          </div>
+                        )
+                      })}
+                      {/* <div className="order-content">
+                        <li className="order-content-row">
+                          <span>Broccolis</span>
+                          <span>x3</span>
+                          <span>2,80E</span>
+                        </li>
+                        <li className="order-content-row">
+                          <span>Broccolis</span>
+                          <span>x3</span>
+                          <span>2,80E</span>
+                        </li>
+                        <li className="order-content-row">
+                          <span>Broccolis</span>
+                          <span>x3</span>
+                          <span>2,80E</span>
+                        </li>
+                        <li className="order-content-row">
+                          <span>Broccolis</span>
+                          <span>x3</span>
+                          <span>2,80E</span>
+                        </li>
+                        <li className="order-content-total-row">
+                          <span>Total</span>
+                          <span>2,80E</span>
+                        </li>
+                      </div> */}
+                    </div> 
+
+                  )
+                })
+
+              }
+
+              
+            {/* <div className="command-card">
               <div className="command-title-infos">
                 <span className="command-reference">#5678 </span>
                 <span>&nbsp;• 02/12/2020 </span>
@@ -140,7 +188,8 @@ class Cart extends Component {
                   <span>2,80E</span>
                 </li>
               </div>
-            </div>
+            </div>  */}
+           
           </div>
         </div>
       </div>

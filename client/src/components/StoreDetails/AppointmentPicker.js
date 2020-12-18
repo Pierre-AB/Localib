@@ -65,7 +65,7 @@ class AppointmentPicker extends React.Component {
   // Send hour selected to the parents StoreDetails
   bookAppointment = (event) => {
     event.preventDefault();
-    this.props.createOrder(this.state.pickedTime, this.state.orderProducts)
+    this.props.createOrder(this.state.pickedTime)
   }
 
   // Add className to hour picker button in order to know if the user can select or not this timeslot.

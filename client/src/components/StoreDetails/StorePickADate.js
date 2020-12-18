@@ -195,13 +195,13 @@ class StorePickADate extends React.Component {
 
   // CREATE ORDERS Here =  Appointment booking
 
-  createOrder = (time, productList) => {
+  createOrder = (time) => {
     const client_id = this.props.loggedInUser._id
     const store_id = this.state.store._id;
     const appointmentDay = `${this.state.pickedDate.getFullYear()}-${this.state.pickedDate.getMonth() + 1}-${this.state.pickedDate.getDate()}`; // Record in server the date in a string format to avoid time offset due to local time from the browser
     const appointmentTime = time;
     const status = "confirmed"
-    const products = productList // qui vient d'App.js
+    const products = this.props.orderProducts // qui vient d'AppointmentPicker
 
     axios.post(`${process.env.REACT_APP_APIURL || ""}/api/orders`, { store_id, appointmentDay, appointmentTime, status, client_id, products })
       .then(response => {

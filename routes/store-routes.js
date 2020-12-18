@@ -236,5 +236,15 @@ router.get(`/stores/:id`, (req, res, next) => {
 })
 
 
+router.get(`/stores`, (req, res, next) => {
+  User.find()
+    .then(store => {
+      res.status(200).json(store)
+    })
+    .catch(err => {
+      res.status(400).json({ message: err })
+    })
+})
+
 
 module.exports = router;

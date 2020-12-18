@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { useLoading, ThreeDots } from '@agney/react-loading';
+
 
 
 class Cart extends Component {
   state = {
     query: '',
     isMobile: false, 
-    order: []
+    orders: [],
+    stores: []
   }
   
   updateQuery = (newValue) => {
@@ -14,7 +17,8 @@ class Cart extends Component {
   }  
   
   componentDidMount() {
-    this.getSingleStore()
+    this.getOrders();
+    this.getStores();
     window.addEventListener("resize", this.resize.bind(this));
     this.resize();
   }
@@ -36,21 +40,63 @@ class Cart extends Component {
   // $$ |  $$ |$$  /\$$\ $$ |\$$$$$$  |$$$$$$$  |      \$$$$$$$\\$$$$$$$ |$$ |$$ |$$$$$$$  |
   // \__|  \__|\__/  \__|\__| \______/ \_______/        \_______|\_______|\__|\__|\_______/ 
 
-  getSingleStore = () => {
-    axios.get(`${process.env.REACT_APP_APIURL || ""}/orders`)
+  getOrders = () => {
+    axios.get(`${process.env.REACT_APP_APIURL || ""}/api/orders`)
       .then(ordersFromDB => {
         this.setState({
-          order: ordersFromDB
+          orders: ordersFromDB
         });
 
       })
-      .catch(err => console.log("Error on getting store details:", err))
+      .catch(err => console.log("Error on getting Orders", err))
+  }
+
+  getStores = () => {
+    axios.get(`${process.env.REACT_APP_APIURL || ""}/api/stores`)
+      .then(storesFromDB => {
+        this.setState({
+          stores: storesFromDB
+        });
+
+      })
+      .catch(err => console.log("Error on getting Orders", err))
   }
   
   
+
+
+    //                                      $$\                     
+  //                                     $$ |                    
+  //  $$$$$$\   $$$$$$\  $$$$$$$\   $$$$$$$ | $$$$$$\   $$$$$$\  
+  // $$  __$$\ $$  __$$\ $$  __$$\ $$  __$$ |$$  __$$\ $$  __$$\ 
+  // $$ |  \__|$$$$$$$$ |$$ |  $$ |$$ /  $$ |$$$$$$$$ |$$ |  \__|
+  // $$ |      $$   ____|$$ |  $$ |$$ |  $$ |$$   ____|$$ |      
+  // $$ |      \$$$$$$$\ $$ |  $$ |\$$$$$$$ |\$$$$$$$\ $$ |      
+  // \__|       \_______|\__|  \__| \_______| \_______|\__|      
+
+
   render() {
-    const order = this.state.order
+
+    let allOrders = this.state.orders
+
     return (
+      // <div>
+
+      // {allOrders.length <= 0 && <ThreeDots width="30" />}
+
+      //   {allOrders.map(order => {
+      //     return (
+            
+      //     )
+      //   })
+
+      //   }
+      // </div>
+
+
+
+
+
       <div>
         <div className={`${this.state.isMobile ? "page-container-mobile" : "page-container-desktop"}`}>
           {/* <SearchBar query={this.state.query} updateQuery={this.updateQuery} /> */}   

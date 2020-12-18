@@ -169,7 +169,7 @@ class StorePickADate extends React.Component {
   getBookedAppo = () => {
     let store = this.state.store._id
     // console.log("🏚 store/id=", store._id)
-    axios.get(`http://localhost:5000/api/orders?storeId=${encodeURIComponent(store)}`) // QUERY STRING
+    axios.get(`${process.env.REACT_APP_APIURL || ""}/api/orders?storeId=${encodeURIComponent(store)}`) // QUERY STRING
       .then(response => {
         const ordersFromApi = response.data;
         console.log("⏰ ORDERS from API=", ordersFromApi);
@@ -203,7 +203,7 @@ class StorePickADate extends React.Component {
     const status = "confirmed"
     const products = productList // qui vient d'App.js
 
-    axios.post('http://localhost:5000/api/orders', { store_id, appointmentDay, appointmentTime, status, client_id, products })
+    axios.post(`${process.env.REACT_APP_APIURL || ""}/api/orders`, { store_id, appointmentDay, appointmentTime, status, client_id, products })
       .then(response => {
         // console.log(response)
         // console.log("ORDER PASSED TO BACK");

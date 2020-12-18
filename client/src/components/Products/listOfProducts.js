@@ -15,14 +15,18 @@ class listOfProducts extends React.Component {
 
 
   addQty = (ev) => {
+    if (this.props.mustLogin) {
+      this.props.history.push('/signup')
+      return;
+    } else {
+      this.setState({
+        qty: this.state.qty + 1, //qty = 2 - this.state.qty = 2 + 1 
+      }, () => {
+        this.props.addToCart({ name: this.props.name, qty: 1, price: this.props.price })
+        console.log("this.state.qty", this.state.qty)
+      })
 
-    this.setState({
-      qty: this.state.qty + 1, //qty = 2 - this.state.qty = 2 + 1 
-    }, () => {
-      this.props.addToCart({ name: this.props.name, qty: 1, price: this.props.price })
-      console.log("this.state.qty", this.state.qty)
-    })
-
+    }
   }
 
   removeQty = (ev) => {
@@ -52,6 +56,8 @@ class listOfProducts extends React.Component {
     const selected = this.state.selected
     let product = this.props.products
     const qty = this.state.qty
+
+
     return (
       <div>
 

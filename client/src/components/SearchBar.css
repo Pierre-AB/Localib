@@ -97,7 +97,7 @@
   -ms-flex: 1 0 0px;
   flex: 1 0 0;
   line-height: 16px;
-  padding: 0 46px;
+  padding: 0 0 0 46px;
   border: none;
   background-color: #fff;
   color: var(--blue-grey);

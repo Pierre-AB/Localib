@@ -59,7 +59,7 @@ class Signup extends Component {
 
           {/* <label>Password:</label> */}
           <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={e => this.handleChange(e)} />
-          <Link to={'/login'}>Vous avez déjà un compte ?</Link>
+          <Link className="redirect-link" to={'/login'}>Vous avez déjà un compte ?</Link>
 
           <button type="submit">S'inscrire</button>
 

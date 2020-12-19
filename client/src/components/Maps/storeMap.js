@@ -99,7 +99,7 @@ render() {
                           <p className="nearby-store-address">{this.state.selectedPlace.address}</p>
                           <p className="nearby-store-address">{Math.floor(this.state.selectedPlace.distance)} mètres</p>
                           <form target="_blank" action={`http://www.google.com/maps/place/${this.state.selectedPlace.latitude},${this.state.selectedPlace.longitude}` }>
-                              <button type="submit">GO</button>
+                              <button type="submit">S’y rendre</button>
                           </form>
                       </div>
                     </div>

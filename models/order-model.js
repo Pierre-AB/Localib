@@ -5,6 +5,8 @@ const orderModel = new Schema({
   client_id: [{ type: Schema.Types.ObjectId, ref: 'Consumer' }],
   store_id: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   products: [Array],
+  storeImg: String,
+  storeName: String,
   totalAmount: Number,
   appointmentDay: String,
   appointmentTime: String,

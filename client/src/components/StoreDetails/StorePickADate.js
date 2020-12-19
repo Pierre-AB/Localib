@@ -202,8 +202,12 @@ class StorePickADate extends React.Component {
     const appointmentTime = time;
     const status = "confirmed"
     const products = this.props.orderProducts // qui vient d'AppointmentPicker
+    const storeImg = this.state.store.picture;
+    const storeName = this.state.store.fullName;
 
-    axios.post(`${process.env.REACT_APP_APIURL || ""}/api/orders`, { store_id, appointmentDay, appointmentTime, status, client_id, products })
+    console.log("aaaaaaaaa", storeImg)
+
+    axios.post(`${process.env.REACT_APP_APIURL || ""}/api/orders`, { store_id, appointmentDay, appointmentTime, status, client_id, products, storeImg, storeName})
       .then(response => {
         this.props.history.push("/success")
         setTimeout(() => {

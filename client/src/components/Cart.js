@@ -40,7 +40,7 @@ class Cart extends Component {
   // \__|  \__|\__/  \__|\__| \______/ \_______/        \_______|\_______|\__|\__|\_______/ 
 
   getOrders = () => {
-    axios.get(`${process.env.REACT_APP_APIURL || ""}/api/orders`)
+      axios.get(`${process.env.REACT_APP_APIURL || ""}/api/orders/${this.props.loggedInUser._id}`)
       .then(ordersFromDB => {
         this.setState({
           orders: ordersFromDB.data
@@ -48,7 +48,20 @@ class Cart extends Component {
 
       })
       .catch(err => console.log("Error on getting Orders", err))
+      console.log("je suis là")
+    
+
   }
+
+  // userOrder = () => {
+  //   const userOrderList = this.state.orders.filter(order => {
+  //     const filteredOrder = order.client_id && order.client_id.toString().includes(this.props.loggedInUser._id.toString())
+  //     return filteredOrder
+  //   })
+  //   console.log("userOrderList:", userOrderList)  
+  //   console.log("user:", this.props.loggedInUser._id)  
+    
+  // }
 
   // getStores = () => {
   //   axios.get(`${process.env.REACT_APP_APIURL || ""}/api/stores`)
@@ -109,7 +122,7 @@ class Cart extends Component {
                         <span>&nbsp;à {order.appointmentTime}</span>
                       </div>
                       <div className="whoTakesOrder">
-                        <img src="https://www.grange-aux-pains.com/images/boulangerie-lacanau-la-grange-aux-pains.jpg" />
+                        {/* <img src={ /> */}
                         <h3>La boulangerie de Micheline</h3>
                       </div>
                       <hr />

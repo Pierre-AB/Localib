@@ -7,27 +7,28 @@ import { logout } from './auth/auth-service'
 class Cart extends Component {
   state = {
     query: '',
-    isMobile: false, 
+    isMobile: false,
     orders: [],
-    stores: []
+    stores: [],
+    userOrders: []
   }
-  
+
   updateQuery = (newValue) => {
-    this.setState({query: newValue});
-  }  
-  
+    this.setState({ query: newValue });
+  }
+
   componentDidMount() {
     this.getOrders();
     window.addEventListener("resize", this.resize.bind(this));
     this.resize();
   }
-  
+
   resize() {
-      this.setState({isMobile: window.innerWidth <= 992});
+    this.setState({ isMobile: window.innerWidth <= 992 });
   }
-  
+
   componentWillUnmount() {
-      window.removeEventListener("resize", this.resize.bind(this));
+    window.removeEventListener("resize", this.resize.bind(this));
   }
 
   //  $$$$$$\            $$\                                              $$\ $$\           
@@ -40,28 +41,32 @@ class Cart extends Component {
   // \__|  \__|\__/  \__|\__| \______/ \_______/        \_______|\_______|\__|\__|\_______/ 
 
   getOrders = () => {
-      axios.get(`${process.env.REACT_APP_APIURL || ""}/api/orders/${this.props.loggedInUser._id}`)
+    axios.get(`${process.env.REACT_APP_APIURL || ""}/api/orders`)
       .then(ordersFromDB => {
         this.setState({
           orders: ordersFromDB.data
-        });
+        }, () => { this.userOrder() });
 
       })
       .catch(err => console.log("Error on getting Orders", err))
-      console.log("je suis là")
-    
+    console.log("je suis là")
+
 
   }
 
-  // userOrder = () => {
-  //   const userOrderList = this.state.orders.filter(order => {
-  //     const filteredOrder = order.client_id && order.client_id.toString().includes(this.props.loggedInUser._id.toString())
-  //     return filteredOrder
-  //   })
-  //   console.log("userOrderList:", userOrderList)  
-  //   console.log("user:", this.props.loggedInUser._id)  
-    
-  // }
+  userOrder = () => {
+    console.log('this.state.orders=', this.state.orders)
+    const userOrderList = this.state.orders.filter(order => {
+      const filteredOrder = order.client_id && order.client_id.toString().includes(this.props.loggedInUser._id.toString())
+      return filteredOrder
+    })
+    console.log("userOrderList:", userOrderList)
+    console.log("user:", this.props.loggedInUser._id)
+    this.setState({
+      userOrders: userOrderList
+    })
+
+  }
 
   // getStores = () => {
   //   axios.get(`${process.env.REACT_APP_APIURL || ""}/api/stores`)
@@ -73,11 +78,11 @@ class Cart extends Component {
   //     })
   //     .catch(err => console.log("Error on getting Orders", err))
   // }
-  
-  
 
 
-    //                                      $$\                     
+
+
+  //                                      $$\                     
   //                                     $$ |                    
   //  $$$$$$\   $$$$$$\  $$$$$$$\   $$$$$$$ | $$$$$$\   $$$$$$\  
   // $$  __$$\ $$  __$$\ $$  __$$\ $$  __$$ |$$  __$$\ $$  __$$\ 
@@ -92,11 +97,15 @@ class Cart extends Component {
     let allOrders = this.state.orders
     const loggedUser = this.props.loggedInUser
 
+    if (!loggedUser) {
+      this.props.history.push('/mapView'); // if logout we stay on the same page
+    }
+
     return (
 
       <div>
         <div className={`${this.state.isMobile ? "page-container-mobile" : "page-container-desktop"}`}>
-          {/* <SearchBar query={this.state.query} updateQuery={this.updateQuery} /> */}   
+          {/* <SearchBar query={this.state.query} updateQuery={this.updateQuery} /> */}
           <div className={`${this.state.isMobile ? "command-section-mobile" : "command-section-desktop"}`}>
             {this.state.isMobile ? (
               <div className="mobile-command-title">
@@ -106,39 +115,39 @@ class Cart extends Component {
                 ) : (<div />)}
               </div>
             ) : (
-              <h2>Mes commandes</h2>
-            )}
+                <h2>Mes commandes</h2>
+              )}
             <hr />
 
-             {allOrders.length <= 0 && <ThreeDots width="30" />}
+            {this.state.userOrders.length <= 0 && <ThreeDots width="30" />}
 
-              {allOrders.map(order => {
+            {this.state.userOrders.map(order => {
 
-                return (                  
-                    <div className="command-card">
-                      <div className="command-title-infos">
-                        <span className="command-reference"> {order._id} </span>
-                        <span>&nbsp;• {order.appointmentDay} </span>
-                        <span>&nbsp;à {order.appointmentTime}</span>
+              return (
+                <div className="command-card">
+                  <div className="command-title-infos">
+                    {/* <span className="command-reference"> {order._id} </span> */}
+                    <span>&nbsp;Le {order.appointmentDay} </span>
+                    <span>&nbsp;à {order.appointmentTime}</span>
+                  </div>
+                  <div className="whoTakesOrder">
+                    <img src={order.storeImg} />
+                    <h3>{order.storeName}</h3>
+                  </div>
+                  <hr />
+
+                  {order.products && order.products.map(product => {
+                    return (
+                      <div className="order-content">
+                        <li className="order-content-row">
+                          <span className="span-name">{product[0].name}</span>
+                          <span className="span-qty">{product[0].qty}</span>
+                          <span>{product[0].price}€</span>
+                        </li>
                       </div>
-                      <div className="whoTakesOrder">
-                        {/* <img src={ /> */}
-                        <h3>La boulangerie de Micheline</h3>
-                      </div>
-                      <hr />
-
-                      {order.products && order.products.map(product => {
-                        return (
-                          <div className="order-content">
-                            <li className="order-content-row">
-                            <span className="span-name">{product[0].name}</span>
-                            <span className="span-qty">{product[0].qty}</span>
-                            <span>{product[0].price}€</span>
-                            </li>
-                          </div>
-                        )
-                      })}
-                      {/* <div className="order-content">
+                    )
+                  })}
+                  {/* <div className="order-content">
                         <li className="order-content-row">
                           <span>Broccolis</span>
                           <span>x3</span>
@@ -164,14 +173,14 @@ class Cart extends Component {
                           <span>2,80E</span>
                         </li>
                       </div> */}
-                    </div> 
+                </div>
 
-                  )
-                })
+              )
+            })
 
-              }
+            }
 
-              
+
             {/* <div className="command-card">
               <div className="command-title-infos">
                 <span className="command-reference">#5678 </span>
@@ -210,7 +219,7 @@ class Cart extends Component {
                 </li>
               </div>
             </div>  */}
-           
+
           </div>
         </div>
       </div>

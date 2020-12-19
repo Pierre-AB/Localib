@@ -169,7 +169,7 @@ class StorePickADate extends React.Component {
   getBookedAppo = () => {
     let store = this.state.store._id
     // console.log("🏚 store/id=", store._id)
-    axios.get(`${process.env.REACT_APP_APIURL || ""}/api/orders?storeId=${encodeURIComponent(store)}`) // QUERY STRING
+    axios.get(`${process.env.REACT_APP_APIURL || ""}/api/orders/store?storeId=${encodeURIComponent(store)}`) // QUERY STRING
       .then(response => {
         const ordersFromApi = response.data;
         console.log("⏰ ORDERS from API=", ordersFromApi);

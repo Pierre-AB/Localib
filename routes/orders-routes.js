@@ -3,6 +3,21 @@ const ordersRoute = express.Router();
 
 const Order = require('../models/order-model')
 
+// 
+
+ordersRoute.get('/orders/store', (req, res, next) => {
+  console.log('user: 🤑', req.session.currentUser)
+  const storeId = req.query.storeId
+  Order.find({ store_id: storeId })
+    .then(response => {
+      console.log("🍫 ORDER FROM DB=", response);
+      res.status(200).json(response)
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    })
+})
 
 // RETRIEVE APPOINTMENTS FOR A STORE
 

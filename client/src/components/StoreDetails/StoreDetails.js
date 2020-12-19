@@ -167,6 +167,8 @@ class StoreDetails extends React.Component {
     }
 
     let productList = [...ProductFilteredStoreId]
+    let latitude = this.state.store.location && this.state.store.location.coordinates[1]
+    let longitude = this.state.store.location && this.state.store.location.coordinates[0]
 
     return (
 
@@ -192,6 +194,8 @@ class StoreDetails extends React.Component {
                   <Link to={`/signup`}>Créer un compte pour prendre RDV</Link>
                 </>)
               }
+              <a target="_blank" href={`http://www.google.com/maps/place/${latitude},${longitude}`}>S’y rendre</a>
+
               {/* <a href='#'>Voir les produits</a> */}
             </div>
             <hr />

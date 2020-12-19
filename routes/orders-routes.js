@@ -7,14 +7,17 @@ const Order = require('../models/order-model')
 // RETRIEVE APPOINTMENTS FOR A STORE
 
 ordersRoute.get('/orders', (req, res, next) => {
+  console.log('user: 🤑', req.session.currentUser)
   const storeId = req.query.storeId
-  Order.find({ store_id: storeId })
+  Order.find() //({ store_id: storeId })
     .then(response => {
       console.log("🍫 ORDER FROM DB=", response);
       res.status(200).json(response)
     })
-    .catch(err => { console.log("🥕", err) });
-
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    })
 })
 
 
@@ -23,7 +26,7 @@ ordersRoute.get('/orders', (req, res, next) => {
 
 ordersRoute.post('/orders', (req, res, next) => {
   // const { client_id, store_id, products, totalAmount, appointmentDay, appointmentTime, comment, status } = req.body;
-  const { store_id, products, totalAmount, appointmentDay, appointmentTime, comment, status, client_id } = req.body;
+  const { store_id, products, totalAmount, appointmentDay, appointmentTime, comment, status, client_id, storeImg, storeName } = req.body;
 
   const newOrder = new Order({
     // client_id: req.session.currentUser,
@@ -34,7 +37,9 @@ ordersRoute.post('/orders', (req, res, next) => {
     appointmentDay,
     appointmentTime,
     comment,
-    status
+    status,
+    storeImg,
+    storeName
   })
 
   newOrder.save()

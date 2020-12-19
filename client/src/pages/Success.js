@@ -7,10 +7,10 @@ class Success extends Component {
     return (
       <div className="success-page page-container-mobile flex-column middle">
         <FaCheckCircle />
-        <h1>Success Message</h1>
-        <p>{this.props.msg}Lorem ipsum</p>
+        <h1>Merci pour votre commande !</h1>
+        <p>{this.props.msg}</p>
         <div className="btn-container">
-          <Link to={`/home`} ><button>Go back home</button></Link>
+          <Link to={`/home`} ><button> Retour à l'accueil</button></Link>
         </div>
       </div>
     );

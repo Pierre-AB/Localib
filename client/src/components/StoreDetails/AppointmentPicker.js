@@ -24,7 +24,8 @@ class AppointmentPicker extends React.Component {
   state = {
     pickedTime: null,
     timeClicked: false,
-    pickedDate: this.props.pickedDate
+    pickedDate: this.props.pickedDate,
+    orderProducts: this.props.orderProducts
   }
 
   /* _________ANTOINE_______: 

@@ -19,8 +19,6 @@ import UserSettings from './pages/UserSettings';
 import Signup from './components/auth/Signup'
 import Login from './components/auth/Login'
 
-import FilteredMap from './components/Maps/FilteredMap'
-
 // import service
 import { loggedIn } from './components/auth/auth-service'
 
@@ -99,12 +97,12 @@ class App extends React.Component {
           <Route exact path="/home" component={Home} />
           <Route exact path="/listSearch" component={SearchListResults} />
           <Route exact path="/mapView" component={MapView} />
-          <Route exact path="/cart" render={(props) => <Cart loggedInUser={this.state.loggedInUser} {...props} />} />
+          <Route exact path="/cart" render={(props) => <Cart loggedInUser={this.state.loggedInUser} updateUser={this.updateLoggedInUser} {...props} />} />
           <Route exact path="/userSettings" component={UserSettings} />
 
           {/* Store Details */}
-          <Route exact path="/storeDetails/:id" render={(props) => <StoreDetails loggedInUser={this.state.loggedInUser} fetchOrderProduct={this.fetchOrderProduct} {...props} />} />
-          <Route exact path="/storeDetails/appointment/:id" render={(props) => <StorePickADate loggedInUser={this.state.loggedInUser} {...props} />} />
+          <Route exact path="/storeDetails/:id" render={(props) => <StoreDetails loggedInUser={this.state.loggedInUser} fetchOrderProduct={this.fetchOrderProduct} orderProducts={this.state.orderProducts} {...props} />} />
+          <Route exact path="/storeDetails/appointment/:id" render={(props) => <StorePickADate loggedInUser={this.state.loggedInUser} orderProducts={this.state.orderProducts} {...props} />} />
 
 
           {/* Signup, Login*/}

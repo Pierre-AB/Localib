@@ -128,7 +128,8 @@ class StorePickADate extends React.Component {
     storeIsLoaded: false,
     timeSlot: 15,
     nonAvaiTime: [],
-    centerCalendarDay: new Date().getDate()
+    centerCalendarDay: new Date().getDate(),
+    orderProducts: this.props.orderProducts
   }
 
   componentDidMount() {
@@ -168,7 +169,7 @@ class StorePickADate extends React.Component {
   getBookedAppo = () => {
     let store = this.state.store._id
     // console.log("🏚 store/id=", store._id)
-    axios.get(`http://localhost:5000/api/orders?storeId=${encodeURIComponent(store)}`) // QUERY STRING
+    axios.get(`${process.env.REACT_APP_APIURL || ""}/api/orders?storeId=${encodeURIComponent(store)}`) // QUERY STRING
       .then(response => {
         const ordersFromApi = response.data;
         console.log("⏰ ORDERS from API=", ordersFromApi);
@@ -200,9 +201,19 @@ class StorePickADate extends React.Component {
     const appointmentDay = `${this.state.pickedDate.getFullYear()}-${this.state.pickedDate.getMonth() + 1}-${this.state.pickedDate.getDate()}`; // Record in server the date in a string format to avoid time offset due to local time from the browser
     const appointmentTime = time;
     const status = "confirmed"
+    const products = this.props.orderProducts // qui vient d'AppointmentPicker
+    const storeImg = this.state.store.picture;
+    const storeName = this.state.store.fullName;
 
-    axios.post('http://localhost:5000/api/orders', { store_id, appointmentDay, appointmentTime, status, client_id })
+    console.log("aaaaaaaaa", storeImg)
+
+    axios.post(`${process.env.REACT_APP_APIURL || ""}/api/orders`, { store_id, appointmentDay, appointmentTime, status, client_id, products, storeImg, storeName})
       .then(response => {
+        this.props.history.push("/success")
+        setTimeout(() => {
+          this.props.history.push("/cart")
+        }, 1500);
+
         // console.log(response)
         // console.log("ORDER PASSED TO BACK");
       })
@@ -211,13 +222,6 @@ class StorePickADate extends React.Component {
 
   }
 
-  /**
-   
-                    APP
-      StoreDetails      StireOuckADate
-
-
-   */ 
 
   //  $$$$$$\                                  $$\     $$\                               
   // $$  __$$\                                 $$ |    \__|                              
@@ -414,6 +418,7 @@ class StorePickADate extends React.Component {
                 dayAvaiArr={dayInfo}
                 createOrder={this.createOrder}
                 nonAvaiTime={nonAvaiTime}
+                orderProducts={this.state.orderProducts}
               />
               {/* <StoreMap store={this.state.store} /> */}
             </div>

@@ -36,7 +36,7 @@ class Home extends Component {
         <div className={`${this.state.isMobile ? "page-container-mobile" : "page-container-desktop"}`}>
           {/* <SearchBar query={this.state.query} updateQuery={this.updateQuery} /> */}   
           <div className={`${this.state.isMobile ? "nearby-section-mobile" : "nearby-section-desktop"}`}>
-            <h2>Nearby</h2>
+          <h2>Autour de moi</h2>
  
             {/* {this.state.isMobile ? "" : (
               <Link to='/mapView'>
@@ -52,12 +52,12 @@ class Home extends Component {
             <NearbyStores />
 
             {this.state.isMobile ? (
-              <Link to='/mapView'><button>Autour de moi...</button></Link>
+              <Link to='/mapView'><button>Voir la carte...</button></Link>
             ) : ""}
             
           </div>
           <div>
-            <h2>By categories</h2>
+            <h2>Par catégories</h2>
             <StoresByCategory title="Alimentation" category="Alimentation"/>
             <StoresByCategory title="Epicerie et boissons" category="Epicerie-et-boissons"/>
             {/* <StoresByCategory title="Informatique" category="Informatique"/>

@@ -265,6 +265,16 @@ div#searchlist {
   width: 210px;
 }
 
+@media (min-width: 992px) { 
+  .nearby-store-infowindow-desktop .nearby-store-address, .nearby-store-infowindow-desktop .nearby-store-title {
+    /* ... si déborde */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 315px;
+  }
+}
+
 /* CATEGORY STYLES */
 .category-section-container {
   float: left;
@@ -314,6 +324,16 @@ div#searchlist {
   overflow: hidden;
   text-overflow: ellipsis;
   width: 85px;
+}
+
+@media (min-width: 992px) {
+  .category-store-info h4 {
+    /* ... si déborde */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 250px;
+  }
 }
 
 .category-store-address {
@@ -402,7 +422,17 @@ div#searchlist {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 200px;
+  width: 270px;
+}
+
+@media (min-width: 992px) { 
+  .vertical-store-info h4, .vertical-store-info p {
+    /* ... si déborde */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 350px;
+  }
 }
 
 .vertical-store-info h4 {
@@ -513,6 +543,11 @@ div#searchlist {
 
 .span-qty {
   width: 70px;
+}
+
+.span-price {
+  width: 70px;
+  text-align: right;
 }
 
 .span-name {

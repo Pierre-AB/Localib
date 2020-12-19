@@ -201,7 +201,7 @@ class StoreDetails extends React.Component {
           {storeIsLoaded ? (
             <div className="listOfProducts">
               <StoreMap store={this.state.store} />
-              <div>
+              <div className="all-products-container">
                 {/* {mustLogin ? "Must login" : ""} */}
                 {productList.map((products, i) => {
                   return <ListOfProducts key={i} {...products} orderProductsFromApp={this.state.orderProductsFromApp} addToCart={this.addToCart} mustLogin={mustLogin} loggedInUser={this.props.loggedInUser} {...this.props} />;

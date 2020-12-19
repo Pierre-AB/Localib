@@ -3,7 +3,7 @@ const ordersRoute = express.Router();
 
 const Order = require('../models/order-model')
 
-// 
+// find store orders
 
 ordersRoute.get('/orders/store', (req, res, next) => {
   console.log('user: 🤑', req.session.currentUser)

@@ -26,7 +26,6 @@ class StoreDetails extends React.Component {
     storeIsLoaded: false,
     nonAvaiTime: [],
     timeSlot: 15,
-    nonAvaiTime: [],
     listOfProducts: [],
     storeProducts: [],
     orderProducts: [],

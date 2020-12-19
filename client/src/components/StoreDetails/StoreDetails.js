@@ -16,8 +16,6 @@ import ListOfProducts from '../Products/listOfProducts'
 //  ######   #######  ##     ## ##         #######  ##    ## ######## ##    ##    ##    
 
 
-var ordersProductsArr = []
-
 class StoreDetails extends React.Component {
 
   state = {
@@ -146,6 +144,7 @@ class StoreDetails extends React.Component {
     let background = this.state.store.picture;
     const loggedUser = this.props.loggedInUser
     const storeIsLoaded = this.state.storeIsLoaded;
+    let mustLogin = false
     // const dayInfo = this.splitDay();
 
     // // const nonAvaiTime = this.state.nonAvaiTime;
@@ -162,6 +161,10 @@ class StoreDetails extends React.Component {
       }
 
     })
+
+    if (!this.props.loggedInUser) {
+      mustLogin = true
+    }
 
     let productList = [...ProductFilteredStoreId]
 
@@ -199,8 +202,9 @@ class StoreDetails extends React.Component {
             <div className="listOfProducts">
               <StoreMap store={this.state.store} />
               <div>
+                {/* {mustLogin ? "Must login" : ""} */}
                 {productList.map((products, i) => {
-                  return <ListOfProducts key={i} {...products} orderProductsFromApp={this.state.orderProductsFromApp} addToCart={this.addToCart} />;
+                  return <ListOfProducts key={i} {...products} orderProductsFromApp={this.state.orderProductsFromApp} addToCart={this.addToCart} mustLogin={mustLogin} loggedInUser={this.props.loggedInUser} {...this.props} />;
                 })}
               </div>
             </div>

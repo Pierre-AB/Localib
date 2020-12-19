@@ -26,7 +26,7 @@ ordersRoute.get('/orders', (req, res, next) => {
 
 ordersRoute.post('/orders', (req, res, next) => {
   // const { client_id, store_id, products, totalAmount, appointmentDay, appointmentTime, comment, status } = req.body;
-  const { store_id, products, totalAmount, appointmentDay, appointmentTime, comment, status, client_id } = req.body;
+  const { store_id, products, totalAmount, appointmentDay, appointmentTime, comment, status, client_id, storeImg, storeName } = req.body;
 
   const newOrder = new Order({
     // client_id: req.session.currentUser,
@@ -37,7 +37,9 @@ ordersRoute.post('/orders', (req, res, next) => {
     appointmentDay,
     appointmentTime,
     comment,
-    status
+    status,
+    storeImg,
+    storeName
   })
 
   newOrder.save()

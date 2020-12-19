@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { useLoading, ThreeDots } from '@agney/react-loading';
 import { logout } from './auth/auth-service'
+import { Link, withRouter } from 'react-router-dom';
+
 
 
 class Cart extends Component {
@@ -96,6 +98,7 @@ class Cart extends Component {
 
     let allOrders = this.state.orders
     const loggedUser = this.props.loggedInUser
+    const sum = 0
 
     if (!loggedUser) {
       this.props.history.push('/mapView'); // if logout we stay on the same page
@@ -132,7 +135,10 @@ class Cart extends Component {
                   </div>
                   <div className="whoTakesOrder">
                     <img src={order.storeImg} />
+                    <Link to={`/storeDetails/${order.store_id}`} >
                     <h3>{order.storeName}</h3>
+                    </Link>
+                    
                   </div>
                   <hr />
 
@@ -147,6 +153,10 @@ class Cart extends Component {
                       </div>
                     )
                   })}
+                  {/* <li className="order-content-total-row">
+                  <span>Total</span>
+                  <span>{order.products && order.products.reduce((a, b) => a[0].price + b[0].price, 0)}E</span>
+                </li> */}
                   {/* <div className="order-content">
                         <li className="order-content-row">
                           <span>Broccolis</span>

@@ -283,6 +283,12 @@ button.react-calendar__tile.react-calendar__month-view__days__day {
   .storeDetailsMap {
     width: calc(48vw - 2.6em) !important;
     margin: 0;
+    height: 35vh !important;
+  }
+
+  .all-products-container {
+    height: 35vh !important;
+    overflow: scroll;
   }
 
   .product-list-container {
@@ -369,4 +375,11 @@ button.react-calendar__tile.react-calendar__month-view__days__day {
 
 .product-picture, .product-name, .product-img-and-name {
   pointer-events: none;
+}
+
+.command-card hr {
+  margin: 1em auto;
+  background-color: #aeb5c552;
+  height: 1px;
+  width: 100%;
 }
